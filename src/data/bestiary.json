@@ -1,0 +1,39 @@
+{
+  "creatures": [
+    { "id": "wolf", "nameKey": "bestiary.wolf", "loreKey": "bestiary.wolf.lore", "danger": 3, "habitatKey": "bestiary.wolf.habitat", "loot": ["wolf_pelt", "bone_wolf"], "unlockBy": ["see", "kill", "hear", "talk:wiera"] },
+    { "id": "boar", "nameKey": "bestiary.boar", "loreKey": "bestiary.boar.lore", "danger": 2, "habitatKey": "bestiary.boar.habitat", "loot": ["meat_venison", "hide_deer"], "unlockBy": ["see", "kill", "talk:rybak_ewa"] },
+    { "id": "deer", "nameKey": "bestiary.deer", "loreKey": "bestiary.deer.lore", "danger": 0, "habitatKey": "bestiary.deer.habitat", "loot": ["meat_venison", "hide_deer"], "unlockBy": ["see", "kill", "track"] },
+    { "id": "dog", "nameKey": "bestiary.dog", "loreKey": "bestiary.dog.lore", "danger": 1, "habitatKey": "bestiary.dog.habitat", "loot": [], "unlockBy": ["see"] },
+    { "id": "crow", "nameKey": "bestiary.crow", "loreKey": "bestiary.crow.lore", "danger": 0, "habitatKey": "bestiary.crow.habitat", "loot": ["feather_goose"], "unlockBy": ["see"] },
+    { "id": "rat", "nameKey": "bestiary.rat", "loreKey": "bestiary.rat.lore", "danger": 0, "habitatKey": "bestiary.rat.habitat", "loot": [], "unlockBy": ["see", "hear"] },
+    { "id": "pike", "nameKey": "bestiary.pike", "loreKey": "bestiary.pike.lore", "danger": 0, "habitatKey": "bestiary.pike.habitat", "loot": ["fish_smoked"], "unlockBy": ["catch", "talk:rybak_ewa"] },
+    { "id": "goose", "nameKey": "bestiary.goose", "loreKey": "bestiary.goose.lore", "danger": 0, "habitatKey": "bestiary.goose.habitat", "loot": ["feather_goose", "egg_goose"], "unlockBy": ["see", "kill"] },
+    { "id": "horse", "nameKey": "bestiary.horse", "loreKey": "bestiary.horse.lore", "danger": 1, "habitatKey": "bestiary.horse.habitat", "loot": [], "unlockBy": ["see"] },
+    { "id": "wildKnight", "nameKey": "bestiary.knight", "loreKey": "bestiary.knight.lore", "danger": 5, "habitatKey": "bestiary.knight.habitat", "loot": ["knight_token", "chain_shirt"], "unlockBy": ["see", "talk", "kill"] }
+  ],
+  "plants": [
+    { "id": "yarrow", "nameKey": "bestiary.yarrow", "loreKey": "bestiary.yarrow.lore", "item": "herb_yarrow", "confusable": "hemlock", "risk": 0.25, "unlockBy": ["gather", "talk:wiera"] },
+    { "id": "hemlock", "nameKey": "bestiary.hemlock", "loreKey": "bestiary.hemlock.lore", "item": "poison_vial", "confusable": "yarrow", "risk": 0.5, "unlockBy": ["gather", "talk:wiera"] },
+    { "id": "chanterelle", "nameKey": "bestiary.chanterelle", "loreKey": "bestiary.chanterelle.lore", "item": "mushroom_common", "confusable": "toadstool", "risk": 0.2, "unlockBy": ["gather"] },
+    { "id": "toadstool", "nameKey": "bestiary.toadstool", "loreKey": "bestiary.toadstool.lore", "item": null, "confusable": "chanterelle", "risk": 0.7, "unlockBy": ["gather", "talk:wiera"] },
+    { "id": "willow_bark", "nameKey": "bestiary.willow", "loreKey": "bestiary.willow.lore", "item": "herb_yarrow", "confusable": null, "risk": 0.05, "unlockBy": ["gather", "talk:medyk_elen"] }
+  ],
+  "places": [
+    { "id": "harbour", "nameKey": "bestiary.harbour", "loreKey": "bestiary.harbour.lore", "unlockBy": ["visit:place.harbour"] },
+    { "id": "market", "nameKey": "bestiary.market", "loreKey": "bestiary.market.lore", "unlockBy": ["visit:place.marketSquare"] },
+    { "id": "gallows", "nameKey": "bestiary.gallows", "loreKey": "bestiary.gallows.lore", "unlockBy": ["visit", "talk:baltazar_kat"] },
+    { "id": "chapel", "nameKey": "bestiary.chapel", "loreKey": "bestiary.chapel.lore", "unlockBy": ["visit:place.chapelYard", "talk:teodor"] },
+    { "id": "tannery", "nameKey": "bestiary.tannery", "loreKey": "bestiary.tannery.lore", "unlockBy": ["visit:place.tanneryYard"] },
+    { "id": "smugglersGap", "nameKey": "bestiary.gap", "loreKey": "bestiary.gap.lore", "unlockBy": ["visit", "talk:idzi"] },
+    { "id": "abbeyRuin", "nameKey": "bestiary.abbey", "loreKey": "bestiary.abbey.lore", "unlockBy": ["visit", "talk:teodor"] }
+  ],
+  "johnNotes": [
+    { "id": "note_arrival", "dayKey": "note.arrival.day", "textKey": "note.arrival", "trigger": "prolog" },
+    { "id": "note_debt", "dayKey": "note.debt.day", "textKey": "note.debt", "trigger": "quest:q_prolog_debt" },
+    { "id": "note_vagn", "dayKey": "note.vagn.day", "textKey": "note.vagn", "trigger": "meet:vagn" },
+    { "id": "note_marta", "dayKey": "note.marta.day", "textKey": "note.marta", "trigger": "meet:marta" },
+    { "id": "note_idzi", "dayKey": "note.idzi.day", "textKey": "note.idzi", "trigger": "meet:idzi" },
+    { "id": "note_fire1428", "dayKey": "note.fire.day", "textKey": "note.fire", "trigger": "flag:remembered_fire" },
+    { "id": "note_firstblood", "dayKey": "note.blood.day", "textKey": "note.blood", "trigger": "firstKill" }
+  ]
+}

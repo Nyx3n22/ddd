@@ -1,22 +1,132 @@
-[
-  {
-    "id":"main_debt",
-    "title":"Dług krwi",
-    "desc":"Spłać 10 000 koron w 30 dni u Dzikich Rycerzy. Zegar tyka.",
-    "type":"main",
-    "giver":"Dzicy Rycerze",
-    "location":"Obóz",
-    "objectives":["Zdobądź 10 000 koron","Spłać dług przed dniem 30","Zdecyduj o zakończeniu"],
-    "rewards":{"gold":0,"endings":["honest","crime","join","overthrow","escape","death"]}
-  },
-  {
-    "id":"side_smuggle",
-    "title":"Sól bez akcyzy",
-    "desc":"Przemytnicy chcą 10x sól przez celników. Wysokie zyski, wysokie ryzyko.",
-    "type":"side",
-    "giver":"Przemytnicy z Portu",
-    "location":"Port",
-    "objectives":["Zdobądź sól","Ukryj w wozie","Przejdź kontrolę","Dostarcz"],
-    "rewards":{"gold":300,"rep":{"faction":"smugglers","delta":15}}
-  }
-]
+{
+  "quests": [
+    {
+      "id": "q_prolog_debt",
+      "titleKey": "quest.prolog.title",
+      "type": "story",
+      "giver": null,
+      "autoStart": true,
+      "journalKey": "quest.prolog.journal",
+      "stages": [
+        { "id": "s1", "descKey": "quest.prolog.s1", "objective": { "type": "talk", "npc": "poborca_gwidon" } },
+        { "id": "s2", "descKey": "quest.prolog.s2", "objective": { "type": "custom", "flag": "earned_first_crown", "count": 1 } },
+        { "id": "s3", "descKey": "quest.prolog.s3", "objective": { "type": "debtPaid", "amount": 100 } }
+      ],
+      "rewards": { "crowns": 0, "noteKey": "quest.prolog.note" },
+      "failCondition": "deadline"
+    },
+    {
+      "id": "q_coal_for_orlik",
+      "titleKey": "quest.coal.title",
+      "type": "work",
+      "giver": "orlik",
+      "journalKey": "quest.coal.journal",
+      "hintKey": "quest.coal.hint",
+      "stages": [
+        { "id": "s1", "descKey": "quest.coal.s1", "objective": { "type": "collect", "item": "coal_lump", "count": 3 } },
+        { "id": "s2", "descKey": "quest.coal.s2", "objective": { "type": "talk", "npc": "orlik" } }
+      ],
+      "rewards": { "crowns": 65, "rep": { "merchantGuild": 6 }, "xp": { "smithing": 40, "barter": 10 }, "noteKey": "quest.coal.note", "unlockStation": "forgeWork" },
+      "failAfterDays": 4,
+      "repeatable": true
+    },
+    {
+      "id": "q_untaxed_salt",
+      "titleKey": "quest.salt.title",
+      "type": "crime",
+      "giver": "idzi",
+      "journalKey": "quest.salt.journal",
+      "hintKey": "quest.salt.hint",
+      "requiresRep": { "smugglers": 0 },
+      "stages": [
+        { "id": "s1", "descKey": "quest.salt.s1", "objective": { "type": "enterInterior", "interior": "int_warehouse" } },
+        { "id": "s2", "descKey": "quest.salt.s2", "objective": { "type": "collect", "item": "crate_untaxed", "count": 1 } },
+        { "id": "s3", "descKey": "quest.salt.s3", "objective": { "type": "reachArea", "region": "place.piers", "nightOnly": true } },
+        { "id": "s4", "descKey": "quest.salt.s4", "objective": { "type": "talk", "npc": "idzi" } }
+      ],
+      "rewards": { "crowns": 240, "rep": { "smugglers": 18, "cityGuard": -12 }, "xp": { "sneak": 70, "streetwise": 30 }, "noteKey": "quest.salt.note" },
+      "failAfterDays": 3,
+      "crimeOnFail": { "type": "smuggling", "witnesses": 2, "location": "Port" }
+    },
+    {
+      "id": "q_marta_satchel",
+      "titleKey": "quest.marta.title",
+      "type": "story",
+      "giver": "marta",
+      "journalKey": "quest.marta.journal",
+      "hintKey": "quest.marta.hint",
+      "stages": [
+        { "id": "s1", "descKey": "quest.marta.s1", "objective": { "type": "reachArea", "region": "place.alleyWest" } },
+        { "id": "s2", "descKey": "quest.marta.s2", "objective": { "type": "kill", "target": "bandit_marta", "count": 1 } },
+        { "id": "s3", "descKey": "quest.marta.s3", "objective": { "type": "collect", "item": "marta_satchel", "count": 1 } },
+        { "id": "s4", "descKey": "quest.marta.s4", "objective": { "type": "talk", "npc": "marta" } }
+      ],
+      "rewards": { "crowns": 45, "rep": { "smugglers": 10, "villagers": 4 }, "xp": { "sword": 40, "streetwise": 25 }, "noteKey": "quest.marta.note", "unlockTeacher": "marta" },
+      "failAfterDays": 2,
+      "moral": true
+    },
+    {
+      "id": "q_hanna_tab",
+      "titleKey": "quest.tab.title",
+      "type": "story",
+      "giver": "hanna",
+      "journalKey": "quest.tab.journal",
+      "stages": [
+        { "id": "s1", "descKey": "quest.tab.s1", "objective": { "type": "gamble", "wins": 1 } },
+        { "id": "s2", "descKey": "quest.tab.s2", "objective": { "type": "collect", "item": "hanna_tab", "count": 1 } },
+        { "id": "s3", "descKey": "quest.tab.s3", "objective": { "type": "payGold", "amount": 30 } }
+      ],
+      "rewards": { "crowns": 0, "rep": { "villagers": 8 }, "xp": { "gamble": 40, "persuade": 15 }, "noteKey": "quest.tab.note" },
+      "failAfterDays": 5
+    },
+    {
+      "id": "q_vagn_respect",
+      "titleKey": "quest.vagn.title",
+      "type": "story",
+      "giver": "vagn",
+      "journalKey": "quest.vagn.journal",
+      "requiresSkill": { "brawl": 1 },
+      "stages": [
+        { "id": "s1", "descKey": "quest.vagn.s1", "objective": { "type": "custom", "flag": "spar_vagn", "count": 1 } },
+        { "id": "s2", "descKey": "quest.vagn.s2", "objective": { "type": "talk", "npc": "vagn" } }
+      ],
+      "rewards": { "crowns": 0, "rep": { "villagers": 10 }, "xp": { "parry": 60, "sword": 40 }, "noteKey": "quest.vagn.note", "unlockTeacher": "vagn" },
+      "failAfterDays": 6
+    }
+  ],
+  "board": [
+    {
+      "id": "board_delivery", "titleKey": "board.delivery.title", "descKeys": ["board.delivery.a", "board.delivery.b", "board.delivery.c"],
+      "type": "delivery", "pay": [18, 45], "rep": { "merchantGuild": 3, "villagers": 2 }, "xp": { "barter": 15 }, "items": ["bread_loaf", "salt_sack", "fish_smoked", "plank_oak"]
+    },
+    {
+      "id": "board_escort", "titleKey": "board.escort.title", "descKeys": ["board.escort.a", "board.escort.b"],
+      "type": "escort", "pay": [40, 90], "rep": { "merchantGuild": 5 }, "xp": { "sword": 25, "endurance": 15 }, "risk": 0.5
+    },
+    {
+      "id": "board_pests", "titleKey": "board.pests.title", "descKeys": ["board.pests.a", "board.pests.b"],
+      "type": "pests", "pay": [25, 55], "rep": { "villagers": 6 }, "xp": { "tracking": 20, "sword": 20 }, "targets": ["wolf", "rat", "boar"]
+    },
+    {
+      "id": "board_debt", "titleKey": "board.debt.title", "descKeys": ["board.debt.a", "board.debt.b"],
+      "type": "debt", "pay": [30, 70], "rep": { "merchantGuild": 4, "villagers": -4 }, "xp": { "intimidate": 25 }, "moral": true
+    },
+    {
+      "id": "board_missing", "titleKey": "board.missing.title", "descKeys": ["board.missing.a", "board.missing.b"],
+      "type": "missing", "pay": [22, 60], "rep": { "villagers": 5 }, "xp": { "tracking": 30 }
+    },
+    {
+      "id": "board_labour", "titleKey": "board.labour.title", "descKeys": ["board.labour.a", "board.labour.b"],
+      "type": "labour", "pay": [12, 26], "rep": { "villagers": 3 }, "xp": { "endurance": 20 }
+    }
+  ],
+  "endings": [
+    { "id": "end_honest", "nameKey": "ending.honest", "cond": { "debtPaid": true, "crimeLow": true } },
+    { "id": "end_crime", "nameKey": "ending.crime", "cond": { "debtPaid": true, "crimeHigh": true } },
+    { "id": "end_escape", "nameKey": "ending.escape", "cond": { "escaped": true } },
+    { "id": "end_knights", "nameKey": "ending.knights", "cond": { "rep": { "wildKnights": 80 } } },
+    { "id": "end_overthrow", "nameKey": "ending.overthrow", "cond": { "rep": { "cityGuard": 70, "villagers": 70 }, "flag": "overthrow" } },
+    { "id": "end_death", "nameKey": "ending.death", "cond": { "dead": true } },
+    { "id": "end_captive", "nameKey": "ending.captive", "cond": { "deadline": true, "debtPaid": false } }
+  ]
+}

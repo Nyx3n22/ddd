@@ -1,0 +1,29 @@
+{
+  "comment": "Statystyki bojowe przeciwników i zwierząt. Wszystko w JSON — kod tylko czyta.",
+  "creatures": {
+    "wolf":       { "hp": 34, "dmg": 11, "speed": 68, "reach": 16, "armor": 0,    "attackTime": 0.55, "telegraph": 0.35, "aggro": 260, "fleeAt": 0.15, "packs": true, "nightBold": true, "loot": ["wolf_pelt", "bone_wolf"], "sound": "wolf" },
+    "boar":       { "hp": 46, "dmg": 14, "speed": 55, "reach": 16, "armor": 0.12, "attackTime": 0.7,  "telegraph": 0.5,  "aggro": 140, "fleeAt": 0.05, "charge": true, "loot": ["meat_venison", "hide_deer"], "sound": "boar" },
+    "deer":       { "hp": 22, "dmg": 0,  "speed": 82, "reach": 0,  "armor": 0,    "attackTime": 1,    "telegraph": 0,    "aggro": 0,   "fleeAt": 1,    "skittish": true, "loot": ["meat_venison", "hide_deer"], "sound": "deer" },
+    "dog":        { "hp": 16, "dmg": 6,  "speed": 72, "reach": 12, "armor": 0,    "attackTime": 0.45, "telegraph": 0.3,  "aggro": 200, "fleeAt": 0.25, "guardDog": true, "loot": [], "sound": "dog" },
+    "crow":       { "hp": 4,  "dmg": 1,  "speed": 90, "reach": 8,  "armor": 0,    "attackTime": 0.3,  "telegraph": 0.2,  "aggro": 60,  "fleeAt": 0.9,  "flies": true, "loot": ["feather_goose"], "sound": "crow" },
+    "rat":        { "hp": 5,  "dmg": 2,  "speed": 60, "reach": 8,  "armor": 0,    "attackTime": 0.3,  "telegraph": 0.2,  "aggro": 90,  "fleeAt": 0.6,  "plague": 0.25, "loot": [], "sound": "rat" },
+    "pike":       { "hp": 8,  "dmg": 3,  "speed": 40, "reach": 10, "armor": 0,    "attackTime": 0.5,  "telegraph": 0.3,  "aggro": 70,  "fleeAt": 0.5,  "aquatic": true, "loot": ["fish_smoked"], "sound": "splash" },
+    "goose":      { "hp": 9,  "dmg": 2,  "speed": 48, "reach": 10, "armor": 0,    "attackTime": 0.4,  "telegraph": 0.35, "aggro": 120, "fleeAt": 0.4,  "territorial": true, "loot": ["feather_goose", "egg_goose"], "sound": "goose" },
+    "horse":      { "hp": 60, "dmg": 10, "speed": 96, "reach": 18, "armor": 0.05, "attackTime": 0.8,  "telegraph": 0.5,  "aggro": 0,   "fleeAt": 1,    "skittish": true, "kick": true, "loot": [], "sound": "horse" },
+    "wildKnight": { "hp": 92, "dmg": 22, "speed": 48, "reach": 26, "armor": 0.42, "attackTime": 0.75, "telegraph": 0.45, "aggro": 300, "fleeAt": 0, "blocks": true, "parries": true, "mail": true, "loot": ["knight_token", "chain_shirt", "sword_iron"], "sound": "knight" }
+  },
+  "humans": {
+    "bandit_weak":  { "hp": 40, "dmg": 10, "speed": 46, "reach": 22, "armor": 0.08, "attackTime": 0.6, "telegraph": 0.4, "aggro": 220, "fleeAt": 0.2, "palette": "bandit", "look": { "weapon": "dagger", "helmet": "hood" }, "skill": "sword", "loot": ["dagger", "coin_purse_small"], "crimeOnKill": "murder" },
+    "bandit":       { "hp": 58, "dmg": 15, "speed": 48, "reach": 24, "armor": 0.15, "attackTime": 0.6, "telegraph": 0.4, "aggro": 260, "fleeAt": 0.15, "palette": "bandit", "look": { "weapon": "sword", "helmet": "cap", "bulk": 1 }, "skill": "sword", "loot": ["sword_rusted", "coin_purse_small", "rope_hemp"], "crimeOnKill": "murder" },
+    "bandit_boss":  { "hp": 78, "dmg": 19, "speed": 46, "reach": 26, "armor": 0.25, "attackTime": 0.65,"telegraph": 0.45,"aggro": 300, "fleeAt": 0, "palette": "bandit", "look": { "weapon": "axe", "helmet": "hood", "bulk": 2 }, "skill": "axe", "loot": ["axe_wood", "coin_purse_big", "marta_satchel"], "crimeOnKill": "murder" },
+    "drunk":        { "hp": 32, "dmg": 7,  "speed": 34, "reach": 18, "armor": 0,    "attackTime": 0.9, "telegraph": 0.6, "aggro": 120, "fleeAt": 0.35, "palette": "peasantM", "look": { "weapon": "none", "bulk": 1 }, "skill": "brawl", "loot": ["beer_mug"], "crimeOnKill": "murder" },
+    "guard":        { "hp": 70, "dmg": 17, "speed": 46, "reach": 28, "armor": 0.3,  "attackTime": 0.6, "telegraph": 0.4, "aggro": 320, "fleeAt": 0, "palette": "guard", "look": { "weapon": "spear", "helmet": "kettle" }, "skill": "spear", "blocks": true, "arrests": true, "loot": ["spear_watch", "permit_port"], "crimeOnKill": "murder" },
+    "knight_squire":{ "hp": 84, "dmg": 20, "speed": 44, "reach": 26, "armor": 0.35, "attackTime": 0.7, "telegraph": 0.45,"aggro": 300, "fleeAt": 0, "palette": "knight", "look": { "weapon": "sword", "helmet": "coif", "cloak": true }, "skill": "sword", "blocks": true, "parries": true, "loot": ["sword_iron", "knight_token"], "crimeOnKill": "murder" }
+  },
+  "difficulty": {
+    "story":   { "enemyHp": 0.8, "enemyDmg": 0.75, "playerDmg": 1.15, "parryWindow": 0.30, "dodgeInvuln": 0.32 },
+    "normal":  { "enemyHp": 1.0, "enemyDmg": 1.0,  "playerDmg": 1.0,  "parryWindow": 0.22, "dodgeInvuln": 0.24 },
+    "veteran": { "enemyHp": 1.2, "enemyDmg": 1.25, "playerDmg": 0.9,  "parryWindow": 0.17, "dodgeInvuln": 0.20 },
+    "iron":    { "enemyHp": 1.4, "enemyDmg": 1.5,  "playerDmg": 0.8,  "parryWindow": 0.13, "dodgeInvuln": 0.16 }
+  }
+}

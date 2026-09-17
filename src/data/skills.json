@@ -1,0 +1,907 @@
+{
+ "branches": [
+  {
+   "id": "combat",
+   "nameKey": "branch.combat",
+   "descKey": "branch.combat.desc"
+  },
+  {
+   "id": "crime",
+   "nameKey": "branch.crime",
+   "descKey": "branch.crime.desc"
+  },
+  {
+   "id": "craft",
+   "nameKey": "branch.craft",
+   "descKey": "branch.craft.desc"
+  },
+  {
+   "id": "trade",
+   "nameKey": "branch.trade",
+   "descKey": "branch.trade.desc"
+  },
+  {
+   "id": "survival",
+   "nameKey": "branch.survival",
+   "descKey": "branch.survival.desc"
+  },
+  {
+   "id": "knowledge",
+   "nameKey": "branch.knowledge",
+   "descKey": "branch.knowledge.desc"
+  }
+ ],
+ "skills": [
+  {
+   "id": "alchemy",
+   "branch": "craft",
+   "nameKey": "skill.alchemy",
+   "descKey": "skill.alchemy.desc",
+   "useKey": "use.alchemy"
+  },
+  {
+   "id": "archery",
+   "branch": "combat",
+   "nameKey": "skill.archery",
+   "descKey": "skill.archery.desc",
+   "useKey": "use.archery"
+  },
+  {
+   "id": "axe",
+   "branch": "combat",
+   "nameKey": "skill.axe",
+   "descKey": "skill.axe.desc",
+   "useKey": "use.axe"
+  },
+  {
+   "id": "barter",
+   "branch": "trade",
+   "nameKey": "skill.barter",
+   "descKey": "skill.barter.desc",
+   "useKey": "use.barter"
+  },
+  {
+   "id": "beasts",
+   "branch": "knowledge",
+   "nameKey": "skill.beasts",
+   "descKey": "skill.beasts.desc",
+   "useKey": "use.beasts"
+  },
+  {
+   "id": "blunt",
+   "branch": "combat",
+   "nameKey": "skill.blunt",
+   "descKey": "skill.blunt.desc",
+   "useKey": "use.blunt"
+  },
+  {
+   "id": "brawl",
+   "branch": "combat",
+   "nameKey": "skill.brawl",
+   "descKey": "skill.brawl.desc",
+   "useKey": "use.brawl"
+  },
+  {
+   "id": "brewing",
+   "branch": "craft",
+   "nameKey": "skill.brewing",
+   "descKey": "skill.brewing.desc",
+   "useKey": "use.brewing"
+  },
+  {
+   "id": "carpentry",
+   "branch": "craft",
+   "nameKey": "skill.carpentry",
+   "descKey": "skill.carpentry.desc",
+   "useKey": "use.carpentry"
+  },
+  {
+   "id": "cooking",
+   "branch": "craft",
+   "nameKey": "skill.cooking",
+   "descKey": "skill.cooking.desc",
+   "useKey": "use.cooking"
+  },
+  {
+   "id": "dagger",
+   "branch": "combat",
+   "nameKey": "skill.dagger",
+   "descKey": "skill.dagger.desc",
+   "useKey": "use.dagger"
+  },
+  {
+   "id": "deceit",
+   "branch": "crime",
+   "nameKey": "skill.deceit",
+   "descKey": "skill.deceit.desc",
+   "useKey": "use.deceit"
+  },
+  {
+   "id": "endurance",
+   "branch": "survival",
+   "nameKey": "skill.endurance",
+   "descKey": "skill.endurance.desc",
+   "useKey": "use.endurance"
+  },
+  {
+   "id": "firstaid",
+   "branch": "survival",
+   "nameKey": "skill.firstaid",
+   "descKey": "skill.firstaid.desc",
+   "useKey": "use.firstaid"
+  },
+  {
+   "id": "fishing",
+   "branch": "survival",
+   "nameKey": "skill.fishing",
+   "descKey": "skill.fishing.desc",
+   "useKey": "use.fishing"
+  },
+  {
+   "id": "foraging",
+   "branch": "survival",
+   "nameKey": "skill.foraging",
+   "descKey": "skill.foraging.desc",
+   "useKey": "use.foraging"
+  },
+  {
+   "id": "gamble",
+   "branch": "trade",
+   "nameKey": "skill.gamble",
+   "descKey": "skill.gamble.desc",
+   "useKey": "use.gamble"
+  },
+  {
+   "id": "herbalism",
+   "branch": "knowledge",
+   "nameKey": "skill.herbalism",
+   "descKey": "skill.herbalism.desc",
+   "useKey": "use.herbalism"
+  },
+  {
+   "id": "history",
+   "branch": "knowledge",
+   "nameKey": "skill.history",
+   "descKey": "skill.history.desc",
+   "useKey": "use.history"
+  },
+  {
+   "id": "intimidate",
+   "branch": "crime",
+   "nameKey": "skill.intimidate",
+   "descKey": "skill.intimidate.desc",
+   "useKey": "use.intimidate"
+  },
+  {
+   "id": "lockpick",
+   "branch": "crime",
+   "nameKey": "skill.lockpick",
+   "descKey": "skill.lockpick.desc",
+   "useKey": "use.lockpick"
+  },
+  {
+   "id": "medicine",
+   "branch": "knowledge",
+   "nameKey": "skill.medicine",
+   "descKey": "skill.medicine.desc",
+   "useKey": "use.medicine"
+  },
+  {
+   "id": "parry",
+   "branch": "combat",
+   "nameKey": "skill.parry",
+   "descKey": "skill.parry.desc",
+   "useKey": "use.parry"
+  },
+  {
+   "id": "persuade",
+   "branch": "trade",
+   "nameKey": "skill.persuade",
+   "descKey": "skill.persuade.desc",
+   "useKey": "use.persuade"
+  },
+  {
+   "id": "pickpocket",
+   "branch": "crime",
+   "nameKey": "skill.pickpocket",
+   "descKey": "skill.pickpocket.desc",
+   "useKey": "use.pickpocket"
+  },
+  {
+   "id": "reading",
+   "branch": "knowledge",
+   "nameKey": "skill.reading",
+   "descKey": "skill.reading.desc",
+   "useKey": "use.reading"
+  },
+  {
+   "id": "sailing",
+   "branch": "survival",
+   "nameKey": "skill.sailing",
+   "descKey": "skill.sailing.desc",
+   "useKey": "use.sailing"
+  },
+  {
+   "id": "smithing",
+   "branch": "craft",
+   "nameKey": "skill.smithing",
+   "descKey": "skill.smithing.desc",
+   "useKey": "use.smithing"
+  },
+  {
+   "id": "sneak",
+   "branch": "crime",
+   "nameKey": "skill.sneak",
+   "descKey": "skill.sneak.desc",
+   "useKey": "use.sneak"
+  },
+  {
+   "id": "spear",
+   "branch": "combat",
+   "nameKey": "skill.spear",
+   "descKey": "skill.spear.desc",
+   "useKey": "use.spear"
+  },
+  {
+   "id": "streetwise",
+   "branch": "trade",
+   "nameKey": "skill.streetwise",
+   "descKey": "skill.streetwise.desc",
+   "useKey": "use.streetwise"
+  },
+  {
+   "id": "sword",
+   "branch": "combat",
+   "nameKey": "skill.sword",
+   "descKey": "skill.sword.desc",
+   "useKey": "use.sword"
+  },
+  {
+   "id": "tanning",
+   "branch": "craft",
+   "nameKey": "skill.tanning",
+   "descKey": "skill.tanning.desc",
+   "useKey": "use.tanning"
+  },
+  {
+   "id": "tracking",
+   "branch": "survival",
+   "nameKey": "skill.tracking",
+   "descKey": "skill.tracking.desc",
+   "useKey": "use.tracking"
+  }
+ ],
+ "perks": [
+  {
+   "id": "parry_master",
+   "skill": "parry",
+   "reqLevel": 3,
+   "nameKey": "perk.parryMaster",
+   "descKey": "perk.parryMaster.desc",
+   "teacher": "vagn",
+   "crowns": 120,
+   "reputation": {
+    "villagers": 10
+   },
+   "days": 2,
+   "effects": [
+    {
+     "type": "parryWindow",
+     "value": 0.12
+    }
+   ]
+  },
+  {
+   "id": "riposte",
+   "skill": "sword",
+   "reqLevel": 4,
+   "nameKey": "perk.riposte",
+   "descKey": "perk.riposte.desc",
+   "teacher": "vagn",
+   "crowns": 160,
+   "reputation": {
+    "villagers": 20
+   },
+   "days": 3,
+   "effects": [
+    {
+     "type": "riposte",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "id": "shield_wall",
+   "skill": "brawl",
+   "reqLevel": 3,
+   "nameKey": "perk.shieldWall",
+   "descKey": "perk.shieldWall.desc",
+   "teacher": "vagn",
+   "crowns": 90,
+   "reputation": {},
+   "days": 2,
+   "effects": [
+    {
+     "type": "blockCost",
+     "value": -0.35
+    }
+   ]
+  },
+  {
+   "id": "heavy_hand",
+   "skill": "blunt",
+   "reqLevel": 4,
+   "nameKey": "perk.heavyHand",
+   "descKey": "perk.heavyHand.desc",
+   "teacher": "vagn",
+   "crowns": 110,
+   "reputation": {},
+   "days": 2,
+   "effects": [
+    {
+     "type": "guardBreak",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "id": "quick_draw",
+   "skill": "sword",
+   "reqLevel": 2,
+   "nameKey": "perk.quickDraw",
+   "descKey": "perk.quickDraw.desc",
+   "teacher": "vagn",
+   "crowns": 70,
+   "reputation": {},
+   "days": 1,
+   "effects": [
+    {
+     "type": "attackSpeed",
+     "value": 0.15
+    }
+   ]
+  },
+  {
+   "id": "soft_step",
+   "skill": "sneak",
+   "reqLevel": 2,
+   "nameKey": "perk.softStep",
+   "descKey": "perk.softStep.desc",
+   "teacher": "marta",
+   "crowns": 40,
+   "reputation": {
+    "smugglers": 5
+   },
+   "days": 1,
+   "effects": [
+    {
+     "type": "noiseMul",
+     "value": -0.3
+    }
+   ]
+  },
+  {
+   "id": "shadow_work",
+   "skill": "sneak",
+   "reqLevel": 4,
+   "nameKey": "perk.shadowWork",
+   "descKey": "perk.shadowWork.desc",
+   "teacher": "idzi",
+   "crowns": 150,
+   "reputation": {
+    "smugglers": 25
+   },
+   "days": 2,
+   "effects": [
+    {
+     "type": "darknessBonus",
+     "value": 0.25
+    }
+   ]
+  },
+  {
+   "id": "wire_fingers",
+   "skill": "lockpick",
+   "reqLevel": 3,
+   "nameKey": "perk.wireFingers",
+   "descKey": "perk.wireFingers.desc",
+   "teacher": "marta",
+   "crowns": 80,
+   "reputation": {},
+   "days": 2,
+   "effects": [
+    {
+     "type": "lockpickSpeed",
+     "value": 0.4
+    }
+   ]
+  },
+  {
+   "id": "cutpurse",
+   "skill": "pickpocket",
+   "reqLevel": 3,
+   "nameKey": "perk.cutpurse",
+   "descKey": "perk.cutpurse.desc",
+   "teacher": "marta",
+   "crowns": 60,
+   "reputation": {
+    "smugglers": 10
+   },
+   "days": 1,
+   "effects": [
+    {
+     "type": "pickpocketBonus",
+     "value": 0.2
+    }
+   ]
+  },
+  {
+   "id": "smooth_lie",
+   "skill": "deceit",
+   "reqLevel": 3,
+   "nameKey": "perk.smoothLie",
+   "descKey": "perk.smoothLie.desc",
+   "teacher": "idzi",
+   "crowns": 90,
+   "reputation": {
+    "smugglers": 15
+   },
+   "days": 1,
+   "effects": [
+    {
+     "type": "lieBonus",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "id": "cold_eye",
+   "skill": "intimidate",
+   "reqLevel": 4,
+   "nameKey": "perk.coldEye",
+   "descKey": "perk.coldEye.desc",
+   "teacher": "baldwin",
+   "crowns": 200,
+   "reputation": {
+    "wildKnights": 30
+   },
+   "days": 2,
+   "effects": [
+    {
+     "type": "intimidateBonus",
+     "value": 2
+    }
+   ]
+  },
+  {
+   "id": "hidden_pockets",
+   "skill": "sneak",
+   "reqLevel": 5,
+   "nameKey": "perk.hiddenPockets",
+   "descKey": "perk.hiddenPockets.desc",
+   "teacher": "idzi",
+   "crowns": 180,
+   "reputation": {
+    "smugglers": 30
+   },
+   "days": 2,
+   "effects": [
+    {
+     "type": "concealBonus",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "id": "true_temper",
+   "skill": "smithing",
+   "reqLevel": 3,
+   "nameKey": "perk.trueTemper",
+   "descKey": "perk.trueTemper.desc",
+   "teacher": "orlik",
+   "crowns": 130,
+   "reputation": {
+    "merchantGuild": 15
+   },
+   "days": 3,
+   "effects": [
+    {
+     "type": "craftQuality",
+     "value": 0.15
+    }
+   ]
+  },
+  {
+   "id": "bellows_rhythm",
+   "skill": "smithing",
+   "reqLevel": 2,
+   "nameKey": "perk.bellows",
+   "descKey": "perk.bellows.desc",
+   "teacher": "orlik",
+   "crowns": 70,
+   "reputation": {},
+   "days": 1,
+   "effects": [
+    {
+     "type": "craftSpeed",
+     "value": 0.3
+    }
+   ]
+  },
+  {
+   "id": "distillers_hand",
+   "skill": "alchemy",
+   "reqLevel": 3,
+   "nameKey": "perk.distiller",
+   "descKey": "perk.distiller.desc",
+   "teacher": "wiera",
+   "crowns": 110,
+   "reputation": {
+    "church": 10
+   },
+   "days": 2,
+   "effects": [
+    {
+     "type": "brewYield",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "id": "joiners_eye",
+   "skill": "carpentry",
+   "reqLevel": 2,
+   "nameKey": "perk.joiner",
+   "descKey": "perk.joiner.desc",
+   "teacher": "orlik",
+   "crowns": 60,
+   "reputation": {},
+   "days": 1,
+   "effects": [
+    {
+     "type": "craftQuality",
+     "value": 0.08
+    }
+   ]
+  },
+  {
+   "id": "salt_hand",
+   "skill": "cooking",
+   "reqLevel": 2,
+   "nameKey": "perk.saltHand",
+   "descKey": "perk.saltHand.desc",
+   "teacher": "hanna",
+   "crowns": 45,
+   "reputation": {
+    "villagers": 5
+   },
+   "days": 1,
+   "effects": [
+    {
+     "type": "foodQuality",
+     "value": 0.2
+    }
+   ]
+  },
+  {
+   "id": "brewers_patience",
+   "skill": "brewing",
+   "reqLevel": 3,
+   "nameKey": "perk.brewer",
+   "descKey": "perk.brewer.desc",
+   "teacher": "hanna",
+   "crowns": 95,
+   "reputation": {},
+   "days": 2,
+   "effects": [
+    {
+     "type": "brewYield",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "id": "curing_knowhow",
+   "skill": "tanning",
+   "reqLevel": 2,
+   "nameKey": "perk.curing",
+   "descKey": "perk.curing.desc",
+   "teacher": "garbarz_oles",
+   "crowns": 55,
+   "reputation": {},
+   "days": 1,
+   "effects": [
+    {
+     "type": "craftQuality",
+     "value": 0.1
+    }
+   ]
+  },
+  {
+   "id": "merchants_ear",
+   "skill": "barter",
+   "reqLevel": 3,
+   "nameKey": "perk.merchantsEar",
+   "descKey": "perk.merchantsEar.desc",
+   "teacher": "kupiec_zbylut",
+   "crowns": 120,
+   "reputation": {
+    "merchantGuild": 20
+   },
+   "days": 2,
+   "effects": [
+    {
+     "type": "priceMod",
+     "value": -0.12
+    }
+   ]
+  },
+  {
+   "id": "honest_face",
+   "skill": "persuade",
+   "reqLevel": 3,
+   "nameKey": "perk.honestFace",
+   "descKey": "perk.honestFace.desc",
+   "teacher": "teodor",
+   "crowns": 80,
+   "reputation": {
+    "church": 15
+   },
+   "days": 1,
+   "effects": [
+    {
+     "type": "persuadeBonus",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "id": "dice_memory",
+   "skill": "gamble",
+   "reqLevel": 3,
+   "nameKey": "perk.diceMemory",
+   "descKey": "perk.diceMemory.desc",
+   "teacher": "hanna",
+   "crowns": 70,
+   "reputation": {},
+   "days": 1,
+   "effects": [
+    {
+     "type": "cheatDetect",
+     "value": -0.25
+    }
+   ]
+  },
+  {
+   "id": "street_ear",
+   "skill": "streetwise",
+   "reqLevel": 2,
+   "nameKey": "perk.streetEar",
+   "descKey": "perk.streetEar.desc",
+   "teacher": "idzi",
+   "crowns": 50,
+   "reputation": {
+    "smugglers": 10
+   },
+   "days": 1,
+   "effects": [
+    {
+     "type": "rumorAccess",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "id": "read_the_ground",
+   "skill": "tracking",
+   "reqLevel": 3,
+   "nameKey": "perk.readGround",
+   "descKey": "perk.readGround.desc",
+   "teacher": "wiera",
+   "crowns": 90,
+   "reputation": {
+    "villagers": 10
+   },
+   "days": 2,
+   "effects": [
+    {
+     "type": "trackBonus",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "id": "green_thumb",
+   "skill": "foraging",
+   "reqLevel": 2,
+   "nameKey": "perk.greenThumb",
+   "descKey": "perk.greenThumb.desc",
+   "teacher": "wiera",
+   "crowns": 45,
+   "reputation": {},
+   "days": 1,
+   "effects": [
+    {
+     "type": "gatherYield",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "id": "still_water",
+   "skill": "fishing",
+   "reqLevel": 2,
+   "nameKey": "perk.stillWater",
+   "descKey": "perk.stillWater.desc",
+   "teacher": "rybak_ewa",
+   "crowns": 40,
+   "reputation": {
+    "villagers": 5
+   },
+   "days": 1,
+   "effects": [
+    {
+     "type": "fishYield",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "id": "long_breath",
+   "skill": "endurance",
+   "reqLevel": 3,
+   "nameKey": "perk.longBreath",
+   "descKey": "perk.longBreath.desc",
+   "teacher": "vagn",
+   "crowns": 100,
+   "reputation": {},
+   "days": 2,
+   "effects": [
+    {
+     "type": "staminaMax",
+     "value": 25
+    }
+   ]
+  },
+  {
+   "id": "field_dressing",
+   "skill": "firstaid",
+   "reqLevel": 2,
+   "nameKey": "perk.fieldDressing",
+   "descKey": "perk.fieldDressing.desc",
+   "teacher": "medyk_elen",
+   "crowns": 75,
+   "reputation": {},
+   "days": 1,
+   "effects": [
+    {
+     "type": "bandageBonus",
+     "value": 0.5
+    }
+   ]
+  },
+  {
+   "id": "coast_pilot",
+   "skill": "sailing",
+   "reqLevel": 3,
+   "nameKey": "perk.coastPilot",
+   "descKey": "perk.coastPilot.desc",
+   "teacher": "idzi",
+   "crowns": 140,
+   "reputation": {
+    "smugglers": 20
+   },
+   "days": 2,
+   "effects": [
+    {
+     "type": "unlockBoats",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "id": "herbarium",
+   "skill": "herbalism",
+   "reqLevel": 2,
+   "nameKey": "perk.herbarium",
+   "descKey": "perk.herbarium.desc",
+   "teacher": "wiera",
+   "crowns": 65,
+   "reputation": {},
+   "days": 1,
+   "effects": [
+    {
+     "type": "bestiaryHint",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "id": "beast_lore",
+   "skill": "beasts",
+   "reqLevel": 2,
+   "nameKey": "perk.beastLore",
+   "descKey": "perk.beastLore.desc",
+   "teacher": "wiera",
+   "crowns": 55,
+   "reputation": {
+    "villagers": 5
+   },
+   "days": 1,
+   "effects": [
+    {
+     "type": "bestiaryHint",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "id": "chirurgeon",
+   "skill": "medicine",
+   "reqLevel": 4,
+   "nameKey": "perk.chirurgeon",
+   "descKey": "perk.chirurgeon.desc",
+   "teacher": "medyk_elen",
+   "crowns": 180,
+   "reputation": {
+    "church": 15
+   },
+   "days": 3,
+   "effects": [
+    {
+     "type": "healBonus",
+     "value": 0.5
+    }
+   ]
+  },
+  {
+   "id": "literate",
+   "skill": "reading",
+   "reqLevel": 1,
+   "nameKey": "perk.literate",
+   "descKey": "perk.literate.desc",
+   "teacher": "skryba_urban",
+   "crowns": 30,
+   "reputation": {},
+   "days": 1,
+   "effects": [
+    {
+     "type": "readDocuments",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "id": "island_chronicle",
+   "skill": "history",
+   "reqLevel": 2,
+   "nameKey": "perk.chronicle",
+   "descKey": "perk.chronicle.desc",
+   "teacher": "teodor",
+   "crowns": 70,
+   "reputation": {
+    "church": 10
+   },
+   "days": 1,
+   "effects": [
+    {
+     "type": "compendiumBonus",
+     "value": 1
+    }
+   ]
+  }
+ ],
+ "levelXp": [
+  0,
+  40,
+  100,
+  190,
+  320,
+  500,
+  740,
+  1050,
+  1450,
+  2000,
+  999999
+ ]
+}

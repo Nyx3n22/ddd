@@ -1,0 +1,900 @@
+{
+  "nodes": {
+    "hanna_root": {
+      "portrait": "hanna", "emotion": "neutral",
+      "text": "Hanna wipes the counter with a rag and sizes you up. \"New off the continent. Here they pay first and ask later. What do you need, John?\"",
+      "options": [
+        { "text": "Something hot and a mug of beer.", "goto": "hanna_meal" },
+        { "text": "I'm looking for work. Who pays cash in this town?", "goto": "hanna_work" },
+        { "text": "What's the word in town?", "goto": "hanna_gossip" },
+        { "text": "Who's at the gaming table today?", "goto": "hanna_dice" },
+        { "text": "I need a bed for the night.", "goto": "hanna_room" },
+        { "text": "I hear I have a tab with you.", "cond": { "flag": "hanna_tab_open" }, "goto": "hanna_tab" },
+        { "text": "[Intimidate 3] Forget the tab I owe you.", "cond": { "skill": "intimidate", "min": 3 }, "reqKey": "req.intimidate3", "goto": "hanna_threat" },
+        { "text": "I won't keep you.", "goto": "exit" }
+      ]
+    },
+    "hanna_meal": {
+      "portrait": "hanna", "emotion": "happy",
+      "text": "\"Six crowns for a bowl of stew and bread. Beer is two. Don't expect credit — you have a debtor's face.\"",
+      "options": [
+        { "text": "Stew and a beer. (8 crowns)", "cond": { "gold": 8 }, "reqKey": "req.gold8", "goto": "exit", "effects": [{ "openService": "meal" }, { "gold": -8 }, { "relation": { "hanna": 2 } }] },
+        { "text": "Just the beer. (2 crowns)", "cond": { "gold": 2 }, "reqKey": "req.gold2", "goto": "exit", "effects": [{ "openService": "drink" }, { "gold": -2 }] },
+        { "text": "Another time.", "goto": "hanna_root" }
+      ]
+    },
+    "hanna_work": {
+      "portrait": "hanna", "emotion": "sly",
+      "text": "\"There's as much work as there's dirt in the alleys. Orlik the smith wants coal — he pays on the spot. Ewa down by the water buys fish. And if your hands are soft and your conscience hard, Idzi hangs around the third pier after dark. I never told you that.\"",
+      "options": [
+        { "text": "Orlik, you say. Where do I find him?", "goto": "exit", "effects": [{ "note": "note.work_orlik" }, { "entry": { "kind": "place", "id": "market" } }, { "xp": { "streetwise": 8 } }] },
+        { "text": "Idzi. What does he carry?", "goto": "hanna_idzi" },
+        { "text": "Thanks. I'll buy you a round one day.", "goto": "exit", "effects": [{ "relation": { "hanna": 4 } }] }
+      ]
+    },
+    "hanna_idzi": {
+      "portrait": "hanna", "emotion": "sad",
+      "text": "\"Whatever customs didn't write down. Untaxed salt, untaxed beer, sometimes something that was still in the church yesterday. Listen — if they catch you with his goods, I'll say I've never seen you before. And I'll mean it.\"",
+      "options": [
+        { "text": "Understood. Discretion.", "goto": "exit", "effects": [{ "note": "note.idzi_warning" }, { "xp": { "streetwise": 10 } }] },
+        { "text": "And how do you know all this?", "goto": "hanna_secret_hint" }
+      ]
+    },
+    "hanna_secret_hint": {
+      "portrait": "hanna", "emotion": "angry",
+      "text": "\"Because an inn is the town's ear, John. Everybody says something after the third mug. Now go, my guests are getting cold.\"",
+      "options": [{ "text": "Going.", "goto": "exit", "effects": [{ "entry": { "kind": "note", "id": "hanna_ear" } }] }]
+    },
+    "hanna_gossip": {
+      "portrait": "hanna", "emotion": "neutral",
+      "text": "\"Gossip costs, but for a newcomer one is free. The Wild Knights take a cut from every stall. For three days customs officer Bernard has worn a face like he swallowed a lemon — twenty barrels of salt are missing from his books. And the hangman Baltazar is circling the gallows again, which means somebody will swing soon.\"",
+      "options": [
+        { "text": "Twenty barrels of salt. Somebody's making a deal.", "goto": "exit", "effects": [{ "rumor": "rumor.customsMissing" }, { "xp": { "streetwise": 12 } }, { "entry": { "kind": "note", "id": "salt_missing" } }] },
+        { "text": "Who's going to swing?", "goto": "hanna_gallows" },
+        { "text": "Thank you, Hanna.", "goto": "exit", "effects": [{ "relation": { "hanna": 2 } }] }
+      ]
+    },
+    "hanna_gallows": {
+      "portrait": "hanna", "emotion": "sad",
+      "text": "\"A boy from the suburbs. He took a sack of grain from the customs store because his mother had nothing to pay for a funeral. Baltazar says it's a quarter hour of work. The town says it's a performance.\"",
+      "options": [{ "text": "I'll remember that.", "goto": "exit", "effects": [{ "note": "note.gallows_boy" }, { "rep": { "villagers": 2 } }] }]
+    },
+    "hanna_dice": {
+      "portrait": "hanna", "emotion": "sly",
+      "text": "\"By day Cecylia sits at the window — a merchant's widow. Cards, and she hates cheats. After dark Pankracy comes — dice, hot temper, a knife in his boot. I don't open the table for strangers: you have to be let in. And you need a stake in coin, not in promises.\"",
+      "options": [
+        { "text": "Introduce me to the table. (5 crowns for the kitchen)", "cond": { "gold": 5 }, "reqKey": "req.gold5", "goto": "exit", "effects": [{ "gold": -5 }, { "flag": "table_welcome" }, { "relation": { "hanna": 3 } }] },
+        { "text": "Maybe later.", "goto": "hanna_root" }
+      ]
+    },
+    "hanna_room": {
+      "portrait": "hanna", "emotion": "neutral",
+      "text": "\"Room upstairs, four crowns a night. Fresh straw, the door has a lock — though a lock here is more decoration than anything. If you want to sleep, go up and lie down.\"",
+      "options": [
+        { "text": "I'll take the room tonight. (4 crowns)", "cond": { "gold": 4 }, "reqKey": "req.gold4", "goto": "exit", "effects": [{ "gold": -4 }, { "openService": "room" }, { "flag": "rented_room" }] },
+        { "text": "I'll sleep somewhere else.", "goto": "hanna_root" }
+      ]
+    },
+    "hanna_tab": {
+      "portrait": "hanna", "emotion": "angry",
+      "text": "\"Thirty crowns. I wrote it on the board by the barrel so I wouldn't have to trust my memory. Pay today and your bowl is free. Pay in a week and you'll drink elsewhere.\"",
+      "options": [
+        { "text": "Here's thirty.", "cond": { "gold": 30 }, "reqKey": "req.gold30", "goto": "exit", "effects": [{ "gold": -30 }, { "quest": { "action": "advance", "id": "q_hanna_tab" } }, { "relation": { "hanna": 10 } }, { "rep": { "villagers": 4 } }, { "xp": { "barter": 10 } }] },
+        { "text": "I'll dice for it. If I win, the tab is gone.", "cond": { "flag": "table_welcome" }, "reqKey": "req.table", "goto": "hanna_tab_dice" },
+        { "text": "I'll come when I have it.", "goto": "exit", "effects": [{ "relation": { "hanna": -4 } }] }
+      ]
+    },
+    "hanna_tab_dice": {
+      "portrait": "hanna", "emotion": "sly",
+      "text": "\"Oh no, darling. I don't play. But Pankracy will, if you meet his stake. Win, and you buy my chit from him and bring it here. That's how adults do it.\"",
+      "options": [{ "text": "I'll go to Pankracy.", "goto": "exit", "effects": [{ "flag": "tab_dice_plan" }, { "note": "note.tab_plan" }] }]
+    },
+    "hanna_threat": {
+      "portrait": "hanna", "emotion": "angry",
+      "text": "Hanna puts the rag down and looks at you for a long time. \"I've seen thirty like you in my life. Twenty-nine of them hanged or drank themselves to the bottom of the harbour. Get out before I call Rawicz.\"",
+      "options": [
+        { "text": "Forgive me. I'll pay when I can.", "goto": "exit", "effects": [{ "relation": { "hanna": -2 } }, { "rumor": "rumor.johnThreatened" }] },
+        { "text": "Call him. The guard owes me too.", "goto": "exit", "effects": [{ "relation": { "hanna": -12 } }, { "rep": { "villagers": -6 } }, { "crime": { "type": "threat", "witnesses": 2, "location": "Inn" } }] }
+      ]
+    },
+
+    "orlik_root": {
+      "portrait": "orlik", "emotion": "neutral",
+      "text": "Orlik doesn't stop working. He talks over his shoulder, in a voice used to noise: \"If you didn't come with iron or with coin, stand aside — sparks fly.\"",
+      "options": [
+        { "text": "I'm looking for work with coal.", "goto": "orlik_coal" },
+        { "text": "Show me what you sell.", "goto": "exit", "effects": [{ "openTrade": "orlik_forge" }] },
+        { "text": "I want to stand at the anvil.", "cond": { "flag": "forge_unlocked" }, "reqKey": "req.forgeUnlocked", "goto": "exit", "effects": [{ "openCraft": "forgeWork" }] },
+        { "text": "Teach me to smith.", "goto": "orlik_teach" },
+        { "text": "I hear the guild has trouble with the Knights.", "goto": "orlik_guild" },
+        { "text": "I won't interrupt.", "goto": "exit" }
+      ]
+    },
+    "orlik_coal": {
+      "portrait": "orlik", "emotion": "neutral",
+      "text": "\"Coal. Three baskets. I have next to none and the carts from the quarry have been standing in the rain. Bring me three lumps — sixty-five crowns and permission to touch my anvil. I won't sell you coal cheaper, because then I'd buy it from myself.\"",
+      "options": [
+        { "text": "I'll bring three lumps of coal.", "goto": "exit", "effects": [{ "quest": { "action": "start", "id": "q_coal_for_orlik" } }] },
+        { "text": "I have the coal. (3 lumps)", "cond": { "item": "coal_lump", "qty": 3 }, "reqKey": "req.coal3", "goto": "exit", "effects": [{ "take": "coal_lump", "qty": 3 }, { "quest": { "action": "advance", "id": "q_coal_for_orlik" } }] },
+        { "text": "Where do I find coal?", "goto": "orlik_coal_where" },
+        { "text": "Too rich for me. I'll find other work.", "goto": "exit", "effects": [{ "relation": { "orlik": -2 } }] }
+      ]
+    },
+    "orlik_coal_where": {
+      "portrait": "orlik", "emotion": "sly",
+      "text": "\"Honestly? The quarry cart stands by the west gate, next to the stone heap. The guard watches the cart but doesn't look down. Dishonestly — I didn't ask and you didn't say. And don't bring me wet coal, I won't take it.\"",
+      "options": [{ "text": "I know as much as I need to.", "goto": "exit", "effects": [{ "note": "note.coal_cart" }, { "entry": { "kind": "note", "id": "coal_cart" } }] }]
+    },
+    "orlik_teach": {
+      "portrait": "orlik", "emotion": "angry",
+      "text": "\"Teach? Lad, I have a guild apprentice and I have my schedule. But if your hands know what a hammer is, I'll show you one thing: how not to waste iron. Three days of my time and a hundred thirty crowns for coal and steel. Not less, because the guild audits me.\"",
+      "options": [
+        { "text": "Teach me. Three days, a hundred thirty crowns.", "cond": { "gold": 130, "skill": "smithing", "min": 1 }, "reqKey": "req.teachSmith", "goto": "exit", "effects": [{ "gold": -130 }, { "train": { "perk": "true_temper" } }] },
+        { "text": "I'll learn on my own, at your anvil.", "goto": "exit", "effects": [{ "relation": { "orlik": -3 } }] },
+        { "text": "I don't have that much. I'll be back.", "goto": "orlik_root" }
+      ]
+    },
+    "orlik_guild": {
+      "portrait": "orlik", "emotion": "sad",
+      "text": "\"'Trouble' is too small a word. The Knights take every tenth piece 'for protection'. Zbylut at the Guild reckons it will settle down. I reckon how much iron is in my chest. If you want to know who here sides with the Knights — ask at the Guild, not at my forge. I have children.\"",
+      "options": [
+        { "text": "Understood. Nobody heard me ask.", "goto": "exit", "effects": [{ "note": "note.guild_protection" }, { "xp": { "streetwise": 10 } }, { "relation": { "orlik": 3 } }] },
+        { "text": "That business could be spoiled.", "goto": "orlik_sabotage" }
+      ]
+    },
+    "orlik_sabotage": {
+      "portrait": "orlik", "emotion": "surprised",
+      "text": "Orlik puts the hammer down. \"It could. Only once you do it, there's no going back. Think about whether you want to be the one who sets fires instead of the one who forges. I have a smithy, not an army.\"",
+      "options": [{ "text": "I'll remember your words.", "goto": "exit", "effects": [{ "flag": "orlik_warned" }, { "note": "note.orlik_warning" }, { "relation": { "orlik": 5 } }] }]
+    },
+
+    "vagn_root": {
+      "portrait": "vagn", "emotion": "angry",
+      "text": "Old Vagn leans on a fence post and reads you from boots to hands. \"Mercenary. I can tell by how you stand: weight on the left leg, because the right one got hit once. Say what you want, I haven't got all day.\"",
+      "options": [
+        { "text": "I want you to teach me.", "goto": "vagn_teach" },
+        { "text": "Teach me to parry.", "cond": { "relation": { "vagn": 30 }, "skill": "parry", "min": 2 }, "reqKey": "req.vagnRespect", "goto": "vagn_parry" },
+        { "text": "One round with me. No steel.", "goto": "vagn_spar" },
+        { "text": "What happened to your leg?", "goto": "vagn_past" },
+        { "text": "I know you from the stories. You fought at Vranov.", "cond": { "skill": "history", "min": 2 }, "reqKey": "req.history2", "goto": "vagn_vranov" },
+        { "text": "I won't take your time.", "goto": "exit" }
+      ]
+    },
+    "vagn_teach": {
+      "portrait": "vagn", "emotion": "sly",
+      "text": "\"Teach a stranger? I taught three. Two are dead, the third drinks. I don't teach for money — I teach for respect, and respect is bought with work. Show me you can stay on your feet when somebody's hitting you. Spar with me in the yard.\"",
+      "options": [
+        { "text": "Let's do it.", "goto": "vagn_spar" },
+        { "text": "Not now.", "goto": "exit", "effects": [{ "relation": { "vagn": -2 } }] }
+      ]
+    },
+    "vagn_spar": {
+      "portrait": "vagn", "emotion": "neutral",
+      "text": "Vagn takes a training staff from the rack. \"Three hits and we're done. It hurts as usual. Don't count on mercy, count on your legs.\"",
+      "options": [
+        { "text": "Begin.", "goto": "exit", "effects": [{ "spar": "vagn" }, { "quest": { "action": "advance", "id": "q_vagn_respect" } }] },
+        { "text": "Wait. Let me warm up first.", "goto": "exit", "effects": [{ "note": "note.spar_later" }] }
+      ]
+    },
+    "vagn_parry": {
+      "portrait": "vagn", "emotion": "happy",
+      "text": "\"Parrying. Two days in the yard, a hundred twenty crowns — beer for me and salve for you — and one thing: you won't learn it from a book, only from pain. Agreed?\"",
+      "options": [
+        { "text": "Agreed. Two days and a hundred twenty crowns.", "cond": { "gold": 120 }, "reqKey": "req.gold120", "goto": "exit", "effects": [{ "gold": -120 }, { "train": { "perk": "parry_master" } }] },
+        { "text": "I can't afford it now.", "goto": "vagn_root" }
+      ]
+    },
+    "vagn_past": {
+      "portrait": "vagn", "emotion": "sad",
+      "text": "\"A horse. Not mine. At Vranov, in forty-eight. The horse was somebody else's and the leg was mine. I stayed alive because I knew how not to move for three days in a ditch. That's why I teach people to stand, not to swing iron.\"",
+      "options": [
+        { "text": "Three days in a ditch. That's a better lesson than ten years of drill.", "goto": "exit", "effects": [{ "relation": { "vagn": 8 } }, { "entry": { "kind": "note", "id": "vagn_vranov" } }, { "xp": { "history": 15 } }] },
+        { "text": "Who won at Vranov?", "goto": "vagn_vranov" }
+      ]
+    },
+    "vagn_vranov": {
+      "portrait": "vagn", "emotion": "angry",
+      "text": "\"Nobody. That's why they call it a slaughter, not a battle. The Knights who take your cut today are the same ones who burned villages on the way there. Remember that, because one day you'll have to choose a side. And don't choose by money.\"",
+      "options": [{ "text": "I'll remember.", "goto": "exit", "effects": [{ "note": "note.vranov" }, { "flag": "knows_knights_vranov" }, { "xp": { "history": 20 } }, { "relation": { "vagn": 5 } }] }]
+    },
+
+    "idzi_root": {
+      "portrait": "idzi", "emotion": "sly",
+      "text": "Idzi stands in the warehouse shadow and doesn't step into the light. \"Speak low and don't point. Everybody in the harbour has eyes and half of them are on customs' payroll.\"",
+      "options": [
+        { "text": "I want work that pays better than coal.", "goto": "idzi_job" },
+        { "text": "I have goods to sell. Don't ask where from.", "goto": "exit", "effects": [{ "openTrade": "idzi_black" }] },
+        { "text": "Teach me to walk so nobody sees me.", "goto": "idzi_teach" },
+        { "text": "Bernard is missing twenty barrels of salt in his books.", "cond": { "flag": "knows_salt_missing" }, "reqKey": "req.saltRumor", "goto": "idzi_salt_known" },
+        { "text": "Who are you really, Idzi?", "goto": "idzi_who" },
+        { "text": "I didn't see you.", "goto": "exit" }
+      ]
+    },
+    "idzi_job": {
+      "portrait": "idzi", "emotion": "neutral",
+      "text": "\"There's an untaxed crate in warehouse A. It has to get to the third pier, in the dark, past the customs man and his lantern. Two hundred forty crowns. If they catch you, I don't know you. If you drop it, I don't know you either. Deal?\"",
+      "options": [
+        { "text": "I'm in. Where's the warehouse key?", "goto": "idzi_key" },
+        { "text": "And if the guard sees me?", "goto": "idzi_risk" },
+        { "text": "Too risky. I'd rather haul coal.", "goto": "exit", "effects": [{ "relation": { "idzi": -4 } }] }
+      ]
+    },
+    "idzi_key": {
+      "portrait": "idzi", "emotion": "sly",
+      "text": "\"The key is where it always is: in the lock, on the inside. The yard gate has a lock as old as the harbour — a pick or a strong back. Don't go by day; Bernard has a habit of counting crates in the afternoon.\"",
+      "options": [{ "text": "I'll come after dark.", "goto": "exit", "effects": [{ "quest": { "action": "start", "id": "q_untaxed_salt" } }, { "note": "note.warehouse_key" }] }]
+    },
+    "idzi_risk": {
+      "portrait": "idzi", "emotion": "neutral",
+      "text": "\"Then I'll tell you how law works in this harbour. The guard doesn't know something is gone until somebody tells them. What counts is witnesses, light and noise. See a lantern — stand in shadow and count your breaths. If they catch you with the crate in your hands you have three choices: a fine, the stocks, or running. Running is cheapest but needs legs.\"",
+      "options": [
+        { "text": "Then I go in the dark.", "goto": "idzi_key" },
+        { "text": "Thanks. That's more than anyone ever told me.", "goto": "exit", "effects": [{ "xp": { "streetwise": 20 } }, { "entry": { "kind": "note", "id": "crime_howto" } }, { "relation": { "idzi": 4 } }] }
+      ]
+    },
+    "idzi_teach": {
+      "portrait": "idzi", "emotion": "sly",
+      "text": "\"I teach shadow-work for a hundred fifty crowns and two days. But only to people who've already done something for me — otherwise I'm teaching a future witness against myself. Help me once, then we'll talk.\"",
+      "options": [
+        { "text": "It's a deal.", "goto": "exit", "effects": [{ "note": "note.idzi_terms" }] },
+        { "text": "Teach me now. I have the money.", "cond": { "gold": 150, "rep": { "smugglers": 25 } }, "reqKey": "req.idziTeach", "goto": "exit", "effects": [{ "gold": -150 }, { "train": { "perk": "shadow_work" } }] }
+      ]
+    },
+    "idzi_salt_known": {
+      "portrait": "idzi", "emotion": "surprised",
+      "text": "Idzi stops smiling. \"Who told you that? ...Never mind. If you know, then you also know half that salt came out of my warehouse. You have two roads now: sell it to Bernard for gratitude, or keep your teeth shut and have me on your side. There's no third.\"",
+      "options": [
+        { "text": "I keep my teeth shut.", "goto": "exit", "effects": [{ "rep": { "smugglers": 12 } }, { "relation": { "idzi": 15 } }, { "flag": "idzi_trusts" }] },
+        { "text": "Bernard would pay for that news.", "goto": "exit", "effects": [{ "rep": { "cityGuard": 10, "smugglers": -30 } }, { "relation": { "idzi": -40 } }, { "rumor": "rumor.johnBetrayed" }, { "flag": "betrayed_idzi" }] }
+      ]
+    },
+    "idzi_who": {
+      "portrait": "idzi", "emotion": "neutral",
+      "text": "\"I was boatswain on the St Elmo. She went down with somebody else's cargo, and the cargo's owner decided the fault lay with the man who survived. Since then I carry things that aren't in any book. Your question wasn't about me, it was about how much I know. And I know a lot.\"",
+      "options": [{ "text": "Then we'll understand each other.", "goto": "exit", "effects": [{ "relation": { "idzi": 5 } }, { "entry": { "kind": "note", "id": "idzi_past" } }] }]
+    },
+
+    "rawicz_root": {
+      "portrait": "rawicz", "emotion": "angry",
+      "text": "Sergeant Rawicz rests a hand on his hilt. \"Speak short. I have twelve men, forty drunks and one town that refuses to behave.\"",
+      "options": [
+        { "text": "I want to pay the fine and close the matter.", "cond": { "flag": "wanted" }, "reqKey": "req.wanted", "goto": "rawicz_fine" },
+        { "text": "I confess. I'd rather have the stocks than run.", "cond": { "flag": "wanted" }, "reqKey": "req.wanted", "goto": "rawicz_confess" },
+        { "text": "I have news about the salt from the customs warehouse.", "cond": { "flag": "betrayed_idzi" }, "reqKey": "req.betrayed", "goto": "rawicz_inform" },
+        { "text": "What do you take for looking the other way?", "goto": "rawicz_bribe" },
+        { "text": "Who really runs this town?", "goto": "rawicz_knights" },
+        { "text": "I won't keep you.", "goto": "exit" }
+      ]
+    },
+    "rawicz_fine": {
+      "portrait": "rawicz", "emotion": "neutral",
+      "text": "\"The fine goes to the town coffers, not to me. Whatever you're carrying that belongs to somebody else stays in the evidence store. You pay and you're clean — until next time.\"",
+      "options": [
+        { "text": "I'll pay the fine.", "goto": "exit", "effects": [{ "payFine": true }] },
+        { "text": "I don't have that much.", "goto": "rawicz_confess" }
+      ]
+    },
+    "rawicz_confess": {
+      "portrait": "rawicz", "emotion": "sly",
+      "text": "\"Confession is half the punishment, but in this town it's the half that costs days. Stocks on the market until dusk, then a night in the guard's cellar. You lose a day, maybe two. But nobody will be looking for you. Choose.\"",
+      "options": [
+        { "text": "I'll take the stocks.", "goto": "exit", "effects": [{ "punish": "stocks" }] },
+        { "text": "I'd rather pay the fine.", "goto": "rawicz_fine" },
+        { "text": "I'd rather try to run.", "goto": "exit", "effects": [{ "flee": true }] }
+      ]
+    },
+    "rawicz_bribe": {
+      "portrait": "rawicz", "emotion": "sly",
+      "text": "\"I don't take them. I have a wife and two daughters, and a bribe in this town ends with somebody writing your name in a book. But I know men who do. The guard at the customs gate has debts. Just remember that I don't know about it.\"",
+      "options": [
+        { "text": "I'll remember.", "goto": "exit", "effects": [{ "xp": { "streetwise": 15 } }, { "entry": { "kind": "note", "id": "bribe_customs" } }, { "relation": { "rawicz": 4 } }] },
+        { "text": "Why tell me this?", "goto": "rawicz_why" }
+      ]
+    },
+    "rawicz_why": {
+      "portrait": "rawicz", "emotion": "sad",
+      "text": "\"Because I have twelve men and I need to know which of them is bought. And because you have the face of a man who will end up on the other side sooner or later. I'd rather know early.\"",
+      "options": [{ "text": "Sensible.", "goto": "exit", "effects": [{ "relation": { "rawicz": 6 } }, { "flag": "rawicz_watching" }] }]
+    },
+    "rawicz_inform": {
+      "portrait": "rawicz", "emotion": "surprised",
+      "text": "\"Say it precisely. Crates, hours, who carried them. If it's true you have my gratitude and twenty crowns from the coffers. If you're lying to settle a rival's account, I'll know, and I'll remember your name.\"",
+      "options": [
+        { "text": "It's Idzi. Warehouse A, third pier, after dark.", "goto": "exit", "effects": [{ "gold": 20 }, { "rep": { "cityGuard": 12, "smugglers": -35 } }, { "relation": { "idzi": -50 } }, { "flag": "informed_on_idzi" }, { "crime": { "type": "informing", "witnesses": 0 } }] },
+        { "text": "I won't talk without payment up front.", "goto": "exit", "effects": [{ "relation": { "rawicz": -8 } }] }
+      ]
+    },
+    "rawicz_knights": {
+      "portrait": "rawicz", "emotion": "angry",
+      "text": "\"Officially? The town hall and the guild. Unofficially — Baldwin Crow has half the council in his pocket and the other half in fear. I have twelve men with spears against thirty in mail. That's why I watch the market and not the castle. Now go, they're seeing me with you.\"",
+      "options": [{ "text": "Thanks, sergeant.", "goto": "exit", "effects": [{ "note": "note.rawicz_knights" }, { "xp": { "history": 15 } }, { "entry": { "kind": "note", "id": "power_balance" } }] }]
+    },
+
+    "teodor_root": {
+      "portrait": "teodor", "emotion": "neutral",
+      "text": "Father Teodor has host-flour on his hands and eyes that have seen too much. \"John. I heard about your debt before you walked into town. Sit, or stand if you prefer — the Lord listens in both positions.\"",
+      "options": [
+        { "text": "I want to confess.", "goto": "teodor_confess" },
+        { "text": "I'd like to give alms.", "cond": { "gold": 3 }, "reqKey": "req.gold3", "goto": "teodor_alms" },
+        { "text": "I'm looking for the relic of Saint Elenem.", "goto": "teodor_relic" },
+        { "text": "Will the Church help me with the debt?", "goto": "teodor_debt" },
+        { "text": "Teach me to read.", "goto": "teodor_read" },
+        { "text": "I won't take your time.", "goto": "exit" }
+      ]
+    },
+    "teodor_confess": {
+      "portrait": "teodor", "emotion": "sad",
+      "text": "\"Confession is free, penance isn't. Say what's on your conscience — theft, blood, lies. I won't write it in a book, but I will remember. That is my job and my punishment.\"",
+      "options": [
+        { "text": "I killed men for money.", "goto": "teodor_killers" },
+        { "text": "I stole and cheated.", "goto": "exit", "effects": [{ "openService": "confess" }, { "gold": -3 }, { "rep": { "church": 4 } }] },
+        { "text": "I have no conscience, Father.", "goto": "teodor_nosoul" }
+      ]
+    },
+    "teodor_killers": {
+      "portrait": "teodor", "emotion": "surprised",
+      "text": "\"How many? ...Don't answer. I'll tell you something I don't say from the pulpit: I remember the fire at Vranov and I remember who lit it. If your debt to the Knights is the price of silence, then it isn't a debt, it's blackmail. And a blackmailer can be acquitted in his own heart. Say three Hail Marys and go do something good.\"",
+      "options": [
+        { "text": "How do you know about the fire?", "goto": "teodor_fire" },
+        { "text": "Thank you, Father.", "goto": "exit", "effects": [{ "flag": "remembered_fire" }, { "note": "note.confession" }, { "rep": { "church": 6 } }, { "xp": { "history": 20 } }] }
+      ]
+    },
+    "teodor_fire": {
+      "portrait": "teodor", "emotion": "sad",
+      "text": "\"Because I was there with the last rites. I held a boy's hand, and you stood three steps away watching whether anyone was coming. I'm not accusing. I'm only saying the island is small and people's memory is long.\"",
+      "options": [{ "text": "...I remember.", "goto": "exit", "effects": [{ "flag": "remembered_fire" }, { "note": "note.johns_past" }, { "relation": { "teodor": 10 } }] }]
+    },
+    "teodor_nosoul": {
+      "portrait": "teodor", "emotion": "sly",
+      "text": "\"Everyone says that until they dream of the face of somebody they hurt. Come back when you dream it. The doors are open from dawn and I am more patient than your creditors.\"",
+      "options": [{ "text": "Perhaps I will.", "goto": "exit", "effects": [{ "relation": { "teodor": 2 } }] }]
+    },
+    "teodor_alms": {
+      "portrait": "teodor", "emotion": "happy",
+      "text": "\"Three crowns in the box is bread for two families for a day. You won't get a place in heaven for it, but you'll get gratitude at the market, and that's more practical.\"",
+      "options": [
+        { "text": "Three crowns in.", "cond": { "gold": 3 }, "reqKey": "req.gold3", "goto": "exit", "effects": [{ "gold": -3 }, { "openService": "alms" }, { "rep": { "church": 5, "villagers": 3 } }, { "relation": { "teodor": 4 } }] },
+        { "text": "I'll give more when I have it.", "goto": "exit" }
+      ]
+    },
+    "teodor_relic": {
+      "portrait": "teodor", "emotion": "surprised",
+      "text": "\"The reliquary of Saint Elenem vanished from the abbey ruins three years ago. The Church says pagans took it. I say someone from the island took it and sold it, because the winter was long. I won't bless a search — but I won't tell the guard either, if the reliquary comes back to the altar.\"",
+      "options": [
+        { "text": "If I find it, I'll bring it to you.", "goto": "exit", "effects": [{ "flag": "relic_promise" }, { "note": "note.relic_quest" }, { "rep": { "church": 8 } }, { "entry": { "kind": "place", "id": "abbeyRuin" } }] },
+        { "text": "What's it worth?", "goto": "teodor_relic_value" }
+      ]
+    },
+    "teodor_relic_value": {
+      "portrait": "teodor", "emotion": "angry",
+      "text": "\"Three hundred crowns at Idzi's in the harbour, and four hundred years of somebody's prayer. Choose which price you want to know.\"",
+      "options": [{ "text": "I know both.", "goto": "exit", "effects": [{ "note": "note.relic_value" }, { "xp": { "history": 10 } }] }]
+    },
+    "teodor_debt": {
+      "portrait": "teodor", "emotion": "sad",
+      "text": "\"The Church doesn't pay debts to an armed brotherhood — that would mean we accept their law. I can give you three things: bread, a bed for one night at the almshouse, and a letter to Zbylut of the Guild so he looks on you more kindly. I have nothing more.\"",
+      "options": [
+        { "text": "I'll take the letter.", "goto": "exit", "effects": [{ "give": "letter_sealed" }, { "rep": { "church": 4 } }, { "note": "note.church_letter" }] },
+        { "text": "Thank you. That's more than I expected.", "goto": "exit", "effects": [{ "rep": { "church": 3 } }, { "relation": { "teodor": 5 } }] }
+      ]
+    },
+    "teodor_read": {
+      "portrait": "teodor", "emotion": "neutral",
+      "text": "\"Reading is taught by the scribe Urban, not by me — I teach what to do with the reading. Go to him for a notebook and a quill. A man without a notebook remembers only what he wants to remember, and that is the shortest road to being cheated.\"",
+      "options": [{ "text": "I'll go to Urban.", "goto": "exit", "effects": [{ "note": "note.buy_notebook" }, { "xp": { "reading": 10 } }] }]
+    },
+
+    "marta_root": {
+      "portrait": "marta", "emotion": "sly",
+      "text": "The girl steps back into shadow, appraising you. \"Don't come that close. Your hand is on your purse, which means you think you have something worth stealing. What do you want, mercenary?\"",
+      "options": [
+        { "text": "Keep your hands to yourself and we'll both be fine.", "goto": "marta_respect" },
+        { "text": "They say you're the best in the trade.", "goto": "marta_teach" },
+        { "text": "I hear somebody took something from you.", "cond": { "flag": "knows_marta_satchel" }, "reqKey": "req.martaRumor", "goto": "marta_satchel" },
+        { "text": "I need to get into a locked warehouse.", "goto": "marta_lock" },
+        { "text": "Take care of yourself.", "goto": "exit" }
+      ]
+    },
+    "marta_respect": {
+      "portrait": "marta", "emotion": "happy",
+      "text": "\"Good. First rule: don't watch the hands, watch the hips. Hands lie, hips don't. Second: never work where they know you. Third: don't tell me how to live, because I'm fifteen and I have more corpses in my memory than you have in your ledger.\"",
+      "options": [{ "text": "Three rules, remembered.", "goto": "exit", "effects": [{ "xp": { "pickpocket": 20 } }, { "relation": { "marta": 6 } }, { "entry": { "kind": "note", "id": "marta_rules" } }] }]
+    },
+    "marta_teach": {
+      "portrait": "marta", "emotion": "sly",
+      "text": "\"Best? I'm the only one not sitting in the stocks. I teach for forty crowns and one day. Condition: you don't steal from anyone who has less than you. Break that and I won't hand you in — you'll hand yourself in.\"",
+      "options": [
+        { "text": "Forty crowns and a day. Deal.", "cond": { "gold": 40, "skill": "pickpocket", "min": 1 }, "reqKey": "req.martaTeach", "goto": "exit", "effects": [{ "gold": -40 }, { "train": { "perk": "cutpurse" } }] },
+        { "text": "Teach me to walk quietly.", "cond": { "gold": 40 }, "reqKey": "req.gold40", "goto": "exit", "effects": [{ "gold": -40 }, { "train": { "perk": "soft_step" } }] },
+        { "text": "Principles are a luxury. I can't afford them.", "goto": "marta_principle" }
+      ]
+    },
+    "marta_principle": {
+      "portrait": "marta", "emotion": "angry",
+      "text": "\"That's exactly why you're thirty-six and in debt instead of having a house. I'm fifteen and I owe nobody anything but myself. Think about that when you sleep on the market.\"",
+      "options": [{ "text": "Maybe you're right.", "goto": "exit", "effects": [{ "relation": { "marta": 3 } }, { "note": "note.marta_lesson" }] }]
+    },
+    "marta_satchel": {
+      "portrait": "marta", "emotion": "sad",
+      "text": "\"Three of them. In the west alley, by the collapsed hut. They took my satchel and in it my mother's savings — eleven crowns and a silver clasp. I won't go there alone, they'd kill me. Will you go? I'll give you the satchel and what's in it, and I'll teach you one thing free.\"",
+      "options": [
+        { "text": "I'll get your satchel back.", "goto": "exit", "effects": [{ "quest": { "action": "start", "id": "q_marta_satchel" } }] },
+        { "text": "Three is too many. I'll come back when I'm ready.", "goto": "exit", "effects": [{ "relation": { "marta": -3 } }] },
+        { "text": "Forget the satchel. I'll teach you not to get robbed twice.", "cond": { "skill": "streetwise", "min": 3 }, "reqKey": "req.streetwise3", "goto": "marta_alternative" }
+      ]
+    },
+    "marta_alternative": {
+      "portrait": "marta", "emotion": "surprised",
+      "text": "Marta looks at you for a long moment, as if for the first time an adult spoke to her instead of over her. \"Fine. But the satchel first. Then we'll talk about principles.\"",
+      "options": [{ "text": "Satchel first.", "goto": "exit", "effects": [{ "quest": { "action": "start", "id": "q_marta_satchel" } }, { "relation": { "marta": 8 } }] }]
+    },
+    "marta_lock": {
+      "portrait": "marta", "emotion": "sly",
+      "text": "\"The lock on warehouse A is an old mechanism, four pins. A pick and patience: half a minute. Without a pick — your back and the hinge. But remember: once you open a lock you don't close it, and in the morning somebody will see it and count.\"",
+      "options": [{ "text": "Knowing the pin count is enough.", "goto": "exit", "effects": [{ "xp": { "lockpick": 15 } }, { "entry": { "kind": "note", "id": "warehouse_lock" } }] }]
+    },
+
+    "goslaw_root": {
+      "portrait": "goslaw", "emotion": "neutral",
+      "text": "Goslaw unrolls a parchment on his stall and holds the corners down with stones. \"Cartographer. I sell what I know and I buy what I don't. Plan of the harbour and Lower Town: forty crowns. Drawn from nature, not from rumours.\"",
+      "options": [
+        { "text": "I'll buy the town plan. (40 crowns)", "cond": { "gold": 40, "noItem": "map_port" }, "reqKey": "req.gold40", "goto": "exit", "effects": [{ "gold": -40 }, { "give": "map_port" }, { "note": "note.bought_map" }] },
+        { "text": "Do you have a plan of the whole island?", "goto": "goslaw_island" },
+        { "text": "Anything else for sale?", "goto": "exit", "effects": [{ "openTrade": "goslaw_maps" }] },
+        { "text": "I have news about the terrain. Will you buy it?", "goto": "goslaw_sell_knowledge" },
+        { "text": "Why are your maps better than others?", "goto": "goslaw_craft" },
+        { "text": "I don't need a map.", "goto": "exit" }
+      ]
+    },
+    "goslaw_island": {
+      "portrait": "goslaw", "emotion": "sly",
+      "text": "\"I do. A hundred eighty crowns and one caveat: half the island on it is drawn from fishermen's stories, so the eastern marshes may be a day's journey further than I've drawn them. You'll buy it anyway, because nobody else has anything.\"",
+      "options": [
+        { "text": "I'll take the island plan. (180 crowns)", "cond": { "gold": 180 }, "reqKey": "req.gold180", "goto": "exit", "effects": [{ "gold": -180 }, { "give": "map_island" }] },
+        { "text": "Too much for now.", "goto": "goslaw_root" }
+      ]
+    },
+    "goslaw_sell_knowledge": {
+      "portrait": "goslaw", "emotion": "surprised",
+      "text": "\"I buy. Tell me something that isn't on my parchment: a crossing, a ford, a place the guard doesn't walk, a cave, a well. For true news I pay ten to thirty crowns. For invention I pay nothing and remember your face.\"",
+      "options": [
+        { "text": "There's a gap in the customs wall at the eastern end.", "cond": { "flag": "found_gap" }, "reqKey": "req.foundGap", "goto": "exit", "effects": [{ "gold": 25 }, { "relation": { "goslaw": 8 } }, { "xp": { "barter": 15 } }] },
+        { "text": "I know of a cave under the cliff.", "cond": { "flag": "found_cave" }, "reqKey": "req.foundCave", "goto": "exit", "effects": [{ "gold": 30 }, { "relation": { "goslaw": 10 } }] },
+        { "text": "I have nothing certain.", "goto": "goslaw_root" }
+      ]
+    },
+    "goslaw_craft": {
+      "portrait": "goslaw", "emotion": "happy",
+      "text": "\"Because I walk. Forty years of walking. Others draw from an inn window and then a peasant drowns his cart in a marsh that on their map is a meadow. My map won't save your life, but at least it will lie honestly.\"",
+      "options": [{ "text": "Lie honestly. That's the most one can ask of a map.", "goto": "exit", "effects": [{ "relation": { "goslaw": 5 } }, { "xp": { "history": 10 } }] }]
+    },
+
+    "baldwin_root": {
+      "portrait": "baldwin", "emotion": "neutral",
+      "text": "Baldwin Crow stands on the pier in a cloak no harbour could dirty. \"John. Thirty-six years old, ten thousand crowns, thirty days. Let's sit like merchants, not like creditor and debtor. It's the same conversation, only politer.\"",
+      "options": [
+        { "text": "I'll pay. I just need time.", "goto": "baldwin_time" },
+        { "text": "I want to negotiate an extension.", "goto": "baldwin_extend" },
+        { "text": "What happened at Vranov that I'm in your book?", "cond": { "flag": "knows_knights_vranov" }, "reqKey": "req.vranov", "goto": "baldwin_vranov" },
+        { "text": "Perhaps I'd be useful to you with a sword.", "goto": "baldwin_join" },
+        { "text": "I won't pay a single crown.", "goto": "baldwin_refuse" }
+      ]
+    },
+    "baldwin_time": {
+      "portrait": "baldwin", "emotion": "happy",
+      "text": "\"Time is the one commodity I don't buy. You have thirty days, and every day you don't pay costs you interest — fifty crowns a day past the deadline. Pay in part whenever you like. Gwidon takes payments at the customs gate from dawn to dusk. It's a fairer arrangement than most in this town.\"",
+      "options": [
+        { "text": "I'll pay what I have now.", "goto": "exit", "effects": [{ "openDebt": true }] },
+        { "text": "I'll come when I have more.", "goto": "exit", "effects": [{ "note": "note.baldwin_terms" }] }
+      ]
+    },
+    "baldwin_extend": {
+      "portrait": "baldwin", "emotion": "sly",
+      "text": "\"An extension costs. Ten more days for a thousand crowns up front and one favour, chosen by me, at a time chosen by me. The favour won't be bloody — I'm not a butcher, I'm a merchant with a sword. But it may be uncomfortable.\"",
+      "options": [
+        { "text": "A thousand crowns and a favour. Agreed.", "cond": { "gold": 1000 }, "reqKey": "req.gold1000", "goto": "exit", "effects": [{ "gold": -1000 }, { "debtExtend": 10 }, { "flag": "baldwin_favor_owed" }, { "note": "note.favor_owed" }] },
+        { "text": "I don't have a thousand. Let's talk differently.", "goto": "baldwin_time" },
+        { "text": "I don't sell favours sight unseen.", "goto": "baldwin_refuse" }
+      ]
+    },
+    "baldwin_vranov": {
+      "portrait": "baldwin", "emotion": "angry",
+      "text": "Baldwin goes quiet for a moment. \"Vranov. A pretty word for an ugly thing. You were there on the other side of the fence, John. That's why your debt has your name on it and not a number. It isn't about ten thousand. It's about making you remember, for thirty days, who you owe for nobody remembering you. Now go and earn.\"",
+      "options": [{ "text": "I'll remember every word.", "goto": "exit", "effects": [{ "note": "note.vranov_truth" }, { "flag": "knows_debt_reason" }, { "xp": { "history": 30 } }] }]
+    },
+    "baldwin_join": {
+      "portrait": "baldwin", "emotion": "sly",
+      "text": "\"You would be. But you don't join the brotherhood with a debt — you join instead of the debt. Eighty days of service: escorts, collection, guard duty. In return the debt vanishes and you get a cloak and a reputation you won't wash off. Think it over, because it's the one thing you can't resell.\"",
+      "options": [
+        { "text": "I'll think it over. I'm not saying no.", "goto": "exit", "effects": [{ "flag": "knights_offer" }, { "note": "note.knights_offer" }, { "rep": { "wildKnights": 10 } }] },
+        { "text": "No. I'll pay the debt with my own hands.", "goto": "exit", "effects": [{ "rep": { "wildKnights": -5, "villagers": 5 } }, { "flag": "refused_knights" }] }
+      ]
+    },
+    "baldwin_refuse": {
+      "portrait": "baldwin", "emotion": "angry",
+      "text": "\"Then we'll meet on the thirtieth day. I won't shout — shouting is for men who have neither right nor money. I'll only say your name in front of witnesses, and then you'll do what people with no way out do. Farewell, John.\"",
+      "options": [{ "text": "Farewell.", "goto": "exit", "effects": [{ "flag": "defied_baldwin" }, { "rep": { "wildKnights": -20 } }, { "note": "note.defiance" }] }]
+    },
+
+    "collector_root": {
+      "portrait": "knight", "emotion": "angry",
+      "text": "Gwidon Frost has a ledger under his arm and a hand on his hilt. \"John. Which day it is, how much is left, how much you paid — in that order. I have no time for stories, I have a list.\"",
+      "options": [
+        { "text": "I'm paying what I have.", "goto": "exit", "effects": [{ "openDebt": true }] },
+        { "text": "How much is left?", "goto": "collector_status" },
+        { "text": "I need an extension.", "goto": "collector_extend" },
+        { "text": "You have no right to stop me.", "goto": "collector_threat" },
+        { "text": "Not now.", "goto": "exit" }
+      ]
+    },
+    "collector_status": {
+      "portrait": "knight", "emotion": "neutral",
+      "text": "Gwidon opens the ledger and reads without a trace of feeling: \"Ten thousand crowns, due on the thirtieth day. After the deadline fifty a day, and after seven days of delay we come for the property. Do you have property? You don't. Then mind the deadline.\"",
+      "options": [{ "text": "I'll remember.", "goto": "exit", "effects": [{ "note": "note.debt_terms" }, { "xp": { "streetwise": 5 } }] }]
+    },
+    "collector_extend": {
+      "portrait": "knight", "emotion": "sly",
+      "text": "\"I don't extend. I take money and write numbers. Extensions come from Baldwin, and Baldwin gives them for a thousand crowns and a favour. If you want to talk to Baldwin, say so and I'll pass it on — for five crowns, because that's my work, not my kindness.\"",
+      "options": [
+        { "text": "Pass it on. (5 crowns)", "cond": { "gold": 5 }, "reqKey": "req.gold5", "goto": "exit", "effects": [{ "gold": -5 }, { "flag": "asked_extension" }, { "note": "note.extension_asked" }] },
+        { "text": "I'll go to him myself.", "goto": "exit" }
+      ]
+    },
+    "collector_threat": {
+      "portrait": "knight", "emotion": "angry",
+      "text": "\"I have no right. I have an entry in a ledger and thirty men who read that ledger. In this town that works better than law. One more sentence like that and I'll add ten crowns for insult. I have a separate column for it.\"",
+      "options": [
+        { "text": "Let there be a column. Good day.", "goto": "exit", "effects": [{ "rep": { "wildKnights": -6 } }, { "crime": { "type": "insult", "witnesses": 1, "location": "Harbour" } }] },
+        { "text": "Forgive me. I'm tired.", "goto": "exit", "effects": [{ "relation": { "poborca_gwidon": 2 } }] }
+      ]
+    },
+
+    "usurer_root": {
+      "portrait": "usurer", "emotion": "sly",
+      "text": "Rejne counts coins on the table without looking up. \"I lend. Thirty percent a month, secured on goods or on a favour. I don't ask what for. I ask what you'll pay with if you don't pay.\"",
+      "options": [
+        { "text": "I need two hundred crowns.", "goto": "usurer_200" },
+        { "text": "How much will you lend against a pledge?", "goto": "usurer_pawn" },
+        { "text": "What happens when someone doesn't repay?", "goto": "usurer_consequences" },
+        { "text": "Not today.", "goto": "exit" }
+      ]
+    },
+    "usurer_200": {
+      "portrait": "usurer", "emotion": "neutral",
+      "text": "\"Two hundred today, two hundred sixty in a month. Security: your weapon, or your name in my ledger — which more people read than you think. Do you take it?\"",
+      "options": [
+        { "text": "I take two hundred.", "goto": "exit", "effects": [{ "gold": 200 }, { "loan": { "principal": 200, "due": 260 } }, { "note": "note.loan_taken" }] },
+        { "text": "Too dear.", "goto": "usurer_root" }
+      ]
+    },
+    "usurer_pawn": {
+      "portrait": "usurer", "emotion": "sly",
+      "text": "\"Against a pledge I give half the value of the thing, no bargaining. Iron, silver, relics — all the same, as long as it can be sold. The item sits in my chest until repayment. Don't repay and it sits with me forever, and you have the comfort of having 'sold' it.\"",
+      "options": [
+        { "text": "I'll pledge what I have.", "goto": "exit", "effects": [{ "openTrade": "pawn_idzi" }] },
+        { "text": "I'll think about it.", "goto": "exit" }
+      ]
+    },
+    "usurer_consequences": {
+      "portrait": "usurer", "emotion": "neutral",
+      "text": "\"First a letter. Then a visit. Then something that can't be described in a letter. In this town I don't beat people — that's what the Knights are for, and I pay them. I simply make sure you stop being solvent for anyone else.\"",
+      "options": [{ "text": "Clear as day.", "goto": "exit", "effects": [{ "entry": { "kind": "note", "id": "usurer_methods" } }, { "xp": { "streetwise": 15 } }] }]
+    },
+
+    "gambler_root": {
+      "portrait": "gambler", "emotion": "neutral",
+      "text": "The player at the table doesn't look up. \"The stake lies on the table, not in the mouth. You pay — you play. You win — you take. You lose — you sit on or stand up. You cheat — you leave through the window.\"",
+      "options": [
+        { "text": "I'm in. (stake 10)", "cond": { "gold": 10 }, "reqKey": "req.gold10", "goto": "exit", "effects": [{ "openGamble": { "game": "dice", "stake": 10 } }] },
+        { "text": "I'll play for a higher stake. (50)", "cond": { "gold": 50 }, "reqKey": "req.gold50", "goto": "exit", "effects": [{ "openGamble": { "game": "dice", "stake": 50 } }] },
+        { "text": "I'll just watch.", "goto": "exit" }
+      ]
+    },
+
+    "scribe_root": {
+      "portrait": "scribe", "emotion": "neutral",
+      "text": "The scribe Urban puts down his quill. \"Notebook: fourteen crowns, leather binding, twenty-four leaves. Quill and ink eight. Without a notebook a man remembers only what suits him, and that is the most expensive kind of forgetting.\"",
+      "options": [
+        { "text": "I'll buy the notebook. (14 crowns)", "cond": { "gold": 14, "noItem": "notebook" }, "reqKey": "req.gold14", "goto": "exit", "effects": [{ "gold": -14 }, { "give": "notebook" }, { "note": "note.bought_notebook" }, { "xp": { "reading": 10 } }] },
+        { "text": "Quill and ink. (8 crowns)", "cond": { "gold": 8 }, "reqKey": "req.gold8", "goto": "exit", "effects": [{ "gold": -8 }, { "give": "quill_ink" }] },
+        { "text": "What else do you have?", "goto": "exit", "effects": [{ "openTrade": "scribe_shop" }] },
+        { "text": "Teach me to read. (30 crowns, one day)", "cond": { "gold": 30 }, "reqKey": "req.gold30", "goto": "exit", "effects": [{ "gold": -30 }, { "train": { "perk": "literate" } }] },
+        { "text": "I'll think about it.", "goto": "exit" }
+      ]
+    },
+
+    "medic_root": {
+      "portrait": "medic", "emotion": "neutral",
+      "text": "The medic looks at your hands first, then at your face. \"You're not bleeding. No. But you have the colour of a man who sleeps in his clothes and eats whatever falls into his hands. What troubles you — the body or the purse?\"",
+      "options": [
+        { "text": "Dress my wounds. (25 crowns)", "cond": { "gold": 25 }, "reqKey": "req.gold25", "goto": "exit", "effects": [{ "gold": -25 }, { "openService": "treat" }] },
+        { "text": "Set my bone. (40 crowns)", "cond": { "gold": 40 }, "reqKey": "req.gold40", "goto": "exit", "effects": [{ "gold": -40 }, { "openService": "set_bone" }] },
+        { "text": "What's in your bag?", "goto": "exit", "effects": [{ "openTrade": "medic_shop" }] },
+        { "text": "Teach me to dress wounds.", "cond": { "gold": 75 }, "reqKey": "req.gold75", "goto": "exit", "effects": [{ "gold": -75 }, { "train": { "perk": "field_dressing" } }] },
+        { "text": "I'm well.", "goto": "exit" }
+      ]
+    },
+
+    "customs_root": {
+      "portrait": "customs", "emotion": "neutral",
+      "text": "Customs officer Bernard has a ledger and a stack of seals in front of him. \"Everything that enters the town must be in the ledger. You are 'goods' too, until you have a pass. Say what you came for, the queue behind you is growing.\"",
+      "options": [
+        { "text": "I want a harbour pass. (20 crowns)", "cond": { "gold": 20, "noItem": "permit_port" }, "reqKey": "req.gold20", "goto": "exit", "effects": [{ "gold": -20 }, { "give": "permit_port" }, { "note": "note.bought_permit" }] },
+        { "text": "I have a pass. Open the gate, please.", "cond": { "item": "permit_port" }, "reqKey": "req.permit", "goto": "exit", "effects": [{ "openGate": "gate_customs" }] },
+        { "text": "How much not to look in my purse?", "goto": "customs_bribe" },
+        { "text": "You're missing twenty barrels of salt in your books.", "cond": { "flag": "knows_salt_missing" }, "reqKey": "req.saltRumor", "goto": "customs_salt" },
+        { "text": "I'm leaving.", "goto": "exit" }
+      ]
+    },
+    "customs_bribe": {
+      "portrait": "customs", "emotion": "sly",
+      "text": "Bernard glances around the room. \"I didn't hear a question. But since you asked it: fifty crowns, and for an hour I have a great many papers to check. In that time the gate is sometimes... occupied with somebody else.\"",
+      "options": [
+        { "text": "Fifty. (bribe)", "cond": { "gold": 50 }, "reqKey": "req.gold50", "goto": "exit", "effects": [{ "gold": -50 }, { "crime": { "type": "bribery", "witnesses": 1, "location": "Customs" } }, { "flag": "bribed_customs" }, { "openGate": "gate_customs" }, { "note": "note.bribe_paid" }] },
+        { "text": "Too dear. I'll buy the pass.", "goto": "customs_root" }
+      ]
+    },
+    "customs_salt": {
+      "portrait": "customs", "emotion": "surprised",
+      "text": "Bernard closes the ledger. \"Who told you that? ...No, don't answer. If you have proof — a crate, a seal, a name — you get thirty crowns from the coffers and my memory, which is sometimes useful. If you have only a rumour, you have a problem, because I dislike rumours about my own ledger.\"",
+      "options": [
+        { "text": "I have a name: Idzi of the third pier.", "cond": { "flag": "idzi_trusts" }, "reqKey": "req.idziTrust", "goto": "customs_betray" },
+        { "text": "Only a rumour. Forgive me.", "goto": "exit", "effects": [{ "relation": { "celnik_bernard": -6 } }] },
+        { "text": "I know nothing. I made it up.", "goto": "exit", "effects": [{ "relation": { "celnik_bernard": -12 } }, { "rumor": "rumor.johnLied" }] }
+      ]
+    },
+    "customs_betray": {
+      "portrait": "customs", "emotion": "angry",
+      "text": "\"Idzi. I knew it. ...No, I didn't, but now I do. Thirty crowns and one warning: Idzi has friends in the harbour and you now have an enemy with a knife and a boat. Consider whether it was worth it.\"",
+      "options": [{ "text": "It was worth it.", "goto": "exit", "effects": [{ "gold": 30 }, { "rep": { "cityGuard": 10, "smugglers": -35 } }, { "relation": { "idzi": -50 } }, { "flag": "betrayed_idzi" }] }]
+    },
+
+    "guild_root": {
+      "portrait": "guild", "emotion": "neutral",
+      "text": "Zbylut of the Merchant Guild has soft hands and hard numbers. \"The Guild pays for certainty, not for courage. You have goods — I buy. You have hands — I have a contract. You have a problem — I have a lawyer, but the lawyer costs more than the problem.\"",
+      "options": [
+        { "text": "Show me what you buy.", "goto": "exit", "effects": [{ "openTrade": "guild_shop" }] },
+        { "text": "Do you have a caravan escort contract?", "goto": "guild_escort" },
+        { "text": "Orlik says the Knights take every tenth piece.", "goto": "guild_knights" },
+        { "text": "Teach me to bargain.", "cond": { "gold": 120, "rep": { "merchantGuild": 15 } }, "reqKey": "req.guildTeach", "goto": "exit", "effects": [{ "gold": -120 }, { "train": { "perk": "merchants_ear" } }] },
+        { "text": "I'll come back when I have goods.", "goto": "exit" }
+      ]
+    },
+    "guild_escort": {
+      "portrait": "guild", "emotion": "sly",
+      "text": "\"I do. A cart with salt and iron goes out the road past the stone bridge the day after tomorrow at dawn. Eighty crowns for the day, twenty of it in advance. Condition: you come back with the cart. If the cart comes back without you, I pay your family, and that's dearer, so you'd rather come back.\"",
+      "options": [
+        { "text": "I'll take the contract. (20 crowns advance)", "goto": "exit", "effects": [{ "gold": 20 }, { "quest": { "action": "startBoard", "id": "board_escort" } }, { "rep": { "merchantGuild": 3 } }] },
+        { "text": "I won't leave the town. I have thirty days.", "goto": "exit", "effects": [{ "relation": { "kupiec_zbylut": -2 } }] }
+      ]
+    },
+    "guild_knights": {
+      "portrait": "guild", "emotion": "angry",
+      "text": "\"Orlik has a long tongue and a short memory of whom he tells what. Yes, they take. And yes, I reckon it will pass, because Baldwin is a merchant dressed as a knight and merchants don't burn what they live off. The question is what happens when it stops paying him. I don't know. And I don't want to know with witnesses present.\"",
+      "options": [{ "text": "There are no witnesses.", "goto": "exit", "effects": [{ "note": "note.guild_knights" }, { "xp": { "streetwise": 15 } }, { "entry": { "kind": "note", "id": "guild_fear" } }] }]
+    },
+
+    "tanner_root": {
+      "portrait": "tanner", "emotion": "neutral",
+      "text": "Oles wipes his hands on his apron and doesn't offer you his. \"It stinks? It stinks. That's why my workshop is outside town and my prices are better than the guild's. I buy hides, I sell dressed leather. Say what you came with.\"",
+      "options": [
+        { "text": "I have hides to sell.", "goto": "exit", "effects": [{ "openTrade": "tanner_shop" }] },
+        { "text": "Teach me tanning. (55 crowns, one day)", "cond": { "gold": 55 }, "reqKey": "req.gold55", "goto": "exit", "effects": [{ "gold": -55 }, { "train": { "perk": "curing_knowhow" } }] },
+        { "text": "Who buys wolf pelts here?", "goto": "tanner_wolves" },
+        { "text": "Just passing.", "goto": "exit" }
+      ]
+    },
+    "tanner_wolves": {
+      "portrait": "tanner", "emotion": "sly",
+      "text": "\"I do. Forty-eight crowns for a whole one, twenty for a torn one. The wolves came down from the marshes because somebody burned their den — probably the same people who then complain that wolves are in town. Bring the pelt fresh, not dried on a stone.\"",
+      "options": [{ "text": "I'll bring one.", "goto": "exit", "effects": [{ "entry": { "kind": "creature", "id": "wolf" } }, { "xp": { "beasts": 10 } }] }]
+    },
+
+    "fisher_root": {
+      "portrait": "fisher", "emotion": "happy",
+      "text": "Ewa has her hands in a net and the smile of someone who got up before dawn because she wanted to. \"The fish were biting today. Buy, sell, or sit with me and learn where to cast — that costs less than a fish and lasts a lifetime.\"",
+      "options": [
+        { "text": "I'll buy fish and a hook.", "goto": "exit", "effects": [{ "openTrade": "fisher_shop" }] },
+        { "text": "Teach me to fish. (40 crowns, one day)", "cond": { "gold": 40 }, "reqKey": "req.gold40", "goto": "exit", "effects": [{ "gold": -40 }, { "train": { "perk": "still_water" } }] },
+        { "text": "Where is it quiet in this harbour?", "goto": "fisher_quiet" },
+        { "text": "Fair nets.", "goto": "exit" }
+      ]
+    },
+    "fisher_quiet": {
+      "portrait": "fisher", "emotion": "sly",
+      "text": "\"It's quiet behind the eastern wall, where there's a gap in the palisade. The guard doesn't walk there because they're afraid of the boggy ground. I'm telling you this because once you pulled my net out of the water — no, I'm joking. I'm telling you because you have the face of a man who'll go there anyway.\"",
+      "options": [{ "text": "I'll go. Thank you, Ewa.", "goto": "exit", "effects": [{ "entry": { "kind": "place", "id": "smugglersGap" } }, { "note": "note.gap_hint" }, { "relation": { "rybak_ewa": 5 } }] }]
+    },
+
+    "baker_root": {
+      "portrait": "baker", "emotion": "happy",
+      "text": "Ignac has flour up to his elbows. \"Bread is four crowns, because flour is dear — the miller says the river is low, and I say the miller plays dice. Are you buying or only sniffing?\"",
+      "options": [
+        { "text": "I'll buy bread. (4 crowns)", "cond": { "gold": 4 }, "reqKey": "req.gold4", "goto": "exit", "effects": [{ "gold": -4 }, { "give": "bread_loaf" }] },
+        { "text": "Show me the stall.", "goto": "exit", "effects": [{ "openTrade": "baker_stall" }] },
+        { "text": "The miller plays dice? With whom?", "goto": "baker_dice" },
+        { "text": "Only sniffing.", "goto": "exit" }
+      ]
+    },
+    "baker_dice": {
+      "portrait": "baker", "emotion": "sly",
+      "text": "\"With Pankracy, at night, at Hanna's. He loses flour, then he raises the price of grain, and finally I explain to the market women why a loaf costs four crowns. That's how the economy works, lad.\"",
+      "options": [{ "text": "That's how the economy works.", "goto": "exit", "effects": [{ "entry": { "kind": "note", "id": "bread_prices" } }, { "xp": { "barter": 12 } }] }]
+    },
+
+    "beggar_root": {
+      "portrait": "beggar", "emotion": "sad",
+      "text": "Lame Maciej holds out a hand but looks into your eyes, not at your purse. \"I've sat here six years. I know who walks where and at what hour. A crown for a piece of news, two for one that hurts somebody.\"",
+      "options": [
+        { "text": "Give me news for a crown.", "cond": { "gold": 1 }, "reqKey": "req.gold1", "goto": "beggar_rumor" },
+        { "text": "What do you know about the Wild Knights?", "cond": { "gold": 2 }, "reqKey": "req.gold2", "goto": "beggar_knights" },
+        { "text": "Here's bread instead of a crown.", "cond": { "item": "bread_loaf" }, "reqKey": "req.bread", "goto": "beggar_bread" },
+        { "text": "I have nothing.", "goto": "exit" }
+      ]
+    },
+    "beggar_rumor": {
+      "portrait": "beggar", "emotion": "sly",
+      "text": "\"Marta from the west alley walks the market at night and nobody catches her, because the guard has short legs and long tongues. Idzi from the harbour has crates that aren't in any ledger. And Hanna at the inn has a chit for somebody's debt and hides it in the barrel behind the counter. Choose which piece of news is worth your crown.\"",
+      "options": [
+        { "text": "All three. Here are two crowns more.", "cond": { "gold": 2 }, "reqKey": "req.gold2", "goto": "exit", "effects": [{ "gold": -3 }, { "flag": "knows_marta_satchel" }, { "flag": "knows_salt_missing" }, { "flag": "knows_hanna_chit" }, { "entry": { "kind": "note", "id": "beggar_rumors" } }, { "xp": { "streetwise": 20 } }] },
+        { "text": "Enough. Thanks.", "goto": "exit", "effects": [{ "gold": -1 }, { "flag": "knows_marta_satchel" }, { "xp": { "streetwise": 10 } }] }
+      ]
+    },
+    "beggar_knights": {
+      "portrait": "beggar", "emotion": "angry",
+      "text": "\"The Knights? They have a camp past the stone bridge, thirty men and twice as many horses. Every week they come for the levy, and Gwidon with his ledger walks the market reading names aloud so everybody hears. That isn't collecting money. That's theatre.\"",
+      "options": [{ "text": "Theatre. I'll remember.", "goto": "exit", "effects": [{ "gold": -2 }, { "note": "note.knights_camp" }, { "entry": { "kind": "creature", "id": "wildKnight" } }, { "xp": { "history": 15 } }] }]
+    },
+    "beggar_bread": {
+      "portrait": "beggar", "emotion": "happy",
+      "text": "Maciej takes the bread with both hands. \"Bread is better than a crown, because I can't eat a crown. In return I'll tell you something free: don't sleep on the market after dark. Not because they'll rob you — they certainly will. Because the guard counts the sleepers and adds them to the vagrant list, and from the vagrant list you go to the stocks.\"",
+      "options": [{ "text": "Thank you, Maciej.", "goto": "exit", "effects": [{ "take": "bread_loaf" }, { "rep": { "villagers": 6 } }, { "relation": { "maciej_kulawy": 12 } }, { "note": "note.sleep_warning" }] }]
+    },
+
+    "guard_root": {
+      "portrait": "guard", "emotion": "angry",
+      "text": "The guard sets his spear upright. \"Gate. A pass, or fifty crowns, or you turn back. I don't have a fourth option and I don't have all day.\"",
+      "options": [
+        { "text": "I have a pass.", "cond": { "item": "permit_port" }, "reqKey": "req.permit", "goto": "exit", "effects": [{ "openGate": "gate_customs" }] },
+        { "text": "Fifty crowns and you open it.", "cond": { "gold": 50 }, "reqKey": "req.gold50", "goto": "exit", "effects": [{ "gold": -50 }, { "crime": { "type": "bribery", "witnesses": 1, "location": "Gate" } }, { "openGate": "gate_customs" }] },
+        { "text": "[Intimidate 4] Open it, or you'll regret it.", "cond": { "skill": "intimidate", "min": 4 }, "reqKey": "req.intimidate4", "goto": "guard_intimidate" },
+        { "text": "I'm turning back.", "goto": "exit" }
+      ]
+    },
+    "guard_intimidate": {
+      "portrait": "guard", "emotion": "surprised",
+      "text": "The guard steps back half a pace and looks at your hilt. \"I'm not paid enough for this. Go through. But if anyone asks, I didn't see you and you didn't see me.\"",
+      "options": [{ "text": "I didn't see you.", "goto": "exit", "effects": [{ "openGate": "gate_customs" }, { "rep": { "cityGuard": -8 } }, { "rumor": "rumor.guardBullied" }, { "xp": { "intimidate": 25 } }] }]
+    },
+
+    "executioner_root": {
+      "portrait": "executioner", "emotion": "neutral",
+      "text": "Baltazar sharpens his axe on a stone without breaking rhythm. \"You're looking at the gallows, not at me. Everyone does. Ask, since you came.\"",
+      "options": [
+        { "text": "Who hangs tomorrow?", "goto": "executioner_tomorrow" },
+        { "text": "How do you live with that work?", "goto": "executioner_life" },
+        { "text": "I'm leaving.", "goto": "exit" }
+      ]
+    },
+    "executioner_tomorrow": {
+      "portrait": "executioner", "emotion": "sad",
+      "text": "\"A boy, for a sack of grain. At dawn, on the market, so the stall women can see. Don't ask me whether it's just — ask those who write the sentences. I only carry them out and I eat from it.\"",
+      "options": [{ "text": "I'll be at the market.", "goto": "exit", "effects": [{ "flag": "knows_execution" }, { "note": "note.execution_tomorrow" }, { "entry": { "kind": "place", "id": "gallows" } }] }]
+    },
+    "executioner_life": {
+      "portrait": "executioner", "emotion": "neutral",
+      "text": "\"I live outside town, because nobody wants that neighbour. I eat at the inn by the door, because nobody wants that neighbour at the table. I earn three times what a guard does and I have no friends. That's the whole answer.\"",
+      "options": [{ "text": "Thank you for the honesty.", "goto": "exit", "effects": [{ "relation": { "baltazar_kat": 6 } }, { "xp": { "history": 10 } }] }]
+    },
+
+    "washer_root": {
+      "portrait": "washer", "emotion": "happy",
+      "text": "Zofia wrings out a sheet. \"You're as dirty as this harbour. Four crowns and you'll have a clean shirt in the morning. Or go to the bathhouse, they charge more but they have warm water.\"",
+      "options": [
+        { "text": "Wash my shirt. (4 crowns)", "cond": { "gold": 4 }, "reqKey": "req.gold4", "goto": "exit", "effects": [{ "gold": -4 }, { "hygiene": 60 }, { "relation": { "zofia_prawka": 3 } }] },
+        { "text": "What do people say at the washing?", "goto": "washer_gossip" },
+        { "text": "Maybe later.", "goto": "exit" }
+      ]
+    },
+    "washer_gossip": {
+      "portrait": "washer", "emotion": "sly",
+      "text": "\"Washing is a second confession. From the stains you learn who drinks, who beats, who walks at night in the mud, and who has blood on his sleeve and says it's wine. This week two sleeves had 'wine'. I won't say whose, because I have children and I want to keep them.\"",
+      "options": [{ "text": "Understood. Discretion.", "goto": "exit", "effects": [{ "entry": { "kind": "note", "id": "blood_sleeves" } }, { "xp": { "streetwise": 15 } }, { "relation": { "zofia_prawka": 4 } }] }]
+    },
+
+    "stableboy_root": {
+      "portrait": "stableboy", "emotion": "happy",
+      "text": "Pietrek holds a horse by the bridle and looks up at you. \"Sir wants a horse? A horse costs eighty crowns and two sacks of oats a month. Or sir only wants to pat him — that's free, but don't approach from behind.\"",
+      "options": [
+        { "text": "I'll buy the horse. (80 crowns)", "cond": { "gold": 80 }, "reqKey": "req.gold80", "goto": "exit", "effects": [{ "gold": -80 }, { "flag": "owns_horse" }, { "note": "note.bought_horse" }] },
+        { "text": "What do you charge for watching my things?", "goto": "stableboy_watch" },
+        { "text": "I'll just pat him.", "goto": "exit", "effects": [{ "relation": { "pietrek_stajenny": 4 } }] }
+      ]
+    },
+    "stableboy_watch": {
+      "portrait": "stableboy", "emotion": "sly",
+      "text": "\"A crown a day. Nobody will touch it, because everyone knows it's mine. And if somebody does touch it, I'll tell you who — because I see everything here, I just pretend I don't.\"",
+      "options": [{ "text": "A crown a day. Deal.", "cond": { "gold": 1 }, "reqKey": "req.gold1", "goto": "exit", "effects": [{ "gold": -1 }, { "flag": "stable_storage" }, { "relation": { "pietrek_stajenny": 6 } }] }]
+    },
+
+    "nun_root": {
+      "portrait": "nun", "emotion": "neutral",
+      "text": "Sister Agnes puts down her book. \"If you came to pray, the pew is free. If you came for help, we have bread for twelve and twelve places at the almshouse for the night. If you came out of curiosity — that's fine too, just don't make noise.\"",
+      "options": [
+        { "text": "I'd like a place at the almshouse for the night.", "goto": "exit", "effects": [{ "sleep": { "to": 6, "cost": 0, "place": "almshouse" } }] },
+        { "text": "What are you reading?", "goto": "nun_book" },
+        { "text": "I won't disturb you.", "goto": "exit" }
+      ]
+    },
+    "nun_book": {
+      "portrait": "nun", "emotion": "happy",
+      "text": "\"The chronicle of the island. The year fourteen twenty-eight — the one nobody wants to copy, because it has the abbey fire and a list of names in it. Father Teodor says the list is incomplete. I think it's complete, only somebody shortened it.\"",
+      "options": [{ "text": "A list of names from the fire. I'll remember.", "goto": "exit", "effects": [{ "flag": "knows_fire_list" }, { "note": "note.fire_list" }, { "xp": { "history": 25 } }, { "entry": { "kind": "note", "id": "chronicle_1428" } }] }]
+    },
+
+    "wiera_root": {
+      "portrait": "wiera", "emotion": "sly",
+      "text": "Wiera's hands smell of marsh and her eyes count how many days you have left. \"You came from town and you stink like a man who sleeps too little. I have herbs, I have salves; I don't sell advice — I give it free, because you won't follow it anyway.\"",
+      "options": [
+        { "text": "Show me what you have.", "goto": "exit", "effects": [{ "openTrade": "wiera_herbs" }] },
+        { "text": "Teach me to recognise herbs. (65 crowns)", "cond": { "gold": 65 }, "reqKey": "req.gold65", "goto": "exit", "effects": [{ "gold": -65 }, { "train": { "perk": "herbarium" } }] },
+        { "text": "I have a wound that won't heal.", "cond": { "injured": true }, "reqKey": "req.injured", "goto": "wiera_wound" },
+        { "text": "What grows in the marshes that can kill?", "goto": "wiera_poison" },
+        { "text": "Thank you. I won't keep you.", "goto": "exit" }
+      ]
+    },
+    "wiera_wound": {
+      "portrait": "wiera", "emotion": "neutral",
+      "text": "\"Show me. ...Red edges, warm, smells sweet. That's not a wound any more, that's a guest. Salve is thirty-eight crowns, or wash it, dry it and don't move for two days — then it's free, but then you'll probably move. Choose between comfort and life, like everybody.\"",
+      "options": [
+        { "text": "I'll take the salve. (38 crowns)", "cond": { "gold": 38 }, "reqKey": "req.gold38", "goto": "exit", "effects": [{ "gold": -38 }, { "give": "salve_wiera" }, { "cureInfection": true }] },
+        { "text": "I'll wash it and keep still.", "goto": "exit", "effects": [{ "xp": { "firstaid": 20 } }, { "entry": { "kind": "note", "id": "wound_care" } }] }
+      ]
+    },
+    "wiera_poison": {
+      "portrait": "wiera", "emotion": "sly",
+      "text": "\"Spotted hemlock. It grows where yarrow grows and it looks like yarrow to anyone in a hurry. The difference: a hollow stem and spots. I sell it in a vial for ninety crowns and I don't ask what for. I only ask whether you know that there's no antidote, only time.\"",
+      "options": [
+        { "text": "I know what time costs.", "goto": "exit", "effects": [{ "entry": { "kind": "plant", "id": "hemlock" } }, { "xp": { "herbalism": 25 } }, { "note": "note.hemlock" }] },
+        { "text": "I don't buy poison.", "goto": "exit", "effects": [{ "entry": { "kind": "plant", "id": "hemlock" } }, { "rep": { "church": 2 } }] }
+      ]
+    },
+
+    "passerby_root": {
+      "portrait": "passerby", "emotion": "neutral",
+      "text": "{greeting}",
+      "options": [
+        { "text": "What hour is it?", "goto": "passerby_hour" },
+        { "text": "What's the news?", "goto": "passerby_rumor" },
+        { "text": "I won't keep you.", "goto": "exit" }
+      ]
+    },
+    "passerby_hour": {
+      "portrait": "passerby", "emotion": "neutral",
+      "text": "{hourAnswer}",
+      "options": [{ "text": "Thanks.", "goto": "exit" }]
+    },
+    "passerby_rumor": {
+      "portrait": "passerby", "emotion": "neutral",
+      "text": "{rumor}",
+      "options": [{ "text": "Interesting.", "goto": "exit", "effects": [{ "xp": { "streetwise": 3 } }] }]
+    },
+    "stranger_root": {
+      "portrait": "stranger", "emotion": "angry",
+      "text": "The man in the hood's shadow doesn't answer at once. \"I don't know you. Go your way and I'll go mine, and we'll both have a good day.\"",
+      "options": [
+        { "text": "Hand over the satchel at your belt.", "goto": "exit", "effects": [{ "combat": "start" }] },
+        { "text": "I'm looking for Marta. Do you know her?", "goto": "stranger_marta" },
+        { "text": "I'm going my way.", "goto": "exit" }
+      ]
+    },
+    "stranger_marta": {
+      "portrait": "stranger", "emotion": "sly",
+      "text": "\"I know her. And I know what her satchel is worth. If you came to give it back, you're too late. If you came to take it — there are three of us and one of you. Count, don't talk.\"",
+      "options": [
+        { "text": "I counted.", "goto": "exit", "effects": [{ "combat": "start" }] },
+        { "text": "Not worth it. I'm leaving.", "goto": "exit", "effects": [{ "flag": "backed_off" }] }
+      ]
+    }
+  }
+}

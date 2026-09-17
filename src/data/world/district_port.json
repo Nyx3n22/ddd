@@ -1,0 +1,1651 @@
+{
+ "id": "port_dolne_miasto",
+ "nameKey": "region.port_dolne_miasto",
+ "sizeTiles": [
+  140,
+  112
+ ],
+ "spawn": {
+  "x": 2016,
+  "y": 3216,
+  "dir": 3,
+  "fromShip": true
+ },
+ "ground": {
+  "base": "grass",
+  "patches": [
+   [
+    "dirt",
+    0,
+    60,
+    140,
+    20
+   ],
+   [
+    "dirt",
+    12,
+    6,
+    118,
+    58
+   ],
+   [
+    "sand",
+    6,
+    84,
+    128,
+    12
+   ],
+   [
+    "mud",
+    108,
+    44,
+    26,
+    16
+   ],
+   [
+    "swamp",
+    0,
+    40,
+    14,
+    24
+   ],
+   [
+    "swamp",
+    126,
+    62,
+    14,
+    22
+   ],
+   [
+    "gravel",
+    96,
+    56,
+    22,
+    10
+   ],
+   [
+    "cobble",
+    44,
+    30,
+    44,
+    22
+   ],
+   [
+    "cobble",
+    58,
+    6,
+    8,
+    46
+   ],
+   [
+    "cobble",
+    58,
+    52,
+    8,
+    34
+   ],
+   [
+    "cobble",
+    16,
+    34,
+    108,
+    6
+   ],
+   [
+    "cobble",
+    24,
+    20,
+    6,
+    16
+   ],
+   [
+    "cobble",
+    92,
+    16,
+    6,
+    20
+   ],
+   [
+    "cobble",
+    104,
+    34,
+    20,
+    6
+   ],
+   [
+    "road",
+    0,
+    56,
+    140,
+    3
+   ],
+   [
+    "road",
+    118,
+    40,
+    22,
+    4
+   ],
+   [
+    "planks",
+    28,
+    88,
+    8,
+    18
+   ],
+   [
+    "planks",
+    58,
+    88,
+    8,
+    22
+   ],
+   [
+    "planks",
+    94,
+    88,
+    8,
+    14
+   ],
+   [
+    "planks",
+    26,
+    92,
+    12,
+    4
+   ],
+   [
+    "planks",
+    56,
+    96,
+    12,
+    4
+   ],
+   [
+    "stone",
+    62,
+    8,
+    14,
+    12
+   ],
+   [
+    "stone",
+    52,
+    4,
+    16,
+    5
+   ],
+   [
+    "field",
+    122,
+    20,
+    16,
+    14
+   ],
+   [
+    "field",
+    100,
+    62,
+    18,
+    10
+   ],
+   [
+    "ash",
+    116,
+    46,
+    10,
+    8
+   ],
+   [
+    "grassTall",
+    0,
+    20,
+    16,
+    24
+   ],
+   [
+    "grassTall",
+    124,
+    34,
+    16,
+    12
+   ],
+   [
+    "grassTall",
+    8,
+    66,
+    12,
+    14
+   ]
+  ]
+ },
+ "water": [
+  [
+   6,
+   96,
+   128,
+   16,
+   0
+  ],
+  [
+   6,
+   104,
+   128,
+   8,
+   1
+  ],
+  [
+   0,
+   100,
+   8,
+   12,
+   1
+  ],
+  [
+   132,
+   100,
+   8,
+   12,
+   1
+  ],
+  [
+   118,
+   92,
+   16,
+   6,
+   0
+  ]
+ ],
+ "walls": [
+  {
+   "x": 8,
+   "y": 64,
+   "w": 50,
+   "h": 1,
+   "kind": "stone"
+  },
+  {
+   "x": 66,
+   "y": 64,
+   "w": 66,
+   "h": 1,
+   "kind": "stone"
+  },
+  {
+   "x": 46,
+   "y": 4,
+   "w": 12,
+   "h": 1,
+   "kind": "stone"
+  },
+  {
+   "x": 66,
+   "y": 4,
+   "w": 62,
+   "h": 1,
+   "kind": "stone"
+  },
+  {
+   "x": 8,
+   "y": 4,
+   "w": 30,
+   "h": 1,
+   "kind": "stone"
+  },
+  {
+   "x": 8,
+   "y": 4,
+   "w": 1,
+   "h": 61,
+   "kind": "stone"
+  },
+  {
+   "x": 131,
+   "y": 4,
+   "w": 1,
+   "h": 61,
+   "kind": "stone"
+  }
+ ],
+ "gates": [
+  {
+   "id": "gate_customs",
+   "x": 58,
+   "y": 64,
+   "w": 8,
+   "kind": "gatehouse",
+   "nameKey": "place.customsGate",
+   "needsPass": true,
+   "passItem": "permit_port",
+   "bribe": 20,
+   "guardNpc": "guard_customs",
+   "hoursOpen": [
+    6,
+    21
+   ]
+  },
+  {
+   "id": "gate_north",
+   "x": 58,
+   "y": 4,
+   "w": 8,
+   "kind": "gatehouse",
+   "nameKey": "place.northGate",
+   "needsPass": true,
+   "passItem": "permit_upper",
+   "bribe": 50,
+   "guardNpc": "guard_north",
+   "hoursOpen": [
+    7,
+    19
+   ],
+   "lockedMsgKey": "gate.north.locked"
+  },
+  {
+   "id": "gap_smugglers",
+   "x": 124,
+   "y": 64,
+   "w": 4,
+   "kind": "gap",
+   "nameKey": "place.smugglersGap",
+   "hidden": true,
+   "needsSkill": "stealth",
+   "needsLevel": 2
+  }
+ ],
+ "regions": [
+  {
+   "nameKey": "place.harbour",
+   "x": 0,
+   "y": 66,
+   "w": 140,
+   "h": 46,
+   "noteId": "harbour"
+  },
+  {
+   "nameKey": "place.lowerTown",
+   "x": 8,
+   "y": 4,
+   "w": 124,
+   "h": 60
+  },
+  {
+   "nameKey": "place.marketSquare",
+   "x": 44,
+   "y": 30,
+   "w": 44,
+   "h": 22,
+   "noteId": "market"
+  },
+  {
+   "nameKey": "place.tanneryYard",
+   "x": 108,
+   "y": 42,
+   "w": 32,
+   "h": 22,
+   "noteId": "tannery"
+  },
+  {
+   "nameKey": "place.chapelYard",
+   "x": 60,
+   "y": 6,
+   "w": 20,
+   "h": 16,
+   "noteId": "chapel"
+  },
+  {
+   "nameKey": "place.vagnYard",
+   "x": 22,
+   "y": 14,
+   "w": 18,
+   "h": 16
+  },
+  {
+   "nameKey": "place.piers",
+   "x": 20,
+   "y": 88,
+   "w": 96,
+   "h": 24
+  },
+  {
+   "nameKey": "place.alleyWest",
+   "x": 10,
+   "y": 40,
+   "w": 18,
+   "h": 22
+  }
+ ],
+ "buildings": [
+  {
+   "id": "tavern",
+   "nameKey": "bld.tavern",
+   "tx": 46,
+   "ty": 30,
+   "tw": 12,
+   "td": 8,
+   "wallH": 44,
+   "roof": "tile",
+   "wall": "#c8b48c",
+   "trim": "#6b4a2c",
+   "stories": 2,
+   "chimney": true,
+   "balcony": true,
+   "windows": 3,
+   "halfTimber": true,
+   "flowerBoxes": true,
+   "sign": {
+    "textKey": "bld.tavern.sign",
+    "color": "#8e4433"
+   },
+   "interior": "int_tavern",
+   "doorX": 192,
+   "doorW": 18
+  },
+  {
+   "id": "scribe",
+   "nameKey": "bld.scribe",
+   "tx": 62,
+   "ty": 30,
+   "tw": 8,
+   "td": 6,
+   "wallH": 32,
+   "roof": "tile",
+   "wall": "#d8cbb0",
+   "trim": "#5a452e",
+   "windows": 2,
+   "halfTimber": true,
+   "sign": {
+    "textKey": "bld.scribe.sign",
+    "color": "#3b5a86"
+   },
+   "interior": "int_scribe",
+   "doorX": 128,
+   "doorW": 15
+  },
+  {
+   "id": "smithy",
+   "nameKey": "bld.smithy",
+   "tx": 78,
+   "ty": 30,
+   "tw": 10,
+   "td": 7,
+   "wallH": 34,
+   "roof": "tile",
+   "wall": "#8f8577",
+   "trim": "#4a3220",
+   "chimney": true,
+   "windows": 2,
+   "sign": {
+    "textKey": "bld.smithy.sign",
+    "color": "#4f4c45"
+   },
+   "interior": "int_smithy",
+   "doorX": 160,
+   "doorW": 20
+  },
+  {
+   "id": "bathhouse",
+   "nameKey": "bld.bathhouse",
+   "tx": 92,
+   "ty": 30,
+   "tw": 9,
+   "td": 6,
+   "wallH": 30,
+   "roof": "shingle",
+   "wall": "#cbbfa4",
+   "trim": "#6b4a2c",
+   "chimney": true,
+   "windows": 2,
+   "interior": "int_bath",
+   "doorX": 144,
+   "doorW": 15
+  },
+  {
+   "id": "chapel",
+   "nameKey": "bld.chapel",
+   "tx": 64,
+   "ty": 20,
+   "tw": 12,
+   "td": 9,
+   "wallH": 52,
+   "roof": "tile",
+   "wall": "#cfc7b4",
+   "trim": "#6e6a63",
+   "roofColor": "#6e3327",
+   "windows": 4,
+   "chimney": false,
+   "stairs": true,
+   "doorX": 192,
+   "doorW": 22,
+   "interior": "int_chapel"
+  },
+  {
+   "id": "vagn_house",
+   "nameKey": "bld.vagn",
+   "tx": 26,
+   "ty": 26,
+   "tw": 7,
+   "td": 6,
+   "wallH": 28,
+   "roof": "thatch",
+   "wall": "#b9a67c",
+   "trim": "#4a3220",
+   "windows": 1,
+   "doorX": 112,
+   "doorW": 14,
+   "interior": "int_vagn"
+  },
+  {
+   "id": "guild_house",
+   "nameKey": "bld.guild",
+   "tx": 100,
+   "ty": 32,
+   "tw": 11,
+   "td": 8,
+   "wallH": 46,
+   "roof": "tile",
+   "wall": "#d5c39c",
+   "trim": "#5a452e",
+   "stories": 2,
+   "balcony": true,
+   "windows": 3,
+   "chimney": true,
+   "flowerBoxes": true,
+   "doorX": 176,
+   "doorW": 18,
+   "interior": "int_guild"
+  },
+  {
+   "id": "guardhouse",
+   "nameKey": "bld.guardhouse",
+   "tx": 44,
+   "ty": 12,
+   "tw": 9,
+   "td": 6,
+   "wallH": 36,
+   "roof": "tile",
+   "wall": "#a8a296",
+   "trim": "#4c4842",
+   "windows": 2,
+   "doorX": 144,
+   "doorW": 16,
+   "interior": "int_guard"
+  },
+  {
+   "id": "marta_shack",
+   "nameKey": "bld.marta",
+   "tx": 16,
+   "ty": 50,
+   "tw": 6,
+   "td": 5,
+   "wallH": 24,
+   "roof": "thatch",
+   "wall": "#9a8a6c",
+   "trim": "#4a3220",
+   "windows": 1,
+   "ruin": false,
+   "doorX": 96,
+   "doorW": 13
+  },
+  {
+   "id": "tannery",
+   "nameKey": "bld.tannery",
+   "tx": 114,
+   "ty": 52,
+   "tw": 11,
+   "td": 7,
+   "wallH": 30,
+   "roof": "shingle",
+   "wall": "#8b7a5c",
+   "trim": "#3a2c1e",
+   "windows": 2,
+   "doorX": 176,
+   "doorW": 20,
+   "interior": "int_tannery"
+  },
+  {
+   "id": "customs",
+   "nameKey": "bld.customs",
+   "tx": 54,
+   "ty": 78,
+   "tw": 11,
+   "td": 7,
+   "wallH": 36,
+   "roof": "tile",
+   "wall": "#bfae8c",
+   "trim": "#5a452e",
+   "chimney": true,
+   "windows": 3,
+   "sign": {
+    "textKey": "bld.customs.sign",
+    "color": "#3b5a86"
+   },
+   "doorX": 176,
+   "doorW": 18,
+   "interior": "int_customs"
+  },
+  {
+   "id": "warehouse_a",
+   "nameKey": "bld.warehouseA",
+   "tx": 26,
+   "ty": 84,
+   "tw": 13,
+   "td": 9,
+   "wallH": 38,
+   "roof": "shingle",
+   "wall": "#9c8f78",
+   "trim": "#4a3220",
+   "windows": 2,
+   "doorX": 208,
+   "doorW": 24,
+   "interior": "int_warehouse"
+  },
+  {
+   "id": "warehouse_b",
+   "nameKey": "bld.warehouseB",
+   "tx": 82,
+   "ty": 84,
+   "tw": 11,
+   "td": 8,
+   "wallH": 34,
+   "roof": "shingle",
+   "wall": "#8f8571",
+   "trim": "#4a3220",
+   "windows": 2,
+   "doorX": 176,
+   "doorW": 22
+  },
+  {
+   "id": "fisher_hut",
+   "nameKey": "bld.fisher",
+   "tx": 104,
+   "ty": 88,
+   "tw": 6,
+   "td": 5,
+   "wallH": 24,
+   "roof": "thatch",
+   "wall": "#a89878",
+   "trim": "#4a3220",
+   "windows": 1,
+   "doorX": 96,
+   "doorW": 13
+  },
+  {
+   "id": "shack_1",
+   "nameKey": "bld.shack",
+   "tx": 122,
+   "ty": 58,
+   "tw": 5,
+   "td": 4,
+   "wallH": 22,
+   "roof": "thatch",
+   "wall": "#98876a",
+   "trim": "#3a2c1e",
+   "windows": 1,
+   "ruin": true
+  },
+  {
+   "id": "shack_2",
+   "nameKey": "bld.shack",
+   "tx": 130,
+   "ty": 56,
+   "tw": 5,
+   "td": 4,
+   "wallH": 22,
+   "roof": "thatch",
+   "wall": "#8f7e63",
+   "trim": "#3a2c1e",
+   "windows": 1
+  },
+  {
+   "id": "house_a",
+   "nameKey": "bld.house",
+   "tx": 20,
+   "ty": 40,
+   "tw": 7,
+   "td": 6,
+   "wallH": 30,
+   "roof": "tile",
+   "wall": "#c3b193",
+   "trim": "#5a452e",
+   "windows": 2,
+   "halfTimber": true
+  },
+  {
+   "id": "house_b",
+   "nameKey": "bld.house",
+   "tx": 32,
+   "ty": 40,
+   "tw": 7,
+   "td": 6,
+   "wallH": 30,
+   "roof": "tile",
+   "wall": "#b8a68a",
+   "trim": "#5a452e",
+   "windows": 2
+  },
+  {
+   "id": "house_c",
+   "nameKey": "bld.house",
+   "tx": 96,
+   "ty": 18,
+   "tw": 8,
+   "td": 6,
+   "wallH": 32,
+   "roof": "tile",
+   "wall": "#cdbb98",
+   "trim": "#5a452e",
+   "windows": 2,
+   "flowerBoxes": true
+  },
+  {
+   "id": "house_d",
+   "nameKey": "bld.house",
+   "tx": 112,
+   "ty": 18,
+   "tw": 8,
+   "td": 6,
+   "wallH": 32,
+   "roof": "thatch",
+   "wall": "#bfae90",
+   "trim": "#4a3220",
+   "windows": 2
+  },
+  {
+   "id": "house_e",
+   "nameKey": "bld.house",
+   "tx": 74,
+   "ty": 12,
+   "tw": 7,
+   "td": 6,
+   "wallH": 30,
+   "roof": "tile",
+   "wall": "#c8b898",
+   "trim": "#5a452e",
+   "windows": 2
+  },
+  {
+   "id": "house_f",
+   "nameKey": "bld.house",
+   "tx": 88,
+   "ty": 12,
+   "tw": 7,
+   "td": 6,
+   "wallH": 30,
+   "roof": "tile",
+   "wall": "#bda98a",
+   "trim": "#5a452e",
+   "windows": 2,
+   "halfTimber": true
+  },
+  {
+   "id": "almshouse",
+   "nameKey": "bld.almshouse",
+   "tx": 20,
+   "ty": 14,
+   "tw": 8,
+   "td": 6,
+   "wallH": 28,
+   "roof": "thatch",
+   "wall": "#a9987c",
+   "trim": "#4a3220",
+   "windows": 2,
+   "ruin": false
+  },
+  {
+   "id": "ruin_abbey",
+   "nameKey": "bld.abbeyRuin",
+   "tx": 6,
+   "ty": 22,
+   "tw": 9,
+   "td": 7,
+   "wallH": 34,
+   "roof": "tile",
+   "wall": "#8b867c",
+   "trim": "#4c4842",
+   "windows": 2,
+   "ruin": true
+  }
+ ],
+ "props": [
+  [
+   "well",
+   64,
+   40
+  ],
+  [
+   "noticeBoard",
+   50,
+   33
+  ],
+  [
+   "stocks",
+   78,
+   46
+  ],
+  [
+   "stall",
+   48,
+   36,
+   0
+  ],
+  [
+   "stall",
+   56,
+   36,
+   1
+  ],
+  [
+   "stall",
+   70,
+   36,
+   2
+  ],
+  [
+   "stall",
+   80,
+   36,
+   3
+  ],
+  [
+   "stall",
+   48,
+   46,
+   1
+  ],
+  [
+   "stall",
+   62,
+   46,
+   0
+  ],
+  [
+   "stall",
+   74,
+   46,
+   2
+  ],
+  [
+   "barrel",
+   51,
+   39
+  ],
+  [
+   "crate",
+   54,
+   39
+  ],
+  [
+   "sack",
+   67,
+   39
+  ],
+  [
+   "sack",
+   69,
+   39
+  ],
+  [
+   "barrelStack",
+   84,
+   39
+  ],
+  [
+   "crateStack",
+   86,
+   43
+  ],
+  [
+   "haystack",
+   42,
+   48
+  ],
+  [
+   "lampPost",
+   46,
+   32
+  ],
+  [
+   "lampPost",
+   60,
+   32
+  ],
+  [
+   "lampPost",
+   74,
+   32
+  ],
+  [
+   "lampPost",
+   86,
+   32
+  ],
+  [
+   "lampPost",
+   60,
+   50
+  ],
+  [
+   "lampPost",
+   74,
+   50
+  ],
+  [
+   "lampPost",
+   60,
+   60
+  ],
+  [
+   "lampPost",
+   62,
+   26
+  ],
+  [
+   "lampPost",
+   30,
+   36
+  ],
+  [
+   "lampPost",
+   96,
+   36
+  ],
+  [
+   "lampPost",
+   108,
+   36
+  ],
+  [
+   "lampPost",
+   36,
+   62
+  ],
+  [
+   "lampPost",
+   84,
+   62
+  ],
+  [
+   "lampPost",
+   56,
+   74
+  ],
+  [
+   "lampPost",
+   68,
+   74
+  ],
+  [
+   "cart",
+   56,
+   54,
+   0
+  ],
+  [
+   "cart",
+   90,
+   42,
+   1
+  ],
+  [
+   "horse",
+   94,
+   44,
+   0
+  ],
+  [
+   "horse",
+   36,
+   34,
+   1
+  ],
+  [
+   "forge",
+   74,
+   34
+  ],
+  [
+   "anvil",
+   78,
+   35
+  ],
+  [
+   "grindstone",
+   81,
+   35
+  ],
+  [
+   "logPile",
+   73,
+   37
+  ],
+  [
+   "toolRack",
+   88,
+   33
+  ],
+  [
+   "waterTrough",
+   92,
+   36
+  ],
+  [
+   "hayBale",
+   90,
+   37
+  ],
+  [
+   "bench",
+   52,
+   42
+  ],
+  [
+   "bench",
+   68,
+   42
+  ],
+  [
+   "bench",
+   62,
+   48
+  ],
+  [
+   "table",
+   44,
+   33
+  ],
+  [
+   "shrine",
+   60,
+   24
+  ],
+  [
+   "statue",
+   70,
+   22
+  ],
+  [
+   "gallows",
+   86,
+   50
+  ],
+  [
+   "treeOak",
+   40,
+   26
+  ],
+  [
+   "treeOak",
+   92,
+   26
+  ],
+  [
+   "treePine",
+   20,
+   30
+  ],
+  [
+   "treePine",
+   14,
+   24
+  ],
+  [
+   "treeOak",
+   104,
+   44
+  ],
+  [
+   "treePine",
+   124,
+   26
+  ],
+  [
+   "treeOak",
+   128,
+   30
+  ],
+  [
+   "treeOak",
+   12,
+   60
+  ],
+  [
+   "bush",
+   38,
+   28
+  ],
+  [
+   "bush",
+   90,
+   28
+  ],
+  [
+   "bush",
+   18,
+   36
+  ],
+  [
+   "bush",
+   112,
+   40
+  ],
+  [
+   "bush",
+   122,
+   44
+  ],
+  [
+   "rock",
+   26,
+   60
+  ],
+  [
+   "rock",
+   100,
+   66
+  ],
+  [
+   "rock",
+   12,
+   74
+  ],
+  [
+   "rock",
+   130,
+   70
+  ],
+  [
+   "fence",
+   22,
+   30
+  ],
+  [
+   "fence",
+   26,
+   30
+  ],
+  [
+   "fence",
+   22,
+   22
+  ],
+  [
+   "fence",
+   26,
+   22
+  ],
+  [
+   "fence",
+   30,
+   22
+  ],
+  [
+   "fence",
+   108,
+   26
+  ],
+  [
+   "fence",
+   112,
+   26
+  ],
+  [
+   "fence",
+   116,
+   26
+  ],
+  [
+   "clothesline",
+   34,
+   44
+  ],
+  [
+   "clothesline",
+   100,
+   22
+  ],
+  [
+   "barrelRain",
+   66,
+   32
+  ],
+  [
+   "barrelRain",
+   96,
+   32
+  ],
+  [
+   "signInn",
+   44,
+   32
+  ],
+  [
+   "crateCustoms",
+   52,
+   76
+  ],
+  [
+   "crateCustoms",
+   55,
+   76
+  ],
+  [
+   "crateStack",
+   70,
+   76
+  ],
+  [
+   "barrelStack",
+   74,
+   76
+  ],
+  [
+   "netPile",
+   88,
+   90
+  ],
+  [
+   "anchor",
+   92,
+   92
+  ],
+  [
+   "saltPile",
+   40,
+   88
+  ],
+  [
+   "fishCrate",
+   100,
+   90
+  ],
+  [
+   "boat",
+   30,
+   100,
+   0
+  ],
+  [
+   "boat",
+   60,
+   106,
+   0
+  ],
+  [
+   "boat",
+   96,
+   98,
+   0
+  ],
+  [
+   "barrel",
+   34,
+   90
+  ],
+  [
+   "crate",
+   36,
+   90
+  ],
+  [
+   "barrel",
+   64,
+   92
+  ],
+  [
+   "crate",
+   66,
+   92
+  ],
+  [
+   "sack",
+   62,
+   92
+  ],
+  [
+   "smugglingCrate",
+   122,
+   68
+  ],
+  [
+   "crate",
+   124,
+   68
+  ],
+  [
+   "barrel",
+   123,
+   70
+  ],
+  [
+   "tent",
+   100,
+   70,
+   0
+  ],
+  [
+   "tent",
+   108,
+   72,
+   1
+  ],
+  [
+   "campfire",
+   104,
+   74
+  ],
+  [
+   "torchStand",
+   56,
+   66
+  ],
+  [
+   "torchStand",
+   66,
+   66
+  ],
+  [
+   "torchStand",
+   28,
+   84
+  ],
+  [
+   "torchStand",
+   96,
+   84
+  ],
+  [
+   "chicken",
+   42,
+   44,
+   0
+  ],
+  [
+   "chicken",
+   44,
+   46,
+   1
+  ],
+  [
+   "chicken",
+   110,
+   56,
+   0
+  ],
+  [
+   "dog",
+   78,
+   44,
+   0
+  ],
+  [
+   "cat",
+   24,
+   48,
+   1
+  ],
+  [
+   "pig",
+   116,
+   60,
+   0
+  ],
+  [
+   "crow",
+   88,
+   52
+  ],
+  [
+   "weaponRack",
+   24,
+   20
+  ],
+  [
+   "chest",
+   26,
+   20
+  ],
+  [
+   "quarryCart",
+   6,
+   68
+  ],
+  [
+   "logPile",
+   10,
+   70
+  ],
+  [
+   "haystack",
+   120,
+   34
+  ],
+  [
+   "hayBale",
+   124,
+   36
+  ],
+  [
+   "waterTrough",
+   118,
+   30
+  ],
+  [
+   "cauldron",
+   110,
+   50
+  ],
+  [
+   "barrelRain",
+   112,
+   48
+  ],
+  [
+   "bench",
+   62,
+   22
+  ],
+  [
+   "bench",
+   66,
+   18
+  ]
+ ],
+ "lamps": [
+  [
+   46,
+   32
+  ],
+  [
+   60,
+   32
+  ],
+  [
+   74,
+   32
+  ],
+  [
+   86,
+   32
+  ],
+  [
+   60,
+   50
+  ],
+  [
+   74,
+   50
+  ],
+  [
+   60,
+   60
+  ],
+  [
+   62,
+   26
+  ],
+  [
+   30,
+   36
+  ],
+  [
+   96,
+   36
+  ],
+  [
+   108,
+   36
+  ],
+  [
+   36,
+   62
+  ],
+  [
+   84,
+   62
+  ],
+  [
+   56,
+   74
+  ],
+  [
+   68,
+   74
+  ],
+  [
+   56,
+   66
+  ],
+  [
+   66,
+   66
+  ],
+  [
+   28,
+   84
+  ],
+  [
+   96,
+   84
+  ]
+ ],
+ "spawners": {
+  "passerby": {
+   "count": 16,
+   "areas": [
+    [
+     16,
+     30,
+     108,
+     30
+    ],
+    [
+     12,
+     50,
+     120,
+     12
+    ],
+    [
+     30,
+     70,
+     90,
+     16
+    ]
+   ]
+  },
+  "guards": {
+   "count": 5,
+   "points": [
+    [
+     58,
+     62
+    ],
+    [
+     70,
+     36
+    ],
+    [
+     50,
+     36
+    ],
+    [
+     60,
+     20
+    ],
+    [
+     96,
+     40
+    ]
+   ]
+  },
+  "bandits": {
+   "count": 3,
+   "points": [
+    [
+     14,
+     46
+    ],
+    [
+     126,
+     60
+    ],
+    [
+     110,
+     44
+    ]
+   ]
+  },
+  "knightPatrol": {
+   "count": 2,
+   "points": [
+    [
+     62,
+     56
+    ],
+    [
+     84,
+     30
+    ]
+   ]
+  }
+ },
+ "fastTravel": [
+  {
+   "id": "ft_market",
+   "nameKey": "place.marketSquare",
+   "tx": 62,
+   "ty": 44
+  },
+  {
+   "id": "ft_pier",
+   "nameKey": "place.piers",
+   "tx": 60,
+   "ty": 90
+  }
+ ],
+ "ambience": {
+  "birds": 6,
+  "smoke": [
+   [
+    48,
+    26
+   ],
+   [
+    80,
+    26
+   ],
+   [
+    66,
+    14
+   ],
+   [
+    56,
+    74
+   ],
+   [
+    102,
+    28
+   ]
+  ]
+ }
+}

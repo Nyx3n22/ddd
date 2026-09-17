@@ -1,10 +1,1476 @@
-[
-  {"id":"sword_iron","name":"Miecz żelazny","type":"weapon","value":120,"weight":2.5,"contraband":false,"desc":"Podstawowa broń, wymaga ostrzenia"},
-  {"id":"salt","name":"Sól","type":"trade","value":12,"weight":0.5,"contraband":false,"desc":"Drożeje przy blokadzie portu"},
-  {"id":"herbs","name":"Zioła","type":"alchemy","value":30,"weight":0.2,"contraband":false,"desc":"Leczenie i mikstury"},
-  {"id":"bandage","name":"Bandaż","type":"medical","value":15,"weight":0.1,"contraband":false,"desc":"Zatrzymuje krwotok"},
-  {"id":"relic","name":"Relikwia św. Elenema","type":"contraband","value":300,"weight":0.8,"contraband":true,"desc":"Zakazana, wysoka cena na czarnym rynku"},
-  {"id":"poison","name":"Trucizna","type":"contraband","value":80,"weight":0.1,"contraband":true,"desc":"Do zadań i zabójstw"},
-  {"id":"bread","name":"Chleb","type":"food","value":5,"weight":0.3,"contraband":false,"desc":"Zmniejsza głód"},
-  {"id":"beer","name":"Piwo","type":"drink","value":6,"weight":0.5,"contraband":false,"desc":"Zmniejsza pragnienie, lekki alkohol"}
-]
+{
+ "items": [
+  {
+   "id": "crown",
+   "nameKey": "item.crown",
+   "descKey": "item.crown.desc",
+   "icon": "coins",
+   "weight": 0.01,
+   "volume": 0,
+   "value": 1,
+   "cat": "money",
+   "tags": [
+    "currency"
+   ],
+   "stack": 9999
+  },
+  {
+   "id": "sword_iron",
+   "nameKey": "item.swordIron",
+   "descKey": "item.swordIron.desc",
+   "icon": "sword",
+   "weight": 1.4,
+   "volume": 3,
+   "value": 85,
+   "cat": "weapon",
+   "tags": [
+    "weapon",
+    "edged"
+   ],
+   "weapon": {
+    "dmg": 18,
+    "stam": 14,
+    "speed": 1.0,
+    "reach": 26,
+    "arc": 1.1,
+    "vsArmor": 1.0,
+    "skill": "sword",
+    "parryWindow": 0.22
+   }
+  },
+  {
+   "id": "sword_rusted",
+   "nameKey": "item.swordRusted",
+   "descKey": "item.swordRusted.desc",
+   "icon": "sword",
+   "weight": 1.5,
+   "volume": 3,
+   "value": 28,
+   "cat": "weapon",
+   "tags": [
+    "weapon",
+    "edged",
+    "poor"
+   ],
+   "weapon": {
+    "dmg": 12,
+    "stam": 15,
+    "speed": 0.95,
+    "reach": 24,
+    "arc": 1.0,
+    "vsArmor": 0.85,
+    "skill": "sword",
+    "parryWindow": 0.2
+   }
+  },
+  {
+   "id": "axe_wood",
+   "nameKey": "item.axeWood",
+   "descKey": "item.axeWood.desc",
+   "icon": "axe",
+   "weight": 1.8,
+   "volume": 4,
+   "value": 22,
+   "cat": "tool",
+   "tags": [
+    "tool",
+    "weapon"
+   ],
+   "weapon": {
+    "dmg": 14,
+    "stam": 18,
+    "speed": 0.8,
+    "reach": 22,
+    "arc": 1.3,
+    "vsArmor": 1.2,
+    "skill": "axe",
+    "parryWindow": 0.14
+   },
+   "craft": [
+    "carpentry"
+   ]
+  },
+  {
+   "id": "axe_war",
+   "nameKey": "item.axeWar",
+   "descKey": "item.axeWar.desc",
+   "icon": "axe",
+   "weight": 2.6,
+   "volume": 5,
+   "value": 110,
+   "cat": "weapon",
+   "tags": [
+    "weapon"
+   ],
+   "weapon": {
+    "dmg": 26,
+    "stam": 24,
+    "speed": 0.7,
+    "reach": 26,
+    "arc": 1.4,
+    "vsArmor": 1.5,
+    "skill": "axe",
+    "parryWindow": 0.12
+   }
+  },
+  {
+   "id": "hammer_smith",
+   "nameKey": "item.hammerSmith",
+   "descKey": "item.hammerSmith.desc",
+   "icon": "hammer",
+   "weight": 2.2,
+   "volume": 4,
+   "value": 34,
+   "cat": "tool",
+   "tags": [
+    "tool",
+    "weapon"
+   ],
+   "weapon": {
+    "dmg": 20,
+    "stam": 22,
+    "speed": 0.65,
+    "reach": 22,
+    "arc": 1.2,
+    "vsArmor": 1.9,
+    "skill": "blunt",
+    "parryWindow": 0.1
+   },
+   "craft": [
+    "smithing"
+   ]
+  },
+  {
+   "id": "dagger",
+   "nameKey": "item.dagger",
+   "descKey": "item.dagger.desc",
+   "icon": "dagger",
+   "weight": 0.4,
+   "volume": 1,
+   "value": 18,
+   "cat": "weapon",
+   "tags": [
+    "weapon",
+    "concealed"
+   ],
+   "weapon": {
+    "dmg": 9,
+    "stam": 7,
+    "speed": 1.6,
+    "reach": 16,
+    "arc": 0.7,
+    "vsArmor": 0.6,
+    "skill": "dagger",
+    "parryWindow": 0.3
+   }
+  },
+  {
+   "id": "bow_hunting",
+   "nameKey": "item.bow",
+   "descKey": "item.bow.desc",
+   "icon": "bow",
+   "weight": 1.1,
+   "volume": 6,
+   "value": 60,
+   "cat": "weapon",
+   "tags": [
+    "weapon",
+    "ranged"
+   ],
+   "weapon": {
+    "dmg": 16,
+    "stam": 12,
+    "speed": 0.8,
+    "reach": 200,
+    "arc": 0.2,
+    "vsArmor": 0.9,
+    "skill": "archery",
+    "ranged": "arrow"
+   }
+  },
+  {
+   "id": "crossbow_light",
+   "nameKey": "item.crossbow",
+   "descKey": "item.crossbow.desc",
+   "icon": "crossbow",
+   "weight": 2.4,
+   "volume": 6,
+   "value": 140,
+   "cat": "weapon",
+   "tags": [
+    "weapon",
+    "ranged",
+    "contraband"
+   ],
+   "weapon": {
+    "dmg": 28,
+    "stam": 10,
+    "speed": 0.4,
+    "reach": 220,
+    "arc": 0.15,
+    "vsArmor": 1.6,
+    "skill": "archery",
+    "ranged": "bolt"
+   }
+  },
+  {
+   "id": "spear_watch",
+   "nameKey": "item.spear",
+   "descKey": "item.spear.desc",
+   "icon": "spear",
+   "weight": 2.0,
+   "volume": 8,
+   "value": 40,
+   "cat": "weapon",
+   "tags": [
+    "weapon"
+   ],
+   "weapon": {
+    "dmg": 17,
+    "stam": 13,
+    "speed": 0.9,
+    "reach": 34,
+    "arc": 0.5,
+    "vsArmor": 1.1,
+    "skill": "spear",
+    "parryWindow": 0.18
+   }
+  },
+  {
+   "id": "arrow",
+   "nameKey": "item.arrow",
+   "descKey": "item.arrow.desc",
+   "icon": "feather",
+   "weight": 0.05,
+   "volume": 0.2,
+   "value": 1,
+   "cat": "ammo",
+   "tags": [
+    "ammo"
+   ],
+   "stack": 60
+  },
+  {
+   "id": "shield_round",
+   "nameKey": "item.shield",
+   "descKey": "item.shield.desc",
+   "icon": "shield",
+   "weight": 3.0,
+   "volume": 8,
+   "value": 55,
+   "cat": "armor",
+   "tags": [
+    "offhand"
+   ],
+   "armor": {
+    "block": 12,
+    "blockStam": 6
+   }
+  },
+  {
+   "id": "padded_jack",
+   "nameKey": "item.paddedJack",
+   "descKey": "item.paddedJack.desc",
+   "icon": "armor",
+   "weight": 4.0,
+   "volume": 14,
+   "value": 70,
+   "cat": "armor",
+   "tags": [
+    "body"
+   ],
+   "armor": {
+    "mit": 7,
+    "stamPen": 0.04
+   }
+  },
+  {
+   "id": "leather_vest",
+   "nameKey": "item.leatherVest",
+   "descKey": "item.leatherVest.desc",
+   "icon": "armor",
+   "weight": 5.0,
+   "volume": 12,
+   "value": 120,
+   "cat": "armor",
+   "tags": [
+    "body"
+   ],
+   "armor": {
+    "mit": 11,
+    "stamPen": 0.08
+   }
+  },
+  {
+   "id": "chain_shirt",
+   "nameKey": "item.chainShirt",
+   "descKey": "item.chainShirt.desc",
+   "icon": "armor",
+   "weight": 9.0,
+   "volume": 16,
+   "value": 260,
+   "cat": "armor",
+   "tags": [
+    "body",
+    "contraband"
+   ],
+   "armor": {
+    "mit": 17,
+    "stamPen": 0.16
+   }
+  },
+  {
+   "id": "kettle_helm",
+   "nameKey": "item.kettleHelm",
+   "descKey": "item.kettleHelm.desc",
+   "icon": "helmet",
+   "weight": 1.8,
+   "volume": 5,
+   "value": 65,
+   "cat": "armor",
+   "tags": [
+    "head"
+   ],
+   "armor": {
+    "mit": 5,
+    "headMit": 8
+   }
+  },
+  {
+   "id": "wool_cloak",
+   "nameKey": "item.cloak",
+   "descKey": "item.cloak.desc",
+   "icon": "cloack",
+   "weight": 1.6,
+   "volume": 6,
+   "value": 30,
+   "cat": "clothing",
+   "tags": [
+    "body",
+    "warm",
+    "rain"
+   ]
+  },
+  {
+   "id": "torch",
+   "nameKey": "item.torch",
+   "descKey": "item.torch.desc",
+   "icon": "torch",
+   "weight": 0.6,
+   "volume": 2,
+   "value": 3,
+   "cat": "tool",
+   "tags": [
+    "light",
+    "belt"
+   ],
+   "burns": 90
+  },
+  {
+   "id": "lantern_oil",
+   "nameKey": "item.lantern",
+   "descKey": "item.lantern.desc",
+   "icon": "lantern",
+   "weight": 1.2,
+   "volume": 3,
+   "value": 45,
+   "cat": "tool",
+   "tags": [
+    "light",
+    "belt"
+   ],
+   "burns": 300
+  },
+  {
+   "id": "candle",
+   "nameKey": "item.candle",
+   "descKey": "item.candle.desc",
+   "icon": "candle",
+   "weight": 0.1,
+   "volume": 0.3,
+   "value": 2,
+   "cat": "tool",
+   "tags": [
+    "light"
+   ],
+   "burns": 60
+  },
+  {
+   "id": "flint_steel",
+   "nameKey": "item.flint",
+   "descKey": "item.flint.desc",
+   "icon": "toolbox",
+   "weight": 0.2,
+   "volume": 0.3,
+   "value": 6,
+   "cat": "tool",
+   "tags": [
+    "fire"
+   ]
+  },
+  {
+   "id": "lockpick_set",
+   "nameKey": "item.lockpick",
+   "descKey": "item.lockpick.desc",
+   "icon": "lockpick",
+   "weight": 0.2,
+   "volume": 0.4,
+   "value": 25,
+   "cat": "tool",
+   "tags": [
+    "crime",
+    "concealed",
+    "belt"
+   ],
+   "uses": 8
+  },
+  {
+   "id": "rope_hemp",
+   "nameKey": "item.rope",
+   "descKey": "item.rope.desc",
+   "icon": "rope",
+   "weight": 2.5,
+   "volume": 5,
+   "value": 14,
+   "cat": "tool",
+   "tags": [
+    "tool"
+   ]
+  },
+  {
+   "id": "oilcloth",
+   "nameKey": "item.oilcloth",
+   "descKey": "item.oilcloth",
+   "icon": "oilcloth",
+   "weight": 0.5,
+   "volume": 2,
+   "value": 12,
+   "cat": "tool",
+   "tags": [
+    "rain",
+    "protectsNotes"
+   ]
+  },
+  {
+   "id": "waterskin",
+   "nameKey": "item.waterskin",
+   "descKey": "item.waterskin.desc",
+   "icon": "waterskin",
+   "weight": 0.4,
+   "volume": 1.5,
+   "value": 5,
+   "cat": "consumable",
+   "tags": [
+    "drink",
+    "belt"
+   ],
+   "quench": 45
+  },
+  {
+   "id": "bandage_linen",
+   "nameKey": "item.bandage",
+   "descKey": "item.bandage.desc",
+   "icon": "bandage",
+   "weight": 0.15,
+   "volume": 0.5,
+   "value": 9,
+   "cat": "consumable",
+   "tags": [
+    "medical",
+    "belt"
+   ],
+   "heal": 12,
+   "stopsBleeding": true
+  },
+  {
+   "id": "splint",
+   "nameKey": "item.splint",
+   "descKey": "item.splint.desc",
+   "icon": "plank",
+   "weight": 0.6,
+   "volume": 2,
+   "value": 12,
+   "cat": "consumable",
+   "tags": [
+    "medical"
+   ],
+   "fixes": "fracture"
+  },
+  {
+   "id": "herb_yarrow",
+   "nameKey": "item.yarrow",
+   "descKey": "item.yarrow.desc",
+   "icon": "herb",
+   "weight": 0.1,
+   "volume": 0.4,
+   "value": 14,
+   "cat": "herb",
+   "tags": [
+    "medical",
+    "gather"
+   ],
+   "heal": 6
+  },
+  {
+   "id": "salve_wiera",
+   "nameKey": "item.salve",
+   "descKey": "item.salve.desc",
+   "icon": "flask",
+   "weight": 0.3,
+   "volume": 0.5,
+   "value": 38,
+   "cat": "consumable",
+   "tags": [
+    "medical",
+    "belt"
+   ],
+   "heal": 22,
+   "curesInfection": true
+  },
+  {
+   "id": "potion_bitter",
+   "nameKey": "item.bitterDraught",
+   "descKey": "item.bitterDraught.desc",
+   "icon": "potion",
+   "weight": 0.4,
+   "volume": 0.6,
+   "value": 55,
+   "cat": "consumable",
+   "tags": [
+    "medical"
+   ],
+   "curesDisease": true
+  },
+  {
+   "id": "poison_vial",
+   "nameKey": "item.poison",
+   "descKey": "item.poison.desc",
+   "icon": "poison",
+   "weight": 0.2,
+   "volume": 0.3,
+   "value": 90,
+   "cat": "consumable",
+   "tags": [
+    "crime",
+    "contraband",
+    "concealed"
+   ]
+  },
+  {
+   "id": "mushroom_common",
+   "nameKey": "item.mushroom",
+   "descKey": "item.mushroom.desc",
+   "icon": "mushroom",
+   "weight": 0.1,
+   "volume": 0.3,
+   "value": 4,
+   "cat": "food",
+   "tags": [
+    "gather",
+    "riskPoison"
+   ],
+   "feed": 8
+  },
+  {
+   "id": "bread_loaf",
+   "nameKey": "item.bread",
+   "descKey": "item.bread.desc",
+   "icon": "bread",
+   "weight": 0.6,
+   "volume": 1.5,
+   "value": 4,
+   "cat": "food",
+   "tags": [
+    "eat",
+    "belt"
+   ],
+   "feed": 32
+  },
+  {
+   "id": "cheese_wheel",
+   "nameKey": "item.cheese",
+   "descKey": "item.cheese.desc",
+   "icon": "cheese",
+   "weight": 1.2,
+   "volume": 2,
+   "value": 11,
+   "cat": "food",
+   "tags": [
+    "eat"
+   ],
+   "feed": 40
+  },
+  {
+   "id": "apple",
+   "nameKey": "item.apple",
+   "descKey": "item.apple.desc",
+   "icon": "apple",
+   "weight": 0.2,
+   "volume": 0.4,
+   "value": 2,
+   "cat": "food",
+   "tags": [
+    "eat",
+    "belt"
+   ],
+   "feed": 12
+  },
+  {
+   "id": "fish_smoked",
+   "nameKey": "item.fish",
+   "descKey": "item.fish.desc",
+   "icon": "fish",
+   "weight": 0.5,
+   "volume": 1,
+   "value": 8,
+   "cat": "food",
+   "tags": [
+    "eat"
+   ],
+   "feed": 26
+  },
+  {
+   "id": "meat_venison",
+   "nameKey": "item.venison",
+   "descKey": "item.venison.desc",
+   "icon": "meat",
+   "weight": 2.0,
+   "volume": 4,
+   "value": 24,
+   "cat": "food",
+   "tags": [
+    "eat",
+    "hunt",
+    "raw"
+   ],
+   "feed": 45
+  },
+  {
+   "id": "stew_bowl",
+   "nameKey": "item.stew",
+   "descKey": "item.stew.desc",
+   "icon": "stew",
+   "weight": 0.7,
+   "volume": 1,
+   "value": 7,
+   "cat": "food",
+   "tags": [
+    "eat",
+    "warm"
+   ],
+   "feed": 50,
+   "warmth": 20
+  },
+  {
+   "id": "beer_mug",
+   "nameKey": "item.beer",
+   "descKey": "item.beer.desc",
+   "icon": "beer",
+   "weight": 0.6,
+   "volume": 1,
+   "value": 3,
+   "cat": "food",
+   "tags": [
+    "drink",
+    "tavern"
+   ],
+   "quench": 22,
+   "courage": 10
+  },
+  {
+   "id": "ale_cask",
+   "nameKey": "item.aleCask",
+   "descKey": "item.aleCask.desc",
+   "icon": "bottle",
+   "weight": 14,
+   "volume": 30,
+   "value": 60,
+   "cat": "goods",
+   "tags": [
+    "contraband",
+    "untaxed",
+    "heavy"
+   ]
+  },
+  {
+   "id": "salt_sack",
+   "nameKey": "item.salt",
+   "descKey": "item.salt.desc",
+   "icon": "salt",
+   "weight": 6,
+   "volume": 8,
+   "value": 12,
+   "cat": "goods",
+   "tags": [
+    "trade",
+    "contraband",
+    "untaxed"
+   ]
+  },
+  {
+   "id": "iron_ore",
+   "nameKey": "item.ironOre",
+   "descKey": "item.ironOre.desc",
+   "icon": "ore",
+   "weight": 4,
+   "volume": 4,
+   "value": 9,
+   "cat": "material",
+   "tags": [
+    "smith",
+    "heavy"
+   ]
+  },
+  {
+   "id": "coal_lump",
+   "nameKey": "item.coal",
+   "descKey": "item.coal.desc",
+   "icon": "coal",
+   "weight": 2,
+   "volume": 3,
+   "value": 6,
+   "cat": "material",
+   "tags": [
+    "smith",
+    "fuel"
+   ]
+  },
+  {
+   "id": "iron_bar",
+   "nameKey": "item.ironBar",
+   "descKey": "item.ironBar.desc",
+   "icon": "iron",
+   "weight": 5,
+   "volume": 3,
+   "value": 26,
+   "cat": "material",
+   "tags": [
+    "smith"
+   ]
+  },
+  {
+   "id": "nails_handful",
+   "nameKey": "item.nails",
+   "descKey": "item.nails.desc",
+   "icon": "nails",
+   "weight": 0.8,
+   "volume": 1,
+   "value": 7,
+   "cat": "material",
+   "tags": [
+    "smith",
+    "carpenter"
+   ]
+  },
+  {
+   "id": "plank_oak",
+   "nameKey": "item.plank",
+   "descKey": "item.plank.desc",
+   "icon": "plank",
+   "weight": 3,
+   "volume": 8,
+   "value": 10,
+   "cat": "material",
+   "tags": [
+    "carpenter"
+   ]
+  },
+  {
+   "id": "hide_deer",
+   "nameKey": "item.hide",
+   "descKey": "item.hide.desc",
+   "icon": "hide",
+   "weight": 3,
+   "volume": 8,
+   "value": 22,
+   "cat": "material",
+   "tags": [
+    "hunt",
+    "tanner"
+   ]
+  },
+  {
+   "id": "leather_tanned",
+   "nameKey": "item.leather",
+   "descKey": "item.leather.desc",
+   "icon": "hide",
+   "weight": 2.4,
+   "volume": 6,
+   "value": 40,
+   "cat": "material",
+   "tags": [
+    "tanner",
+    "crafted"
+   ]
+  },
+  {
+   "id": "wool_bundle",
+   "nameKey": "item.wool",
+   "descKey": "item.wool.desc",
+   "icon": "wool",
+   "weight": 1.5,
+   "volume": 6,
+   "value": 13,
+   "cat": "material",
+   "tags": [
+    "trade"
+   ]
+  },
+  {
+   "id": "grain_sack",
+   "nameKey": "item.grain",
+   "descKey": "item.grain.desc",
+   "icon": "grain",
+   "weight": 8,
+   "volume": 14,
+   "value": 15,
+   "cat": "goods",
+   "tags": [
+    "trade",
+    "heavy"
+   ]
+  },
+  {
+   "id": "notebook",
+   "nameKey": "item.notebook",
+   "descKey": "item.notebook.desc",
+   "icon": "notebook",
+   "weight": 0.5,
+   "volume": 1,
+   "value": 14,
+   "cat": "special",
+   "tags": [
+    "notes",
+    "unique",
+    "canSoak",
+    "canBurn",
+    "canSteal"
+   ]
+  },
+  {
+   "id": "quill_ink",
+   "nameKey": "item.quill",
+   "descKey": "item.quill.desc",
+   "icon": "quill",
+   "weight": 0.1,
+   "volume": 0.3,
+   "value": 8,
+   "cat": "special",
+   "tags": [
+    "writing"
+   ]
+  },
+  {
+   "id": "map_port",
+   "nameKey": "item.mapPort",
+   "descKey": "item.mapPort.desc",
+   "icon": "map",
+   "weight": 0.2,
+   "volume": 0.5,
+   "value": 40,
+   "cat": "special",
+   "tags": [
+    "map",
+    "unique"
+   ],
+   "mapRegion": "port_dolne_miasto"
+  },
+  {
+   "id": "map_island",
+   "nameKey": "item.mapIsland",
+   "descKey": "item.mapIsland.desc",
+   "icon": "map",
+   "weight": 0.3,
+   "volume": 0.6,
+   "value": 180,
+   "cat": "special",
+   "tags": [
+    "map",
+    "unique"
+   ],
+   "mapRegion": "island"
+  },
+  {
+   "id": "pocket_watch",
+   "nameKey": "item.watch",
+   "descKey": "item.watch.desc",
+   "icon": "watch",
+   "weight": 0.1,
+   "volume": 0.2,
+   "value": 240,
+   "cat": "special",
+   "tags": [
+    "time",
+    "rare",
+    "unique"
+   ]
+  },
+  {
+   "id": "permit_port",
+   "nameKey": "item.permitPort",
+   "descKey": "item.permitPort.desc",
+   "icon": "permit",
+   "weight": 0.05,
+   "volume": 0.1,
+   "value": 20,
+   "cat": "document",
+   "tags": [
+    "pass",
+    "unique"
+   ]
+  },
+  {
+   "id": "permit_upper",
+   "nameKey": "item.permitUpper",
+   "descKey": "item.permitUpper.desc",
+   "icon": "permit",
+   "weight": 0.05,
+   "volume": 0.1,
+   "value": 90,
+   "cat": "document",
+   "tags": [
+    "pass",
+    "unique"
+   ]
+  },
+  {
+   "id": "false_papers",
+   "nameKey": "item.falsePapers",
+   "descKey": "item.falsePapers.desc",
+   "icon": "letter",
+   "weight": 0.1,
+   "volume": 0.2,
+   "value": 100,
+   "cat": "document",
+   "tags": [
+    "crime",
+    "contraband",
+    "concealed"
+   ]
+  },
+  {
+   "id": "letter_sealed",
+   "nameKey": "item.letter",
+   "descKey": "item.letter.desc",
+   "icon": "letter",
+   "weight": 0.05,
+   "volume": 0.1,
+   "value": 5,
+   "cat": "document",
+   "tags": [
+    "quest"
+   ]
+  },
+  {
+   "id": "deed_room",
+   "nameKey": "item.deedRoom",
+   "descKey": "item.deedRoom.desc",
+   "icon": "deed",
+   "weight": 0.1,
+   "volume": 0.2,
+   "value": 0,
+   "cat": "document",
+   "tags": [
+    "property",
+    "unique"
+   ]
+  },
+  {
+   "id": "relic_saint",
+   "nameKey": "item.relic",
+   "descKey": "item.relic.desc",
+   "icon": "relic",
+   "weight": 1.0,
+   "volume": 2,
+   "value": 300,
+   "cat": "special",
+   "tags": [
+    "contraband",
+    "church",
+    "quest"
+   ]
+  },
+  {
+   "id": "signet_ring",
+   "nameKey": "item.ring",
+   "descKey": "item.ring.desc",
+   "icon": "ring",
+   "weight": 0.05,
+   "volume": 0.1,
+   "value": 150,
+   "cat": "valuables",
+   "tags": [
+    "pawn",
+    "concealed"
+   ]
+  },
+  {
+   "id": "silver_gem",
+   "nameKey": "item.gem",
+   "descKey": "item.gem.desc",
+   "icon": "gem",
+   "weight": 0.05,
+   "volume": 0.1,
+   "value": 210,
+   "cat": "valuables",
+   "tags": [
+    "pawn",
+    "concealed"
+   ]
+  },
+  {
+   "id": "dice_bone",
+   "nameKey": "item.dice",
+   "descKey": "item.dice.desc",
+   "icon": "dice",
+   "weight": 0.05,
+   "volume": 0.1,
+   "value": 4,
+   "cat": "tool",
+   "tags": [
+    "gamble"
+   ]
+  },
+  {
+   "id": "cards_worn",
+   "nameKey": "item.cards",
+   "descKey": "item.cards.desc",
+   "icon": "cards",
+   "weight": 0.1,
+   "volume": 0.2,
+   "value": 6,
+   "cat": "tool",
+   "tags": [
+    "gamble"
+   ]
+  },
+  {
+   "id": "fishing_hook",
+   "nameKey": "item.hook",
+   "descKey": "item.hook.desc",
+   "icon": "hook",
+   "weight": 0.05,
+   "volume": 0.1,
+   "value": 3,
+   "cat": "tool",
+   "tags": [
+    "fishing"
+   ]
+  },
+  {
+   "id": "net_small",
+   "nameKey": "item.net",
+   "descKey": "item.net.desc",
+   "icon": "net",
+   "weight": 1.2,
+   "volume": 4,
+   "value": 18,
+   "cat": "tool",
+   "tags": [
+    "fishing"
+   ]
+  },
+  {
+   "id": "snare_trap",
+   "nameKey": "item.snare",
+   "descKey": "item.snare.desc",
+   "icon": "trap",
+   "weight": 0.4,
+   "volume": 1,
+   "value": 9,
+   "cat": "tool",
+   "tags": [
+    "hunt"
+   ]
+  },
+  {
+   "id": "bait_scraps",
+   "nameKey": "item.bait",
+   "descKey": "item.bait.desc",
+   "icon": "bait",
+   "weight": 0.2,
+   "volume": 0.4,
+   "value": 1,
+   "cat": "tool",
+   "tags": [
+    "fishing",
+    "hunt"
+   ]
+  },
+  {
+   "id": "bone_wolf",
+   "nameKey": "item.bone",
+   "descKey": "item.bone.desc",
+   "icon": "bone",
+   "weight": 0.4,
+   "volume": 1,
+   "value": 3,
+   "cat": "material",
+   "tags": [
+    "hunt"
+   ]
+  },
+  {
+   "id": "wolf_pelt",
+   "nameKey": "item.wolfPelt",
+   "descKey": "item.wolfPelt.desc",
+   "icon": "hide",
+   "weight": 2.6,
+   "volume": 7,
+   "value": 48,
+   "cat": "material",
+   "tags": [
+    "hunt",
+    "tanner"
+   ]
+  },
+  {
+   "id": "feather_goose",
+   "nameKey": "item.feather",
+   "descKey": "item.feather.desc",
+   "icon": "feather",
+   "weight": 0.02,
+   "volume": 0.2,
+   "value": 1,
+   "cat": "material",
+   "tags": [
+    "gather"
+   ]
+  },
+  {
+   "id": "crate_untaxed",
+   "nameKey": "item.crateUntaxed",
+   "descKey": "item.crateUntaxed.desc",
+   "icon": "scroll",
+   "weight": 12,
+   "volume": 30,
+   "value": 0,
+   "cat": "quest",
+   "tags": [
+    "quest",
+    "contraband",
+    "heavy",
+    "carryOnly"
+   ]
+  },
+  {
+   "id": "marta_satchel",
+   "nameKey": "item.satchel",
+   "descKey": "item.satchel.desc",
+   "icon": "coin purse",
+   "weight": 1.0,
+   "volume": 3,
+   "value": 0,
+   "cat": "quest",
+   "tags": [
+    "quest"
+   ]
+  },
+  {
+   "id": "whetstone",
+   "nameKey": "item.whetstone",
+   "descKey": "item.whetstone.desc",
+   "icon": "toolbox",
+   "weight": 0.5,
+   "volume": 1,
+   "value": 12,
+   "cat": "tool",
+   "tags": [
+    "smith",
+    "sharpens"
+   ]
+  },
+  {
+   "id": "hanna_tab",
+   "nameKey": "item.tabChit",
+   "descKey": "item.tabChit.desc",
+   "icon": "letter",
+   "weight": 0.02,
+   "volume": 0.1,
+   "value": 0,
+   "cat": "quest",
+   "tags": [
+    "quest",
+    "debt"
+   ]
+  },
+  {
+   "id": "customs_seal",
+   "nameKey": "item.customsSeal",
+   "descKey": "item.customsSeal.desc",
+   "icon": "permit",
+   "weight": 0.1,
+   "volume": 0.2,
+   "value": 0,
+   "cat": "quest",
+   "tags": [
+    "quest",
+    "stolen"
+   ]
+  },
+  {
+   "id": "knight_token",
+   "nameKey": "item.knightToken",
+   "descKey": "item.knightToken.desc",
+   "icon": "ring",
+   "weight": 0.2,
+   "volume": 0.3,
+   "value": 120,
+   "cat": "valuables",
+   "tags": [
+    "wildKnights",
+    "pawn"
+   ]
+  },
+  {
+   "id": "turnip",
+   "nameKey": "item.turnip",
+   "descKey": "item.turnip.desc",
+   "icon": "turnip",
+   "weight": 0.3,
+   "volume": 0.6,
+   "value": 2,
+   "cat": "food",
+   "tags": [
+    "eat",
+    "gather",
+    "belt"
+   ],
+   "feed": 10
+  },
+  {
+   "id": "garlic_braid",
+   "nameKey": "item.garlic",
+   "descKey": "item.garlic.desc",
+   "icon": "garlic",
+   "weight": 0.2,
+   "volume": 0.5,
+   "value": 6,
+   "cat": "herb",
+   "tags": [
+    "medical",
+    "gather"
+   ],
+   "heal": 3,
+   "curesDisease": true
+  },
+  {
+   "id": "goose_fat",
+   "nameKey": "item.gooseFat",
+   "descKey": "item.gooseFat.desc",
+   "icon": "jar",
+   "weight": 0.4,
+   "volume": 0.5,
+   "value": 7,
+   "cat": "material",
+   "tags": [
+    "alchemy",
+    "food"
+   ],
+   "feed": 6
+  },
+  {
+   "id": "egg_goose",
+   "nameKey": "item.egg",
+   "descKey": "item.egg.desc",
+   "icon": "egg",
+   "weight": 0.15,
+   "volume": 0.3,
+   "value": 3,
+   "cat": "food",
+   "tags": [
+    "eat",
+    "gather"
+   ],
+   "feed": 12
+  },
+  {
+   "id": "rag_linen",
+   "nameKey": "item.rag",
+   "descKey": "item.rag.desc",
+   "icon": "bandage",
+   "weight": 0.1,
+   "volume": 0.3,
+   "value": 1,
+   "cat": "material",
+   "tags": [
+    "medical",
+    "craft"
+   ],
+   "stack": 20
+  },
+  {
+   "id": "poultice",
+   "nameKey": "item.poultice",
+   "descKey": "item.poultice.desc",
+   "icon": "herb",
+   "weight": 0.2,
+   "volume": 0.4,
+   "value": 16,
+   "cat": "consumable",
+   "tags": [
+    "medical",
+    "belt"
+   ],
+   "heal": 9,
+   "stopsBleeding": true,
+   "curesInfection": true
+  },
+  {
+   "id": "antidote_vial",
+   "nameKey": "item.antidote",
+   "descKey": "item.antidote.desc",
+   "icon": "vial",
+   "weight": 0.2,
+   "volume": 0.3,
+   "value": 70,
+   "cat": "consumable",
+   "tags": [
+    "medical",
+    "crime",
+    "belt"
+   ],
+   "curesDisease": true,
+   "heal": 4
+  },
+  {
+   "id": "jerkin_leather",
+   "nameKey": "item.jerkin",
+   "descKey": "item.jerkin.desc",
+   "icon": "armor",
+   "weight": 4.5,
+   "volume": 12,
+   "value": 95,
+   "cat": "armor",
+   "tags": [
+    "body"
+   ],
+   "armor": {
+    "mit": 0.22,
+    "stamPen": 0.06,
+    "block": 0
+   }
+  },
+  {
+   "id": "wolfskin_cloak",
+   "nameKey": "item.wolfskin",
+   "descKey": "item.wolfskin.desc",
+   "icon": "cloack",
+   "weight": 3.2,
+   "volume": 9,
+   "value": 85,
+   "cat": "clothing",
+   "tags": [
+    "body",
+    "warm",
+    "rain"
+   ],
+   "armor": {
+    "mit": 0.08,
+    "stamPen": 0.04,
+    "block": 0
+   },
+   "warmth": 26
+  },
+  {
+   "id": "knife_skinning",
+   "nameKey": "item.skinningKnife",
+   "descKey": "item.skinningKnife.desc",
+   "icon": "dagger",
+   "weight": 0.5,
+   "volume": 1,
+   "value": 19,
+   "cat": "tool",
+   "tags": [
+    "tool",
+    "weapon"
+   ],
+   "weapon": {
+    "dmg": 9,
+    "stam": 9,
+    "speed": 1.3,
+    "reach": 16,
+    "arc": 0.9,
+    "vsArmor": 0.6,
+    "skill": "sword",
+    "parryWindow": 0.2
+   },
+   "craft": [
+    "tanning"
+   ]
+  },
+  {
+   "id": "scrap_iron",
+   "nameKey": "item.scrap",
+   "descKey": "item.scrap.desc",
+   "icon": "iron",
+   "weight": 1.5,
+   "volume": 2,
+   "value": 4,
+   "cat": "material",
+   "tags": [
+    "smith"
+   ]
+  },
+  {
+   "id": "coin_purse_small",
+   "nameKey": "item.purseSmall",
+   "descKey": "item.purseSmall.desc",
+   "icon": "coin purse",
+   "weight": 0.2,
+   "volume": 0.4,
+   "value": 12,
+   "cat": "valuables",
+   "tags": [
+    "pawn",
+    "concealed",
+    "money"
+   ]
+  },
+  {
+   "id": "coin_purse_big",
+   "nameKey": "item.purseBig",
+   "descKey": "item.purseBig.desc",
+   "icon": "coin purse",
+   "weight": 0.6,
+   "volume": 1,
+   "value": 45,
+   "cat": "valuables",
+   "tags": [
+    "pawn",
+    "concealed",
+    "money"
+   ]
+  },
+  {
+   "id": "willow_bark",
+   "nameKey": "item.willowBark",
+   "descKey": "item.willowBark.desc",
+   "icon": "herb",
+   "weight": 0.15,
+   "volume": 0.4,
+   "value": 8,
+   "cat": "herb",
+   "tags": [
+    "medical",
+    "gather"
+   ],
+   "heal": 5
+  },
+  {
+   "id": "book_hours",
+   "nameKey": "item.bookHours",
+   "descKey": "item.bookHours.desc",
+   "icon": "book",
+   "weight": 0.8,
+   "volume": 1.5,
+   "value": 55,
+   "cat": "document",
+   "tags": [
+    "church",
+    "reading",
+    "unique"
+   ]
+  }
+ ]
+}

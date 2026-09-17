@@ -1,0 +1,372 @@
+{
+  "namePool": {
+    "male": ["Janek", "Stanisław", "Maciej", "Paweł", "Wojciech", "Mikołaj", "Piotr", "Andrzej", "Tomasz", "Jakub", "Szymon", "Błażej", "Klemens", "Urban", "Bartosz", "Walenty", "Marcin", "Ambroży"],
+    "female": ["Zofia", "Katarzyna", "Jadwiga", "Anna", "Dorota", "Elżbieta", "Małgorzata", "Barbara", "Agnieszka", "Halszka", "Urszula", "Brygida", "Marta", "Kinga"],
+    "surnames": ["z Młyna", "Kowalczyk", "Bednarczyk", "Szydło", "Wrzosek", "Garbarz", "Rybak", "Świątek", "Kruk", "Bielak", "Ostrowski", "Ciupa", "Warchół", "Zając", "Grzyb", "Suchy", "Bąk", "Trzaska", "Mazur", "Cebula"],
+    "jobs": ["tragarz", "praczka", "zdun", "powroźnik", "piekarz", "rybak", "wełniarka", "bednarz", "garbarz", "straganiarka", "woźnica", "kamieniarz", "zielarka", "krawiec", "pasterz", "marynarz", "służąca", "kopacz"]
+  },
+  "npcs": [
+    {
+      "id": "hanna", "nameKey": "npc.hanna.name", "roleKey": "npc.hanna.role", "age": 34, "gender": "f",
+      "palette": "hanna", "look": { "offhand": "mug", "weapon": "none", "helmet": "none", "beard": false },
+      "faction": "villagers", "stance": -35, "important": true, "dialogue": "hanna_root",
+      "merchant": "hanna_bar", "teacher": ["cooking", "brewing"],
+      "addressKey": "npc.hanna.address", "desireKey": "npc.hanna.desire", "secretKey": "npc.hanna.secret",
+      "greetingKeys": ["npc.hanna.greet1", "npc.hanna.greet2", "npc.hanna.greet3"],
+      "schedule": [
+        { "from": 5, "to": 10, "scene": "int_tavern", "at": [4, 3], "activity": "work", "action": "work" },
+        { "from": 10, "to": 14, "scene": "int_tavern", "at": [6, 6], "activity": "serve", "action": "carry" },
+        { "from": 14, "to": 16, "scene": "world", "at": [50, 44], "activity": "market", "action": "walk", "waypoints": [[50, 44], [62, 44], [70, 40]] },
+        { "from": 16, "to": 23, "scene": "int_tavern", "at": [4, 3], "activity": "work", "action": "work" },
+        { "from": 23, "to": 5, "scene": "int_tavern", "at": [13, 9], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "orlik", "nameKey": "npc.orlik.name", "roleKey": "npc.orlik.role", "age": 40, "gender": "m",
+      "palette": "orlik", "look": { "weapon": "hammer", "offhand": "none", "bulk": 2, "beard": true, "helmet": "none" },
+      "faction": "merchantGuild", "stance": -20, "important": true, "dialogue": "orlik_root",
+      "merchant": "orlik_forge", "teacher": ["smithing", "carpentry"], "crafter": "forgeWork",
+      "addressKey": "npc.orlik.address", "desireKey": "npc.orlik.desire", "secretKey": "npc.orlik.secret",
+      "greetingKeys": ["npc.orlik.greet1", "npc.orlik.greet2"],
+      "schedule": [
+        { "from": 5, "to": 6, "scene": "world", "at": [74, 35], "activity": "yard", "action": "idle" },
+        { "from": 6, "to": 13, "scene": "int_smithy", "at": [5, 4], "activity": "forge", "action": "work" },
+        { "from": 13, "to": 14, "scene": "int_tavern", "at": [9, 6], "activity": "dinner", "action": "sit" },
+        { "from": 14, "to": 19, "scene": "int_smithy", "at": [5, 4], "activity": "forge", "action": "work" },
+        { "from": 19, "to": 21, "scene": "world", "at": [80, 42], "activity": "rest", "action": "idle" },
+        { "from": 21, "to": 5, "scene": "world", "at": [77, 13], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "vagn", "nameKey": "npc.vagn.name", "roleKey": "npc.vagn.role", "age": 61, "gender": "m",
+      "palette": "vagn", "look": { "weapon": "sword", "offhand": "none", "beard": true, "bulk": 1, "helmet": "none" },
+      "faction": "villagers", "stance": -70, "important": true, "dialogue": "vagn_root",
+      "teacher": ["sword", "parry", "blunt", "brawl", "endurance"], "trainer": true,
+      "addressKey": "npc.vagn.address", "desireKey": "npc.vagn.desire", "secretKey": "npc.vagn.secret",
+      "greetingKeys": ["npc.vagn.greet1", "npc.vagn.greet2"],
+      "schedule": [
+        { "from": 5, "to": 8, "scene": "world", "at": [26, 21], "activity": "drill", "action": "work" },
+        { "from": 8, "to": 10, "scene": "int_vagn", "at": [3, 4], "activity": "breakfast", "action": "sit" },
+        { "from": 10, "to": 14, "scene": "world", "at": [26, 21], "activity": "drill", "action": "work" },
+        { "from": 14, "to": 16, "scene": "world", "at": [29, 28], "activity": "home", "action": "idle", "inside": true },
+        { "from": 16, "to": 19, "scene": "int_tavern", "at": [12, 7], "activity": "drink", "action": "sit" },
+        { "from": 19, "to": 22, "scene": "world", "at": [24, 24], "activity": "evening walk", "action": "walk", "waypoints": [[24, 24], [30, 34], [24, 34]] },
+        { "from": 22, "to": 5, "scene": "int_vagn", "at": [6, 2], "activity": "sleep", "action": "sleep" }
+      ]
+    },
+    {
+      "id": "idzi", "nameKey": "npc.idzi.name", "roleKey": "npc.idzi.role", "age": 38, "gender": "m",
+      "palette": "idzi", "look": { "weapon": "dagger", "offhand": "none", "helmet": "cap", "beard": true },
+      "faction": "smugglers", "stance": 40, "important": true, "dialogue": "idzi_root",
+      "merchant": "idzi_black", "teacher": ["deceit", "sailing", "sneak"],
+      "addressKey": "npc.idzi.address", "desireKey": "npc.idzi.desire", "secretKey": "npc.idzi.secret",
+      "greetingKeys": ["npc.idzi.greet1", "npc.idzi.greet2"],
+      "schedule": [
+        { "from": 20, "to": 2, "scene": "world", "at": [98, 90], "activity": "pier", "action": "idle" },
+        { "from": 2, "to": 6, "scene": "int_warehouse", "at": [9, 8], "activity": "stash", "action": "search" },
+        { "from": 6, "to": 10, "scene": "world", "at": [106, 88], "activity": "sleep", "action": "sleep", "inside": true },
+        { "from": 10, "to": 14, "scene": "world", "at": [62, 92], "activity": "cargo", "action": "carry", "waypoints": [[62, 92], [60, 88], [64, 96]] },
+        { "from": 14, "to": 18, "scene": "world", "at": [104, 74], "activity": "camp", "action": "idle" },
+        { "from": 18, "to": 20, "scene": "int_tavern", "at": [12, 8], "activity": "deal", "action": "sit" }
+      ]
+    },
+    {
+      "id": "rawicz", "nameKey": "npc.rawicz.name", "roleKey": "npc.rawicz.role", "age": 44, "gender": "m",
+      "palette": "rawicz", "look": { "weapon": "sword", "offhand": "shield", "helmet": "kettle", "beard": true, "bulk": 1 },
+      "faction": "cityGuard", "stance": -45, "important": true, "dialogue": "rawicz_root",
+      "addressKey": "npc.rawicz.address", "desireKey": "npc.rawicz.desire", "secretKey": "npc.rawicz.secret",
+      "greetingKeys": ["npc.rawicz.greet1", "npc.rawicz.greet2"],
+      "guard": { "authority": true },
+      "schedule": [
+        { "from": 7, "to": 9, "scene": "int_guard", "at": [4, 3], "activity": "muster", "action": "idle" },
+        { "from": 9, "to": 12, "scene": "world", "at": [60, 40], "activity": "patrol", "action": "walk", "patrol": [[60, 40], [80, 36], [86, 46], [62, 50], [50, 40]] },
+        { "from": 12, "to": 14, "scene": "int_guard", "at": [4, 3], "activity": "report", "action": "idle" },
+        { "from": 14, "to": 18, "scene": "world", "at": [62, 62], "activity": "gate", "action": "walk", "patrol": [[62, 62], [62, 44], [96, 40], [62, 44]] },
+        { "from": 18, "to": 20, "scene": "int_tavern", "at": [9, 6], "activity": "supper", "action": "sit" },
+        { "from": 20, "to": 7, "scene": "world", "at": [98, 19], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "teodor", "nameKey": "npc.teodor.name", "roleKey": "npc.teodor.role", "age": 55, "gender": "m",
+      "palette": "teodor", "look": { "weapon": "staff", "offhand": "book", "beard": true, "helmet": "none" },
+      "faction": "church", "stance": -60, "important": true, "dialogue": "teodor_root",
+      "teacher": ["history", "persuade"], "merchant": "teodor_alms",
+      "addressKey": "npc.teodor.address", "desireKey": "npc.teodor.desire", "secretKey": "npc.teodor.secret",
+      "greetingKeys": ["npc.teodor.greet1", "npc.teodor.greet2"],
+      "schedule": [
+        { "from": 5, "to": 7, "scene": "int_chapel", "at": [5, 3], "activity": "matins", "action": "idle" },
+        { "from": 7, "to": 9, "scene": "world", "at": [68, 24], "activity": "yard", "action": "walk", "waypoints": [[68, 24], [62, 24], [70, 26]] },
+        { "from": 9, "to": 12, "scene": "int_chapel", "at": [5, 3], "activity": "service", "action": "idle" },
+        { "from": 12, "to": 14, "scene": "world", "at": [56, 44], "activity": "alms", "action": "talk" },
+        { "from": 14, "to": 17, "scene": "int_chapel", "at": [10, 9], "activity": "study", "action": "idle" },
+        { "from": 17, "to": 19, "scene": "world", "at": [62, 36], "activity": "procession", "action": "walk", "waypoints": [[62, 36], [70, 40], [78, 36], [62, 36]] },
+        { "from": 19, "to": 5, "scene": "int_chapel", "at": [1, 10], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "marta", "nameKey": "npc.marta.name", "roleKey": "npc.marta.role", "age": 15, "gender": "f",
+      "palette": "marta", "look": { "weapon": "dagger", "offhand": "none", "helmet": "hood", "height": -1 },
+      "faction": "smugglers", "stance": -25, "important": true, "dialogue": "marta_root",
+      "teacher": ["pickpocket", "lockpick", "sneak"],
+      "addressKey": "npc.marta.address", "desireKey": "npc.marta.desire", "secretKey": "npc.marta.secret",
+      "greetingKeys": ["npc.marta.greet1", "npc.marta.greet2"],
+      "schedule": [
+        { "from": 10, "to": 14, "scene": "world", "at": [46, 44], "activity": "work", "action": "walk", "waypoints": [[46, 44], [54, 40], [62, 46], [70, 42]] },
+        { "from": 14, "to": 17, "scene": "world", "at": [14, 46], "activity": "hideout", "action": "idle" },
+        { "from": 17, "to": 20, "scene": "world", "at": [19, 52], "activity": "home", "action": "idle", "inside": true },
+        { "from": 20, "to": 24, "scene": "world", "at": [60, 56], "activity": "night work", "action": "sneak", "waypoints": [[60, 56], [84, 58], [104, 56]] },
+        { "from": 0, "to": 10, "scene": "world", "at": [19, 52], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "goslaw", "nameKey": "npc.goslaw.name", "roleKey": "npc.goslaw.role", "age": 58, "gender": "m",
+      "palette": "goslaw", "look": { "weapon": "none", "offhand": "book", "beard": true, "helmet": "cap" },
+      "faction": "merchantGuild", "stance": -10, "important": true, "dialogue": "goslaw_root",
+      "merchant": "goslaw_maps",
+      "addressKey": "npc.goslaw.address", "desireKey": "npc.goslaw.desire", "secretKey": "npc.goslaw.secret",
+      "greetingKeys": ["npc.goslaw.greet1"],
+      "schedule": [
+        { "from": 8, "to": 18, "scene": "world", "at": [45, 78], "activity": "stall", "action": "idle" },
+        { "from": 18, "to": 20, "scene": "int_tavern", "at": [9, 5], "activity": "supper", "action": "sit" },
+        { "from": 20, "to": 8, "scene": "world", "at": [86, 85], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "baldwin", "nameKey": "npc.baldwin.name", "roleKey": "npc.baldwin.role", "age": 50, "gender": "m",
+      "palette": "baldwin", "look": { "weapon": "sword", "offhand": "none", "helmet": "crown", "beard": true, "bulk": 1, "cloak": true },
+      "faction": "wildKnights", "stance": 100, "important": true, "dialogue": "baldwin_root",
+      "addressKey": "npc.baldwin.address", "desireKey": "npc.baldwin.desire", "secretKey": "npc.baldwin.secret",
+      "greetingKeys": ["npc.baldwin.greet1"],
+      "spawnDays": [1],
+      "schedule": [
+        { "from": 6, "to": 10, "scene": "world", "at": [60, 94], "activity": "arrival", "action": "idle" },
+        { "from": 10, "to": 24, "scene": "world", "at": [60, 66], "activity": "gate", "action": "idle" }
+      ]
+    },
+    {
+      "id": "skryba_urban", "nameKey": "npc.scribe.name", "roleKey": "npc.scribe.role", "age": 47, "gender": "m",
+      "palette": "scribe", "look": { "weapon": "none", "offhand": "book", "helmet": "cap" },
+      "faction": "merchantGuild", "stance": 0, "dialogue": "scribe_root", "merchant": "scribe_shop",
+      "teacher": ["reading"],
+      "addressKey": "npc.scribe.address", "desireKey": "npc.scribe.desire", "secretKey": "npc.scribe.secret",
+      "greetingKeys": ["npc.scribe.greet1"],
+      "schedule": [
+        { "from": 8, "to": 18, "scene": "int_scribe", "at": [6, 3], "activity": "work", "action": "sit" },
+        { "from": 18, "to": 8, "scene": "world", "at": [91, 13], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "medyk_elen", "nameKey": "npc.medic.name", "roleKey": "npc.medic.role", "age": 52, "gender": "m",
+      "palette": "medic", "look": { "weapon": "none", "offhand": "lantern", "beard": true },
+      "faction": "church", "stance": -15, "dialogue": "medic_root", "merchant": "medic_shop",
+      "teacher": ["firstaid", "medicine"], "healer": true,
+      "addressKey": "npc.medic.address", "desireKey": "npc.medic.desire", "secretKey": "npc.medic.secret",
+      "greetingKeys": ["npc.medic.greet1"],
+      "schedule": [
+        { "from": 7, "to": 19, "scene": "int_bath", "at": [8, 4], "activity": "work", "action": "idle" },
+        { "from": 19, "to": 7, "scene": "world", "at": [115, 19], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "celnik_bernard", "nameKey": "npc.customs.name", "roleKey": "npc.customs.role", "age": 49, "gender": "m",
+      "palette": "merchant", "look": { "weapon": "none", "offhand": "book", "helmet": "cap", "bulk": 1 },
+      "faction": "cityGuard", "stance": -30, "dialogue": "customs_root", "merchant": "customs_confiscated",
+      "addressKey": "npc.customs.address", "desireKey": "npc.customs.desire", "secretKey": "npc.customs.secret",
+      "greetingKeys": ["npc.customs.greet1"],
+      "schedule": [
+        { "from": 6, "to": 20, "scene": "int_customs", "at": [3, 3], "activity": "desk", "action": "sit" },
+        { "from": 20, "to": 6, "scene": "world", "at": [86, 85], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "kupiec_zbylut", "nameKey": "npc.guild.name", "roleKey": "npc.guild.role", "age": 43, "gender": "m",
+      "palette": "merchant", "look": { "weapon": "none", "offhand": "none", "cloak": true, "helmet": "cap", "bulk": 1 },
+      "faction": "merchantGuild", "stance": -5, "dialogue": "guild_root", "merchant": "guild_shop",
+      "teacher": ["barter"],
+      "addressKey": "npc.guild.address", "desireKey": "npc.guild.desire", "secretKey": "npc.guild.secret",
+      "greetingKeys": ["npc.guild.greet1"],
+      "schedule": [
+        { "from": 8, "to": 18, "scene": "int_guild", "at": [5, 3], "activity": "office", "action": "sit" },
+        { "from": 18, "to": 20, "scene": "int_tavern", "at": [9, 6], "activity": "supper", "action": "sit" },
+        { "from": 20, "to": 8, "scene": "world", "at": [105, 34], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "garbarz_oles", "nameKey": "npc.tanner.name", "roleKey": "npc.tanner.role", "age": 56, "gender": "m",
+      "palette": "beggar", "look": { "weapon": "none", "offhand": "none", "beard": true, "bulk": 1 },
+      "faction": "villagers", "stance": -15, "dialogue": "tanner_root", "merchant": "tanner_shop", "teacher": ["tanning"],
+      "addressKey": "npc.tanner.address", "desireKey": "npc.tanner.desire", "secretKey": "npc.tanner.secret",
+      "greetingKeys": ["npc.tanner.greet1"],
+      "schedule": [
+        { "from": 6, "to": 18, "scene": "int_tannery", "at": [5, 4], "activity": "vats", "action": "work" },
+        { "from": 18, "to": 6, "scene": "world", "at": [132, 57], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "rybak_ewa", "nameKey": "npc.fisher.name", "roleKey": "npc.fisher.role", "age": 39, "gender": "f",
+      "palette": "fisher", "look": { "weapon": "none", "offhand": "basket", "helmet": "straw" },
+      "faction": "villagers", "stance": -20, "dialogue": "fisher_root", "merchant": "fisher_shop", "teacher": ["fishing"],
+      "addressKey": "npc.fisher.address", "desireKey": "npc.fisher.desire", "secretKey": "npc.fisher.secret",
+      "greetingKeys": ["npc.fisher.greet1"],
+      "schedule": [
+        { "from": 4, "to": 9, "scene": "world", "at": [98, 94], "activity": "fishing", "action": "idle" },
+        { "from": 9, "to": 13, "scene": "world", "at": [74, 47], "activity": "stall", "action": "idle" },
+        { "from": 13, "to": 17, "scene": "world", "at": [98, 92], "activity": "nets", "action": "work" },
+        { "from": 17, "to": 20, "scene": "int_tavern", "at": [5, 5], "activity": "supper", "action": "sit" },
+        { "from": 20, "to": 4, "scene": "world", "at": [107, 89], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "piekarz_ignac", "nameKey": "npc.baker.name", "roleKey": "npc.baker.role", "age": 51, "gender": "m",
+      "palette": "peasantM", "look": { "weapon": "none", "offhand": "basket", "bulk": 2, "helmet": "cap" },
+      "faction": "merchantGuild", "stance": -10, "dialogue": "baker_root", "merchant": "baker_stall", "teacher": ["cooking"],
+      "addressKey": "npc.baker.address", "desireKey": "npc.baker.desire", "secretKey": "npc.baker.secret",
+      "greetingKeys": ["npc.baker.greet1"],
+      "schedule": [
+        { "from": 3, "to": 9, "scene": "world", "at": [60, 57], "activity": "oven", "action": "work" },
+        { "from": 9, "to": 15, "scene": "world", "at": [48, 37], "activity": "stall", "action": "idle" },
+        { "from": 15, "to": 19, "scene": "int_tavern", "at": [5, 6], "activity": "rest", "action": "sit" },
+        { "from": 19, "to": 3, "scene": "world", "at": [23, 41], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "poborca_gwidon", "nameKey": "npc.collector.name", "roleKey": "npc.collector.role", "age": 37, "gender": "m",
+      "palette": "knight", "look": { "weapon": "sword", "offhand": "none", "helmet": "kettle", "cloak": true, "bulk": 1 },
+      "faction": "wildKnights", "stance": 90, "dialogue": "collector_root", "collector": true,
+      "addressKey": "npc.collector.address", "desireKey": "npc.collector.desire", "secretKey": "npc.collector.secret",
+      "greetingKeys": ["npc.collector.greet1"],
+      "schedule": [
+        { "from": 9, "to": 13, "scene": "world", "at": [62, 62], "activity": "gate", "action": "idle" },
+        { "from": 13, "to": 17, "scene": "world", "at": [60, 40], "activity": "collecting", "action": "walk", "waypoints": [[60, 40], [78, 38], [86, 46], [62, 48]] },
+        { "from": 17, "to": 21, "scene": "int_tavern", "at": [12, 6], "activity": "drinking", "action": "sit" },
+        { "from": 21, "to": 9, "scene": "world", "at": [59, 79], "activity": "customs", "action": "idle", "inside": true }
+      ]
+    },
+    {
+      "id": "lichwiarz_rejne", "nameKey": "npc.usurer.name", "roleKey": "npc.usurer.role", "age": 60, "gender": "m",
+      "palette": "merchant", "look": { "weapon": "none", "offhand": "none", "helmet": "none", "beard": true },
+      "faction": "merchantGuild", "stance": 10, "dialogue": "usurer_root", "lender": true,
+      "addressKey": "npc.usurer.address", "desireKey": "npc.usurer.desire", "secretKey": "npc.usurer.secret",
+      "greetingKeys": ["npc.usurer.greet1"],
+      "schedule": [
+        { "from": 12, "to": 22, "scene": "int_tavern", "at": [12, 8], "activity": "table", "action": "sit" },
+        { "from": 22, "to": 12, "scene": "world", "at": [105, 34], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "gracz_pankracy", "nameKey": "npc.gamblerNight.name", "roleKey": "npc.gamblerNight.role", "age": 45, "gender": "m",
+      "palette": "beggar", "look": { "weapon": "none", "offhand": "mug", "helmet": "cap", "beard": true },
+      "faction": "villagers", "stance": -30, "dialogue": "gambler_root", "gambler": { "game": "dice", "stake": [5, 40], "temper": "hot", "cheatSkill": 3 },
+      "addressKey": "npc.gamblerNight.address", "desireKey": "npc.gamblerNight.desire", "secretKey": "npc.gamblerNight.secret",
+      "greetingKeys": ["npc.gamblerNight.greet1"],
+      "schedule": [
+        { "from": 20, "to": 4, "scene": "int_tavern", "at": [5, 5], "activity": "dice", "action": "sit" },
+        { "from": 4, "to": 20, "scene": "world", "at": [23, 51], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "graczka_cecylia", "nameKey": "npc.gamblerDay.name", "roleKey": "npc.gamblerDay.role", "age": 38, "gender": "f",
+      "palette": "peasantF", "look": { "weapon": "none", "offhand": "mug", "helmet": "none" },
+      "faction": "merchantGuild", "stance": -10, "dialogue": "gambler_root", "gambler": { "game": "cards", "stake": [10, 60], "temper": "cold", "cheatSkill": 5 },
+      "addressKey": "npc.gamblerDay.address", "desireKey": "npc.gamblerDay.desire", "secretKey": "npc.gamblerDay.secret",
+      "greetingKeys": ["npc.gamblerDay.greet1"],
+      "schedule": [
+        { "from": 10, "to": 18, "scene": "int_tavern", "at": [9, 6], "activity": "cards", "action": "sit" },
+        { "from": 18, "to": 10, "scene": "world", "at": [35, 41], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "wiera", "nameKey": "npc.wiera.name", "roleKey": "npc.wiera.role", "age": 45, "gender": "f",
+      "palette": "wiera", "look": { "weapon": "none", "offhand": "basket", "cloak": true, "helmet": "hood" },
+      "faction": "villagers", "stance": -50, "important": true, "dialogue": "wiera_root",
+      "merchant": "wiera_herbs", "teacher": ["herbalism", "alchemy", "foraging", "tracking"], "healer": true,
+      "addressKey": "npc.wiera.address", "desireKey": "npc.wiera.desire", "secretKey": "npc.wiera.secret",
+      "greetingKeys": ["npc.wiera.greet1"],
+      "parity": "even",
+      "schedule": [
+        { "from": 8, "to": 16, "scene": "world", "at": [62, 47], "activity": "stall", "action": "idle" },
+        { "from": 16, "to": 8, "scene": "world", "at": [10, 70], "activity": "swamp", "action": "walk", "inside": true }
+      ]
+    },
+    {
+      "id": "maciej_kulawy", "nameKey": "npc.beggar.name", "roleKey": "npc.beggar.role", "age": 63, "gender": "m",
+      "palette": "beggar", "look": { "weapon": "staff", "offhand": "none", "beard": true },
+      "faction": "villagers", "stance": -40, "dialogue": "beggar_root", "rumorSeller": true,
+      "addressKey": "npc.beggar.address", "desireKey": "npc.beggar.desire", "secretKey": "npc.beggar.secret",
+      "greetingKeys": ["npc.beggar.greet1"],
+      "schedule": [
+        { "from": 6, "to": 12, "scene": "world", "at": [58, 46], "activity": "begging", "action": "idle" },
+        { "from": 12, "to": 18, "scene": "world", "at": [68, 26], "activity": "chapel", "action": "idle" },
+        { "from": 18, "to": 6, "scene": "world", "at": [24, 15], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "baltazar_kat", "nameKey": "npc.executioner.name", "roleKey": "npc.executioner.role", "age": 48, "gender": "m",
+      "palette": "bandit", "look": { "weapon": "axe", "offhand": "none", "helmet": "hood", "bulk": 2 },
+      "faction": "cityGuard", "stance": -20, "dialogue": "executioner_root",
+      "addressKey": "npc.executioner.address", "desireKey": "npc.executioner.desire", "secretKey": "npc.executioner.secret",
+      "greetingKeys": ["npc.executioner.greet1"],
+      "schedule": [
+        { "from": 8, "to": 18, "scene": "world", "at": [86, 52], "activity": "duty", "action": "idle" },
+        { "from": 18, "to": 8, "scene": "int_guard", "at": [7, 4], "activity": "off duty", "action": "sit" }
+      ]
+    },
+    {
+      "id": "zofia_prawka", "nameKey": "npc.washer.name", "roleKey": "npc.washer.role", "age": 33, "gender": "f",
+      "palette": "peasantF", "look": { "weapon": "none", "offhand": "basket", "helmet": "none" },
+      "faction": "villagers", "stance": -25, "dialogue": "washer_root",
+      "addressKey": "npc.washer.address", "desireKey": "npc.washer.desire", "secretKey": "npc.washer.secret",
+      "greetingKeys": ["npc.washer.greet1"],
+      "schedule": [
+        { "from": 6, "to": 12, "scene": "world", "at": [34, 45], "activity": "laundry", "action": "work" },
+        { "from": 12, "to": 18, "scene": "world", "at": [64, 42], "activity": "well", "action": "work" },
+        { "from": 18, "to": 6, "scene": "world", "at": [35, 41], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "pietrek_stajenny", "nameKey": "npc.stableboy.name", "roleKey": "npc.stableboy.role", "age": 14, "gender": "m",
+      "palette": "child", "look": { "weapon": "none", "offhand": "none", "height": -1 },
+      "faction": "villagers", "stance": -15, "dialogue": "stableboy_root",
+      "addressKey": "npc.stableboy.address", "desireKey": "npc.stableboy.desire", "secretKey": "npc.stableboy.secret",
+      "greetingKeys": ["npc.stableboy.greet1"],
+      "schedule": [
+        { "from": 5, "to": 12, "scene": "world", "at": [94, 45], "activity": "horses", "action": "work" },
+        { "from": 12, "to": 19, "scene": "world", "at": [36, 35], "activity": "horses", "action": "work" },
+        { "from": 19, "to": 5, "scene": "world", "at": [117, 53], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "agnieszka_siostra", "nameKey": "npc.nun.name", "roleKey": "npc.nun.role", "age": 29, "gender": "f",
+      "palette": "monk", "look": { "weapon": "none", "offhand": "book", "helmet": "coif" },
+      "faction": "church", "stance": -55, "dialogue": "nun_root",
+      "addressKey": "npc.nun.address", "desireKey": "npc.nun.desire", "secretKey": "npc.nun.secret",
+      "greetingKeys": ["npc.nun.greet1"],
+      "schedule": [
+        { "from": 5, "to": 20, "scene": "int_chapel", "at": [3, 6], "activity": "prayer", "action": "sit" },
+        { "from": 20, "to": 5, "scene": "int_chapel", "at": [1, 10], "activity": "sleep", "action": "sleep", "inside": true }
+      ]
+    },
+    {
+      "id": "guard_customs", "nameKey": "npc.guardCustoms.name", "roleKey": "npc.guardCustoms.role", "age": 31, "gender": "m",
+      "palette": "guard", "look": { "weapon": "spear", "offhand": "none", "helmet": "kettle" },
+      "faction": "cityGuard", "stance": -40, "dialogue": "guard_root", "guard": { "post": "gate_customs" },
+      "addressKey": "npc.guard.address", "desireKey": "npc.guard.desire", "secretKey": "npc.guard.secret",
+      "greetingKeys": ["npc.guard.greet1"],
+      "schedule": [
+        { "from": 6, "to": 21, "scene": "world", "at": [62, 66], "activity": "post", "action": "idle" },
+        { "from": 21, "to": 6, "scene": "int_guard", "at": [7, 5], "activity": "off duty", "action": "sit" }
+      ]
+    },
+    {
+      "id": "guard_north", "nameKey": "npc.guardNorth.name", "roleKey": "npc.guardNorth.role", "age": 27, "gender": "m",
+      "palette": "guard", "look": { "weapon": "spear", "offhand": "shield", "helmet": "kettle" },
+      "faction": "cityGuard", "stance": -40, "dialogue": "guard_root", "guard": { "post": "gate_north" },
+      "addressKey": "npc.guard.address", "desireKey": "npc.guard.desire", "secretKey": "npc.guard.secret",
+      "greetingKeys": ["npc.guard.greet2"],
+      "schedule": [
+        { "from": 7, "to": 19, "scene": "world", "at": [62, 6], "activity": "post", "action": "idle" },
+        { "from": 19, "to": 7, "scene": "int_guard", "at": [3, 5], "activity": "off duty", "action": "sit" }
+      ]
+    }
+  ]
+}
