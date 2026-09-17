@@ -1,0 +1,22 @@
+[
+  {
+    "id":"main_debt",
+    "title":"Dług krwi",
+    "desc":"Spłać 10 000 koron w 30 dni u Dzikich Rycerzy. Zegar tyka.",
+    "type":"main",
+    "giver":"Dzicy Rycerze",
+    "location":"Obóz",
+    "objectives":["Zdobądź 10 000 koron","Spłać dług przed dniem 30","Zdecyduj o zakończeniu"],
+    "rewards":{"gold":0,"endings":["honest","crime","join","overthrow","escape","death"]}
+  },
+  {
+    "id":"side_smuggle",
+    "title":"Sól bez akcyzy",
+    "desc":"Przemytnicy chcą 10x sól przez celników. Wysokie zyski, wysokie ryzyko.",
+    "type":"side",
+    "giver":"Przemytnicy z Portu",
+    "location":"Port",
+    "objectives":["Zdobądź sól","Ukryj w wozie","Przejdź kontrolę","Dostarcz"],
+    "rewards":{"gold":300,"rep":{"faction":"smugglers","delta":15}}
+  }
+]

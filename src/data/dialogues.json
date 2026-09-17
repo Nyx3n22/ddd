@@ -1,0 +1,22 @@
+[
+  {
+    "npc":"strażnik_portu",
+    "greetings":["No, patrzcie, świeże mięso z kontynentu. John, tak?","Stój! Przepustka?"],
+    "options":[
+      {"text":"Mam przepustkę, proszę.","req":null,"rep":{"faction":"cityGuard","min":-100},"result":"Dobrze, przechodź. Ale uważaj na Rycerzy."},
+      {"text":"[Perswazja 4] Daj spokój, jestem swój.","req":{"skill":"persuasion","level":4},"result":"Perswazja udana. Przepuszczam, ale jesteś mi winien przysługę.","repDelta":{"cityGuard":5}},
+      {"text":"[Kłamstwo 2] Oczywiście, zaraz pokażę...","req":{"skill":"lying","level":2},"result":"Kłamstwo może zostać zweryfikowane później. Strażnik patrzy podejrzliwie.","repDelta":{"cityGuard":-5}},
+      {"text":"[Zastraszanie 3] Zmiataj mi z drogi.","req":{"skill":"intimidation","level":3},"result":"Zastraszanie... Strażnik się cofa, ale zapamięta.","repDelta":{"cityGuard":-10}},
+      {"text":"Ile za łapówkę?","req":null,"result":"50 koron i zapominam, że cię widziałem."}
+    ]
+  },
+  {
+    "npc":"przemytnik",
+    "greetings":["Cicho. Masz towar? Straż celna dziś czujna.","John! Słyszałem o twoim długu. Mogę pomóc... za cenę."],
+    "options":[
+      {"text":"Mam sól bez akcyzy.","req":{"item":"sól"},"result":"Dobra robota. 300 koron, ale ryzyko twoje.","gold":300},
+      {"text":"Potrzebuję fałszywych dokumentów.","req":null,"result":"100 koron. I nikt cię nie zatrzyma w porcie.","gold":-100},
+      {"text":"[Przemytnicy +20] Jestem jednym z was.","req":{"rep":{"faction":"smugglers","min":20}},"result":"Witamy w rodzinie. Mam kryjówkę w beczkach."}
+    ]
+  }
+]

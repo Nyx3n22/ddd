@@ -1,0 +1,10 @@
+[
+  {"id":"sword_iron","name":"Miecz żelazny","type":"weapon","value":120,"weight":2.5,"contraband":false,"desc":"Podstawowa broń, wymaga ostrzenia"},
+  {"id":"salt","name":"Sól","type":"trade","value":12,"weight":0.5,"contraband":false,"desc":"Drożeje przy blokadzie portu"},
+  {"id":"herbs","name":"Zioła","type":"alchemy","value":30,"weight":0.2,"contraband":false,"desc":"Leczenie i mikstury"},
+  {"id":"bandage","name":"Bandaż","type":"medical","value":15,"weight":0.1,"contraband":false,"desc":"Zatrzymuje krwotok"},
+  {"id":"relic","name":"Relikwia św. Elenema","type":"contraband","value":300,"weight":0.8,"contraband":true,"desc":"Zakazana, wysoka cena na czarnym rynku"},
+  {"id":"poison","name":"Trucizna","type":"contraband","value":80,"weight":0.1,"contraband":true,"desc":"Do zadań i zabójstw"},
+  {"id":"bread","name":"Chleb","type":"food","value":5,"weight":0.3,"contraband":false,"desc":"Zmniejsza głód"},
+  {"id":"beer","name":"Piwo","type":"drink","value":6,"weight":0.5,"contraband":false,"desc":"Zmniejsza pragnienie, lekki alkohol"}
+]
