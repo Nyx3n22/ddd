@@ -1,0 +1,902 @@
+{
+  "nodes": {
+    "hanna_root": {
+      "portrait": "hanna", "emotion": "neutral",
+      "text": "Hanna wyciera blat szmatą i patrzy na ciebie spod oka. „Nowy z kontynentu. U nas najpierw płacą, potem pytają. Czego trzeba, John?”",
+      "options": [
+        { "text": "Postaw mi coś ciepłego i kufel.", "goto": "hanna_meal" },
+        { "text": "Szukam roboty. Kto w mieście płaci gotówką?", "goto": "hanna_work" },
+        { "text": "Co słychać w mieście?", "goto": "hanna_gossip" },
+        { "text": "Kto dziś gra przy stole?", "goto": "hanna_dice" },
+        { "text": "Potrzebuję kąta na noc.", "goto": "hanna_room" },
+        { "text": "Słyszałem, że masz u mnie kredyt.", "cond": { "flag": "hanna_tab_open" }, "goto": "hanna_tab" },
+        { "text": "[Zastraszanie 3] Zapomnij o moim długu u ciebie.", "cond": { "skill": "intimidate", "min": 3 }, "reqKey": "req.intimidate3", "goto": "hanna_threat" },
+        { "text": "Nie przeszkadzam.", "goto": "exit" }
+      ]
+    },
+    "hanna_meal": {
+      "portrait": "hanna", "emotion": "happy",
+      "text": "„Sześć koron za miskę gulaszu i chleb. Piwo dwie. Nie licz, że dam ci kredyt, bo masz minę dłużnika.”",
+      "options": [
+        { "text": "Biorę gulasz i piwo. (8 koron)", "cond": { "gold": 8 }, "reqKey": "req.gold8", "goto": "exit", "effects": [{ "openService": "meal" }, { "gold": -8 }, { "relation": { "hanna": 2 } }] },
+        { "text": "Tylko piwo. (2 korony)", "cond": { "gold": 2 }, "reqKey": "req.gold2", "goto": "exit", "effects": [{ "openService": "drink" }, { "gold": -2 }] },
+        { "text": "Innym razem.", "goto": "hanna_root" }
+      ]
+    },
+    "hanna_work": {
+      "portrait": "hanna", "emotion": "sly",
+      "text": "„Roboty jest tyle, co brudu w zaułkach. Orlik z kuźni szuka węgla — płaci od ręki. Ewa nad wodą kupuje ryby. A jak masz miękkie ręce i twarde sumienie, to Idzi kręci się po nocy przy trzecim pomoście. Nie mówiłam ci tego.”",
+      "options": [
+        { "text": "Orlik, mówisz. Gdzie go znajdę?", "goto": "exit", "effects": [{ "note": "note.work_orlik" }, { "entry": { "kind": "place", "id": "market" } }, { "xp": { "streetwise": 8 } }] },
+        { "text": "Idzi. Co on przewozi?", "goto": "hanna_idzi" },
+        { "text": "Dziękuję. Postawię ci kiedyś kolejkę.", "goto": "exit", "effects": [{ "relation": { "hanna": 4 } }] }
+      ]
+    },
+    "hanna_idzi": {
+      "portrait": "hanna", "emotion": "sad",
+      "text": "„To, czego nie wpisała straż celna. Sól bez akcyzy, piwo bez akcyzy, czasem coś, co jeszcze wczoraj leżało w kościele. Dziewczyno, chłopie — jak cię złapią z jego towarem, to ja powiem, że pierwszy raz cię widzę. I tak będzie.”",
+      "options": [
+        { "text": "Rozumiem. Dyskrecja.", "goto": "exit", "effects": [{ "note": "note.idzi_warning" }, { "xp": { "streetwise": 10 } }] },
+        { "text": "A ty skąd o tym wszystkim wiesz?", "goto": "hanna_secret_hint" }
+      ]
+    },
+    "hanna_secret_hint": {
+      "portrait": "hanna", "emotion": "angry",
+      "text": "„Bo karczma to ucho miasta, John. Każdy tu coś mówi po trzecim kuflu. A teraz idź, bo mi goście stygną.”",
+      "options": [{ "text": "Już idę.", "goto": "exit", "effects": [{ "entry": { "kind": "note", "id": "hanna_ear" } }] }]
+    },
+    "hanna_gossip": {
+      "portrait": "hanna", "emotion": "neutral",
+      "text": "„Plotka kosztuje, ale dla nowego dam za darmo jedną. Dzicy Rycerze ściągają haracz z każdego straganu. Od trzech dni celnik Bernard chodzi z miną, jakby połknął cytrynę — podobno brakuje mu w księgach dwudziestu beczek soli. A pod szubienicą znów kręci się kat Baltazar, co znaczy, że ktoś wkrótce zawiśnie.”",
+      "options": [
+        { "text": "Dwadzieścia beczek soli. Ktoś tu robi interes.", "goto": "exit", "effects": [{ "rumor": "rumor.customsMissing" }, { "xp": { "streetwise": 12 } }, { "entry": { "kind": "note", "id": "salt_missing" } }] },
+        { "text": "Kto zawiśnie?", "goto": "hanna_gallows" },
+        { "text": "Dzięki, Hanno.", "goto": "exit", "effects": [{ "relation": { "hanna": 2 } }] }
+      ]
+    },
+    "hanna_gallows": {
+      "portrait": "hanna", "emotion": "sad",
+      "text": "„Chłopak z przedmieścia. Wziął worek zboża z magazynu celnego, bo jego matka nie miała czym zapłacić za pogrzeb. Baltazar mówi, że to robota na kwadrans. Miasto mówi, że na pokaz.”",
+      "options": [{ "text": "Zapamiętam.", "goto": "exit", "effects": [{ "note": "note.gallows_boy" }, { "rep": { "villagers": 2 } }] }]
+    },
+    "hanna_dice": {
+      "portrait": "hanna", "emotion": "sly",
+      "text": " „W dzień przy oknie siedzi Cecylia, wdowa po kupcu. Gra w karty i nie znosi oszustów. Po zmroku przychodzi Pankracy — kości, gorąca głowa, nóż w bucie. Stołu nie otwieram dla obcych: musisz być wpuszczony. I mieć stawę w monecie, nie w obietnicach.”",
+      "options": [
+        { "text": "Wprowadź mnie do stołu. (5 koron dla kuchni)", "cond": { "gold": 5 }, "reqKey": "req.gold5", "goto": "exit", "effects": [{ "gold": -5 }, { "flag": "table_welcome" }, { "relation": { "hanna": 3 } }] },
+        { "text": "Może później.", "goto": "hanna_root" }
+      ]
+    },
+    "hanna_room": {
+      "portrait": "hanna", "emotion": "neutral",
+      "text": "„Izba na piętrze, cztery korony za noc. Siano świeże, drzwi mają zamek, choć zamek to tu bardziej ozdoba. Jak chcesz spać, idź na górę i połóż się.”",
+      "options": [
+        { "text": "Biorę izbę na dziś. (4 korony)", "cond": { "gold": 4 }, "reqKey": "req.gold4", "goto": "exit", "effects": [{ "gold": -4 }, { "openService": "room" }, { "flag": "rented_room" }] },
+        { "text": "Prześpię się gdzie indziej.", "goto": "hanna_root" }
+      ]
+    },
+    "hanna_tab": {
+      "portrait": "hanna", "emotion": "angry",
+      "text": "„Trzydzieści koron. Zapisałam na desce przy beczce, żebym nie musiała ufać pamięci. Oddasz dziś — dostaniesz miskę za darmo. Oddasz po tygodniu — będziesz pił u kogoś innego.”",
+      "options": [
+        { "text": "Masz tu trzydzieści.", "cond": { "gold": 30 }, "reqKey": "req.gold30", "goto": "exit", "effects": [{ "gold": -30 }, { "quest": { "action": "advance", "id": "q_hanna_tab" } }, { "relation": { "hanna": 10 } }, { "rep": { "villagers": 4 } }, { "xp": { "barter": 10 } }] },
+        { "text": "Zagram o to w kości. Jeśli wygram, dług znika.", "cond": { "flag": "table_welcome" }, "reqKey": "req.table", "goto": "hanna_tab_dice" },
+        { "text": "Przyjdę, gdy będę miał.", "goto": "exit", "effects": [{ "relation": { "hanna": -4 } }] }
+      ]
+    },
+    "hanna_tab_dice": {
+      "portrait": "hanna", "emotion": "sly",
+      "text": "„O nie, kochanieńki. Ja nie gram. Ale Pankracy zagra, jeśli postawisz jego stawkę. Wygrasz — kupisz u niego mój kwit i przyniesiesz mi go. Tak to działa u dorosłych.”",
+      "options": [{ "text": "Pójdę do Pankracego.", "goto": "exit", "effects": [{ "flag": "tab_dice_plan" }, { "note": "note.tab_plan" }] }]
+    },
+    "hanna_threat": {
+      "portrait": "hanna", "emotion": "angry",
+      "text": "Hanna odkłada szmatę i patrzy na ciebie długo. „Widziałam w życiu trzydziestu takich jak ty. Dwudziestu dziewięciu wisiało albo piło na dnie portu. Wyjdź, zanim zawołam Rawicza.”",
+      "options": [
+        { "text": "Wybacz. Zapłacę, gdy będę miał.", "goto": "exit", "effects": [{ "relation": { "hanna": -2 } }, { "rumor": "rumor.johnThreatened" }] },
+        { "text": "Zawołaj. Straż też ma u mnie dług.", "goto": "exit", "effects": [{ "relation": { "hanna": -12 } }, { "rep": { "villagers": -6 } }, { "crime": { "type": "threat", "witnesses": 2, "location": "Karczma" } }], "locked": false }
+      ]
+    },
+
+    "orlik_root": {
+      "portrait": "orlik", "emotion": "neutral",
+      "text": "Orlik nie przerywa pracy. Mówi przez ramię, głosem przyzwyczajonym do huku: „Jeśli nie przyszedłeś z żelazem albo z koroną, to stój z boku, bo iskry lecą.”",
+      "options": [
+        { "text": "Szukam pracy przy węglu.", "goto": "orlik_coal" },
+        { "text": "Pokaż, co masz na sprzedaż.", "goto": "exit", "effects": [{ "openTrade": "orlik_forge" }] },
+        { "text": "Chcę stanąć przy kowadle.", "cond": { "flag": "forge_unlocked" }, "reqKey": "req.forgeUnlocked", "goto": "exit", "effects": [{ "openCraft": "forgeWork" }] },
+        { "text": "Naucz mnie kuć.", "goto": "orlik_teach" },
+        { "text": "Słyszałem, że cech ma kłopoty z Rycerzami.", "goto": "orlik_guild" },
+        { "text": "Nie przeszkadzam.", "goto": "exit" }
+      ]
+    },
+    "orlik_coal": {
+      "portrait": "orlik", "emotion": "neutral",
+      "text": "„Węgiel. Trzy kosze. Mam go tyle, co kot napłakał, a wozy z kamieniołomu stoją od deszczu. Przynieś trzy bryły — sześćdziesiąt pięć koron i pozwolenie, żebyś dotknął mojego kowadła. Nie sprzedam ci węgla taniej, bo wtedy sam bym go kupował od siebie.”",
+      "options": [
+        { "text": "Przyniosę trzy bryły węgla.", "goto": "exit", "effects": [{ "quest": { "action": "start", "id": "q_coal_for_orlik" } }] },
+        { "text": "Mam węgiel. (3 bryły)", "cond": { "item": "coal_lump", "qty": 3 }, "reqKey": "req.coal3", "goto": "exit", "effects": [{ "take": "coal_lump", "qty": 3 }, { "quest": { "action": "advance", "id": "q_coal_for_orlik" } }] },
+        { "text": "Gdzie znajdę węgiel?", "goto": "orlik_coal_where" },
+        { "text": "Za drogo. Poszukam innej roboty.", "goto": "exit", "effects": [{ "relation": { "orlik": -2 } }] }
+      ]
+    },
+    "orlik_coal_where": {
+      "portrait": "orlik", "emotion": "sly",
+      "text": "„Legalnie? Wóz z kamieniołomu stoi za zachodnią bramą, przy kupie kamieni. Straż patrzy na wóz, ale nie patrzy w dół. Nielegalnie — nie pytałem, ty nie mówiłeś. I nie przynoś mi węgla mokrego, bo go nie wezmę.”",
+      "options": [{ "text": "Wiem tyle, ile trzeba.", "goto": "exit", "effects": [{ "note": "note.coal_cart" }, { "entry": { "kind": "note", "id": "coal_cart" } }] }]
+    },
+    "orlik_teach": {
+      "portrait": "orlik", "emotion": "angry",
+      "text": "„Uczyć? Chłopcze, ja mam czeladnika z cechu i mam termin. Ale jeśli twoje ręce wiedzą, co to młot, to pokażę ci jedno: jak nie zmarnować żelaza. Trzy dni mojego czasu i sto trzydzieści koron na węgiel i stal. Nie mniej, bo cech mnie rozliczy.”",
+      "options": [
+        { "text": "Ucz mnie. Trzy dni i sto trzydzieści koron.", "cond": { "gold": 130, "skill": "smithing", "min": 1 }, "reqKey": "req.teachSmith", "goto": "exit", "effects": [{ "gold": -130 }, { "train": { "perk": "true_temper" } }] },
+        { "text": "Nauczę się sam, przy twoim kowadle.", "goto": "exit", "effects": [{ "relation": { "orlik": -3 } }] },
+        { "text": "Nie mam tyle. Wrócę.", "goto": "orlik_root" }
+      ]
+    },
+    "orlik_guild": {
+      "portrait": "orlik", "emotion": "sad",
+      "text": "„Kłopoty to za małe słowo. Rycerze biorą z każdego wyrobu co dziesiątą sztukę »na ochronę«. Zbylut z Gildii liczy, że się ułoży. Ja liczę, ile mam żelaza w skrzyni. Jakbyś chciał wiedzieć, kto u nas trzyma stronę Rycerzy — pytaj w Gildii, nie u mnie. Ja mam dzieci.”",
+      "options": [
+        { "text": "Rozumiem. Nikt nie słyszał, że pytałem.", "goto": "exit", "effects": [{ "note": "note.guild_protection" }, { "xp": { "streetwise": 10 } }, { "relation": { "orlik": 3 } }] },
+        { "text": "Można by im popsuć ten interes.", "goto": "orlik_sabotage" }
+      ]
+    },
+    "orlik_sabotage": {
+      "portrait": "orlik", "emotion": "surprised",
+      "text": "Orlik odkłada młot. „Można. Tylko że jak się to robi, to się nie cofa. Przemyśl, czy chcesz być tym, co podpala, a nie tym, co kuje. Bo ja mam kuźnię, nie armię.”",
+      "options": [{ "text": "Zapamiętam twoje słowa.", "goto": "exit", "effects": [{ "flag": "orlik_warned" }, { "note": "note.orlik_warning" }, { "relation": { "orlik": 5 } }] }]
+    },
+
+    "vagn_root": {
+      "portrait": "vagn", "emotion": "angry",
+      "text": "Stary Vagn opiera się o słup płotu i mierzy cię wzrokiem od butów po ręce. „Najemnik. Poznaję po tym, jak stoisz: ciężar na lewej nodze, bo prawa kiedyś dostała. Mów, czego chcesz, bo nie mam całego dnia.”",
+      "options": [
+        { "text": "Chcę, żebyś mnie uczył.", "goto": "vagn_teach" },
+        { "text": "Naucz mnie parować.", "cond": { "relation": { "vagn": 30 }, "skill": "parry", "min": 2 }, "reqKey": "req.vagnRespect", "goto": "vagn_parry" },
+        { "text": "Rozegrajmy jedną rundę. Bez żelaza.", "goto": "vagn_spar" },
+        { "text": "Co ci się stało w nogę?", "goto": "vagn_past" },
+        { "text": "Znam cię z opowieści. Walczyłeś pod Vranoviem.", "cond": { "skill": "history", "min": 2 }, "reqKey": "req.history2", "goto": "vagn_vranov" },
+        { "text": "Nie będę zabierał czasu.", "goto": "exit" }
+      ]
+    },
+    "vagn_teach": {
+      "portrait": "vagn", "emotion": "sly",
+      "text": "„Uczyć obcego? Uczyłem trzech. Dwóch nie żyje, trzeci pije. Nie uczę za pieniądze — uczę za szacunek, a szacunek kupuje się robotą. Pokaż, że umiesz stać na nogach, kiedy ktoś w ciebie bije. Rozegraj ze mną rundę na podwórzu.”",
+      "options": [
+        { "text": "Rozegrajmy.", "goto": "vagn_spar" },
+        { "text": "Nie mam teraz czasu.", "goto": "exit", "effects": [{ "relation": { "vagn": -2 } }] }
+      ]
+    },
+    "vagn_spar": {
+      "portrait": "vagn", "emotion": "neutral",
+      "text": "Vagn bierze kij treningowy ze stojaka. „Trzy trafienia i koniec. Boli jak zwykle. Nie licz na litość, licz na nogi.”",
+      "options": [
+        { "text": "Zaczynamy.", "goto": "exit", "effects": [{ "spar": "vagn" }, { "quest": { "action": "advance", "id": "q_vagn_respect" } }] },
+        { "text": "Poczekaj. Najpierw się rozgrzeję.", "goto": "exit", "effects": [{ "note": "note.spar_later" }] }
+      ]
+    },
+    "vagn_parry": {
+      "portrait": "vagn", "emotion": "happy",
+      "text": "„Parowanie. Dwa dni na podwórzu, sto dwadzieścia koron na piwo dla mnie i na maść dla ciebie, i jedno: nie nauczysz się tego z książki, tylko z bólu. Zgoda?”",
+      "options": [
+        { "text": "Zgoda. Dwa dni i sto dwadzieścia koron.", "cond": { "gold": 120 }, "reqKey": "req.gold120", "goto": "exit", "effects": [{ "gold": -120 }, { "train": { "perk": "parry_master" } }] },
+        { "text": "Nie stać mnie teraz.", "goto": "vagn_root" }
+      ]
+    },
+    "vagn_past": {
+      "portrait": "vagn", "emotion": "sad",
+      "text": "„Koń. Nie mój. Pod Vranoviem, w czterdziestym ósmym. Koń był cudzy, a noga moja. Zostałem przy życiu dlatego, że umiałem się nie ruszać przez trzy dni w rowie. Dlatego uczę ludzi stać na nogach, a nie machać żelazem.”",
+      "options": [
+        { "text": "Trzy dni w rowie. To lepsza nauczka niż dziesięć lat musztry.", "goto": "exit", "effects": [{ "relation": { "vagn": 8 } }, { "entry": { "kind": "note", "id": "vagn_vranov" } }, { "xp": { "history": 15 } }] },
+        { "text": "Kto wygrał pod Vranoviem?", "goto": "vagn_vranov" }
+      ]
+    },
+    "vagn_vranov": {
+      "portrait": "vagn", "emotion": "angry",
+      "text": "„Nikt. Dlatego nazywają to rzezią, a nie bitwą. Rycerze, którzy dziś ściągają z was haracz, to ci sami, którzy wtedy palili wsie po drodze. Zapamiętaj to, bo kiedyś będziesz musiał wybrać, po której stronie staniesz. I nie wybieraj po pieniądzach.”",
+      "options": [
+        { "text": "Zapamiętam.", "goto": "exit", "effects": [{ "note": "note.vranov" }, { "flag": "knows_knights_vranov" }, { "xp": { "history": 20 } }, { "relation": { "vagn": 5 } }] }
+      ]
+    },
+
+    "idzi_root": {
+      "portrait": "idzi", "emotion": "sly",
+      "text": "Idzi stoi w cieniu magazynu i nie wychodzi do światła. „Mów cicho i nie pokazuj palcem. W porcie każdy ma oczy, a połowa z nich jest na żołdzie celnika.”",
+      "options": [
+        { "text": "Szukam roboty, która płaci więcej niż węgiel.", "goto": "idzi_job" },
+        { "text": "Mam towar do sprzedania. Nie pytaj skąd.", "goto": "exit", "effects": [{ "openTrade": "idzi_black" }] },
+        { "text": "Naucz mnie chodzić tak, żeby mnie nie widzieli.", "goto": "idzi_teach" },
+        { "text": "Bernardowi brakuje dwudziestu beczek soli w księgach.", "cond": { "flag": "knows_salt_missing" }, "reqKey": "req.saltRumor", "goto": "idzi_salt_known" },
+        { "text": "Kim ty właściwie jesteś, Idzi?", "goto": "idzi_who" },
+        { "text": "Nie widziałem cię.", "goto": "exit" }
+      ]
+    },
+    "idzi_job": {
+      "portrait": "idzi", "emotion": "neutral",
+      "text": "„W magazynie A stoi skrzynia bez akcyzy. Trzeba ją przenieść na trzeci pomost, po ciemku, obok celnika i jego latarni. Dwieście czterdzieści koron. Jeśli cię złapią — nie znam cię. Jeśli ją upuścisz — też nie znam. Zgoda?”",
+      "options": [
+        { "text": "Biorę. Gdzie klucz do magazynu?", "goto": "idzi_key" },
+        { "text": "A jeśli straż mnie zobaczy?", "goto": "idzi_risk" },
+        { "text": "Za duże ryzyko. Wolę węgiel.", "goto": "exit", "effects": [{ "relation": { "idzi": -4 } }] }
+      ]
+    },
+    "idzi_key": {
+      "portrait": "idzi", "emotion": "sly",
+      "text": "„Klucz jest tam, gdzie zwykle: w zamku, po wewnętrznej stronie. Wrota od podwórza mają zamek stary jak port — wytrych albo mocne plecy. Nie idź w dzień, bo Bernard ma zwyczaj liczyć skrzynie po południu.”",
+      "options": [{ "text": "Przyjdę po zmroku.", "goto": "exit", "effects": [{ "quest": { "action": "start", "id": "q_untaxed_salt" } }, { "note": "note.warehouse_key" }] }]
+    },
+    "idzi_risk": {
+      "portrait": "idzi", "emotion": "neutral",
+      "text": "„To ci powiem, jak działa prawo w tym porcie. Straż nie wie, że coś zginęło, dopóki ktoś jej nie powie. Liczy się świadek, światło i hałas. Zobaczysz latarnię — stój w cieniu i licz oddechy. Złapią cię ze skrzynią w rękach, to masz wybór: grzywna, dyby albo bieg. Bieg jest najtańszy, ale wymaga nóg.”",
+      "options": [
+        { "text": "W takim razie idę po ciemku.", "goto": "idzi_key" },
+        { "text": "Dzięki. To więcej niż mi powiedziano przez całe życie.", "goto": "exit", "effects": [{ "xp": { "streetwise": 20 } }, { "entry": { "kind": "note", "id": "crime_howto" } }, { "relation": { "idzi": 4 } }] }
+      ]
+    },
+    "idzi_teach": {
+      "portrait": "idzi", "emotion": "sly",
+      "text": "„Cienia uczę za sto pięćdziesiąt koron i dwa dni. Ale tylko ludzi, którzy już coś dla mnie zrobili — inaczej uczę przyszłego świadka przeciwko sobie. Przynajmniej raz mi pomóż, potem pogadamy.”",
+      "options": [
+        { "text": "Umowa stoi.", "goto": "exit", "effects": [{ "note": "note.idzi_terms" }] },
+        { "text": "Naucz mnie teraz. Mam pieniądze.", "cond": { "gold": 150, "rep": { "smugglers": 25 } }, "reqKey": "req.idziTeach", "goto": "exit", "effects": [{ "gold": -150 }, { "train": { "perk": "shadow_work" } }] }
+      ]
+    },
+    "idzi_salt_known": {
+      "portrait": "idzi", "emotion": "surprised",
+      "text": "Idzi przestaje się uśmiechać. „Kto ci to powiedział? ...Nieważne. Skoro wiesz, to wiesz też, że połowa tej soli wyszła z mojego magazynu. Masz teraz dwie drogi: sprzedać to Bernardowi za wdzięczność albo trzymać język za zębami i mieć mnie po swojej stronie. Trzeciej nie ma.”",
+      "options": [
+        { "text": "Trzymam język za zębami.", "goto": "exit", "effects": [{ "rep": { "smugglers": 12 } }, { "relation": { "idzi": 15 } }, { "flag": "idzi_trusts" }] },
+        { "text": "Bernard zapłaci za taką wiadomość.", "goto": "exit", "effects": [{ "rep": { "cityGuard": 10, "smugglers": -30 } }, { "relation": { "idzi": -40 } }, { "rumor": "rumor.johnBetrayed" }, { "flag": "betrayed_idzi" }] }
+      ]
+    },
+    "idzi_who": {
+      "portrait": "idzi", "emotion": "neutral",
+      "text": "„Byłem bosmanem na »Św. Elmo«. Statek poszedł na dno z cudzym ładunkiem, a właściciel ładunku uznał, że winny jest ten, kto przeżył. Od tej pory wożę rzeczy, których nie ma w księgach. Pytanie nie było o mnie, tylko o to, ile wiem. A wiem dużo.”",
+      "options": [{ "text": "W takim razie będziemy się rozumieli.", "goto": "exit", "effects": [{ "relation": { "idzi": 5 } }, { "entry": { "kind": "note", "id": "idzi_past" } }] }]
+    },
+
+    "rawicz_root": {
+      "portrait": "rawicz", "emotion": "angry",
+      "text": "Sierżant Rawicz opiera dłoń o rękojeść. „Mów krótko. Mam dwunastu ludzi, czterdziestu pijaków i jedno miasto, które nie chce się zachowywać.”",
+      "options": [
+        { "text": "Chcę zapłacić grzywnę i zamknąć sprawę.", "cond": { "flag": "wanted" }, "reqKey": "req.wanted", "goto": "rawicz_fine" },
+        { "text": "Przyznaję się. Wolę dyby niż ucieczkę.", "cond": { "flag": "wanted" }, "reqKey": "req.wanted", "goto": "rawicz_confess" },
+        { "text": "Mam wiadomość o soli z magazynu celnego.", "cond": { "flag": "betrayed_idzi" }, "reqKey": "req.betrayed", "goto": "rawicz_inform" },
+        { "text": "Ile bierzesz za przymknięcie oka?", "goto": "rawicz_bribe" },
+        { "text": "Kto w tym mieście naprawdę rządzi?", "goto": "rawicz_knights" },
+        { "text": "Nie zatrzymuję.", "goto": "exit" }
+      ]
+    },
+    "rawicz_fine": {
+      "portrait": "rawicz", "emotion": "neutral",
+      "text": "„Grzywna idzie do kasy miejskiej, nie do mnie. To, co masz przy sobie z cudzego, zostaje w magazynie dowodów. Płacisz i jesteś czysty — do następnego razu.”",
+      "options": [
+        { "text": "Płacę grzywnę.", "goto": "exit", "effects": [{ "payFine": true }] },
+        { "text": "Nie mam tyle.", "goto": "rawicz_confess" }
+      ]
+    },
+    "rawicz_confess": {
+      "portrait": "rawicz", "emotion": "sly",
+      "text": "„Przyznanie to połowa kary, ale w tym mieście to połowa, która kosztuje dni. Dyby na rynku do zmroku, potem noc w piwnicy straży. Stracisz dzień, może dwa. Za to nikt nie będzie cię szukał. Wybieraj.”",
+      "options": [
+        { "text": "Biorę dyby.", "goto": "exit", "effects": [{ "punish": "stocks" }] },
+        { "text": "Wolę grzywnę.", "goto": "rawicz_fine" },
+        { "text": "Wolę spróbować uciec.", "goto": "exit", "effects": [{ "flee": true }] }
+      ]
+    },
+    "rawicz_bribe": {
+      "portrait": "rawicz", "emotion": "sly",
+      "text": "„Nie biorę. Mam żonę i dwie córki, a łapówka w tym mieście kończy się tym, że ktoś zapisuje twoje nazwisko w księdze. Ale znam ludzi, którzy biorą. Strażnik przy bramie celnej ma długi. Pamiętaj tylko, że ja o tym nie wiem.”",
+      "options": [
+        { "text": "Zapamiętam.", "goto": "exit", "effects": [{ "xp": { "streetwise": 15 } }, { "entry": { "kind": "note", "id": "bribe_customs" } }, { "relation": { "rawicz": 4 } }] },
+        { "text": "Dlaczego mi to mówisz?", "goto": "rawicz_why" }
+      ]
+    },
+    "rawicz_why": {
+      "portrait": "rawicz", "emotion": "sad",
+      "text": "„Bo mam dwunastu ludzi i muszę wiedzieć, kto z nich jest kupiony. A ty masz twarz człowieka, który prędzej czy później będzie stał po drugiej stronie. Wolę wiedzieć wcześniej.”",
+      "options": [{ "text": "Rozsądne.", "goto": "exit", "effects": [{ "relation": { "rawicz": 6 } }, { "flag": "rawicz_watching" }] }]
+    },
+    "rawicz_inform": {
+      "portrait": "rawicz", "emotion": "surprised",
+      "text": "„Mów dokładnie. Skrzynie, godziny, kto nosił. Jeśli to prawda, masz u mnie dług wdzięczności i dwadzieścia koron z kasy. Jeśli kłamiesz, żeby załatwić konkurencję — będę wiedział i zapamiętam twoje nazwisko.”",
+      "options": [
+        { "text": "To Idzi. Magazyn A, trzeci pomost, po zmroku.", "goto": "exit", "effects": [{ "gold": 20 }, { "rep": { "cityGuard": 12, "smugglers": -35 } }, { "relation": { "idzi": -50 } }, { "flag": "informed_on_idzi" }, { "crime": { "type": "informing", "witnesses": 0 } }] },
+        { "text": "Nie powiem bez zapłaty z góry.", "goto": "exit", "effects": [{ "relation": { "rawicz": -8 } }] }
+      ]
+    },
+    "rawicz_knights": {
+      "portrait": "rawicz", "emotion": "angry",
+      "text": "„Oficjalnie? Ratusz i cech. Nieoficjalnie — Baldwin Kruk ma w kieszeni połowę rady, a drugą połowę w strachu. Ja mam dwunastu ludzi z włóczniami przeciwko trzydziestu w kolczugach. Dlatego pilnuję rynku, a nie zamku. Teraz idź, bo mnie widzą z tobą.”",
+      "options": [{ "text": "Dzięki, sierżancie.", "goto": "exit", "effects": [{ "note": "note.rawicz_knights" }, { "xp": { "history": 15 } }, { "entry": { "kind": "note", "id": "power_balance" } }] }]
+    },
+
+    "teodor_root": {
+      "portrait": "teodor", "emotion": "neutral",
+      "text": "Ojciec Teodor ma ręce w mące z hostii i oczy, które widziały za dużo. „John. Słyszałem o twoim długu wcześniej, niż ty sam wszedłeś do miasta. Siadaj albo mów stojąc — Pan słucha w obu pozycjach.”",
+      "options": [
+        { "text": "Chcę się wyspowiadać.", "goto": "teodor_confess" },
+        { "text": "Dam na jałmużnę.", "cond": { "gold": 3 }, "reqKey": "req.gold3", "goto": "teodor_alms" },
+        { "text": "Szukam relikwii świętego Elenema.", "goto": "teodor_relic" },
+        { "text": "Czy Kościół pomoże mi z długiem?", "goto": "teodor_debt" },
+        { "text": "Naucz mnie czytać.", "goto": "teodor_read" },
+        { "text": "Nie będę zajmować czasu.", "goto": "exit" }
+      ]
+    },
+    "teodor_confess": {
+      "portrait": "teodor", "emotion": "sad",
+      "text": "„Spowiedź jest darmowa, pokuta nie. Mów, co masz na sumieniu — kradzież, krew, kłamstwo. Nie zapiszę tego w księdze, ale zapamiętam. Taka jest moja robota i moja kara.”",
+      "options": [
+        { "text": "Zabijałem ludzi za pieniądze.", "goto": "teodor_killers" },
+        { "text": "Kradłem i oszukiwałem.", "goto": "exit", "effects": [{ "openService": "confess" }, { "gold": -3 }, { "rep": { "church": 4 } }] },
+        { "text": "Nie mam sumienia, ojcze.", "goto": "teodor_nosoul" }
+      ]
+    },
+    "teodor_killers": {
+      "portrait": "teodor", "emotion": "surprised",
+      "text": "„Ilu? ...Nie odpowiadaj. Powiem ci coś, czego nie mówię z ambony: pamiętam pożar w Vranoviu i pamiętam, kto podpalał. Jeśli twój dług u Rycerzy jest ceną za milczenie, to nie jest dług, tylko szantaż. A szantażystę można uniewinnić we własnym sercu. Odmów trzy razy »Zdrowaś« i idź robić coś dobrego.”",
+      "options": [
+        { "text": "Skąd ojciec wie o pożarze?", "goto": "teodor_fire" },
+        { "text": "Dziękuję, ojcze.", "goto": "exit", "effects": [{ "flag": "remembered_fire" }, { "note": "note.confession" }, { "rep": { "church": 6 } }, { "xp": { "history": 20 } }] }
+      ]
+    },
+    "teodor_fire": {
+      "portrait": "teodor", "emotion": "sad",
+      "text": "„Bo byłem tam z ostatnim namaszczeniem. Trzymałem chłopca za rękę, a ty stałeś trzy kroki dalej i patrzyłeś, czy nikt nie nadchodzi. Nie oskarżam. Mówię tylko, że wyspa jest mała, a pamięć ludzka długa.”",
+      "options": [{ "text": "...Pamiętam.", "goto": "exit", "effects": [{ "flag": "remembered_fire" }, { "note": "note.johns_past" }, { "relation": { "teodor": 10 } }] }]
+    },
+    "teodor_nosoul": {
+      "portrait": "teodor", "emotion": "sly",
+      "text": "„Każdy tak mówi, dopóki mu się nie przyśni twarz kogoś, kogo skrzywdził. Przyjdź, kiedy się przyśni. Drzwi są otwarte od świtu, a ja jestem cierpliwszy niż twoi wierzyciele.”",
+      "options": [{ "text": "Może przyjdę.", "goto": "exit", "effects": [{ "relation": { "teodor": 2 } }] }]
+    },
+    "teodor_alms": {
+      "portrait": "teodor", "emotion": "happy",
+      "text": "„Trzy korony do skarbonki to chleb dla dwóch rodzin na dzień. Nie dostaniesz za to miejsca w raju, ale dostaniesz wdzięczność na rynku, a ta bywa praktyczniejsza.”",
+      "options": [
+        { "text": "Wrzucam trzy korony.", "cond": { "gold": 3 }, "reqKey": "req.gold3", "goto": "exit", "effects": [{ "gold": -3 }, { "openService": "alms" }, { "rep": { "church": 5, "villagers": 3 } }, { "relation": { "teodor": 4 } }] },
+        { "text": "Dam więcej, gdy będę miał.", "goto": "exit" }
+      ]
+    },
+    "teodor_relic": {
+      "portrait": "teodor", "emotion": "surprised",
+      "text": "„Relikwiarz świętego Elenema zniknął z ruin opactwa trzy lata temu. Kościół mówi, że ukradli go poganie. Ja mówię, że ukradł go ktoś z wyspy i sprzedał, bo zima była długa. Nie błogosławię poszukiwaniom — ale nie doniosę straży, jeśli relikwiarz wróci na ołtarz.”",
+      "options": [
+        { "text": "Gdybym go znalazł, przyniósłbym ojcu.", "goto": "exit", "effects": [{ "flag": "relic_promise" }, { "note": "note.relic_quest" }, { "rep": { "church": 8 } }, { "entry": { "kind": "place", "id": "abbeyRuin" } }] },
+        { "text": "Ile jest wart?", "goto": "teodor_relic_value" }
+      ]
+    },
+    "teodor_relic_value": {
+      "portrait": "teodor", "emotion": "angry",
+      "text": "„Trzysta koron u Idziego w porcie i czterysta lat czyjejś modlitwy. Wybierz, którą cenę chcesz znać.”",
+      "options": [{ "text": "Znam obie.", "goto": "exit", "effects": [{ "note": "note.relic_value" }, { "xp": { "history": 10 } }] }]
+    },
+    "teodor_debt": {
+      "portrait": "teodor", "emotion": "sad",
+      "text": "„Kościół nie spłaca długów zbrojnym bractwom — to by oznaczało, że uznajemy ich prawo. Mogę dać ci trzy rzeczy: chleb, miejsce do spania na jedną noc w przytułku i list do Zbyluta z Gildii, żeby spojrzał na ciebie łaskawiej. Więcej nie mam.”",
+      "options": [
+        { "text": "Wezmę list.", "goto": "exit", "effects": [{ "give": "letter_sealed" }, { "rep": { "church": 4 } }, { "note": "note.church_letter" }] },
+        { "text": "Dziękuję. To więcej, niż się spodziewałem.", "goto": "exit", "effects": [{ "rep": { "church": 3 } }, { "relation": { "teodor": 5 } }] }
+      ]
+    },
+    "teodor_read": {
+      "portrait": "teodor", "emotion": "neutral",
+      "text": "„Czytać uczy skryba Urban, nie ja — ja uczę, co z tym czytaniem zrobić. Idź do niego po notes i pióro. Człowiek bez notesu pamięta tylko to, co chce pamiętać, a to najkrótsza droga do bycia oszukanym.”",
+      "options": [{ "text": "Pójdę do Urbana.", "goto": "exit", "effects": [{ "note": "note.buy_notebook" }, { "xp": { "reading": 10 } }] }]
+    },
+
+    "marta_root": {
+      "portrait": "marta", "emotion": "sly",
+      "text": "Dziewczyna cofa się o krok w cień, oceniając cię wzrokiem. „Nie podchodź tak blisko. Masz rękę przy sakwie, czyli myślisz, że masz coś wartego kradzieży. Czego chcesz, najemniku?”",
+      "options": [
+        { "text": "Trzymaj ręce przy sobie, a nic nam nie będzie.", "goto": "marta_respect" },
+        { "text": "Mówią, że jesteś najlepsza w tym fachu.", "goto": "marta_teach" },
+        { "text": "Słyszałem, że ktoś ci coś zabrał.", "cond": { "flag": "knows_marta_satchel" }, "reqKey": "req.martaRumor", "goto": "marta_satchel" },
+        { "text": "Potrzebuję wejść do zamkniętego magazynu.", "goto": "marta_lock" },
+        { "text": "Uważaj na siebie.", "goto": "exit" }
+      ]
+    },
+    "marta_respect": {
+      "portrait": "marta", "emotion": "happy",
+      "text": "„Dobrze. Pierwsza zasada: nie patrz na ręce, patrz na biodra. Ręce kłamią, biodra nie. Druga: nigdy nie pracuj tam, gdzie cię znają. Trzecia: nie mów mi, jak mam żyć, bo mam piętnaście lat i więcej trupów w pamięci niż ty w swoim rejestrze.”",
+      "options": [{ "text": "Zapamiętam trzy zasady.", "goto": "exit", "effects": [{ "xp": { "pickpocket": 20 } }, { "relation": { "marta": 6 } }, { "entry": { "kind": "note", "id": "marta_rules" } }] }]
+    },
+    "marta_teach": {
+      "portrait": "marta", "emotion": "sly",
+      "text": "„Najlepsza? Jestem jedyna, która nie siedzi w dybach. Uczę za czterdzieści koron i jeden dzień. Warunek: nie kradniesz nikomu, kto ma mniej niż ty. Jak złamiesz zasadę, to nie ja cię wydam — to ty się sam wydasz.”",
+      "options": [
+        { "text": "Czterdzieści koron i dzień. Umowa.", "cond": { "gold": 40, "skill": "pickpocket", "min": 1 }, "reqKey": "req.martaTeach", "goto": "exit", "effects": [{ "gold": -40 }, { "train": { "perk": "cutpurse" } }] },
+        { "text": "Naucz mnie cichego chodu.", "cond": { "gold": 40 }, "reqKey": "req.gold40", "goto": "exit", "effects": [{ "gold": -40 }, { "train": { "perk": "soft_step" } }] },
+        { "text": "Zasada to luksus. Nie stać mnie.", "goto": "marta_principle" }
+      ]
+    },
+    "marta_principle": {
+      "portrait": "marta", "emotion": "angry",
+      "text": "„Właśnie dlatego masz trzydzieści sześć lat i dług, a nie dom. Ja mam piętnaście lat i nie mam długu u nikogo poza sobą. Przemyśl to, kiedy będziesz spać na rynku.”",
+      "options": [{ "text": "Może masz rację.", "goto": "exit", "effects": [{ "relation": { "marta": 3 } }, { "note": "note.marta_lesson" }] }]
+    },
+    "marta_satchel": {
+      "portrait": "marta", "emotion": "sad",
+      "text": "„Trzech z nich. W zachodnim zaułku, przy rozwalonej chacie. Zabrali mi torbę, a w torbie były oszczędności mojej matki — jedenaście koron i srebrna zapinka. Nie pójdę tam sama, bo mnie zabiją. Ty pójdziesz? Oddam ci torbę i to, co w niej jest, a do tego nauczę cię jednej rzeczy za darmo.”",
+      "options": [
+        { "text": "Odbiorę twoją torbę.", "goto": "exit", "effects": [{ "quest": { "action": "start", "id": "q_marta_satchel" } }] },
+        { "text": "Trzech to za dużo. Wrócę, gdy będę gotowy.", "goto": "exit", "effects": [{ "relation": { "marta": -3 } }] },
+        { "text": "Zapomnij o torbie. Nauczę cię, jak nie dać się okraść drugi raz.", "cond": { "skill": "streetwise", "min": 3 }, "reqKey": "req.streetwise3", "goto": "marta_alternative" }
+      ]
+    },
+    "marta_alternative": {
+      "portrait": "marta", "emotion": "surprised",
+      "text": "Marta patrzy na ciebie długo, jakby pierwszy raz widziała dorosłego, który mówi do niej, a nie nad nią. „Dobrze. Ale najpierw torba. Potem pogadamy o zasadach.”",
+      "options": [{ "text": "Torba najpierw.", "goto": "exit", "effects": [{ "quest": { "action": "start", "id": "q_marta_satchel" } }, { "relation": { "marta": 8 } }] }]
+    },
+    "marta_lock": {
+      "portrait": "marta", "emotion": "sly",
+      "text": "„Zamek w magazynie A to stary mechanizm, cztery kołki. Wytrych i cierpliwość: pół minuty. Bez wytrycha — plecy i zawias. Ale pamiętaj: jak otworzysz zamek, to go nie zamkniesz, a rano ktoś to zobaczy i policzy.”",
+      "options": [{ "text": "Wystarczy, że wiem ile kołków.", "goto": "exit", "effects": [{ "xp": { "lockpick": 15 } }, { "entry": { "kind": "note", "id": "warehouse_lock" } }] }]
+    },
+
+    "goslaw_root": {
+      "portrait": "goslaw", "emotion": "neutral",
+      "text": "Gosław rozwija pergamin na straganie i przytrzymuje rogi kamieniami. „Kartograf. Sprzedaję to, co wiem, i kupuję to, czego nie wiem. Plan portu i Dolnego Miasta: czterdzieści koron. Rysowany z natury, nie z plotek.”",
+      "options": [
+        { "text": "Kupuję plan miasta. (40 koron)", "cond": { "gold": 40, "noItem": "map_port" }, "reqKey": "req.gold40", "goto": "exit", "effects": [{ "gold": -40 }, { "give": "map_port" }, { "note": "note.bought_map" }] },
+        { "text": "Masz plan całej wyspy?", "goto": "goslaw_island" },
+        { "text": "Kupię coś jeszcze?", "goto": "exit", "effects": [{ "openTrade": "goslaw_maps" }] },
+        { "text": "Mam wiadomość o terenie. Kupisz?", "goto": "goslaw_sell_knowledge" },
+        { "text": "Dlaczego twoje mapy są lepsze od innych?", "goto": "goslaw_craft" },
+        { "text": "Nie potrzebuję mapy.", "goto": "exit" }
+      ]
+    },
+    "goslaw_island": {
+      "portrait": "goslaw", "emotion": "sly",
+      "text": "„Mam. Sto osiemdziesiąt koron i jedno »ale«: połowa wyspy jest na nim narysowana z opowieści rybaków, więc bagna na wschodzie mogą być o dzień drogi dalej, niż rysuję. Kupisz i tak, bo nikt inny nie ma nic.”",
+      "options": [
+        { "text": "Kupuję plan wyspy. (180 koron)", "cond": { "gold": 180 }, "reqKey": "req.gold180", "goto": "exit", "effects": [{ "gold": -180 }, { "give": "map_island" }] },
+        { "text": "Za drogo na teraz.", "goto": "goslaw_root" }
+      ]
+    },
+    "goslaw_sell_knowledge": {
+      "portrait": "goslaw", "emotion": "surprised",
+      "text": "„Kupuję. Powiedz mi coś, czego nie ma na moim pergaminie: przejście, bród, miejsce, gdzie straż nie chodzi, jaskinię, studnię. Za prawdziwą wiadomość płacę dziesięć do trzydziestu koron. Za zmyśloną — nie płacę i zapamiętuję twoją twarz.”",
+      "options": [
+        { "text": "Za murem celnym jest wyrwa przy wschodnim skraju.", "cond": { "flag": "found_gap" }, "reqKey": "req.foundGap", "goto": "exit", "effects": [{ "gold": 25 }, { "relation": { "goslaw": 8 } }, { "xp": { "barter": 15 } }] },
+        { "text": "Wiem o jaskini pod klifem.", "cond": { "flag": "found_cave" }, "reqKey": "req.foundCave", "goto": "exit", "effects": [{ "gold": 30 }, { "relation": { "goslaw": 10 } }] },
+        { "text": "Nie mam nic pewnego.", "goto": "goslaw_root" }
+      ]
+    },
+    "goslaw_craft": {
+      "portrait": "goslaw", "emotion": "happy",
+      "text": "„Bo chodzę. Czterdzieści lat chodzę. Inni rysują z okna karczmy i potem chłop topi wóz w bagnie, które na ich mapie jest łąką. Moja mapa nie uratuje ci życia, ale przynajmniej będzie uczciwie kłamać.”",
+      "options": [{ "text": "Uczciwie kłamać. To najlepsze, czego można chcieć od mapy.", "goto": "exit", "effects": [{ "relation": { "goslaw": 5 } }, { "xp": { "history": 10 } }] }]
+    },
+
+    "baldwin_root": {
+      "portrait": "baldwin", "emotion": "neutral",
+      "text": "Baldwin Kruk stoi na pomoście w płaszczu, którego nie pobrudziłby żaden port. „John. Trzydzieści sześć lat, dziesięć tysięcy koron, trzydzieści dni. Usiądźmy jak kupcy, nie jak wierzyciel z dłużnikiem. To ta sama rozmowa, tylko grzeczniejsza.”",
+      "options": [
+        { "text": "Spłacę. Potrzebuję tylko czasu.", "goto": "baldwin_time" },
+        { "text": "Chcę negocjować odroczenie.", "goto": "baldwin_extend" },
+        { "text": "Co się stało w Vranoviu, że masz mnie w księdze?", "cond": { "flag": "knows_knights_vranov" }, "reqKey": "req.vranov", "goto": "baldwin_vranov" },
+        { "text": "Może bym się wam przydał z mieczem.", "goto": "baldwin_join" },
+        { "text": "Nie zapłacę ani korony.", "goto": "baldwin_refuse" }
+      ]
+    },
+    "baldwin_time": {
+      "portrait": "baldwin", "emotion": "happy",
+      "text": "„Czas to jedyny towar, którego nie skupuję. Masz trzydzieści dni, a każdy dzień, w którym nie płacisz, kosztuje cię odsetki — pięćdziesiąt koron dziennie po terminie. Płać częściowo, kiedy chcesz. Gwidon przyjmuje wpłaty przy bramie celnej od świtu do zmroku. To uczciwszy układ niż większość w tym mieście.”",
+      "options": [
+        { "text": "Zapłacę, ile mam teraz.", "goto": "exit", "effects": [{ "openDebt": true }] },
+        { "text": "Przyjdę, gdy będę miał więcej.", "goto": "exit", "effects": [{ "note": "note.baldwin_terms" }] }
+      ]
+    },
+    "baldwin_extend": {
+      "portrait": "baldwin", "emotion": "sly",
+      "text": "„Odroczenie kosztuje. Dziesięć dni więcej za tysiąc koron z góry i jedną przysługę, którą wybiorę ja, w czasie, który wybiorę ja. Przysługa nie będzie krwawa — nie jestem rzeźnikiem, jestem kupcem z mieczem. Ale może być niewygodna.”",
+      "options": [
+        { "text": "Tysiąc koron i przysługa. Zgoda.", "cond": { "gold": 1000 }, "reqKey": "req.gold1000", "goto": "exit", "effects": [{ "gold": -1000 }, { "debtExtend": 10 }, { "flag": "baldwin_favor_owed" }, { "note": "note.favor_owed" }] },
+        { "text": "Nie stać mnie na tysiąc. Porozmawiajmy inaczej.", "goto": "baldwin_time" },
+        { "text": "Nie sprzedaję przysług w ciemno.", "goto": "baldwin_refuse" }
+      ]
+    },
+    "baldwin_vranov": {
+      "portrait": "baldwin", "emotion": "angry",
+      "text": "Baldwin milknie na chwilę. „Vranov. Ładne słowo na brzydką rzecz. Byłeś tam po drugiej stronie płotu, John. Dlatego twój dług ma twoje nazwisko, a nie numer. Nie chodzi o dziesięć tysięcy. Chodzi o to, żebyś przez trzydzieści dni pamiętał, komu zawdzięczasz, że nikt nie pamięta o tobie. Teraz idź zarabiać.”",
+      "options": [{ "text": "Zapamiętam każde słowo.", "goto": "exit", "effects": [{ "note": "note.vranov_truth" }, { "flag": "knows_debt_reason" }, { "xp": { "history": 30 } }] }]
+    },
+    "baldwin_join": {
+      "portrait": "baldwin", "emotion": "sly",
+      "text": "„Przydałbyś się. Ale do bractwa nie wchodzi się z długiem — wchodzi się zamiast długu. Osiemdziesiąt dni służby: eskorty, ściąganie, pilnowanie. W zamian dług znika, a ty dostajesz płaszcz i opinię, której nie zmyjesz. Przemyśl, bo to jedyna rzecz, której nie da się odsprzedać.”",
+      "options": [
+        { "text": "Przemyślę. Nie mówię nie.", "goto": "exit", "effects": [{ "flag": "knights_offer" }, { "note": "note.knights_offer" }, { "rep": { "wildKnights": 10 } }] },
+        { "text": "Nie. Spłacę dług własnymi rękami.", "goto": "exit", "effects": [{ "rep": { "wildKnights": -5, "villagers": 5 } }, { "flag": "refused_knights" }] }
+      ]
+    },
+    "baldwin_refuse": {
+      "portrait": "baldwin", "emotion": "angry",
+      "text": "„W takim razie spotkamy się trzydziestego dnia. Nie będę krzyczał — krzyczą ci, którzy nie mają racji ani pieniędzy. Powiem tylko twoje nazwisko przy świadkach, a potem zajmiesz się tym, czym zajmują się ludzie bez wyjścia. Żegnaj, John.”",
+      "options": [{ "text": "Żegnaj.", "goto": "exit", "effects": [{ "flag": "defied_baldwin" }, { "rep": { "wildKnights": -20 } }, { "note": "note.defiance" }] }]
+    },
+
+    "collector_root": {
+      "portrait": "knight", "emotion": "angry",
+      "text": "Gwidon Szron ma księgę pod pachą i dłoń na rękojeści. „John. Dzień który, ile zostało, ile wpłaciłeś — mów po kolei. Nie mam czasu na opowieści, mam listę.”",
+      "options": [
+        { "text": "Wpłacam, ile mam.", "goto": "exit", "effects": [{ "openDebt": true }] },
+        { "text": "Ile mi zostało?", "goto": "collector_status" },
+        { "text": "Potrzebuję odroczenia.", "goto": "collector_extend" },
+        { "text": "Nie masz prawa mnie zatrzymywać.", "goto": "collector_threat" },
+        { "text": "Nie teraz.", "goto": "exit" }
+      ]
+    },
+    "collector_status": {
+      "portrait": "knight", "emotion": "neutral",
+      "text": "Gwidon otwiera księgę i czyta bez cienia emocji: „Dziesięć tysięcy koron, termin trzydziestego dnia. Po terminie pięćdziesiąt dziennie, a po siedmiu dniach zwłoki jedziemy po majątek. Masz majątek? Nie masz. No to pilnuj terminu.”",
+      "options": [{ "text": "Zapamiętam.", "goto": "exit", "effects": [{ "note": "note.debt_terms" }, { "xp": { "streetwise": 5 } }] }]
+    },
+    "collector_extend": {
+      "portrait": "knight", "emotion": "sly",
+      "text": "„Ja nie odraczam. Ja przyjmuję pieniądze i wpisuję liczby. Odroczenie daje Baldwin, a Baldwin daje je za tysiąc koron i przysługę. Chcesz gadać z Baldwinem, to mów, a ja mu przekażę — za pięć koron, bo to moja robota, nie moja łaska.”",
+      "options": [
+        { "text": "Przekaż. (5 koron)", "cond": { "gold": 5 }, "reqKey": "req.gold5", "goto": "exit", "effects": [{ "gold": -5 }, { "flag": "asked_extension" }, { "note": "note.extension_asked" }] },
+        { "text": "Sam do niego pójdę.", "goto": "exit" }
+      ]
+    },
+    "collector_threat": {
+      "portrait": "knight", "emotion": "angry",
+      "text": "„Prawa nie mam. Mam wpis w księdze i trzydziestu ludzi, którzy czytają tę księgę. To w tym mieście działa lepiej niż prawo. Jeszcze jedno takie zdanie, a dopiszę ci dziesięć koron za zniewagę. Mam do tego osobną kolumnę.”",
+      "options": [
+        { "text": "Niech będzie kolumna. Do widzenia.", "goto": "exit", "effects": [{ "rep": { "wildKnights": -6 } }, { "crime": { "type": "insult", "witnesses": 1, "location": "Port" } }] },
+        { "text": "Wybacz. Jestem zmęczony.", "goto": "exit", "effects": [{ "relation": { "poborca_gwidon": 2 } }] }
+      ]
+    },
+
+    "usurer_root": {
+      "portrait": "usurer", "emotion": "sly",
+      "text": "Rejne liczy monety na stole i nie podnosi wzroku. „Pożyczam. Trzydzieści procent na miesiąc, zabezpieczenie w towarze albo w przysłudze. Nie pytam, po co. Pytam, czym zapłacisz, jeśli nie zapłacisz.”",
+      "options": [
+        { "text": "Potrzebuję dwustu koron.", "goto": "usurer_200" },
+        { "text": "Ile pożyczysz pod zastaw?", "goto": "usurer_pawn" },
+        { "text": "Co się dzieje, gdy ktoś nie spłaca?", "goto": "usurer_consequences" },
+        { "text": "Nie dziś.", "goto": "exit" }
+      ]
+    },
+    "usurer_200": {
+      "portrait": "usurer", "emotion": "neutral",
+      "text": "„Dwieście dziś, dwieście sześćdziesiąt za miesiąc. Zabezpieczenie: twoja broń albo twoje nazwisko w mojej księdze, którą czyta więcej osób, niż myślisz. Bierzesz?”",
+      "options": [
+        { "text": "Biorę dwieście.", "goto": "exit", "effects": [{ "gold": 200 }, { "loan": { "principal": 200, "due": 260 } }, { "note": "note.loan_taken" }] },
+        { "text": "Za drogo.", "goto": "usurer_root" }
+      ]
+    },
+    "usurer_pawn": {
+      "portrait": "usurer", "emotion": "sly",
+      "text": "„Pod zastaw biorę połowę wartości rzeczy, bez targowania. Żelazo, srebro, relikwie — wszystko jedno, byle dało się sprzedać. Rzecz leży w mojej skrzyni do spłaty. Nie spłacisz — leży u mnie na zawsze, a ty masz spokój sumienia, że ją »sprzedałeś«.”",
+      "options": [
+        { "text": "Zastawiam, co mam.", "goto": "exit", "effects": [{ "openTrade": "pawn_idzi" }] },
+        { "text": "Przemyślę.", "goto": "exit" }
+      ]
+    },
+    "usurer_consequences": {
+      "portrait": "usurer", "emotion": "neutral",
+      "text": "„Najpierw list. Potem wizyta. Potem rzecz, której nie da się opisać w liście. W tym mieście nie biję ludzi — od tego są Rycerze, którym płacę. Ja tylko sprawiam, że przestajesz być wypłacalny dla kogokolwiek innego.”",
+      "options": [{ "text": "Jasne jak słońce.", "goto": "exit", "effects": [{ "entry": { "kind": "note", "id": "usurer_methods" } }, { "xp": { "streetwise": 15 } }] }]
+    },
+
+    "gambler_root": {
+      "portrait": "gambler", "emotion": "neutral",
+      "text": "Gracz przy stole nie podnosi głowy. „Stawka leży na stole, nie w gębie. Wpłacasz — grasz. Wygrywasz — bierzesz. Przegrywasz — siedzisz dalej albo wstajesz. Oszukujesz — wychodzisz przez okno.”",
+      "options": [
+        { "text": "Wchodzę do gry. (stawka 10)", "cond": { "gold": 10 }, "reqKey": "req.gold10", "goto": "exit", "effects": [{ "openGamble": { "game": "dice", "stake": 10 } }] },
+        { "text": "Gram o wyższą stawkę. (50)", "cond": { "gold": 50 }, "reqKey": "req.gold50", "goto": "exit", "effects": [{ "openGamble": { "game": "dice", "stake": 50 } }] },
+        { "text": "Tylko patrzę.", "goto": "exit" }
+      ]
+    },
+
+    "scribe_root": {
+      "portrait": "scribe", "emotion": "neutral",
+      "text": "Skryba Urban odkłada pióro. „Notes: czternaście koron, oprawa w skórę, dwadzieścia cztery karty. Pióro i inkaust osiem. Bez notesu człowiek pamięta tylko to, co mu wygodnie, a to najdroższy rodzaj zapomnienia.”",
+      "options": [
+        { "text": "Kupuję notes. (14 koron)", "cond": { "gold": 14, "noItem": "notebook" }, "reqKey": "req.gold14", "goto": "exit", "effects": [{ "gold": -14 }, { "give": "notebook" }, { "note": "note.bought_notebook" }, { "xp": { "reading": 10 } }] },
+        { "text": "Kupuję pióro i inkaust. (8 koron)", "cond": { "gold": 8 }, "reqKey": "req.gold8", "goto": "exit", "effects": [{ "gold": -8 }, { "give": "quill_ink" }] },
+        { "text": "Co masz jeszcze?", "goto": "exit", "effects": [{ "openTrade": "scribe_shop" }] },
+        { "text": "Naucz mnie czytać. (30 koron, dzień nauki)", "cond": { "gold": 30 }, "reqKey": "req.gold30", "goto": "exit", "effects": [{ "gold": -30 }, { "train": { "perk": "literate" } }] },
+        { "text": "Przemyślę.", "goto": "exit" }
+      ]
+    },
+
+    "medic_root": {
+      "portrait": "medic", "emotion": "neutral",
+      "text": "Medyk patrzy najpierw na twoje ręce, potem na twarz. „Krwawisz? Nie. Ale masz kolor człowieka, który sypia w ubraniu i je, co wpadnie w ręce. Co ci dolega — ciało czy kieszeń?”",
+      "options": [
+        { "text": "Opatrz mnie. (25 koron)", "cond": { "gold": 25 }, "reqKey": "req.gold25", "goto": "exit", "effects": [{ "gold": -25 }, { "openService": "treat" }] },
+        { "text": "Nastaw mi kość. (40 koron)", "cond": { "gold": 40 }, "reqKey": "req.gold40", "goto": "exit", "effects": [{ "gold": -40 }, { "openService": "set_bone" }] },
+        { "text": "Co masz w torbie?", "goto": "exit", "effects": [{ "openTrade": "medic_shop" }] },
+        { "text": "Naucz mnie opatrywać rany.", "cond": { "gold": 75 }, "reqKey": "req.gold75", "goto": "exit", "effects": [{ "gold": -75 }, { "train": { "perk": "field_dressing" } }] },
+        { "text": "Zdrowy jestem.", "goto": "exit" }
+      ]
+    },
+
+    "customs_root": {
+      "portrait": "customs", "emotion": "neutral",
+      "text": "Celnik Bernard ma przed sobą księgę i stos pieczęci. „Wszystko, co wchodzi do miasta, ma być w księdze. Ty też jesteś »towarem«, dopóki nie masz przepustki. Mów, po co przyszedłeś, bo kolejka za tobą rośnie.”",
+      "options": [
+        { "text": "Chcę przepustkę portową. (20 koron)", "cond": { "gold": 20, "noItem": "permit_port" }, "reqKey": "req.gold20", "goto": "exit", "effects": [{ "gold": -20 }, { "give": "permit_port" }, { "note": "note.bought_permit" }] },
+        { "text": "Mam przepustkę. Proszę otworzyć bramę.", "cond": { "item": "permit_port" }, "reqKey": "req.permit", "goto": "exit", "effects": [{ "openGate": "gate_customs" }] },
+        { "text": "Ile za to, żeby nie patrzeć w moją sakwę?", "goto": "customs_bribe" },
+        { "text": "Brakuje ci dwudziestu beczek soli w księdze.", "cond": { "flag": "knows_salt_missing" }, "reqKey": "req.saltRumor", "goto": "customs_salt" },
+        { "text": "Odchodzę.", "goto": "exit" }
+      ]
+    },
+    "customs_bribe": {
+      "portrait": "customs", "emotion": "sly",
+      "text": "Bernard rozgląda się po izbie. „Nie słyszałem pytania. Ale skoro już je zadałeś: pięćdziesiąt koron, a ja przez godzinę mam bardzo dużo papierów do sprawdzenia. W tym czasie brama bywa... zajęta kimś innym.”",
+      "options": [
+        { "text": "Pięćdziesiąt. (łapówka)", "cond": { "gold": 50 }, "reqKey": "req.gold50", "goto": "exit", "effects": [{ "gold": -50 }, { "crime": { "type": "bribery", "witnesses": 1, "location": "Celnica" } }, { "flag": "bribed_customs" }, { "openGate": "gate_customs" }, { "note": "note.bribe_paid" }] },
+        { "text": "Za drogo. Kupię przepustkę.", "goto": "customs_root" }
+      ]
+    },
+    "customs_salt": {
+      "portrait": "customs", "emotion": "surprised",
+      "text": "Bernard zamyka księgę. „Kto ci to powiedział? ...Nie, nie odpowiadaj. Jeśli masz dowód — skrzynię, pieczęć, nazwisko — dostaniesz trzydzieści koron z kasy i moją pamięć, która bywa użyteczna. Jeśli masz tylko plotkę, to masz kłopot, bo ja nie lubię plotek o własnej księdze.”",
+      "options": [
+        { "text": "Mam nazwisko: Idzi z trzeciego pomostu.", "cond": { "flag": "idzi_trusts" }, "reqKey": "req.idziTrust", "goto": "customs_betray" },
+        { "text": "Mam tylko plotkę. Wybacz.", "goto": "exit", "effects": [{ "relation": { "celnik_bernard": -6 } }] },
+        { "text": "Nic nie wiem. Zmyśliłem.", "goto": "exit", "effects": [{ "relation": { "celnik_bernard": -12 } }, { "rumor": "rumor.johnLied" }] }
+      ]
+    },
+    "customs_betray": {
+      "portrait": "customs", "emotion": "angry",
+      "text": "„Idzi. Wiedziałem. ...Nie, nie wiedziałem, ale teraz wiem. Trzydzieści koron i jedno ostrzeżenie: Idzi ma w porcie przyjaciół, a ty masz teraz wroga z nożem i łodzią. Zastanów się, czy warto było.”",
+      "options": [{ "text": "Warto było.", "goto": "exit", "effects": [{ "gold": 30 }, { "rep": { "cityGuard": 10, "smugglers": -35 } }, { "relation": { "idzi": -50 } }, { "flag": "betrayed_idzi" }] }]
+    },
+
+    "guild_root": {
+      "portrait": "guild", "emotion": "neutral",
+      "text": "Zbylut z Gildii Kupieckiej ma miękkie ręce i twarde liczby. „Gildia płaci za pewność, nie za odwagę. Masz towar — skupuję. Masz ręce — mam kontrakt. Masz problem — mam prawnika, ale prawnik kosztuje więcej niż problem.”",
+      "options": [
+        { "text": "Pokaż, co skupujesz.", "goto": "exit", "effects": [{ "openTrade": "guild_shop" }] },
+        { "text": "Masz kontrakt na ochronę karawany?", "goto": "guild_escort" },
+        { "text": "Orlik mówi, że Rycerze biorą co dziesiąty wyrób.", "goto": "guild_knights" },
+        { "text": "Naucz mnie targować.", "cond": { "gold": 120, "rep": { "merchantGuild": 15 } }, "reqKey": "req.guildTeach", "goto": "exit", "effects": [{ "gold": -120 }, { "train": { "perk": "merchants_ear" } }] },
+        { "text": "Przyjdę, gdy będę miał towar.", "goto": "exit" }
+      ]
+    },
+    "guild_escort": {
+      "portrait": "guild", "emotion": "sly",
+      "text": "„Mam. Wóz z solą i żelazem idzie gościńcem za kamiennym mostem pojutrze o świcie. Osiemdziesiąt koron za dzień, z czego dwadzieścia z góry. Warunek: wracasz z wozem. Jeśli wóz wróci bez ciebie, płacę rodzinie, a to droższe, więc wolisz wracać.”",
+      "options": [
+        { "text": "Biorę kontrakt. (20 koron zaliczki)", "goto": "exit", "effects": [{ "gold": 20 }, { "quest": { "action": "startBoard", "id": "board_escort" } }, { "rep": { "merchantGuild": 3 } }] },
+        { "text": "Poza miasto nie wyjdę. Mam trzydzieści dni.", "goto": "exit", "effects": [{ "relation": { "kupiec_zbylut": -2 } }] }
+      ]
+    },
+    "guild_knights": {
+      "portrait": "guild", "emotion": "angry",
+      "text": "„Orlik ma długi język i krótką pamięć o tym, komu co mówi. Tak, biorą. I tak, liczę, że to minie, bo Baldwin jest kupcem przebranym za rycerza, a kupcy nie palą tego, z czego żyją. Pytanie, co się stanie, gdy przestanie mu się to opłacać. Nie wiem. I nie chcę wiedzieć przy świadkach.”",
+      "options": [{ "text": "Nie było świadków.", "goto": "exit", "effects": [{ "note": "note.guild_knights" }, { "xp": { "streetwise": 15 } }, { "entry": { "kind": "note", "id": "guild_fear" } }] }]
+    },
+
+    "tanner_root": {
+      "portrait": "tanner", "emotion": "neutral",
+      "text": "Oles wyciera ręce w fartuch i nie podaje ci dłoni. „Śmierdzi? Śmierdzi. Dlatego mam warsztat za miastem i ceny lepsze niż w cechu. Skóry skupuję, skórę wyprawioną sprzedaję. Mów, z czym przyszedłeś.”",
+      "options": [
+        { "text": "Mam skóry na sprzedaż.", "goto": "exit", "effects": [{ "openTrade": "tanner_shop" }] },
+        { "text": "Naucz mnie garbowania. (55 koron, dzień)", "cond": { "gold": 55 }, "reqKey": "req.gold55", "goto": "exit", "effects": [{ "gold": -55 }, { "train": { "perk": "curing_knowhow" } }] },
+        { "text": "Kto tu kupuje wilcze skóry?", "goto": "tanner_wolves" },
+        { "text": "Tylko przechodziłem.", "goto": "exit" }
+      ]
+    },
+    "tanner_wolves": {
+      "portrait": "tanner", "emotion": "sly",
+      "text": "„Ja. Czterdzieści osiem koron za całą, dwadzieścia za podartą. Wilki zeszły z bagien, bo ktoś im spalił legowisko — pewnie ci sami, co potem narzekają, że wilki są w mieście. Skórę przynieś świeżą, nie wysuszoną na kamieniu.”",
+      "options": [{ "text": "Przyniosę.", "goto": "exit", "effects": [{ "entry": { "kind": "creature", "id": "wolf" } }, { "xp": { "beasts": 10 } }] }]
+    },
+
+    "fisher_root": {
+      "portrait": "fisher", "emotion": "happy",
+      "text": "Ewa ma ręce w sieci i uśmiech człowieka, który wstał przed świtem, bo chciał. „Ryba dziś brała. Kupisz, sprzedasz, albo posiedzisz ze mną i nauczysz się, gdzie rzucać — to kosztuje mniej niż ryba, a starcza na całe życie.”",
+      "options": [
+        { "text": "Kupię ryby i hak.", "goto": "exit", "effects": [{ "openTrade": "fisher_shop" }] },
+        { "text": "Naucz mnie łowić. (40 koron, dzień)", "cond": { "gold": 40 }, "reqKey": "req.gold40", "goto": "exit", "effects": [{ "gold": -40 }, { "train": { "perk": "still_water" } }] },
+        { "text": "Gdzie w tym porcie jest cicho?", "goto": "fisher_quiet" },
+        { "text": "Dobrej sieci.", "goto": "exit" }
+      ]
+    },
+    "fisher_quiet": {
+      "portrait": "fisher", "emotion": "sly",
+      "text": "„Cicho jest za wschodnim murem, tam gdzie jest wyrwa w palisadzie. Straż tam nie chodzi, bo się boi bagnistego gruntu. Mówię ci to, bo raz wyciągnąłeś mi sieć z wody — nie, żartuję. Mówię, bo masz twarz człowieka, który i tak tam pójdzie.”",
+      "options": [{ "text": "Pójdę. Dzięki, Ewo.", "goto": "exit", "effects": [{ "entry": { "kind": "place", "id": "smugglersGap" } }, { "note": "note.gap_hint" }, { "relation": { "rybak_ewa": 5 } }] }]
+    },
+
+    "baker_root": {
+      "portrait": "baker", "emotion": "happy",
+      "text": "Ignac ma mąkę po łokcie. „Chleb cztery korony, bo mąka droga — młynarz mówi, że rzeka niska, a ja mówię, że młynarz gra w kości. Kupujesz czy tylko wąchasz?”",
+      "options": [
+        { "text": "Kupuję chleb. (4 korony)", "cond": { "gold": 4 }, "reqKey": "req.gold4", "goto": "exit", "effects": [{ "gold": -4 }, { "give": "bread_loaf" }] },
+        { "text": "Pokaż stragan.", "goto": "exit", "effects": [{ "openTrade": "baker_stall" }] },
+        { "text": "Młynarz gra w kości? Z kim?", "goto": "baker_dice" },
+        { "text": "Tylko wącham.", "goto": "exit" }
+      ]
+    },
+    "baker_dice": {
+      "portrait": "baker", "emotion": "sly",
+      "text": "„Z Pankracym, po nocach, u Hanny. Przegrywa mąkę, potem podnosi cenę chleba, a na końcu ja tłumaczę babom na rynku, dlaczego bochenek kosztuje cztery korony. Tak działa ekonomia, chłopcze.”",
+      "options": [{ "text": "Tak działa ekonomia.", "goto": "exit", "effects": [{ "entry": { "kind": "note", "id": "bread_prices" } }, { "xp": { "barter": 12 } }] }]
+    },
+
+    "beggar_root": {
+      "portrait": "beggar", "emotion": "sad",
+      "text": "Kulawy Maciej wyciąga rękę, ale patrzy ci w oczy, nie na sakwę. „Siedzę tu od sześciu lat. Wiem, kto chodzi gdzie i o której. Korona za wiadomość, dwie za taką, która komuś zaszkodzi.”",
+      "options": [
+        { "text": "Daj mi wiadomość za koronę.", "cond": { "gold": 1 }, "reqKey": "req.gold1", "goto": "beggar_rumor" },
+        { "text": "Co wiesz o Dzikiych Rycerzach?", "cond": { "gold": 2 }, "reqKey": "req.gold2", "goto": "beggar_knights" },
+        { "text": "Masz tu chleb, nie koronę.", "cond": { "item": "bread_loaf" }, "reqKey": "req.bread", "goto": "beggar_bread" },
+        { "text": "Nie mam nic.", "goto": "exit" }
+      ]
+    },
+    "beggar_rumor": {
+      "portrait": "beggar", "emotion": "sly",
+      "text": "„Marta z zachodniego zaułka chodzi nocą po rynku i nikt jej nie łapie, bo straż ma krótkie nogi i długie języki. Idzi z portu ma skrzynie, których nie ma w księdze. A Hanna z karczmy ma kwit na czyjś dług i chowa go w beczce za szynkwasem. Wybierz, która wiadomość jest warta twojej korony.”",
+      "options": [
+        { "text": "Wszystkie trzy. Masz jeszcze dwie korony.", "cond": { "gold": 2 }, "reqKey": "req.gold2", "goto": "exit", "effects": [{ "gold": -3 }, { "flag": "knows_marta_satchel" }, { "flag": "knows_salt_missing" }, { "flag": "knows_hanna_chit" }, { "entry": { "kind": "note", "id": "beggar_rumors" } }, { "xp": { "streetwise": 20 } }] },
+        { "text": "Wystarczy. Dzięki.", "goto": "exit", "effects": [{ "gold": -1 }, { "flag": "knows_marta_satchel" }, { "xp": { "streetwise": 10 } }] }
+      ]
+    },
+    "beggar_knights": {
+      "portrait": "beggar", "emotion": "angry",
+      "text": "„Rycerze? Mają obóz za kamiennym mostem, trzydziestu ludzi i dwa razy tyle koni. Co tydzień przyjeżdżają po haracz, a Gwidon z księgą chodzi po rynku i czyta nazwiska na głos, żeby wszyscy słyszeli. To nie jest zbieranie pieniędzy. To jest przedstawienie.”",
+      "options": [{ "text": "Przedstawienie. Zapamiętam.", "goto": "exit", "effects": [{ "gold": -2 }, { "note": "note.knights_camp" }, { "entry": { "kind": "creature", "id": "wildKnight" } }, { "xp": { "history": 15 } }] }]
+    },
+    "beggar_bread": {
+      "portrait": "beggar", "emotion": "happy",
+      "text": "Maciej bierze chleb oburącz. „Chleb lepszy niż korona, bo korony nie zjem. W zamian powiem ci coś za darmo: nie śpij na rynku po zmroku. Nie dlatego, że cię okradną — okradną na pewno. Dlatego, że straż liczy śpiących i dopisuje ich do listy włóczęgów, a z listy włóczęgów idzie się do dyb.”",
+      "options": [{ "text": "Dziękuję, Macieju.", "goto": "exit", "effects": [{ "take": "bread_loaf" }, { "rep": { "villagers": 6 } }, { "relation": { "maciej_kulawy": 12 } }, { "note": "note.sleep_warning" }] }]
+    },
+
+    "guard_root": {
+      "portrait": "guard", "emotion": "angry",
+      "text": "Strażnik przesuwa włócznię do pionu. „Brama. Przepustka albo pięćdziesiąt koron, albo zawracasz. Nie mam czwartej opcji i nie mam całego dnia.”",
+      "options": [
+        { "text": "Mam przepustkę.", "cond": { "item": "permit_port" }, "reqKey": "req.permit", "goto": "exit", "effects": [{ "openGate": "gate_customs" }] },
+        { "text": "Pięćdziesiąt koron i otwierasz.", "cond": { "gold": 50 }, "reqKey": "req.gold50", "goto": "exit", "effects": [{ "gold": -50 }, { "crime": { "type": "bribery", "witnesses": 1, "location": "Brama" } }, { "openGate": "gate_customs" }] },
+        { "text": "[Zastraszanie 4] Otwórz, bo pożałujesz.", "cond": { "skill": "intimidate", "min": 4 }, "reqKey": "req.intimidate4", "goto": "guard_intimidate" },
+        { "text": "Zawracam.", "goto": "exit" }
+      ]
+    },
+    "guard_intimidate": {
+      "portrait": "guard", "emotion": "surprised",
+      "text": "Strażnik cofa się o pół kroku i patrzy na twoją rękojeść. „Nie jestem tu za tyle, ile zarabiam. Przechodź. Ale jak ktoś zapyta, to cię nie widziałem, a ty mnie nie widziałeś.”",
+      "options": [{ "text": "Nie widziałem cię.", "goto": "exit", "effects": [{ "openGate": "gate_customs" }, { "rep": { "cityGuard": -8 } }, { "rumor": "rumor.guardBullied" }, { "xp": { "intimidate": 25 } }] }]
+    },
+
+    "executioner_root": {
+      "portrait": "executioner", "emotion": "neutral",
+      "text": "Baltazar ostrzy topór o kamień, nie przerywając rytmu. „Patrzysz na szubienicę, nie na mnie. Wszyscy tak patrzą. Pytaj, skoro przyszedłeś.”",
+      "options": [
+        { "text": "Kto jutro wisi?", "goto": "executioner_tomorrow" },
+        { "text": "Jak się żyje z taką robotą?", "goto": "executioner_life" },
+        { "text": "Odchodzę.", "goto": "exit" }
+      ]
+    },
+    "executioner_tomorrow": {
+      "portrait": "executioner", "emotion": "sad",
+      "text": "„Chłopak za worek zboża. O świcie, na rynku, żeby straganiarki widziały. Nie pytaj mnie, czy to sprawiedliwe — pytaj tych, co piszą wyroki. Ja tylko wykonuję i mam z tego chleb.”",
+      "options": [{ "text": "Będę na rynku.", "goto": "exit", "effects": [{ "flag": "knows_execution" }, { "note": "note.execution_tomorrow" }, { "entry": { "kind": "place", "id": "gallows" } }] }]
+    },
+    "executioner_life": {
+      "portrait": "executioner", "emotion": "neutral",
+      "text": "„Mieszkam za miastem, bo nikt nie chce sąsiada. Jem w karczmie przy drzwiach, bo nikt nie chce sąsiada przy stole. Mam trzy razy lepsze pieniądze niż strażnik i zero znajomych. To jest cała odpowiedź.”",
+      "options": [{ "text": "Dziękuję za szczerość.", "goto": "exit", "effects": [{ "relation": { "baltazar_kat": 6 } }, { "xp": { "history": 10 } }] }]
+    },
+
+    "washer_root": {
+      "portrait": "washer", "emotion": "happy",
+      "text": "Zofia wyżyma prześcieradło. „Brudny jesteś jak ten port. Cztery korony i masz czystą koszulę jutro rano. Albo idź do łaźni, tam biorą więcej, ale mają ciepłą wodę.”",
+      "options": [
+        { "text": "Pierz moją koszulę. (4 korony)", "cond": { "gold": 4 }, "reqKey": "req.gold4", "goto": "exit", "effects": [{ "gold": -4 }, { "hygiene": 60 }, { "relation": { "zofia_prawka": 3 } }] },
+        { "text": "Co ludzie mówią przy praniu?", "goto": "washer_gossip" },
+        { "text": "Może później.", "goto": "exit" }
+      ]
+    },
+    "washer_gossip": {
+      "portrait": "washer", "emotion": "sly",
+      "text": "„Pranie to druga spowiedź. Po plamach poznasz, kto pije, kto bije, kto chodzi nocą po błocie i kto ma krew na rękawie, a mówi, że to wino. W tym tygodniu dwa rękawy miały »wino«. Nie powiem, czyje, bo mam dzieci i chcę je mieć.”",
+      "options": [{ "text": "Rozumiem. Dyskrecja.", "goto": "exit", "effects": [{ "entry": { "kind": "note", "id": "blood_sleeves" } }, { "xp": { "streetwise": 15 } }, { "relation": { "zofia_prawka": 4 } }] }]
+    },
+
+    "stableboy_root": {
+      "portrait": "stableboy", "emotion": "happy",
+      "text": "Pietrek trzyma konia za uzdę i patrzy na ciebie z dołu. „Pan chce konia? Koń kosztuje osiemdziesiąt koron i dwa worki owsa na miesiąc. Albo pan chce tylko pogłaskać — to za darmo, ale niech pan nie podchodzi od tyłu.”",
+      "options": [
+        { "text": "Kupuję konia. (80 koron)", "cond": { "gold": 80 }, "reqKey": "req.gold80", "goto": "exit", "effects": [{ "gold": -80 }, { "flag": "owns_horse" }, { "note": "note.bought_horse" }] },
+        { "text": "Ile bierzesz za pilnowanie moich rzeczy?", "goto": "stableboy_watch" },
+        { "text": "Tylko pogłaskam.", "goto": "exit", "effects": [{ "relation": { "pietrek_stajenny": 4 } }] }
+      ]
+    },
+    "stableboy_watch": {
+      "portrait": "stableboy", "emotion": "sly",
+      "text": "„Koronę za dzień. Nikt nie ruszy, bo wszyscy wiedzą, że to moje. A jak ktoś ruszy, to powiem panu, kto — bo ja tu widzę wszystko, tylko udaję, że nie.”",
+      "options": [{ "text": "Korona za dzień. Umowa.", "cond": { "gold": 1 }, "reqKey": "req.gold1", "goto": "exit", "effects": [{ "gold": -1 }, { "flag": "stable_storage" }, { "relation": { "pietrek_stajenny": 6 } }] }]
+    },
+
+    "nun_root": {
+      "portrait": "nun", "emotion": "neutral",
+      "text": "Siostra Agnieszka odkłada księgę. „Jeśli przyszedłeś się modlić, ławka jest wolna. Jeśli przyszedłeś po pomoc, to mamy chleb dla dwunastu i dwanaście miejsc w przytułku na noc. Jeśli przyszedłeś z ciekawości — też dobrze, tylko nie hałasuj.”",
+      "options": [
+        { "text": "Poproszę o miejsce w przytułku na noc.", "goto": "exit", "effects": [{ "sleep": { "to": 6, "cost": 0, "place": "almshouse" } }] },
+        { "text": "Co czytasz?", "goto": "nun_book" },
+        { "text": "Nie będę przeszkadzać.", "goto": "exit" }
+      ]
+    },
+    "nun_book": {
+      "portrait": "nun", "emotion": "happy",
+      "text": "„Kronikę wyspy. Rocznik tysiąc czterysta dwudziesty ósmy — ten, którego nikt nie chce przepisywać, bo jest w nim pożar opactwa i lista nazwisk. Ojciec Teodor mówi, że lista jest niekompletna. Ja myślę, że jest kompletna, tylko ktoś ją skrócił.”",
+      "options": [{ "text": "Lista nazwisk z pożaru. Zapamiętam.", "goto": "exit", "effects": [{ "flag": "knows_fire_list" }, { "note": "note.fire_list" }, { "xp": { "history": 25 } }, { "entry": { "kind": "note", "id": "chronicle_1428" } }] }]
+    },
+
+    "wiera_root": {
+      "portrait": "wiera", "emotion": "sly",
+      "text": "Wiera ma ręce pachnące bagnem i oczy, które liczą, ile masz dni przed sobą. „Z miasta przyszedłeś, a śmierdzisz jak człowiek, który mało śpi. Zioła mam, maści mam, rad nie sprzedaję — rad udzielam za darmo, bo i tak ich nie posłuchasz.”",
+      "options": [
+        { "text": "Pokaż, co masz.", "goto": "exit", "effects": [{ "openTrade": "wiera_herbs" }] },
+        { "text": "Naucz mnie rozpoznawać zioła. (65 koron)", "cond": { "gold": 65 }, "reqKey": "req.gold65", "goto": "exit", "effects": [{ "gold": -65 }, { "train": { "perk": "herbarium" } }] },
+        { "text": "Mam ranę, która nie chce się goić.", "cond": { "injured": true }, "reqKey": "req.injured", "goto": "wiera_wound" },
+        { "text": "Co rośnie na bagnach, co może zabić?", "goto": "wiera_poison" },
+        { "text": "Dziękuję. Nie zatrzymuję.", "goto": "exit" }
+      ]
+    },
+    "wiera_wound": {
+      "portrait": "wiera", "emotion": "neutral",
+      "text": "„Pokaż. ...Czerwone brzegi, ciepłe, pachnie słodko. To nie rana, to już gość. Maść trzydzieści osiem koron, albo umyj, osusz i nie ruszaj przez dwa dni — wtedy za darmo, ale wtedy też pewnie będziesz ruszał. Wybieraj między wygodą a życiem, jak wszyscy.”",
+      "options": [
+        { "text": "Biorę maść. (38 koron)", "cond": { "gold": 38 }, "reqKey": "req.gold38", "goto": "exit", "effects": [{ "gold": -38 }, { "give": "salve_wiera" }, { "cureInfection": true }] },
+        { "text": "Umyję i nie będę ruszał.", "goto": "exit", "effects": [{ "xp": { "firstaid": 20 } }, { "entry": { "kind": "note", "id": "wound_care" } }] }
+      ]
+    },
+    "wiera_poison": {
+      "portrait": "wiera", "emotion": "sly",
+      "text": "„Szalej plamisty. Rośnie tam, gdzie krwawnik, wygląda jak krwawnik dla kogoś, kto się spieszy. Różnica: łodyga pusta i plamy. Sprzedaję go w fiolce za dziewięćdziesiąt koron i nie pytam, na co. Pytam tylko, czy wiesz, że nie ma odtrutki, jest tylko czas.”",
+      "options": [
+        { "text": "Wiem, ile kosztuje czas.", "goto": "exit", "effects": [{ "entry": { "kind": "plant", "id": "hemlock" } }, { "xp": { "herbalism": 25 } }, { "note": "note.hemlock" }] },
+        { "text": "Nie kupuję trucizny.", "goto": "exit", "effects": [{ "entry": { "kind": "plant", "id": "hemlock" } }, { "rep": { "church": 2 } }] }
+      ]
+    },
+
+    "passerby_root": {
+      "portrait": "passerby", "emotion": "neutral",
+      "text": "{greeting}",
+      "options": [
+        { "text": "Która godzina?", "goto": "passerby_hour" },
+        { "text": "Co słychać?", "goto": "passerby_rumor" },
+        { "text": "Nie zatrzymuję.", "goto": "exit" }
+      ]
+    },
+    "passerby_hour": {
+      "portrait": "passerby", "emotion": "neutral",
+      "text": "{hourAnswer}",
+      "options": [{ "text": "Dzięki.", "goto": "exit" }]
+    },
+    "passerby_rumor": {
+      "portrait": "passerby", "emotion": "neutral",
+      "text": "{rumor}",
+      "options": [{ "text": "Ciekawe.", "goto": "exit", "effects": [{ "xp": { "streetwise": 3 } }] }]
+    },
+    "stranger_root": {
+      "portrait": "stranger", "emotion": "angry",
+      "text": "Człowiek w cieniu kaptura nie odpowiada od razu. „Nie znam cię. Idź swoją drogą, a ja pójdę swoją, i obaj będziemy mieli dobry dzień.”",
+      "options": [
+        { "text": "Oddaj torbę, którą masz przy pasie.", "goto": "exit", "effects": [{ "combat": "start" }] },
+        { "text": "Szukam Marty. Znasz ją?", "goto": "stranger_marta" },
+        { "text": "Idę swoją drogą.", "goto": "exit" }
+      ]
+    },
+    "stranger_marta": {
+      "portrait": "stranger", "emotion": "sly",
+      "text": "„Znam. I znam też wartość jej torby. Jeśli przyszedłeś ją oddać, to za późno. Jeśli przyszedłeś ją zabrać — to jest nas trzech, a ty jeden. Licz, nie gadaj.”",
+      "options": [
+        { "text": "Policzyłem.", "goto": "exit", "effects": [{ "combat": "start" }] },
+        { "text": "Nie warto. Odchodzę.", "goto": "exit", "effects": [{ "flag": "backed_off" }] }
+      ]
+    }
+  }
+}

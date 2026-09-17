@@ -1,0 +1,114 @@
+{
+  "merchants": [
+    {
+      "id": "hanna_bar", "npc": "hanna", "nameKey": "merchant.tavern", "station": "bar",
+      "cash": 220, "hours": [6, 23], "priceMod": 1.0, "buyCats": [], "sellCats": ["food"],
+      "stock": ["beer_mug", "stew_bowl", "bread_loaf", "cheese_wheel", "apple", "candle", "bandage_linen", "dice_bone"],
+      "services": ["meal", "drink", "room"],
+      "flavorKey": "merchant.tavern.flavor"
+    },
+    {
+      "id": "orlik_forge", "npc": "orlik", "nameKey": "merchant.smithy", "station": "shop",
+      "cash": 480, "hours": [6, 19], "priceMod": 1.05, "buyCats": ["material"], "sellCats": [],
+      "stock": ["sword_rusted", "dagger", "axe_wood", "hammer_smith", "nails_handful", "iron_bar", "whetstone", "shield_round"],
+      "wants": ["iron_ore", "coal_lump", "iron_bar"],
+      "flavorKey": "merchant.smithy.flavor"
+    },
+    {
+      "id": "scribe_shop", "npc": "skryba_urban", "nameKey": "merchant.scribe", "station": "shop",
+      "cash": 90, "hours": [8, 18], "priceMod": 1.0, "buyCats": [], "sellCats": [],
+      "stock": ["notebook", "quill_ink", "candle", "letter_sealed", "oilcloth"],
+      "uniqueOnce": ["notebook"],
+      "flavorKey": "merchant.scribe.flavor"
+    },
+    {
+      "id": "goslaw_maps", "npc": "goslaw", "nameKey": "merchant.cartographer", "station": "shop",
+      "cash": 150, "hours": [8, 18], "priceMod": 1.0, "buyCats": [], "sellCats": [],
+      "stock": ["map_port", "quill_ink", "rope_hemp"],
+      "uniqueOnce": ["map_port"],
+      "knowledgeBuyer": true,
+      "flavorKey": "merchant.cartographer.flavor"
+    },
+    {
+      "id": "wiera_herbs", "npc": "wiera", "nameKey": "merchant.herbalist", "station": "shop",
+      "cash": 200, "hours": [8, 16], "priceMod": 0.95, "buyCats": ["herb", "material"], "sellCats": [],
+      "stock": ["herb_yarrow", "salve_wiera", "potion_bitter", "mushroom_common", "bandage_linen", "poison_vial"],
+      "wants": ["herb_yarrow", "mushroom_common", "hide_deer"],
+      "flavorKey": "merchant.herbalist.flavor"
+    },
+    {
+      "id": "medic_shop", "npc": "medyk_elen", "nameKey": "merchant.medic", "station": "medic",
+      "cash": 260, "hours": [7, 19], "priceMod": 1.15, "buyCats": ["herb"], "sellCats": [],
+      "stock": ["bandage_linen", "splint", "salve_wiera", "potion_bitter", "herb_yarrow"],
+      "services": ["treat", "set_bone", "stitch"],
+      "flavorKey": "merchant.medic.flavor"
+    },
+    {
+      "id": "fisher_shop", "npc": "rybak_ewa", "nameKey": "merchant.fisher", "station": "shop",
+      "cash": 110, "hours": [9, 13], "priceMod": 0.9, "buyCats": ["food"], "sellCats": [],
+      "stock": ["fish_smoked", "fishing_hook", "net_small", "bait_scraps", "rope_hemp"],
+      "wants": ["fish_smoked"],
+      "flavorKey": "merchant.fisher.flavor"
+    },
+    {
+      "id": "baker_stall", "npc": "piekarz_ignac", "nameKey": "merchant.baker", "station": "shop",
+      "cash": 80, "hours": [9, 15], "priceMod": 1.0, "buyCats": [], "sellCats": ["food"],
+      "stock": ["bread_loaf", "cheese_wheel", "apple", "grain_sack"],
+      "flavorKey": "merchant.baker.flavor"
+    },
+    {
+      "id": "tanner_shop", "npc": "garbarz_oles", "nameKey": "merchant.tanner", "station": "shop",
+      "cash": 190, "hours": [6, 18], "priceMod": 0.95, "buyCats": ["material"], "sellCats": [],
+      "stock": ["leather_tanned", "hide_deer", "rope_hemp", "wool_bundle"],
+      "wants": ["hide_deer", "wolf_pelt"],
+      "flavorKey": "merchant.tanner.flavor"
+    },
+    {
+      "id": "guild_shop", "npc": "kupiec_zbylut", "nameKey": "merchant.guild", "station": "guildDesk",
+      "cash": 1400, "hours": [8, 18], "priceMod": 1.1, "buyCats": ["goods", "material", "valuables"], "sellCats": [],
+      "stock": ["salt_sack", "grain_sack", "wool_bundle", "iron_bar", "plank_oak", "ale_cask", "leather_vest", "padded_jack", "permit_port"],
+      "wants": ["salt_sack", "grain_sack", "wool_bundle", "relic_saint", "signet_ring", "silver_gem"],
+      "services": ["contract", "pass"],
+      "flavorKey": "merchant.guild.flavor"
+    },
+    {
+      "id": "idzi_black", "npc": "idzi", "nameKey": "merchant.black", "station": "shop",
+      "cash": 700, "hours": [20, 2], "priceMod": 1.35, "buyCats": ["goods", "valuables", "material", "weapon"], "sellCats": [],
+      "stock": ["lockpick_set", "false_papers", "poison_vial", "crossbow_light", "ale_cask", "salt_sack", "dagger", "lantern_oil"],
+      "wants": ["salt_sack", "ale_cask", "relic_saint", "crossbow_light", "chain_shirt", "customs_seal", "knight_token"],
+      "services": ["smuggle", "fence", "hideout"],
+      "flavorKey": "merchant.black.flavor"
+    },
+    {
+      "id": "customs_confiscated", "npc": "celnik_bernard", "nameKey": "merchant.customs", "station": "shop",
+      "cash": 320, "hours": [6, 20], "priceMod": 0.8, "buyCats": [], "sellCats": [],
+      "stock": ["ale_cask", "salt_sack", "rope_hemp", "lantern_oil"],
+      "services": ["permit"],
+      "flavorKey": "merchant.customs.flavor"
+    },
+    {
+      "id": "pawn_idzi", "npc": "idzi", "nameKey": "merchant.pawn", "station": "hideout",
+      "cash": 500, "hours": [20, 4], "priceMod": 0.55, "buyCats": ["valuables", "goods", "weapon", "armor"], "sellCats": [],
+      "stock": [], "fence": true,
+      "flavorKey": "merchant.pawn.flavor"
+    }
+  ],
+  "stockPrices": {
+    "notebook": 14, "map_port": 40, "map_island": 180, "pocket_watch": 240,
+    "permit_port": 20, "permit_upper": 90, "false_papers": 100
+  },
+  "services": {
+    "meal": { "cost": 6, "feed": 60, "quench": 30, "labelKey": "service.meal", "hours": [11, 22] },
+    "drink": { "cost": 2, "feed": 0, "quench": 25, "courage": 10, "labelKey": "service.drink" },
+    "room": { "cost": 5, "labelKey": "service.room", "sleep": true },
+    "treat": { "cost": 25, "labelKey": "service.treat", "heal": 40, "curesInfection": true },
+    "set_bone": { "cost": 40, "labelKey": "service.setBone", "fixes": "fracture" },
+    "stitch": { "cost": 30, "labelKey": "service.stitch", "stopsBleeding": true, "heal": 15 },
+    "bath": { "cost": 4, "labelKey": "service.bath", "hygiene": 100, "warmth": 20 },
+    "wash": { "cost": 0, "labelKey": "service.wash", "hygiene": 60 },
+    "confess": { "cost": 3, "labelKey": "service.confess", "rep": { "church": 4 } },
+    "alms": { "cost": 0, "labelKey": "service.alms", "rep": { "church": 2 } },
+    "pass": { "cost": 20, "labelKey": "service.pass", "grants": "permit_port" },
+    "contract": { "cost": 0, "labelKey": "service.contract" }
+  }
+}

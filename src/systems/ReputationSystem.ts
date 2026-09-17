@@ -1,44 +1,95 @@
-export type FactionId = 'wildKnights'|'cityGuard'|'merchants'|'church'|'smugglers'|'villagers';
-export const FACTIONS: {id:FactionId, name:string, desc:string, color:string}[] = [
-  {id:'wildKnights', name:'Dzicy Rycerze', desc:'Pół-bandyckie bractwo rycerskie kontrolujące wyspę', color:'#8b3a2f'},
-  {id:'cityGuard', name:'Straż Miejska', desc:'Pilnuje porządku, łapówkarstwo powszechne', color:'#4a6a8a'},
-  {id:'merchants', name:'Gildia Kupiecka', desc:'Kontroluje ceny i port', color:'#c9a86a'},
-  {id:'church', name:'Kościół', desc:'Duchowni, opactwo, relikwie', color:'#8a8a6a'},
-  {id:'smugglers', name:'Przemytnicy z Portu', desc:'Czarny rynek, fałszywe dokumenty', color:'#3a3a3a'},
-  {id:'villagers', name:'Wieśniacy', desc:'Ubodzy, zabobonni, pamiętliwi', color:'#4a5a3a'},
+import NPCS from '../data/npcs.json';
+import { bus } from '../core/EventBus';
+import { getGame } from '../core/gameSingleton';
+import { t } from '../core/Localization';
+import type { FactionId } from '../core/GameState';
+
+/* ============================================================================
+   REPUTACJA I RELACJE
+   Sześć frakcji (−100..+100) i osobiste relacje z każdym NPC. Zmiany są zawsze
+   skutkiem konkretnego czynu widzianego przez kogoś lub opowiedzianego.
+   ========================================================================== */
+
+export interface NpcDef {
+  id: string; nameKey: string; roleKey: string; age: number; gender: string;
+  palette: string; look: any; faction: string; stance: string; important: boolean;
+  dialogue: string; merchant?: string; teacher?: string[]; addressKey: string;
+  desireKey?: string; secretKey?: string; greetingKeys: string[]; schedule: any[];
+}
+
+const NPC_DEFS: Record<string, NpcDef> = {};
+for (const n of NPCS.npcs as any[]) NPC_DEFS[n.id] = n;
+const NAME_POOL = (NPCS.namePool as any) || {};
+
+export function npcDef(id: string): NpcDef | undefined { return NPC_DEFS[id]; }
+export function allNpcDefs() { return Object.values(NPC_DEFS); }
+export function namePool() { return NAME_POOL; }
+export function npcName(id: string) { return NPC_DEFS[id] ? t(NPC_DEFS[id].nameKey) : t('npc.stranger'); }
+export function npcRole(id: string) { return NPC_DEFS[id] ? t(NPC_DEFS[id].roleKey) : ''; }
+
+export const REP_TIERS: Array<{ min: number; key: string }> = [
+  { min: 80, key: 'rep.hero' }, { min: 50, key: 'rep.ally' }, { min: 20, key: 'rep.friendly' },
+  { min: -19, key: 'rep.neutral' }, { min: -49, key: 'rep.disliked' }, { min: -79, key: 'rep.hostile' },
+  { min: -1000, key: 'rep.enemy' }
 ];
 
 export class ReputationSystem {
-  private reps = new Map<FactionId, number>();
+  static tier(faction: FactionId): string {
+    const v = getGame().state.reputation[faction];
+    for (const tier of REP_TIERS) if (v >= tier.min) return t(tier.key);
+    return t('rep.enemy');
+  }
 
-  constructor(){ FACTIONS.forEach(f=>this.reps.set(f.id,0)); }
+  static value(faction: FactionId): number { return getGame().state.reputation[faction]; }
 
-  get(id:FactionId){ return this.reps.get(id) ?? 0; }
-  set(id:FactionId, v:number){ this.reps.set(id, Math.max(-100,Math.min(100,v))); }
-  add(id:FactionId, delta:number){
-    const cur=this.get(id);
-    this.set(id, cur+delta);
-    // rivalry: gain in one = loss in another
-    const rivals:Record<FactionId,FactionId[]> = {
-      wildKnights:['cityGuard','villagers'],
-      cityGuard:['wildKnights','smugglers'],
-      merchants:['smugglers','villagers'],
-      church:['smugglers','wildKnights'],
-      smugglers:['cityGuard','merchants'],
-      villagers:['wildKnights','merchants']
-    };
-    if(delta>0){
-      rivals[id]?.forEach(r=>{ this.set(r, this.get(r)-Math.floor(delta*0.3)); });
+  static add(faction: FactionId, amount: number, reason?: string) {
+    const s = getGame().state;
+    if (!amount) return;
+    const before = s.reputation[faction];
+    s.reputation[faction] = Math.max(-100, Math.min(100, before + amount));
+    const after = s.reputation[faction];
+    bus.emit('rep:changed', { faction, amount, before, after, reason });
+    if (reason && Math.abs(amount) >= 5) {
+      bus.emit('hud:toast', { text: t('rep.toast', { faction: t('faction.' + faction), amount: amount > 0 ? '+' + amount : String(amount), reason: t(reason) }), tone: amount > 0 ? 'good' : 'bad' });
+    }
+    if (after <= -60 && before > -60) bus.emit('rep:threshold', { faction, tier: 'hostile' });
+    if (after >= 60 && before < 60) bus.emit('rep:threshold', { faction, tier: 'ally' });
+  }
+
+  /** Relacja z konkretnym człowiekiem (−100..+100). */
+  static relation(npcId: string): number { return getGame().state.relations[npcId] || 0; }
+
+  static addRelation(npcId: string, amount: number, reason?: string) {
+    const s = getGame().state;
+    if (!amount) return;
+    s.relations[npcId] = Math.max(-100, Math.min(100, (s.relations[npcId] || 0) + amount));
+    bus.emit('relation:changed', { npcId, amount, value: s.relations[npcId], reason });
+    // świadek zmienia zdanie o Johnie — plotka niesie się dalej
+    if (Math.abs(amount) >= 12 && NPC_DEFS[npcId]) {
+      bus.emit('rumor:seed', {
+        textKey: amount > 0 ? 'rumor.johnHelped' : 'rumor.johnOffended',
+        witness: npcId, severity: Math.min(5, Math.abs(amount) / 8)
+      });
     }
   }
-  getPriceModifier(id:FactionId){
-    const rep=this.get(id);
-    // -100 = +50% price, +100 = -30% price
-    return 1 - (rep/100)*0.3 + (rep<0 ? (-rep/100)*0.5 : 0);
+
+  /** Uogólniona reakcja świata: wszyscy w promieniu widzą i zmieniają zdanie. */
+  static witnessesReact(witnesses: string[], amount: number, faction?: FactionId, reason?: string) {
+    for (const w of witnesses) {
+      this.addRelation(w, amount, reason);
+      const f = (faction || NPC_DEFS[w]?.faction) as FactionId | undefined;
+      if (f) this.add(f, Math.round(amount * 0.35), reason);
+    }
   }
-  canAccess(id:FactionId, threshold:number){ return this.get(id)>=threshold; }
-  serialize(){ return Object.fromEntries(this.reps); }
-  deserialize(d:any){ Object.entries(d).forEach(([k,v])=>this.reps.set(k as FactionId, v as number)); }
-  debugMaxAll(){ FACTIONS.forEach(f=>this.set(f.id,100)); }
-  all(){ return FACTIONS.map(f=>({ ...f, rep:this.get(f.id)})); }
+
+  /** Ostateczna ocena świata dla epilogu. */
+  static summary(): string {
+    const s = getGame().state;
+    const pos = (Object.keys(s.reputation) as FactionId[]).filter(f => s.reputation[f] >= 20);
+    const neg = (Object.keys(s.reputation) as FactionId[]).filter(f => s.reputation[f] <= -20);
+    return t('rep.summary', {
+      friends: pos.map(f => t('faction.' + f)).join(', ') || t('rep.none'),
+      enemies: neg.map(f => t('faction.' + f)).join(', ') || t('rep.none')
+    });
+  }
 }

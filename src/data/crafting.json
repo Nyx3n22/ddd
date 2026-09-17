@@ -1,0 +1,29 @@
+{
+  "stations": [
+    { "id": "forgeWork",   "nameKey": "station.forgeWork",   "scene": "int_smithy",  "prop": "anvil",   "skill": "smithing",  "tool": "hammer_smith", "fuel": "coal_lump", "timeMin": 90 },
+    { "id": "workbench",   "nameKey": "station.workbench",   "scene": "int_smithy",  "prop": "workbench","skill": "carpentry", "tool": null,            "fuel": null,        "timeMin": 60 },
+    { "id": "herbTable",   "nameKey": "station.herbTable",   "scene": "world",       "prop": "herbStall","skill": "alchemy",   "tool": null,            "fuel": null,        "timeMin": 45 },
+    { "id": "kitchenFire", "nameKey": "station.kitchenFire", "scene": "int_tavern",   "prop": "fireplace","skill": "cooking",  "tool": null,            "fuel": null,        "timeMin": 40 },
+    { "id": "tanningVat",  "nameKey": "station.tanningVat",  "scene": "int_tannery", "prop": "vat",     "skill": "tanning",   "tool": "knife_skinning", "fuel": null,        "timeMin": 120 }
+  ],
+  "recipes": [
+    { "id": "r_nails",        "station": "forgeWork",   "out": "nails_handful",     "qty": 6, "in": [{ "id": "iron_bar", "qty": 1 }],                              "skillLevel": 1, "qualityBase": 0.4 },
+    { "id": "r_dagger",       "station": "forgeWork",   "out": "dagger",    "qty": 1, "in": [{ "id": "iron_bar", "qty": 1 }, { "id": "plank_oak", "qty": 1 }], "skillLevel": 2, "qualityBase": 0.35 },
+    { "id": "r_sword",        "station": "forgeWork",   "out": "sword_iron",     "qty": 1, "in": [{ "id": "iron_bar", "qty": 2 }, { "id": "leather_tanned", "qty": 2 }], "skillLevel": 4, "qualityBase": 0.3 },
+    { "id": "r_axehead",      "station": "forgeWork",   "out": "axe_wood",       "qty": 1, "in": [{ "id": "iron_bar", "qty": 1 }, { "id": "plank_oak", "qty": 2 }], "skillLevel": 3, "qualityBase": 0.35 },
+    { "id": "r_helm",         "station": "forgeWork",   "out": "kettle_helm",      "qty": 1, "in": [{ "id": "iron_bar", "qty": 2 }],                              "skillLevel": 5, "qualityBase": 0.25 },
+    { "id": "r_repair_blade", "station": "forgeWork",   "out": "sword_rusted",   "qty": 0, "in": [{ "id": "sword_rusted", "qty": 1 }], "repair": "sword_iron",  "skillLevel": 2, "qualityBase": 0.5 },
+    { "id": "r_shaft",        "station": "workbench",   "out": "arrow",          "qty": 12,"in": [{ "id": "plank_oak", "qty": 1 }, { "id": "feather_goose", "qty": 2 }], "skillLevel": 1, "qualityBase": 0.5 },
+    { "id": "r_torch",        "station": "workbench",   "out": "torch",          "qty": 3, "in": [{ "id": "plank_oak", "qty": 1 }, { "id": "rag_linen", "qty": 1 }],   "skillLevel": 1, "qualityBase": 0.6 },
+    { "id": "r_shield",       "station": "workbench",   "out": "shield_round",   "qty": 1, "in": [{ "id": "plank_oak", "qty": 3 }, { "id": "leather_tanned", "qty": 3 }, { "id": "nails_handful", "qty": 4 }], "skillLevel": 3, "qualityBase": 0.35 },
+    { "id": "r_lockpick",     "station": "workbench",   "out": "lockpick_set",       "qty": 2, "in": [{ "id": "nails_handful", "qty": 2 }],                          "skillLevel": 2, "qualityBase": 0.4 },
+    { "id": "r_salve",        "station": "herbTable",   "out": "salve_wiera",    "qty": 1, "in": [{ "id": "herb_yarrow", "qty": 2 }, { "id": "goose_fat", "qty": 1 }], "skillLevel": 2, "qualityBase": 0.45 },
+    { "id": "r_poultice",     "station": "herbTable",   "out": "poultice",       "qty": 2, "in": [{ "id": "herb_yarrow", "qty": 1 }, { "id": "rag_linen", "qty": 1 }], "skillLevel": 1, "qualityBase": 0.5 },
+    { "id": "r_antidote",     "station": "herbTable",   "out": "antidote_vial",  "qty": 1, "in": [{ "id": "garlic_braid", "qty": 1 }, { "id": "mushroom_common", "qty": 2 }], "skillLevel": 4, "qualityBase": 0.3 },
+    { "id": "r_stew",         "station": "kitchenFire", "out": "stew_bowl",      "qty": 1, "in": [{ "id": "turnip", "qty": 1 }, { "id": "fish_smoked", "qty": 1 }], "skillLevel": 1, "qualityBase": 0.5 },
+    { "id": "r_bread",        "station": "kitchenFire", "out": "bread_loaf",     "qty": 2, "in": [{ "id": "grain_sack", "qty": 1 }],                            "skillLevel": 1, "qualityBase": 0.55 },
+    { "id": "r_leather",      "station": "tanningVat",  "out": "leather_tanned",   "qty": 1, "in": [{ "id": "hide_deer", "qty": 1 }, { "id": "salt_sack", "qty": 1 }], "skillLevel": 2, "qualityBase": 0.4 },
+    { "id": "r_jerkin",       "station": "tanningVat",  "out": "jerkin_leather", "qty": 1, "in": [{ "id": "leather_tanned", "qty": 2 }, { "id": "wool_bundle", "qty": 3 }], "skillLevel": 3, "qualityBase": 0.35 },
+    { "id": "r_wolfskin",     "station": "tanningVat",  "out": "wolfskin_cloak", "qty": 1, "in": [{ "id": "wolf_pelt", "qty": 1 }, { "id": "wool_bundle", "qty": 2 }], "skillLevel": 4, "qualityBase": 0.3 }
+  ]
+}

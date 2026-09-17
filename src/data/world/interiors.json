@@ -1,0 +1,155 @@
+{
+  "interiors": [
+    {
+      "id": "int_tavern", "nameKey": "int.tavern", "w": 15, "h": 11, "floor": "floorWood", "wall": "#6b4a2c",
+      "props": [
+        ["barCounter", 3, 2], ["keg", 2, 3], ["keg", 2, 4], ["barrelStack", 1, 5],
+        ["shelf", 7, 1], ["shelf", 9, 1], ["fireplace", 13, 2],
+        ["tableRound", 5, 5], ["stool", 4, 6], ["stool", 6, 6], ["stool", 5, 4],
+        ["tableRound", 9, 6], ["stool", 8, 7], ["stool", 10, 7], ["stool", 9, 5],
+        ["tableRound", 12, 7], ["stool", 11, 8], ["stool", 13, 8],
+        ["table", 6, 9], ["bench", 5, 9], ["chest", 14, 9], ["torchStand", 1, 8], ["torchStand", 14, 4]
+      ],
+      "lights": [[3, 2, 70, "#ffcf6a"], [13, 3, 80, "#ff9a3c"], [1, 8, 55, "#ffcf6a"], [14, 4, 55, "#ffcf6a"], [7, 6, 45, "#e8d6a8"]],
+      "exits": [{ "tx": 7, "ty": 10, "w": 2, "to": "world" }],
+      "stations": [
+        { "tx": 4, "ty": 2, "kind": "bar", "labelKey": "station.bar", "npc": "hanna" },
+        { "tx": 5, "ty": 5, "kind": "gambleTable", "labelKey": "station.dice", "npc": "gambler_night" },
+        { "tx": 9, "ty": 6, "kind": "gambleTable", "labelKey": "station.cards", "npc": "gambler_day" },
+        { "tx": 14, "ty": 9, "kind": "chest", "labelKey": "station.chest" },
+        { "tx": 13, "ty": 2, "kind": "hearth", "labelKey": "station.hearth" }
+      ],
+      "rooms": [{ "id": "room_1", "tx": 11, "ty": 9, "tw": 3, "th": 2, "labelKey": "int.room", "kind": "bed", "cost": 4 }],
+      "npcs": ["hanna"]
+    },
+    {
+      "id": "int_smithy", "nameKey": "int.smithy", "w": 12, "h": 9, "floor": "floorStone", "wall": "#5a4a3a",
+      "props": [
+        ["forge", 2, 2], ["anvil", 5, 3], ["grindstone", 7, 3], ["toolRack", 9, 1],
+        ["rack", 10, 3], ["crateStack", 1, 6], ["logPile", 3, 7], ["chest", 10, 7],
+        ["quenchBarrel", 6, 2], ["torchStand", 8, 6]
+      ],
+      "lights": [[2, 3, 85, "#ff9a3c"], [8, 6, 50, "#ffcf6a"], [5, 4, 40, "#e8d6a8"]],
+      "exits": [{ "tx": 5, "ty": 8, "w": 2, "to": "world" }],
+      "stations": [
+        { "tx": 5, "ty": 3, "kind": "forgeWork", "labelKey": "station.forge", "npc": "orlik" },
+        { "tx": 10, "ty": 3, "kind": "shop", "labelKey": "station.rack", "npc": "orlik" },
+        { "tx": 10, "ty": 7, "kind": "chest", "labelKey": "station.chest" }
+      ],
+      "npcs": ["orlik"]
+    },
+    {
+      "id": "int_scribe", "nameKey": "int.scribe", "w": 10, "h": 8, "floor": "floorWood", "wall": "#7a6248",
+      "props": [
+        ["bookshelf", 1, 1], ["bookshelf", 3, 1], ["desk", 6, 2], ["stool", 6, 3],
+        ["shelf", 8, 1], ["chest", 9, 6], ["table", 3, 5], ["torchStand", 1, 6]
+      ],
+      "lights": [[6, 2, 55, "#ffcf6a"], [1, 6, 45, "#ffcf6a"], [4, 4, 40, "#e8d6a8"]],
+      "exits": [{ "tx": 4, "ty": 7, "w": 2, "to": "world" }],
+      "stations": [
+        { "tx": 6, "ty": 2, "kind": "shop", "labelKey": "station.scribe", "npc": "skryba_urban" },
+        { "tx": 3, "ty": 5, "kind": "writeDesk", "labelKey": "station.writeDesk" }
+      ],
+      "npcs": ["skryba_urban"]
+    },
+    {
+      "id": "int_warehouse", "nameKey": "int.warehouse", "w": 16, "h": 11, "floor": "floorWood", "wall": "#4a3f30",
+      "props": [
+        ["crateStack", 2, 2], ["crateStack", 4, 2], ["crateStack", 2, 4], ["barrelStack", 6, 3],
+        ["crateStack", 12, 2], ["crateStack", 14, 3], ["barrelStack", 13, 6], ["crateStack", 11, 7],
+        ["crateCustoms", 8, 5], ["smugglingCrate", 9, 8], ["saltPile", 7, 8], ["torchStand", 1, 9],
+        ["torchStand", 15, 1], ["cart", 9, 3]
+      ],
+      "lights": [[1, 9, 60, "#ffcf6a"], [15, 1, 60, "#ffcf6a"], [8, 5, 40, "#c8b48c"]],
+      "exits": [{ "tx": 8, "ty": 10, "w": 2, "to": "world" }],
+      "stations": [
+        { "tx": 9, "ty": 8, "kind": "hideout", "labelKey": "station.hideout" },
+        { "tx": 8, "ty": 5, "kind": "search", "labelKey": "station.searchCrate" }
+      ],
+      "npcs": []
+    },
+    {
+      "id": "int_chapel", "nameKey": "int.chapel", "w": 12, "h": 12, "floor": "floorStone", "wall": "#8a8578",
+      "props": [
+        ["altar", 5, 1], ["pew", 3, 4], ["pew", 7, 4], ["pew", 3, 6], ["pew", 7, 6],
+        ["pew", 3, 8], ["pew", 7, 8], ["torchStand", 1, 2], ["torchStand", 10, 2],
+        ["shrine", 10, 9], ["chest", 1, 10]
+      ],
+      "lights": [[5, 2, 70, "#ffcf6a"], [1, 2, 55, "#ffcf6a"], [10, 2, 55, "#ffcf6a"], [6, 7, 45, "#e8d6a8"]],
+      "exits": [{ "tx": 5, "ty": 11, "w": 2, "to": "world" }],
+      "stations": [
+        { "tx": 5, "ty": 2, "kind": "altar", "labelKey": "station.altar", "npc": "teodor" },
+        { "tx": 1, "ty": 10, "kind": "alms", "labelKey": "station.alms" }
+      ],
+      "npcs": ["teodor"]
+    },
+    {
+      "id": "int_bath", "nameKey": "int.bath", "w": 10, "h": 8, "floor": "floorStone", "wall": "#7d7a72",
+      "props": [["tub", 2, 2], ["tub", 5, 2], ["tub", 2, 5], ["tub", 5, 5], ["barrelRain", 8, 2], ["torchStand", 8, 6], ["bench", 8, 4]],
+      "lights": [[3, 3, 60, "#ffd9a0"], [6, 6, 50, "#ffcf6a"], [8, 6, 45, "#ffcf6a"]],
+      "exits": [{ "tx": 4, "ty": 7, "w": 2, "to": "world" }],
+      "stations": [{ "tx": 2, "ty": 2, "kind": "bath", "labelKey": "station.bath" }, { "tx": 5, "ty": 5, "kind": "medic", "labelKey": "station.medic", "npc": "medyk_elen" }],
+      "npcs": ["medyk_elen"]
+    },
+    {
+      "id": "int_customs", "nameKey": "int.customs", "w": 12, "h": 8, "floor": "floorWood", "wall": "#6a5a44",
+      "props": [["desk", 3, 2], ["desk", 6, 2], ["stool", 3, 3], ["bookshelf", 9, 1], ["chest", 10, 5], ["crateCustoms", 1, 5], ["crateCustoms", 2, 6], ["torchStand", 11, 6]],
+      "lights": [[3, 2, 55, "#ffcf6a"], [11, 6, 50, "#ffcf6a"]],
+      "exits": [{ "tx": 5, "ty": 7, "w": 2, "to": "world" }],
+      "stations": [
+        { "tx": 3, "ty": 2, "kind": "customsDesk", "labelKey": "station.customs" },
+        { "tx": 6, "ty": 2, "kind": "shop", "labelKey": "station.confiscated", "npc": "celnik_bernard" }
+      ],
+      "npcs": ["celnik_bernard"]
+    },
+    {
+      "id": "int_vagn", "nameKey": "int.vagn", "w": 9, "h": 8, "floor": "floorWood", "wall": "#5f4a34",
+      "props": [["weaponRack", 1, 1], ["bed", 6, 1], ["table", 3, 4], ["bench", 3, 5], ["chest", 7, 6], ["fireplace", 8, 2], ["torchStand", 1, 6]],
+      "lights": [[8, 3, 70, "#ff9a3c"], [1, 6, 45, "#ffcf6a"]],
+      "exits": [{ "tx": 4, "ty": 7, "w": 2, "to": "world" }],
+      "stations": [
+        { "tx": 1, "ty": 1, "kind": "teacher", "labelKey": "station.trainingDummy", "npc": "vagn" },
+        { "tx": 6, "ty": 1, "kind": "bed", "labelKey": "station.bed" }
+      ],
+      "npcs": ["vagn"]
+    },
+    {
+      "id": "int_room_john", "nameKey": "int.roomJohn", "w": 7, "h": 6, "floor": "floorWood", "wall": "#6b563e",
+      "props": [["bed", 1, 1], ["chest", 5, 1], ["table", 4, 4], ["stool", 4, 5], ["torchStand", 6, 2]],
+      "lights": [[6, 2, 45, "#ffcf6a"], [3, 3, 35, "#e8d6a8"]],
+      "exits": [{ "tx": 3, "ty": 5, "w": 2, "to": "int_tavern" }],
+      "stations": [{ "tx": 1, "ty": 1, "kind": "bed", "labelKey": "station.bed" }, { "tx": 5, "ty": 1, "kind": "chest", "labelKey": "station.chest" }],
+      "npcs": []
+    },
+    {
+      "id": "int_guard", "nameKey": "int.guard", "w": 10, "h": 8, "floor": "floorStone", "wall": "#6e6a63",
+      "props": [["weaponRack", 1, 1], ["desk", 4, 2], ["table", 7, 4], ["bench", 7, 5], ["stocks", 2, 6], ["torchStand", 9, 1], ["chest", 8, 1]],
+      "lights": [[9, 1, 55, "#ffcf6a"], [4, 2, 45, "#e8d6a8"]],
+      "exits": [{ "tx": 4, "ty": 7, "w": 2, "to": "world" }],
+      "stations": [
+        { "tx": 4, "ty": 2, "kind": "guardDesk", "labelKey": "station.guardDesk", "npc": "rawicz" },
+        { "tx": 2, "ty": 6, "kind": "stocks", "labelKey": "station.stocks" }
+      ],
+      "npcs": ["rawicz"]
+    },
+    {
+      "id": "int_guild", "nameKey": "int.guild", "w": 12, "h": 9, "floor": "rug", "wall": "#7a5f42",
+      "props": [["desk", 5, 2], ["stool", 5, 3], ["bookshelf", 1, 1], ["bookshelf", 10, 1], ["table", 8, 5], ["bench", 8, 6], ["chest", 11, 7], ["torchStand", 2, 7]],
+      "lights": [[5, 2, 60, "#ffcf6a"], [2, 7, 45, "#ffcf6a"], [8, 5, 40, "#e8d6a8"]],
+      "exits": [{ "tx": 5, "ty": 8, "w": 2, "to": "world" }],
+      "stations": [
+        { "tx": 5, "ty": 2, "kind": "guildDesk", "labelKey": "station.guildDesk", "npc": "kupiec_zbylut" },
+        { "tx": 11, "ty": 7, "kind": "chest", "labelKey": "station.chest" }
+      ],
+      "npcs": ["kupiec_zbylut"]
+    },
+    {
+      "id": "int_tannery", "nameKey": "int.tannery", "w": 11, "h": 8, "floor": "floorStone", "wall": "#6b5a44",
+      "props": [["tub", 2, 2], ["tub", 5, 2], ["hideRack", 8, 2], ["crateStack", 9, 6], ["barrel", 1, 6], ["torchStand", 10, 1]],
+      "lights": [[10, 1, 50, "#ffcf6a"], [3, 4, 40, "#c8b48c"]],
+      "exits": [{ "tx": 5, "ty": 7, "w": 2, "to": "world" }],
+      "stations": [{ "tx": 2, "ty": 2, "kind": "tanVat", "labelKey": "station.tanVat" }, { "tx": 8, "ty": 2, "kind": "shop", "labelKey": "station.hides", "npc": "garbarz_oles" }],
+      "npcs": ["garbarz_oles"]
+    }
+  ]
+}
