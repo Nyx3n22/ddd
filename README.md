@@ -1,13 +1,23 @@
-# ELENEM — RPG 3D, otwarty świat, 1430 r.
+# ELENEM — 2D pixel-art RPG, otwarty świat, rok 1430
 
-**Tytuł roboczy:** Elenem  
-**Gatunek:** RPG 3D z otwartym światem, immersive sim, survival light, symulacja życia  
-**Perspektywa:** FPP z przełączeniem na TPP [C]  
-**Setting:** Średniowiecze, rok 1430, wyspa Elenem — port, miasto, wsie, lasy, bagna, kopalnie, klify, ruiny  
-**Ton:** Przyziemny, brudny realizm; magia jako zabobon i plotka  
+**Gatunek:** RPG 2D z otwartym światem, immersive sim, survival light, symulacja życia
+**Perspektywa:** rzut 3/4 z góry (top-down), pixel-art
+**Setting:** średniowiecze, rok 1430, wyspa Elenem — port, miasto, wsie, lasy, bagna, kopalnie, klify, ruiny
+**Ton:** przyziemny, brudny realizm; magia jako zabobon i plotka
 **PEGI:** 16+
 
-> **Prolog:** John, 36 lat, były najemnik o niejasnej przeszłości, przypływa statkiem do portowego miasta na wyspie Elenem. Ma 100 koron i dług 10 000 koron do spłaty w 30 dni u Dzikich Rycerzy — na wpół bandyckiego bractwa rycerskiego kontrolującego wyspę.
+> **Prolog:** John, 36 lat, były najemnik o niejasnej przeszłości, przypływa statkiem do
+> portowego miasta na wyspie Elenem. Ma 100 koron i dług **10 000 koron** do spłacenia
+> w **30 dni** u Dzikich Rycerzy — na wpół bandyckiego bractwa kontrolującego wyspę.
+
+Ten projekt to **grywalny vertical slice Etapu 1** (brief v2.0, §10): jedna dzielnica
+portowa i kompletna pętla „jeden dzień pracy w mieście". Szczegóły zakresu:
+[`docs/VERTICAL_SLICE.md`](docs/VERTICAL_SLICE.md). Mapowanie na Godot 4.x:
+[`docs/GODOT_MIGRATION.md`](docs/GODOT_MIGRATION.md).
+
+> ⚠️ **Zmiana kierunku (v2.0):** poprzednia wersja była prototypem 3D na Three.js.
+> Brief v2.0 odwraca tę decyzję — gra jest **2D pixel-art**. Kod 3D został usunięty
+> z `src/` i pozostaje wyłącznie w historii gita (commit `5822bfc`).
 
 ---
 
@@ -15,108 +25,118 @@
 
 ```bash
 npm install
-npm run dev
-# otwórz http://localhost:5173
-npm run build
+npm run dev        # http://localhost:5173
 ```
 
-**Live Preview:** Projekt działa w przeglądarce, 60 FPS na sprzęcie średniej klasy, świat ciągły bez ekranów ładowania (streaming chunków).
+Pozostałe polecenia:
 
-**Rekomendacja technologiczna (wybrana):**
-- **Vite + TypeScript + Three.js** — szybki dev, moduły ES, optymalny bundle
-- Architektura oparta na zdarzeniach (EventBus)
-- Dane w JSON (dialogi, przedmioty, questy, ceny, tłumaczenia)
-- Save system serializujący pełny stan świata do localStorage
-- Pełna lokalizacja PL/EN przez pliki tłumaczeń
+| Polecenie | Co robi |
+|---|---|
+| `npm run build` | produkccyjny build (Vite) do `dist/` |
+| `npm run preview` | podgląd builda |
+| `npm run typecheck` | `tsc --noEmit` (strict) |
+| `npm run i18n:keys` | wyciąga klucze z kodu i danych → źródło tłumaczeń |
+| `npm run i18n:build` | buduje `src/data/locales/{pl,en}.json` |
+| `npm run i18n:check` | audyt: brakujące klucze, klucze danych, parametry `{…}` |
+| `npm run smoke` | build + test dymny na jsdom (realny scenariusz rozgrywki) |
+| `npm run verify` | **typecheck + i18n:check + build + smoke** — wszystko naraz |
 
-Alternatywy rozważone: Babylon.js (większy overhead), Godot Web (brak pełnej kontroli nad UI), Unity WebGL (ciężki).
+Projekt działa w przeglądarce i w Live Preview; renderowanie na canvasie 2D,
+wewnętrzny bufor **640×360** skalowany całkowitą wielokrotnością.
+
+---
+
+## 🎭 Zasada nadrzędna: wszystko ma uzasadnienie fabularne
+
+Najważniejsza reguła briefu (§0). **Żaden system nie pojawia się „z powietrza"
+pod klawiszem** — każdy interfejs ma fizyczny przedmiot w świecie i powód, dla
+którego John ma do niego dostęp. Złamanie tej zasady = usunięcie lub przeróbka funkcji.
+
+| Klawisz | Co naprawdę otwiera | Skąd John to ma |
+|---|---|---|
+| `K` | **notatnik Johna** | kupiony u Teodora (skryba). Bez notatnika klawisz nie działa. Notatnik może zaginąć, zamoknąć, spłonąć, zostać skradziony |
+| `M` | **zwój mapy** | kupiony u Gosława (kartograf). Każda mapa pokrywa **inny region** — bez niej widzisz tylko to, co na ekranie |
+| `G` | **strona wprawy w notatniku** | wymaga notatnika. Perki odblokowuje **tylko żywy nauczyciel**: podejście, zapłata, `E` — nigdy menu |
+| `J` | **dziennik zleceń i długu** | wyłącznie zapis. Zero mechaniki rozgrywki pod tym klawiszem |
+| `I` | sakwa i ekwipunek | fizyczny dobytek Johna |
+| — | hazard, handel, kowalstwo, leczenie, nauka, zaciąg | **bez skrótów klawiszowych**: podejście do stołu / kowadła / medyka / mistrza / areny i `E` |
+
+Zamiast twardych bloków UI są **konsekwencje w świecie**: strażnik pyta o glejt,
+brama jest zamknięta, pies pilnuje podwórka, przewoźnik liczy sobie za kurs,
+kupiec nie skupi stu worków soli, bo nie ma tyle gotówki.
+
+Każdy NPC ma imię, zawód, dom, plan doby i powód istnienia (żadnego „Villager #12").
+Każdą liczbę w grze da się opisać jednym zdaniem po ludzku.
 
 ---
 
 ## 🎮 Sterowanie
 
-| Akcja | Domyślny | Opis |
-|-------|----------|------|
-| Ruch | WASD | Poruszanie |
-| Skok | Spacja | Skok |
-| Kucanie/skradanie | CTRL | Przytrzymanie lub przełącznik (opcja) |
-| Bieg | Shift | Zużywa wytrzymałość |
-| Interakcja | E | NPC, przedmioty, drzwi |
-| Chwyt/przeciąganie | F | Ciała i obiekty |
-| Atak / blok/parowanie | LPM / PPM | Kierunkowe ataki, parowanie w oknie czasowym |
-| Koło szybkiego dostępu | Q | Pochodnia, bandaż, mikstura, broń |
-| Latarnia/pochodnia | R | Zapal/zgaś |
-| Przełączenie FPP/TPP | C | Kamera |
-| Pauza/ustawienia | ESC | |
-| Mapa | M | Mgła wojny, znaczniki gracza |
-| Drzewko rozwoju | G | Punkty ograniczone, nauczyciele |
-| Kompendium | K | Przedmioty, bestiariusz, zadania, zapiski Johna |
-| Ekwipunek | I | Waga, jakość, rzemiosło |
-| Dziennik zadań | J | Fabularne, poboczne, proceduralne |
-| Zegar/kalendarz/dług | T | 30-dniowy kalendarz, licznik |
-| Szybkie menu | TAB | Przełączanie zakładek |
-| Szybki zapis/wczytanie | F5/F9 | Wyłączone w Hardcore |
-| Konsola deweloperska | ~ | Komendy debug |
+| Akcja | Klawisz | Opis |
+|---|---|---|
+| Ruch | `W A S D` / strzałki | 4 kierunki, płynna interpolacja |
+| Unik / przeskoczenie | `Spacja` | **nie skok** — w rzucie z góry skok nie ma sensu; przewrót, przeskok przez przeszkodę, krótkie klatki nietykalności |
+| Skradanie | `Ctrl` / `C` | przytrzymanie lub przełącznik (opcja w ustawieniach) |
+| Bieg | `Shift` | zużywa wytrzymałość |
+| Interakcja | `E` | NPC, przedmioty, drzwi, stoły, stanowiska, bramy |
+| Chwyt / przeciąganie | `F` | ciała i obiekty |
+| Atak | `LPM` | kierunek od ruchu/kursora; cel wybierany po bliskości i łuku |
+| Blok / parowanie | `PPM` | parowanie w oknie czasowym zależnym od trudności |
+| Pas szybkiego dostępu | `Q` | pochodnia, bandaż, broń, narzędzie |
+| Pochodnia / latarnia | `R` | zapal / zgaś (zużywa olej) |
+| Zegar, kalendarz, dług | `T` | pora dnia, dzień, termin spłaty |
+| Notatnik | `K` | wymaga kupionego notatnika |
+| Mapa | `M` | wymaga kupionego zwoju mapy danego regionu |
+| Wprawa (umiejętności) | `G` | strona w notatniku |
+| Dziennik zleceń i długu | `J` | |
+| Ekwipunek | `I` | |
+| Pauza / ustawienia | `ESC` | zakładki: zapis, ustawienia, sterowanie, statystyki, o grze |
+| Szybki zapis / odczyt | `F5` / `F9` | wyłączone na trudności Ironman |
+| Konsola deweloperska | `` ` `` | narzędzie, nie część świata |
 
-Wszystkie klawisze w pełni remapowalne w ESC → Ustawienia.
-
----
-
-## 🧠 Systemy rdzeniowe
-
-### 4.1 Drzewko rozwoju [G]
-- Punkty ograniczone — nie da się odblokować wszystkiego.
-- Źródła: misje, prace, odkrycia, kompendium, osiągnięcia.
-- Gałęzie: Walka, Skradanie i Przestępczość, Rzemiosło, Handel i Perswazja, Przetrwanie, Wiedza.
-- Perki wymagają nauczyciela, opłaty i reputacji.
-- Wzrost przez używanie (hybryda: praktyka = poziom bazowy, punkty = perki).
-
-### 4.2 Kompendium [K]
-1. Przedmioty — zastosowanie, wartość, gdzie kupić/sprzedać
-2. Bestiariusz i przyroda — odblokowywane przez obserwację/polowanie/zbieranie/rozmowę
-3. Zadania — aktywne/ukończone/utracone
-4. Zapiski Johna — przeszłość bohatera
-
-### 4.3 Dialogi
-- Każdy NPC ma dialog (2 linijki do rozbudowanych drzew).
-- Warunki: Perswazja, Zastraszanie, Kłamstwo, reputacja, przedmioty, kompendium, pora dnia, strój.
-- Widoczne zablokowane opcje z wymogiem `[Perswazja 4 — za niski poziom]`.
-- Kłamstwa weryfikowane później — konsekwencje.
-
-### 4.4 Mapa i eksploracja [M]
-- Ciągła mapa: miasto portowe, wsie, lasy, bagna, kamieniołom, klify, ruiny, obóz Rycerzy.
-- Odblokowywanie: przepustka, łapówka, kontakt, wierzchowiec, łódź, klucz, quest.
-- Mgła wojny, kupno map u kartografa, wskazówki NPC, własne znaczniki.
+Wszystkie klawisze są remapowalne (`ESC` → Ustawienia → Sterowanie); mapowanie
+trzymane w `localStorage` pod kluczem `elenem.binds.v2`. Obsługiwany jest też gamepad.
 
 ---
 
-## ⚙️ 20+ Dodatkowych Systemów (zaimplementowane)
+## 🧩 Co jest w vertical slice
 
-1. **Czas, kalendarz, licznik długu** — cykl dnia/nocy, 30 dni, sen przyspiesza czas, sklepy/questy zależne od pory, ostatnie 5 dni = zaostrzona muzyka, poborcy, zmienione dialogi.
-2. **Dynamiczny dług i raty** — spłata częściowa, negocjacje odroczenia, pożyczka u lichwiarza (30% odsetek), zastaw, oszustwo — różne zakończenia.
-3. **Reputacja frakcji** — 6 frakcji -100..+100, ceny, questy, reakcje, obszary. Wzrost u jednych = spadek u innych.
-4. **Renoma i plotki** — czyny z opóźnieniem (świadek musi dotrzeć), zabicie/przekupienie świadka, NPC komentują strój/majątek/wyczyny.
-5. **Przestępczość, śledztwo, kary** — straż nie wie automatycznie. Liczą się świadkowie, ślady krwi, skradziony przedmiot, hałas, światło. Kary: grzywna, dyby, więzienie (utrata dni!), banicja, śmierć. Łapówki, przyznanie, ucieczka, walka.
-6. **Dynamiczna ekonomia** — podaż/popyt, pory roku, wydarzenia (blokada portu → sól x2, zaraza → zioła x3). Wykup, przemyt, niszczenie konkurencji. Kupcy mają ograniczoną gotówkę.
-7. **Przemyt i czarny rynek** — straż celna, przeszukania, kryjówki w wozach/beczkach, fałszywe dokumenty, towary zakazane (broń, alkohol bez akcyzy, relikwie, trucizny, ludzie).
-8. **Rzemiosło** — kowalstwo, alchemia, garbarstwo, stolarstwo, gotowanie, warzenie piwa. Wymaga warsztatu, surowców, przepisu, poziomu. Jakość zależna od umiejętności.
-9. **Walka** — stamina, ataki kierunkowe, blok, parowanie w oknie czasowym, zbicie gardy, chwyt. Bronie vs pancerze. 3 przeciwników = wyrok.
-10. **Obrażenia lokalizacyjne** — kończyny/tułów/głowa, złamana noga spowalnia, rana ręki osłabia atak, krwotok zabija. Bandaże, szyny, zioła, medyk, łaźnia, blizny komentowane przez NPC.
-11. **Potrzeby życiowe** — głód, pragnienie, zmęczenie, czystość jako modyfikatory (brudny = gorsze ceny, niewyspany = gorsze celowanie).
-12. **Choroby, zatrucia, epidemie** — zakażone rany, zatrucie pokarmowe, gorączka bagienna, losowa zaraza zmieniająca mapę (kwarantanny, ceny, questy).
-13. **Skradanie** — światło/dźwięk, gaszenie pochodni, miękkie podłoże, cień, odwracanie uwagi, wytrychy, kieszonkowstwo, ukrywanie ciał.
-14. **Rutyny dobowe NPC** — harmonogram dom/praca/karczma/kościół/sen, obserwacja do planowania kradzieży/zasadzki, reakcje na zmiany (otwarte drzwi, brak towaru, zwłoki).
-15. **Relacje, towarzysze, najemnicy** — zaufanie, przyjaźń, romans, sojusz, wrogość, najemnik dzienny, stały towarzysz z celami (może zdradzić).
-16. **Własność i baza** — wynajem pokoju, zakup domu/warsztatu/magazynu, skrytka, stojak na broń, łóżko do zapisu, czynsz i podatki co tydzień.
-17. **Transport** — konie (wytrzymałość, siodło, karmienie), wozy, łodzie, szybka podróż tylko do odkrytych bezpiecznych punktów kosztem czasu.
-18. **Polowania, zbieractwo, rybołówstwo** — tropy, odgłosy, skórowanie, mięso/skóry, zioła/grzyby z ryzykiem pomyłki (kompendium pomaga).
-19. **Zlecenia proceduralne** — tablice ogłoszeń, szablony (dostawa, eskorta, szkodniki, dług, zaginiony), losowi zleceniodawcy/lokacje/stawki, mniej opłacalne niż fabularne — siatka bezpieczeństwa.
-20. **Losowe wydarzenia** — napady, karawany, wraki po sztormie, pożar, jarmark, egzekucja, procesja, obława, pojedynek. Wagi i cooldowny.
-21. **Hazard i minigry** — kości, karty, zapasy, wyścigi konne, rzut podkową, oszukiwanie (umiejętność) i ryzyko pobicia/utraty reputacji.
-22. **Pogoda i pory roku** — deszcz, mgła, śnieg, sztorm, upał, wpływ na widoczność/ślady/tropienie/ceny/dostępność morza/zachowanie NPC.
-23. **Wiele zakończeń x6** — spłata uczciwie, spłata z przestępstwa, ucieczka z wyspy, wstąpienie do Dzikich Rycerzy, obalenie Rycerzy, śmierć/niewola. Epilog podsumowuje wyspę/frakcje/NPC.
-24. **Zapis i trudność** — sloty ręczne, autozapis przy lokacji/queście, Hardcore/Ironman (1 zapis, brak F9, śmierć=koniec), osobne suwaki: walka, ekonomia, przestępczość.
-25. **Dostępność** — FOV, skalowanie UI, napisy z tłem/wielkością, daltonizm, wyłączenie migotania/wstrząsów, pełny remapping, suwaki głośności, przytrzymaj/przełącz kucanie/bieg.
+**Dzielnica portowa** (~1/40 wyspy) — `src/data/world/district_port.json`:
+
+- siatka **140 × 112 kafli** (kafel 32 px), chunki 16×16, rysowanie tylko chunków w kadrze
+- punkt startowy na deskach przystani (`2016, 3216`), wejście ze statku
+- **8 regionów**: przystań, dolne miasto, plac targowy, podwórze garbarza, dziedziniec kaplicy, podwórze Vagna, mola, zachodnia alejka
+- **24 budynki** (11 z wnętrzami) + **12 definicji wnętrz** (karczma, kuźnia, składnica, kaplica, łaźnia, komora celna, warsztat Vagna, pokój Johna, posterunek, cech, garbarnia, kantorek skryby)
+- **124 rekwizyty**, 19 lamp, 3 bramy, 2 punkty szybkiej podróży, 4 spawnery
+
+**Ludzie i ekonomia:**
+
+- **28 NPC** z imieniem, zawodem, domem, planem doby, nastawieniem i plotkami; **13 z nich uczy** umiejętności
+- **13 kupców** z własną ofertą, gotówką i usługami: `contract`, `drink`, `fence`, `hideout`, `meal`, `pass`, `permit`, `room`, `set_bone`, `smuggle`, `stitch`, `treat`
+- **6 zleceń** (`q_prolog_debt`, `q_coal_for_orlik`, `q_untaxed_salt`, `q_marta_satchel`, `q_hanna_tab`, `q_vagn_respect`) o typach `talk / collect / kill / gamble / custom / debtPaid / enterInterior / reachArea / payGold`
+- **93 przedmioty** w 15 kategoriach, waga i objętość, stan i zużycie, broń z reach, pancerze warstwowe
+- **5 stanowisk rzemieślniczych, 18 receptur**, jakość zależna od umiejętności
+- hazard: kości, karty, kubki; oszukiwanie jako umiejętność z ryzykiem pobicia
+
+**Postać i walka:**
+
+- **34 umiejętności** w 6 gałęziach (walka, przestępczość, rzemiosło, handel, przetrwanie, wiedza) — rosną **od używania**, nie od punktów
+- **34 perki** — wyłącznie od żywego nauczyciela, za opłatą i przy odpowiedniej reputacji
+- obrażenia warstwowe (kończyny / tułów / głowa), skaleczenia, krwawienie, opatrunki, szyny, medyk
+- **10 stworzeń i 6 typów ludzi** (wilk, dzik, jeleń, pies, wrona, szczur, szczupak, gęś, koń, Dziki Rycerz; bandyta, bandyta-boss, pijak, strażnik, giermek)
+- 4 poziomy trudności (`story`, `normal`, `veteran`, `iron`) modyfikujące HP/obrażenia/okno parowania/nietykalność uniku
+
+**Świat i czas:**
+
+- cykl dobowy z fazami (świt, dzień, zmierzch, noc), dzwon miejski co godzinę
+- pogoda (bezchmurzenie, pochmurno, deszcz, burza, mgła, śnieg, upał) i jej wpływ na widoczność, ślady, ceny i zachowanie NPC
+- oświetlenie: globalna ciemność + źródła światła (lampy, pochodnie, okna, ognie)
+- potrzeby: głód, pragnienie, zmęczenie, czystość — jako modyfikatory, nie jako paski do zapełniania
+- dług 10 000 koron / 30 dni: odsetki, raty, negocjacje, poborcy, lichwiarz, zastaw
+- reputacja 6 frakcji, plotki rozchodzące się z opóźnieniem (świadek musi dojść), przestępstwa i śledztwo, 6 zakończeń
+
+**Notatnik** (fizyczny przedmiot) gromadzi: bestiariusz (10 stworzeń, 5 roślin, 7 miejsc),
+przedmioty, miejsca, zapiski Johna (7) i własne wpisy gracza.
 
 ---
 
@@ -124,72 +144,117 @@ Wszystkie klawisze w pełni remapowalne w ESC → Ustawienia.
 
 ```
 src/
-  core/
-    EventBus.ts          # szyna zdarzeń — systemy komunikują się bez sprzęgnięcia
-    GameState.ts         # centralny stan gry, serializacja
-    TimeSystem.ts        # czas, kalendarz, pory roku
-    InputManager.ts      # remapowalne klawisze
-    SaveSystem.ts        # localStorage, sloty
-    Localization.ts      # PL/EN z JSON
-    DebugConsole.ts      # konsola ~, komendy dev
-  systems/
-    DebtSystem.ts, ReputationSystem.ts, RumorSystem.ts, CrimeSystem.ts,
-    EconomySystem.ts, WeatherSystem.ts, NeedsSystem.ts, InjurySystem.ts,
-    CraftingSystem.ts, CombatSystem.ts, StealthSystem.ts, WorldEvents.ts,
-    QuestSystem.ts, OtherSystems.ts (smuggling, disease, NPC schedule, companions, property, transport, hunting, gambling, endings)
-  world/
-    World.ts             # terrain, lokacje, NPC, chunk streaming, raycast
-  player/
-    PlayerState.ts       # skills, inventory, equipment
-    PlayerController.ts  # FPP/TPP, ruch, grawitacja, pointer lock
-  ui/
-    UIManager.ts         # HUD, mapy, skill tree, kompendium, ekwipunek, dziennik, zegar, menu, toasty
-  data/
-    items.json, dialogues.json, quests.json
-    translations/pl.json, en.json
+  core/      EventBus · GameState · Game · TimeSystem · InputManager · Localization
+             SaveSystem · Settings · RNG · AudioSystem · DebugConsole · gameSingleton
+  render/    Palette · Art · Characters · Buildings · Icons · Camera · Lighting
+             WeatherParticles · FloatingText · Renderer
+  world/     TileMap · Scene · Loaders · World
+  entities/  Actor · Player · NPCActor · EnemyActor
+  systems/   DialogueSystem · QuestSystem · SkillsSystem · InventorySystem · EconomySystem
+             CraftingSystem · GamblingSystem · CrimeSystem · ReputationSystem · RumorSystem
+             NeedsSystem · WeatherSystem · DebtSystem · NotesSystem
+  ui/        UIManager — wszystkie oprawy diegetyczne
+  data/      wyłącznie JSON (patrz niżej)
+tools/
+  i18n/      keys.py · build.py · check.py
+  smoke.mjs  test dymny na jsdom
 ```
 
-**EventBus:** Wszystkie systemy emitują/obsługują zdarzenia (`dayChanged`, `debtPaid`, `goldChanged`, `plagueStart`, `randomEvent`, `teleport`, `perspectiveChanged`).
+**EventBus.** Systemy nie znają się nawzajem — emitują i nasłuchują **43 zdarzenia**
+(`DAY_CHANGED`, `PLAYER_ATTACK`, `SKILL_LEVEL_UP`, `RUMOR_SPREAD`, `CRIME_COMMITTED`,
+`TRADE_DONE`, `DEBT_PAID`, `QUEST_ADVANCED`, `NOTES_DAMAGED`, `SLEPT`, `CRAFTED`, …).
+To samo w Godocie realizują sygnały — patrz dokument migracji.
 
-**Dane zewnętrzne:** JSON — dialogi, przedmioty, ceny, questy, eventy, tłumaczenia. Kod tylko interpretuje.
+**Dane zewnętrzne.** Wszystkie liczby, teksty i definicje żyją w JSON; kod tylko je
+interpretuje. Dzięki temu balans i treść zmienia się bez dotykania TypeScriptu.
 
-**Save:** `GameState.serialize()` → JSON → localStorage. Zapisuje pozycje NPC, ekonomię, reputacje, flagi questów, dzień/godzinę, majątek.
+| Plik | Zawartość |
+|---|---|
+| `data/world/district_port.json` | siatka, regiony, budynki, rekwizyty, lampy, bramy, spawnery |
+| `data/world/interiors.json` | 12 wnętrz |
+| `data/npcs.json` | 28 postaci: rutyna, nauczanie, nastawienie, dialog |
+| `data/merchants.json` | 13 kupców: oferta, gotówka, usługi |
+| `data/dialogues/{pl,en}.json` | drzewa dialogowe z warunkami i efektami |
+| `data/items.json` | 93 przedmioty |
+| `data/skills.json` | 34 umiejętności, 34 perki, 6 gałęzi, krzywa XP |
+| `data/quests.json` | 6 zleceń z etapami |
+| `data/crafting.json` | 5 stanowisk, 18 receptur |
+| `data/enemies.json` | stworzenia, ludzie, presety trudności |
+| `data/bestiary.json` | wpisy notatnika |
+| `data/locales/{pl,en}.json` | **1425 kluczy** w każdej wersji |
+
+**Zapis.** `GameState.serialize()` + `World.serialize()` → JSON → `localStorage`
+(sloty ręczne + autozapis). Serializowany jest pełny stan świata: czas, pogoda,
+pozycje i rutyny NPC, ekwipunek, umiejętności, perki, zlecenia, dług, reputacje,
+plotki, notatki, flagi, stan pojemników.
+
+**Lokalizacja.** Zero twardych napisów w kodzie — wszystko przez `t('klucz', {param})`.
+Klucze danych (pola `*Key`) są audytowane razem z kluczami UI.
+
+**Determinizm.** `RNG` to mulberry32 z ziarnem (domyślnie `1430`) + `hash2(x, y, seed)`
+dla szumu siatki — ten sam seed daje ten sam świat.
+
+**Dźwięk.** Syntezowany proceduralnie w WebAudio (brak plików audio w repozytorium):
+kroki po różnych podłożach, uderzenia, dzwon, tłum, wiatr, deszcz.
 
 ---
 
-## 🎨 Styl artystyczny i audio (założenia)
+## 🎨 Założenia techniczne i artystyczne
 
-- Paleta przygaszona, ziemista: brąz, szarość, zieleń mchu, rdzawa czerwień.
-- Architektura: drewno, glina, kamień, strzecha; miasto ciasne i brudne.
-- Muzyka: lira korbowa, flet, lutnia, bęben, dynamicznie reagująca na napięcie i licznik dni.
-- Dźwięk: kroki po różnych podłożach, rozmowy NPC w tle, dzwon miejski odmierzający godziny.
-- W prototypie: Three.js MeshStandardMaterial z vertex colors, mgła, PointLight w lokacjach, cienie PCFSoft.
+- bufor wewnętrzny **640×360**, skalowanie **całkowitą wielokrotnością** (bez rozmazywania)
+- kafel **32×32 px**, postać gracza ~**32×48 px**
+- ograniczona ciepła paleta (brązy, szarości, zielenie mchu, rdzawa czerwień, pergamin)
+- miękkie cienie w jednym kierunku, **Y-sorting obowiązkowy** — postać wchodzi za budynek, beczkę i stragan
+- culling obiektów poza kadrem + rysowanie tylko widocznych chunków
+- sprite'y rysowane proceduralnie z jednej palety: ten sam szkielet NPC, wymienne kolory
+- docelowo 60 FPS na sprzęcie średniej klasy
 
 ---
 
-## 🧪 Debug
+## 🧪 Narzędzia deweloperskie
 
-Konsola [~]:
+**Konsola** (`` ` ``) — 43 polecenia:
+
 ```
-help, teleport x y z, addgold N, setday N, setreputation faction value,
-spawn npc, weather [clear|rain|fog|storm|snow], plague, timeScale N,
-godmode, quest list, save, load, clear, reputation, event, heal, pos
+help · give <itemId> [qty] · take <itemId> [qty] · gold <n> · addgold <n>
+debt [pay|set|days|extend] · time <h> [m] · day <n> · advance [min]
+weather <clear|cloudy|rain|storm|fog|snow|heat> · plague [on|off]
+tp <region|x y> · scene <world|int_x> · quest [list|start|advance|complete|fail]
+skill <id> [level] · perk <id> · rep <faction> <n> · rel <npcId> <n>
+flag <key> [value] · flags · crime <type> · wanted [0-5] · clear
+spawn <npcId|creature|bandit> · kill <npcId> · revive <npcId> · hurt <n> · heal
+injure [part] [type] · note <text> · notebook · map · reveal · rumor <key>
+ending <id> · lang <pl|en> · stats · fps · save [slot] · load [slot]
+seed <n> · npcs · godmode
 ```
 
-Przyciski dev w ESC → Systemy: +1000 koron, zaraza, losowe zdarzenie, max reputacje.
+**Test dymny** (`tools/smoke.mjs`) uruchamia grę w jsdom i przechodzi realny scenariusz:
+rozruch → nowa gra → ruch, unik, atak, blok → `K`/`M`/`G` odmawiają bez przedmiotu,
+a po zakupie notatnika i mapy otwierają się → `J`/`I`/`ESC` → upływ czasu → zlecenia
+w dzienniku → noc, pochodnia, pogoda → zapis, mutacja stanu, odczyt → przełączenie
+na EN (cała oprawa po angielsku) → ekran zakończenia → plotki.
+
+**Stan weryfikacji na tej gałęzi:**
+
+| Sprawdzenie | Wynik |
+|---|---|
+| `tsc --noEmit` (strict) | 0 błędów |
+| `vite build` | OK |
+| `tools/i18n/check.py` | 1425 kluczy PL i EN, 0 braków; 141 kluczy z parametrami, 0 niezgodności |
+| `tools/smoke.mjs` | 55 kroków OK, 0 błędów, 0 ostrzeżeń |
 
 ---
 
-## 📜 Licencja / TODO
+## 🗺️ Co dalej
 
-- Dodać modele 3D (gltf), animacje, dźwięki
-- Rozbudować world streaming o LOD/instancing roślinności
-- Multiplayer? Nie — single player immersive sim
-- Fabuła: rozwinąć zapiski Johna, 6 zakończeń z epilogiem
-- Balans ekonomii i czasu — playtesty
+1. **Warstwa artystyczna:** animacje 4-kierunkowe postaci (8, jeśli pozwoli budżet), normal mapy pod `Light2D`, atlas sprite'ów z plików zamiast rysowania proceduralnego
+2. **Kolejne regiony wyspy:** dolne miasto w całości, wsie, lasy, bagna, kamieniołom, klify, ruiny, obóz Dzikich Rycerzy
+3. **Systemy z briefu poza Etapem 1:** choroby i epidemie, towarzysze i najemnicy, własność i baza, transport (koń, wóz, łódź), polowania i rybołówstwo, zlecenia proceduralne, losowe wydarzenia
+4. **Balans:** playtesty pętli „jeden dzień pracy", ekonomia soli i ziół, tempo narastania długu
+5. **Migracja do Godot 4.x** — plan i mapowanie węzłów: [`docs/GODOT_MIGRATION.md`](docs/GODOT_MIGRATION.md)
 
 ---
 
-**Autor prototypu:** Arena AI Agent  
-**Data:** 2026-09-17  
-**Branch:** arena/01a0b020-ddd
+**Autor prototypu:** Arena AI Agent
+**Data:** 2026-09-17
+**Branch:** `arena/01a0b049-ddd` · PR #2
