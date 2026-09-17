@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ELENEM - 1430</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #1a1714;
+      --panel: #2a2520;
+      --panel2: #3a332c;
+      --text: #d6c7b8;
+      --accent: #8a6d4b;
+      --accent2: #c9a86a;
+      --danger: #8b3a2f;
+      --moss: #4a5a3a;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'EB Garamond',serif;background:var(--bg);color:var(--text);overflow:hidden;user-select:none}
+    #game-canvas{display:block;width:100vw;height:100vh}
+    #ui-root{position:fixed;inset:0;pointer-events:none}
+    .ui-panel{pointer-events:auto;background:linear-gradient(180deg,rgba(42,37,32,0.96),rgba(26,23,20,0.98));border:1px solid #4a3f35;box-shadow:0 0 30px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.05)}
+    
+    /* HUD */
+    #hud-top{position:absolute;top:0;left:0;right:0;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:linear-gradient(180deg,rgba(0,0,0,0.85),rgba(0,0,0,0.2));border-bottom:1px solid #3a332c}
+    #hud-top .left,#hud-top .right{display:flex;gap:16px;align-items:center}
+    .hud-pill{padding:4px 10px;background:rgba(0,0,0,0.5);border:1px solid #3a332c;border-radius:2px;font-size:14px;letter-spacing:0.5px}
+    .hud-pill.debt{color:#e0b080;border-color:#8b3a2f}
+    .hud-pill.time{font-family:'Cinzel',serif}
+    #hud-bottom{position:absolute;bottom:0;left:0;right:0;height:96px;display:flex;align-items:end;justify-content:space-between;padding:12px 18px;background:linear-gradient(0deg,rgba(0,0,0,0.9),rgba(0,0,0,0))}
+    #bars{display:flex;gap:10px;align-items:end}
+    .bar-group{width:180px}
+    .bar-label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#9a8a7a;margin-bottom:3px;display:flex;justify-content:space-between}
+    .bar-track{height:8px;background:#111;border:1px solid #3a332c;position:relative;overflow:hidden}
+    .bar-fill{height:100%;transition:width 0.3s}
+    .bar-fill.health{background:linear-gradient(90deg,#6b2a2a,#c94a3a)}
+    .bar-fill.stamina{background:linear-gradient(90deg,#3a5a2a,#7ab060)}
+    .bar-fill.hunger{background:#8a6d4b}
+    .bar-fill.thirst{background:#4a6a8a}
+    .bar-fill.fatigue{background:#5a5a6a}
+    #crosshair{position:absolute;left:50%;top:50%;width:14px;height:14px;transform:translate(-50%,-50%);pointer-events:none}
+    #crosshair:before,#crosshair:after{content:'';position:absolute;background:rgba(214,199,184,0.7)}
+    #crosshair:before{left:6px;top:0;width:2px;height:14px}
+    #crosshair:after{left:0;top:6px;width:14px;height:2px}
+    #quickbar{position:absolute;bottom:110px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
+    .qslot{width:48px;height:48px;background:rgba(0,0,0,0.6);border:1px solid #4a3f35;display:flex;align-items:center;justify-content:center;font-family:'Cinzel';font-size:10px;color:#9a8a7a}
+    .qslot.active{border-color:var(--accent2);box-shadow:0 0 8px rgba(201,168,106,0.4)}
+
+    /* Overlays */
+    .overlay{position:absolute;inset:0;background:rgba(10,9,8,0.85);backdrop-filter:blur(4px);display:none;pointer-events:auto;overflow:auto;padding:24px}
+    .overlay.open{display:flex}
+    .overlay-content{margin:auto;width:min(1100px,95vw);max-height:90vh;overflow:auto}
+    .panel-header{font-family:'Cinzel',serif;font-size:28px;letter-spacing:2px;margin-bottom:16px;border-bottom:1px solid #4a3f35;padding-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+    .close-btn{background:none;border:1px solid #4a3f35;color:var(--text);padding:6px 14px;font-family:'Cinzel';cursor:pointer}
+    .close-btn:hover{border-color:var(--accent2);color:var(--accent2)}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+    .card{padding:14px;background:rgba(0,0,0,0.3);border:1px solid #3a332c}
+    .card h4{font-family:'Cinzel';font-size:14px;margin-bottom:8px;color:var(--accent2)}
+    .btn{padding:8px 14px;background:var(--panel2);border:1px solid #5a4a3a;color:var(--text);font-family:'Cinzel';font-size:12px;cursor:pointer;letter-spacing:1px}
+    .btn:hover{background:#4a3f35;border-color:var(--accent2)}
+    .btn.primary{background:linear-gradient(180deg,#6b4a2a,#3a2a1a);border-color:var(--accent2)}
+    .keybind{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #2a2520;font-size:14px}
+    .keybind span:last-child{font-family:'Cinzel';background:#111;padding:2px 8px;border:1px solid #3a332c}
+
+    /* Map */
+    #map-canvas{width:100%;height:520px;background:#15120f;border:1px solid #3a332c;position:relative;overflow:hidden}
+    .map-biome{position:absolute;border:1px dashed rgba(201,168,106,0.15)}
+
+    /* Skill tree */
+    .skill-branch{border-left:2px solid #3a332c;padding-left:14px;margin-bottom:18px}
+    .skill-node{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;margin:6px 0;background:rgba(0,0,0,0.4);border:1px solid #2a2520;cursor:pointer}
+    .skill-node.unlocked{border-color:#4a6a3a;background:rgba(58,90,42,0.2)}
+    .skill-node.locked{opacity:0.6}
+    .skill-node:hover{border-color:var(--accent2)}
+
+    /* Inventory */
+    .inv-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:6px}
+    .inv-slot{aspect-ratio:1;background:rgba(0,0,0,0.5);border:1px solid #3a332c;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px;cursor:pointer;font-size:11px;text-align:center}
+    .inv-slot:hover{border-color:var(--accent2)}
+    .inv-slot.has-item{background:linear-gradient(180deg,rgba(58,51,44,0.8),rgba(0,0,0,0.6))}
+
+    /* Dialog */
+    #dialog-box{position:absolute;bottom:120px;left:50%;transform:translateX(-50%);width:min(720px,90vw);background:rgba(20,18,16,0.96);border:1px solid #4a3f35;padding:18px;display:none;pointer-events:auto}
+    #dialog-box.open{display:block}
+    #dialog-text{font-size:17px;line-height:1.5;margin-bottom:14px;font-style:italic}
+    #dialog-options{display:flex;flex-direction:column;gap:6px}
+    .dialog-opt{padding:8px 12px;background:rgba(0,0,0,0.4);border:1px solid #2a2520;cursor:pointer;text-align:left;color:var(--text);font-family:'EB Garamond';font-size:15px}
+    .dialog-opt:hover{border-color:var(--accent2);background:rgba(58,51,44,0.6)}
+    .dialog-opt.locked{opacity:0.5;pointer-events:none}
+    .dialog-opt .req{font-family:'Cinzel';font-size:11px;color:#8a6d4b;margin-left:8px}
+
+    /* Debug console */
+    #debug-console{position:absolute;bottom:0;left:0;right:0;height:260px;background:rgba(0,0,0,0.9);border-top:1px solid #3a332c;display:none;flex-direction:column;pointer-events:auto;font-family:monospace;font-size:12px}
+    #debug-console.open{display:flex}
+    #debug-log{flex:1;overflow:auto;padding:8px;color:#8a9a6a}
+    #debug-input{width:100%;background:#111;border:none;border-top:1px solid #2a2520;color:#d6c7b8;padding:8px;font-family:monospace;outline:none}
+
+    /* Loading */
+    #loading{position:fixed;inset:0;background:#0f0e0c;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity 0.8s}
+    #loading h1{font-family:'Cinzel';font-size:56px;letter-spacing:8px;color:var(--accent2);margin-bottom:12px;text-shadow:0 0 20px rgba(201,168,106,0.3)}
+    #loading p{letter-spacing:3px;color:#6a5a4a;font-size:12px;font-family:'Cinzel'}
+    #loading-bar{width:300px;height:2px;background:#1a1714;border:1px solid #3a332c;margin-top:24px;overflow:hidden}
+    #loading-fill{height:100%;width:0%;background:linear-gradient(90deg,#8a6d4b,#c9a86a);transition:width 0.3s}
+
+    /* Journal */
+    .quest-item{padding:10px;border:1px solid #2a2520;margin-bottom:8px;background:rgba(0,0,0,0.3);cursor:pointer}
+    .quest-item.active{border-color:var(--accent2)}
+    .quest-item .meta{font-family:'Cinzel';font-size:10px;color:#8a6d4b;margin-top:4px}
+
+    /* Scrollbar */
+    ::-webkit-scrollbar{width:8px;height:8px}
+    ::-webkit-scrollbar-track{background:#1a1714}
+    ::-webkit-scrollbar-thumb{background:#3a332c;border:1px solid #4a3f35}
+
+    @media (max-width:800px){
+      .grid-2,.grid-3{grid-template-columns:1fr}
+      #hud-top{flex-direction:column;height:auto;padding:8px;gap:6px}
+      .bar-group{width:120px}
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/index-DoZqJ4mX.js"></script>
+</head>
+<body>
+  <div id="loading">
+    <h1>ELENEM</h1>
+    <p>ROK PAŃSKI 1430 • WYSPA</p>
+    <div id="loading-bar"><div id="loading-fill"></div></div>
+    <p id="loading-text" style="margin-top:12px;font-size:11px">ŁADOWANIE ŚWIATA...</p>
+  </div>
+
+  <canvas id="game-canvas"></canvas>
+
+  <div id="ui-root">
+    <div id="hud-top">
+      <div class="left">
+        <div class="hud-pill time" id="hud-time">Dzień 1 • 08:00 • Wiosna</div>
+        <div class="hud-pill" id="hud-weather">Mgła • 9°C</div>
+        <div class="hud-pill" id="hud-location">Port Elenem - Nabrzeże</div>
+      </div>
+      <div class="right">
+        <div class="hud-pill" id="hud-crowns">100 <span style="color:var(--accent2)">koron</span></div>
+        <div class="hud-pill debt" id="hud-debt">DŁUG: 10 000 / 30 dni</div>
+        <div class="hud-pill" id="hud-fps">60 FPS</div>
+      </div>
+    </div>
+
+    <div id="crosshair"></div>
+
+    <div id="quickbar">
+      <div class="qslot active">Q 1<br>⚔️</div>
+      <div class="qslot">2<br>🗡️</div>
+      <div class="qslot">3<br>🏹</div>
+      <div class="qslot">4<br>🩹</div>
+      <div class="qslot">5<br>🔦</div>
+      <div class="qslot">6<br>🧪</div>
+      <div class="qslot">7<br>🍞</div>
+      <div class="qslot">8<br>🗝️</div>
+    </div>
+
+    <div id="hud-bottom">
+      <div id="bars">
+        <div class="bar-group"><div class="bar-label"><span>Zdrowie</span><span id="health-val">100%</span></div><div class="bar-track"><div class="bar-fill health" id="bar-health" style="width:100%"></div></div></div>
+        <div class="bar-group"><div class="bar-label"><span>Wytrzymałość</span><span id="stamina-val">100%</span></div><div class="bar-track"><div class="bar-fill stamina" id="bar-stamina" style="width:100%"></div></div></div>
+        <div class="bar-group"><div class="bar-label"><span>Głód</span><span>Pragnienie</span></div><div class="bar-track" style="margin-bottom:4px"><div class="bar-fill hunger" id="bar-hunger" style="width:80%"></div></div><div class="bar-track"><div class="bar-fill thirst" id="bar-thirst" style="width:70%"></div></div></div>
+        <div class="bar-group"><div class="bar-label"><span>Zmęczenie</span><span>Brud</span></div><div class="bar-track" style="margin-bottom:4px"><div class="bar-track"><div class="bar-fill fatigue" id="bar-fatigue" style="width:20%"></div></div></div><div class="bar-track"><div class="bar-fill" id="bar-dirt" style="width:10%;background:#3a332c"></div></div></div>
+      </div>
+      <div style="text-align:right;font-family:'Cinzel';font-size:11px;color:#6a5a4a;line-height:1.4">
+        [WASD] RUCH • [SHIFT] BIEG • [SPACJA] SKOK • [CTRL] SKRADANIE<br>
+        [E] INTERAKCJA • [F] CHWYT • [LPM/PPM] WALKA • [Q] KOŁO • [R] LATARNIA • [C] FPP/TPP<br>
+        [M] MAPA • [G] ROZWÓJ • [K] KOMPENDIUM • [I] EKWIPUNEK • [J] DZIENNIK • [T] ZEGAR • [TAB] MENU
+      </div>
+    </div>
+
+    <!-- DIALOG -->
+    <div id="dialog-box">
+      <div style="font-family:'Cinzel';font-size:11px;color:#8a6d4b;margin-bottom:8px" id="dialog-speaker">STRAŻNIK PORTU • Reputacja: Straż Miejska +5</div>
+      <div id="dialog-text">No, patrzcie, świeże mięso z kontynentu. John, tak? Słyszałem, że jesteś winien Rycerzom kupę złota. Nie chciałbym być na twoim miejscu. Masz przepustkę?</div>
+      <div id="dialog-options"></div>
+    </div>
+
+    <!-- OVERLAYS -->
+    <div class="overlay" id="overlay-map">
+      <div class="overlay-content ui-panel" style="padding:20px">
+        <div class="panel-header"><span>MAPA ELENEM • M • Mgła wojny</span><button class="close-btn" data-close="map">ZAMKNIJ [M]</button></div>
+        <div style="display:grid;grid-template-columns:260px 1fr;gap:16px">
+          <div>
+            <div class="card"><h4>LOKALIZACJE</h4><div id="map-locations" style="font-size:13px;line-height:1.6"></div></div>
+            <div class="card" style="margin-top:12px"><h4>LEGENDA</h4><div style="font-size:12px;line-height:1.8">
+              <div>⛵ Port i miasto</div><div>🌲 Lasy i bagna</div><div>⛰️ Kamieniołom, klify</div><div>🏚️ Ruiny opactwa</div><div>⚔️ Obóz Dzikich Rycerzy</div><div>📍 Własne znaczniki [PPM]</div>
+            </div></div>
+            <div class="card" style="margin-top:12px"><h4>SZYBKA PODRÓŻ</h4><p style="font-size:12px">Tylko do odkrytych i bezpiecznych punktów. Koszt: czas w grze.</p><button class="btn" style="margin-top:8px;width:100%" id="btn-fasttravel">PODRÓŻUJ</button></div>
+          </div>
+          <div id="map-canvas"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay" id="overlay-skills">
+      <div class="overlay-content ui-panel" style="padding:20px">
+        <div class="panel-header"><span>DRZEWKO ROZWOJU • G • Punkty: <b id="skill-points">3</b></span><button class="close-btn" data-close="skills">ZAMKNIJ [G]</button></div>
+        <div class="grid-3" id="skills-grid"></div>
+        <p style="margin-top:16px;font-size:12px;color:#8a6d4b">Punkty ograniczone. Nie odblokujesz wszystkiego. Część perków wymaga nauczyciela, opłaty i reputacji. Umiejętności rosną też przez używanie.</p>
+      </div>
+    </div>
+
+    <div class="overlay" id="overlay-compendium">
+      <div class="overlay-content ui-panel" style="padding:20px">
+        <div class="panel-header"><span>KOMPENDIUM • K</span><button class="close-btn" data-close="compendium">ZAMKNIJ [K]</button></div>
+        <div style="display:flex;gap:8px;margin-bottom:14px">
+          <button class="btn primary" data-compendium-tab="items">PRZEDMIOTY</button>
+          <button class="btn" data-compendium-tab="bestiary">BESTIARIUSZ</button>
+          <button class="btn" data-compendium-tab="quests">ZADANIA</button>
+          <button class="btn" data-compendium-tab="notes">ZAPISKI JOHNA</button>
+        </div>
+        <div id="compendium-content" class="grid-2"></div>
+      </div>
+    </div>
+
+    <div class="overlay" id="overlay-inventory">
+      <div class="overlay-content ui-panel" style="padding:20px">
+        <div class="panel-header"><span>EKWIPUNEK I WYPOSAŻENIE • I • <span id="inv-weight">12.4 / 40 kg</span></span><button class="close-btn" data-close="inventory">ZAMKNIJ [I]</button></div>
+        <div style="display:grid;grid-template-columns:1fr 280px;gap:16px">
+          <div><div class="inv-grid" id="inv-grid"></div></div>
+          <div>
+            <div class="card"><h4>WYPOSAŻENIE</h4><div id="equipment" style="font-size:13px;line-height:2"></div></div>
+            <div class="card" style="margin-top:12px"><h4>RZEMIOSŁO</h4><div id="crafting-list" style="font-size:12px"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay" id="overlay-journal">
+      <div class="overlay-content ui-panel" style="padding:20px">
+        <div class="panel-header"><span>DZIENNIK ZADAŃ • J</span><button class="close-btn" data-close="journal">ZAMKNIJ [J]</button></div>
+        <div style="display:grid;grid-template-columns:280px 1fr;gap:16px">
+          <div id="quest-list"></div>
+          <div class="card"><h4 id="quest-title">Wybierz zadanie</h4><div id="quest-desc" style="font-size:14px;line-height:1.6;margin-top:8px"></div><div id="quest-rewards" style="margin-top:12px"></div></div>
+        </div>
+        <div class="card" style="margin-top:16px"><h4>TABLICA OGŁOSZEŃ • ZLECENIA PROCEDURALNE</h4><div id="board-jobs" class="grid-2" style="margin-top:8px"></div></div>
+      </div>
+    </div>
+
+    <div class="overlay" id="overlay-clock">
+      <div class="overlay-content ui-panel" style="padding:20px">
+        <div class="panel-header"><span>ZEGAR, KALENDARZ I DŁUG • T</span><button class="close-btn" data-close="clock">ZAMKNIJ [T]</button></div>
+        <div class="grid-2">
+          <div class="card"><h4>KALENDARZ • 30 DNI</h4><div id="calendar-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px"></div><div id="calendar-legend" style="margin-top:12px;font-size:12px"></div></div>
+          <div class="card"><h4>SYSTEM DŁUGU • DZICY RYCERZE</h4><div id="debt-details" style="font-size:14px;line-height:1.6"></div><div style="margin-top:12px;display:flex;gap:8px"><button class="btn primary" id="btn-pay-debt">SPŁAĆ 500 KORON</button><button class="btn" id="btn-loan">POŻYCZKA U LICHWIARZA</button></div><div style="margin-top:12px"><h4>MOŻLIWE ZAKOŃCZENIA</h4><div id="endings-list" style="font-size:12px;line-height:1.8"></div></div></div>
+        </div>
+        <div class="grid-3" style="margin-top:16px">
+          <div class="card"><h4>REPUTACJA FRAKCJI • -100 do +100</h4><div id="reputation-list" style="font-size:12px"></div></div>
+          <div class="card"><h4>RENOMA I PLOTKI</h4><div id="rumor-list" style="font-size:12px"></div></div>
+          <div class="card"><h4>PRZESTĘPCZOŚĆ</h4><div id="crime-list" style="font-size:12px"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay" id="overlay-menu">
+      <div class="overlay-content ui-panel" style="padding:20px">
+        <div class="panel-header"><span>MENU • ESC • TAB - szybkie przełączanie</span><button class="close-btn" data-close="menu">ZAMKNIJ [ESC]</button></div>
+        <div class="grid-3">
+          <div class="card"><h4>USTAWIENIA GRY</h4><div style="font-size:13px;line-height:2">
+            <div>FOV: <input type="range" min="60" max="110" value="90" id="setting-fov"> <span id="fov-val">90</span></div>
+            <div>Skalowanie UI: <input type="range" min="80" max="140" value="100" id="setting-ui"> <span id="ui-val">100%</span></div>
+            <div>Głośność: <input type="range" min="0" max="100" value="70"></div>
+            <div><label><input type="checkbox" checked> Napisy z tłem</label></div>
+            <div><label><input type="checkbox"> Tryb daltonistyczny</label></div>
+            <div><label><input type="checkbox" checked> Wstrząsy kamery</label></div>
+            <div><label><input type="checkbox" id="setting-crouch"> Kucanie: przełącznik (nie przytrzymanie)</label></div>
+          </div></div>
+          <div class="card"><h4>REMAPOWANIE KLAWISZY</h4><div id="keybinds-list" style="font-size:12px"></div><button class="btn" style="margin-top:8px" id="btn-reset-keys">RESETUJ DO DOMYŚLNYCH</button></div>
+          <div class="card"><h4>ZAPIS I TRUDNOŚĆ</h4><div style="font-size:12px;line-height:1.8">
+            <div>Poziom trudności walki: <select><option>Łatwy</option><option selected>Normalny</option><option>Trudny</option><option>Realistyczny</option></select></div>
+            <div>Napięcie ekonomiczne: <select><option>Niskie</option><option selected>Średnie</option><option>Wysokie</option></select></div>
+            <div>Surowość przestępczości: <select><option>Wybaczająca</option><option selected>Zbalansowana</option><option>Bezwzględna</option></select></div>
+            <div style="margin-top:12px;display:flex;gap:6px"><button class="btn" id="btn-save">ZAPISZ [F5]</button><button class="btn" id="btn-load">WCZYTAJ [F9]</button></div>
+            <div style="margin-top:12px"><label><input type="checkbox" id="hardcore"> Tryb Hardcore/Ironman (1 zapis, śmierć=koniec)</label></div>
+            <div style="margin-top:12px;font-size:11px;color:#8a6d4b">Sloty ręczne, autozapis przy wejściu do lokacji i przed questem.</div>
+          </div></div>
+        </div>
+        <div class="grid-2" style="margin-top:16px">
+          <div class="card"><h4>SYSTEMY (24+1) • DEBUG</h4><div id="systems-status" style="font-size:11px;line-height:1.6;font-family:monospace"></div></div>
+          <div class="card"><h4>KONSOLA DEWELOPERSKA • [~]</h4><p style="font-size:12px">Komendy: help, teleport, addgold, setday, setreputation, spawn, weather, plague, time, godmode, quest</p><button class="btn" id="btn-console">OTWÓRZ KONSOLĘ</button><div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap"><button class="btn" data-dev="addgold 1000">+1000 KORON</button><button class="btn" data-dev="plague">WYWOŁAJ ZARAZĘ</button><button class="btn" data-dev="event">LOSOWE ZDARZENIE</button><button class="btn" data-dev="reputation">MAX REPUTACJE</button></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="debug-console"><div id="debug-log"></div><input id="debug-input" placeholder="Wpisz komendę... (help aby zobaczyć listę)" /></div>
+
+    <div id="toast-container" style="position:absolute;top:60px;right:18px;display:flex;flex-direction:column;gap:8px;pointer-events:none"></div>
+  </div>
+
+</body>
+</html>
