@@ -258,7 +258,9 @@ await step('stacja: szynkwas (E)', async () => {
   const stn = (g.world.scene?.stations || []).find(s => s.kind === 'bar');
   if (stn) { ex(`tp ${Math.round(stn.x)} ${Math.round(stn.y + 16)}`); await wait(150); }
   await press('KeyE', 4);
-  return `trade=${isOpen('ov-trade')} generic=${isOpen('ov-generic')} head="${txt('#ov-generic h2') || txt('#ov-trade h2')}" prompt="${txt('#prompt')}" text="${bodyText('ov-trade', 80) || bodyText('ov-generic', 80)}"`;
+  const r = `trade=${isOpen('ov-trade')} generic=${isOpen('ov-generic')} head="${txt('#ov-generic h2') || txt('#ov-trade h2')}" prompt="${txt('#prompt')}" text="${bodyText('ov-trade', 80) || bodyText('ov-generic', 80)}"`;
+  await press('Escape');
+  return r;
 }, 2);
 await step('zadanie z tablicy + dziennik', () => { ex('quest start q_vagn_respect'); ex('quest start q_coal_for_orlik'); return `quests=${g.state.quests.map(q => q.id + ':' + q.state).join(' ')}`; }, 3);
 await step('dziennik z trzema zadaniami', () => overlayCycle('KeyJ', 'ov-journal', 'dziennik'), 2);
@@ -273,8 +275,14 @@ await step('walka: spawn i cios', async () => {
 await step('atak LPM', async () => {
   const b = g.world.enemies[g.world.enemies.length - 1];
   const hp0 = b?.hp;
-  g.input.mouse.x = 320; g.input.mouse.y = 120;
-  for (let k = 0; k < 3; k++) { g.input.state.set('attack', true); g.input.just.set('attack', true); await frames(10); g.input.state.set('attack', false); g.input.just.delete('attack'); await frames(6); }
+  const scale = g.renderer.scale || 1;
+  g.input.mouse.x = 320 * scale; g.input.mouse.y = 80 * scale;
+  for (let k = 0; k < 3; k++) {
+    g.input.state.set('attack', true); g.input.just.set('attack', true);
+    await frames(16);
+    g.input.state.set('attack', false); g.input.just.delete('attack');
+    await frames(12);
+  }
   return `hp wroga ${hp0} -> ${b?.hp} hp gracza=${Math.round(g.state.needs.health)} stamina=${Math.round(g.state.needs.stamina)} killed=${g.state.stats.killed}`;
 }, 2);
 await step('blok PPM', async () => { g.input.state.set('block', true); await frames(20); g.input.state.set('block', false); await frames(2); return `akcja=${g.world.player.action} stamina=${Math.round(g.state.needs.stamina)}`; }, 2);

@@ -270,7 +270,7 @@ export class DialogueSystem {
 
   static hourAnswer(): string {
     const s = getGame().state;
-    if (!s.flags.owns_watch) return t('time.unknownAnswer');
+    if (!InventorySystem.has('pocket_watch') && !s.flags.owns_watch) return t('time.unknownAnswer');
     return t('time.knownAnswer', { hour: s.time.knownHour });
   }
 }

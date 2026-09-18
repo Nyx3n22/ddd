@@ -62,6 +62,18 @@ export class Renderer {
     document.documentElement.style.setProperty('--ui-scale', String(this.scale));
   }
 
+  clientToWorld(clientX: number, clientY: number) {
+    const rect = this.canvas.getBoundingClientRect?.();
+    if (rect && rect.width > 0 && rect.height > 0) {
+      const sx = (clientX - rect.left) * (VIEW_W / rect.width);
+      const sy = (clientY - rect.top) * (VIEW_H / rect.height);
+      return this.camera.screenToWorld(sx, sy);
+    }
+    const sx = clientX / Math.max(1, this.scale);
+    const sy = clientY / Math.max(1, this.scale);
+    return this.camera.screenToWorld(sx, sy);
+  }
+
   draw(opts: {
     scene: Scene; actors: Actor[]; player: Actor;
     darkness: number; ambient: [number, number, number]; ambientLevel: number;
@@ -107,11 +119,14 @@ export class Renderer {
       if (!this.camera.visible(a.x, a.y, 64)) continue;
       list.push({ y: a.sortY, actor: a });
     }
+    if (opts.player && !opts.player.hidden && this.camera.visible(opts.player.x, opts.player.y, 64)) {
+      list.push({ y: opts.player.sortY, actor: opts.player });
+    }
     list.sort((p, q) => p.y - q.y || (p.obj ? -1 : 1));
 
     for (const e of list) {
       if (e.obj) this.drawObject(ctx, e.obj, camX, camY);
-      else if (e.actor) e.actor.draw(ctx, opts.sunDir);
+      else if (e.actor) e.actor.draw(ctx, opts.sunDir, camX, camY);
     }
 
     /* ---- 3. aktorzy i obiekty wysokie ---- */

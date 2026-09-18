@@ -1,5 +1,12 @@
 # Elenem - Design Document (rozszerzony)
 
+> **Status:** dokument projektowy z fazy 3D. Brief **v2.0 zmienia perspektywę na
+> 2D pixel-art w rzucie 3/4** — założenia fabularne, ekonomiczne i systemowe poniżej
+> pozostają aktualne, ale wszystkie odniesienia do Three.js, FPP/TPP, LOD,
+> `InstancedMesh` i streamingu 3D są historyczne.
+> Stan realizacji: [`README.md`](../README.md) · [`VERTICAL_SLICE.md`](VERTICAL_SLICE.md) ·
+> docelowy silnik: [`GODOT_MIGRATION.md`](GODOT_MIGRATION.md).
+
 ## High Concept
 John, były najemnik, 36 lat, dług 10k koron, 30 dni, wyspa Elenem 1430. Brudny realizm, brak magii, decyzje = czas.
 

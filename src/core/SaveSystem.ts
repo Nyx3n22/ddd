@@ -74,7 +74,7 @@ export class SaveSystem {
     const d = this.read(slot);
     if (!d) { bus.emit('hud:toast', { text: t('save.missing'), tone: 'bad' }); return false; }
     try {
-      if (d.settingsLang && d.settingsLang !== settings.data.lang) { settings.data.lang = d.settingsLang; bus.emit('lang:changed', { lang: d.settingsLang }); }
+      if (d.settingsLang && d.settingsLang !== settings.data.lang) { settings.data.lang = d.settingsLang; bus.emit('lang:set', { lang: d.settingsLang }); }
       g.state.deserialize(d.state);
       g.world.init(d.world);
       g.refreshAfterLoad();

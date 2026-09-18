@@ -149,10 +149,7 @@ export class Game {
       attackPressed: i.pressed('attack'),
       blockHeld: i.down('block'),
       dodgePressed: i.pressed('dodge'),
-      mouseWorld: this.renderer.camera.screenToWorld(
-        i.mousePos().x / Math.max(1, this.renderer.scale),
-        i.mousePos().y / Math.max(1, this.renderer.scale)
-      )
+      mouseWorld: this.renderer.clientToWorld(i.mousePos().x, i.mousePos().y)
     };
   }
 
@@ -163,7 +160,9 @@ export class Game {
     if (this.debug.open) return;
 
     if (!this.started) {
-      if (i.pressed('interact') || i.pressed('pause')) this.ui.titleActivate();
+      if (i.pressed('moveUp') || i.pressedCode('ArrowUp') || i.pressedCode('KeyW')) this.ui.titleNavigate(-1);
+      else if (i.pressed('moveDown') || i.pressedCode('ArrowDown') || i.pressedCode('KeyS')) this.ui.titleNavigate(1);
+      else if (i.pressed('interact') || i.pressed('pause') || i.pressedCode('Enter') || i.pressedCode('Space')) this.ui.titleActivate();
       return;
     }
     // dialog i nakładki przechwytują klawisze
