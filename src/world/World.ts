@@ -23,6 +23,7 @@ import { WeatherSystem } from '../systems/WeatherSystem';
 import { DebtSystem } from '../systems/DebtSystem';
 import { CraftingSystem } from '../systems/CraftingSystem';
 import { GamblingSystem } from '../systems/GamblingSystem';
+import { audio } from '../core/AudioSystem';
 
 /* ============================================================================
    ŚWIAT
@@ -351,6 +352,12 @@ export class World {
       SkillsSystem.use('reading', 6);
       return;
     }
+    if (obj.type === 'groundItem' || (obj.interactId && obj.interactId.startsWith('ground:'))) {
+      if (this.pickupGround(obj)) {
+        bus.emit('hud:toast', { text: t('interact.found', { what: t(obj.nameKey || 'item.unknown') }), tone: 'good' });
+      }
+      return;
+    }
     if (obj.type === 'chest' || obj.type === 'crate' || obj.type === 'barrel' || obj.type === 'sack' || obj.type === 'corpse') {
       this.searchObject(obj);
       return;
@@ -543,6 +550,7 @@ export class World {
     const g = getGame(), s = g.state;
     if (this.transitioning) return;
     if (to !== 'world' && !this.interiors.has(to)) { bus.emit('hud:toast', { text: t('interact.cantEnter'), tone: 'bad' }); return; }
+    if (DialogueSystem.session) DialogueSystem.close();
     this.transitioning = true;
     bus.emit('world:fade', { dir: 1 });
     setTimeout(() => {
@@ -563,6 +571,7 @@ export class World {
         QuestSystem.notify('enter', { interior: to });
       }
       this.refreshNPCVisibility();
+      getGame().renderer?.camera?.follow(this.player.x, this.player.y, 0, true);
       bus.emit('world:fade', { dir: -1 });
       this.transitioning = false;
       bus.emit('hud:place', { nameKey: this.scene.nameKey });
@@ -582,9 +591,10 @@ export class World {
   addGroundItem(itemId: string, x: number, y: number, qty = 1, scene?: string, stolen?: boolean) {
     const sc = scene ? (scene === 'world' ? this.district : this.interiors.get(scene)) : this.scene;
     if (!sc) return;
+    const uid = `${itemId}_${Math.floor(x)}_${Math.floor(y)}_${Date.now()}`;
     const obj = sc.add({
       kind: 'marker', type: 'groundItem', x, y, sortY: y, art: null,
-      nameKey: itemDef(itemId)?.nameKey, interactId: `ground:${itemId}`,
+      nameKey: itemDef(itemId)?.nameKey, interactId: `ground:${uid}`,
       grabbable: false, dynamic: true, data: { itemId, qty, stolen }
     });
     this.groundItems.push({ id: itemId, x, y, qty, obj, stolen });
@@ -597,6 +607,7 @@ export class World {
     if (InventorySystem.add(gi.id, gi.qty, { stolen: gi.stolen })) {
       this.scene.remove(gi.obj);
       this.groundItems.splice(idx, 1);
+      audio.pickup();
       return true;
     }
     return false;
@@ -605,7 +616,8 @@ export class World {
   dropLoot(x: number, y: number, loot: string[], purse: number) {
     for (const id of loot) if (rng.chance(0.8)) this.addGroundItem(id, x + rng.range(-10, 10), y + rng.range(-6, 6), 1);
     if (purse > 0) {
-      const obj = this.scene.add({ kind: 'marker', type: 'groundItem', x, y, sortY: y, nameKey: 'item.coinPurse', interactId: `ground:purse`, dynamic: true, data: { gold: purse } });
+      const uid = `purse_${Math.floor(x)}_${Math.floor(y)}_${Date.now()}`;
+      const obj = this.scene.add({ kind: 'marker', type: 'groundItem', x, y, sortY: y, nameKey: 'item.coinPurse', interactId: `ground:${uid}`, dynamic: true, data: { gold: purse } });
       this.groundItems.push({ id: 'crown', x, y, qty: purse, obj });
     }
   }

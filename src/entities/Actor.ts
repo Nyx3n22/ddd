@@ -161,10 +161,12 @@ export abstract class Actor {
     else this.setAction('hit');
   }
 
-  draw(ctx: CanvasRenderingContext2D, sunDir: { x: number; y: number }) {
+  draw(ctx: CanvasRenderingContext2D, sunDir: { x: number; y: number }, camX = 0, camY = 0) {
     if (this.hidden) return;
-    if (this.shadow && this.alive) drawActorShadow(ctx, this.x, this.y, sunDir.x, this.action === 'sneak' ? 9 : 12, 4, 0.3);
-    drawActor(ctx, this.x, this.y, {
+    const sx = Math.round(this.x - camX);
+    const sy = Math.round(this.y - camY);
+    if (this.shadow && this.alive) drawActorShadow(ctx, sx, sy, sunDir.x, this.action === 'sneak' ? 9 : 12, 4, 0.3);
+    drawActor(ctx, sx, sy, {
       dir: this.dir, action: this.action, frame: this.frame, look: this.look,
       hurt: Math.max(0, Math.min(1, 1 - this.hp / Math.max(1, this.maxHp))) * 0.8 + (this.hurtFlash > 0 ? 0.2 : 0),
       wet: this.wet, telegraph: this.telegraph, alpha: this.hidden ? 0 : 1

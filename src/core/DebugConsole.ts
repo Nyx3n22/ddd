@@ -119,12 +119,24 @@ export class DebugConsole {
     add('plague', '[on|off]', 'epidemia', (a) => { g().state.weather.plague = a[0] !== 'off'; return `plague=${g().state.weather.plague}`; });
     add('tp', '<regionKey|x y>', 'teleport', (a) => {
       const w = g().world; const s = g().state;
-      if (a.length >= 2 && !isNaN(Number(a[0]))) { w.player.x = Number(a[0]); w.player.y = Number(a[1]); return `${a[0]},${a[1]}`; }
+      if (a.length >= 2 && !isNaN(Number(a[0]))) {
+        w.player.x = Number(a[0]); w.player.y = Number(a[1]);
+        g().renderer?.camera?.follow(w.player.x, w.player.y, 0, true);
+        return `${a[0]},${a[1]}`;
+      }
       const key = a[0];
       const region = w.scene.regions.find(r => r.nameKey.includes(key));
       const ft = w.loaded.fastTravel.find(f => f.id.includes(key) || f.nameKey.includes(key));
-      if (region) { w.player.x = (region.x + region.w / 2) * TILE; w.player.y = (region.y + region.h / 2) * TILE; return t(region.nameKey); }
-      if (ft) { w.player.x = ft.x; w.player.y = ft.y; return t(ft.nameKey); }
+      if (region) {
+        w.player.x = (region.x + region.w / 2) * TILE; w.player.y = (region.y + region.h / 2) * TILE;
+        g().renderer?.camera?.follow(w.player.x, w.player.y, 0, true);
+        return t(region.nameKey);
+      }
+      if (ft) {
+        w.player.x = ft.x; w.player.y = ft.y;
+        g().renderer?.camera?.follow(w.player.x, w.player.y, 0, true);
+        return t(ft.nameKey);
+      }
       return 'nie znaleziono: ' + key;
     });
     add('scene', '<world|int_x>', 'zmień scenę', (a) => { g().world.travel(a[0]); return a[0]; });

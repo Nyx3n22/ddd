@@ -230,7 +230,8 @@ export class Player extends Actor {
     this.stamina -= cost;
     // kierunek z kursora (mysz) — atak jest kierunkowy, nie „w stronę ruchu”
     const dx = this.mouse.x - this.x, dy = this.mouse.y - this.y;
-    if (Math.abs(dx) > Math.abs(dy)) c.attackDir = dx < 0 ? 1 : 2;
+    if (this.mouse.x === 0 && this.mouse.y === 0) c.attackDir = this.dir;
+    else if (Math.abs(dx) > Math.abs(dy)) c.attackDir = dx < 0 ? 1 : 2;
     else c.attackDir = dy < 0 ? 3 : 0;
     this.dir = c.attackDir;
     c.attacking = true; c.attackT = 0; c.swingDone = false;

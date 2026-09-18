@@ -94,11 +94,12 @@ export class UIManager {
       'ov-generic': 'ui.leave', 'ov-pause': 'ui.resume'
     };
     for (const [ov, key] of Object.entries(closeKeys)) {
-      const b = document.querySelector(`#${ov} .close-x`);
+      const b = document.querySelector(`#${ov} .close-x`) as HTMLElement | null;
       if (!b) continue;
       const k = b.querySelector('.key');
       b.textContent = t(key);
       if (k) { b.appendChild(document.createTextNode(' ')); b.appendChild(k); }
+      b.onclick = () => this.closeOverlay(ov);
     }
 
     document.querySelectorAll('.vital').forEach(v => {
@@ -338,17 +339,17 @@ export class UIManager {
 
   overlayInput(i: InputManager) {
     if (i.pressed('pause')) { this.closeOverlay(); return; }
+    if (this.overlay === 'ov-generic' && this.confirmCb) {
+      if (i.pressedCode('Digit1') || i.pressed('interact') || i.pressedCode('Enter')) { const cb = this.confirmCb; this.confirmCb = null; this.closeOverlay(); cb(); return; }
+      if (i.pressedCode('Digit2') || i.pressedCode('Escape')) { this.confirmCb = null; this.closeOverlay(); return; }
+    }
     const map: Record<string, string> = { 'ov-notes': 'notes', 'ov-skills': 'skills', 'ov-map': 'map', 'ov-inv': 'inventory', 'ov-journal': 'journal' };
     for (const [ov, action] of Object.entries(map)) if (i.pressed(action as any) && this.overlay === ov) { this.closeOverlay(ov); return; }
-    if (i.pressed('interact')) { this.closeOverlay(); return; }
     if (this.overlay === 'ov-map') {
       const w = i.mouseWheel();
       if (w) { this.mapScale = Math.max(0.6, Math.min(3, this.mapScale * (w > 0 ? 1.1 : 0.9))); this.drawMap(); }
     }
-    if (this.overlay === 'ov-generic' && this.confirmCb) {
-      if (i.pressedCode('Digit1') || i.pressed('interact')) { const cb = this.confirmCb; this.confirmCb = null; this.closeOverlay(); cb(); }
-      if (i.pressedCode('Digit2')) { this.confirmCb = null; this.closeOverlay(); }
-    }
+    if (i.pressed('interact')) { this.closeOverlay(); return; }
   }
 
   /* ---- notatnik (K) ---- */
@@ -1113,14 +1114,32 @@ export class UIManager {
     if (SaveSystem.hasAny()) this.titleItems.splice(1, 0, { label: t('title.continue'), act: () => { if (!this.game.load('auto')) this.game.load('quick'); } });
     this.titleItems.push({ label: t('title.settings'), act: () => { this.openOverlay('ov-pause'); this.pauseTab = 2; this.renderPause(); } });
     this.titleItems.push({ label: t('title.about'), act: () => { this.openOverlay('ov-pause'); this.pauseTab = 5; this.renderPause(); } });
-    menu.innerHTML = this.titleItems.map((it, i) => `<button class="clickable ${i === 0 ? 'on' : ''}" data-i="${i}">${esc(it.label)}</button>`).join('');
-    menu.querySelectorAll('button').forEach(b => (b as HTMLElement).onclick = () => {
-      const i = Number((b as HTMLElement).dataset.i);
-      this.titleItems[i].act();
-    });
+    this.titleSel = 0;
+    this.renderTitleMenu();
     const fine = $('title-fine');
     if (fine) fine.innerHTML = esc(t('title.fine'));
     this.drawTitleArt();
+  }
+
+  renderTitleMenu() {
+    const menu = $('title-menu'); if (!menu) return;
+    menu.innerHTML = this.titleItems.map((it, i) => `<button class="clickable ${i === this.titleSel ? 'on' : ''}" data-i="${i}">${esc(it.label)}</button>`).join('');
+    menu.querySelectorAll('button').forEach(b => {
+      const i = Number((b as HTMLElement).dataset.i);
+      b.onclick = () => { this.titleSel = i; this.titleItems[i].act(); };
+      b.onmouseenter = () => { this.titleSel = i; this.updateTitleSelection(); };
+    });
+  }
+
+  updateTitleSelection() {
+    const btns = document.querySelectorAll('#title-menu button');
+    btns.forEach((b, i) => b.classList.toggle('on', i === this.titleSel));
+  }
+
+  titleNavigate(delta: number) {
+    if (!this.titleItems.length) return;
+    this.titleSel = (this.titleSel + delta + this.titleItems.length) % this.titleItems.length;
+    this.updateTitleSelection();
   }
 
   drawTitleArt() {
