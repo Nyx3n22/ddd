@@ -1666,6 +1666,20 @@ prop.signSmith|Szyld kowala|Smith's sign
 prop.marketUmbrella|Daszek straganu|Stall awning
 prop.pileOfSalt|Hałda soli|Pile of salt
 prop.corpse|Zwłoki|Corpse
+interact.roomNotRented|Hanna trzyma klucz do izby na piętrze. Najpierw zapłać za nocleg.|Hanna keeps the key to the room upstairs. Pay for the night first.
+prop.stairs|Schody na piętro|Stairs up
+prop.candles|Świece|Candles
+prop.pots|Garnki|Pots
+prop.flowers|Kwiaty|Flowers
+prop.tuft|Kępa trawy|Tuft of grass
+prop.pebbles|Kamyki|Pebbles
+prop.reeds|Trzciny|Reeds
+prop.mushrooms|Grzyby|Mushrooms
+prop.fern|Paproć|Fern
+prop.stump|Pniak|Stump
+prop.hedge|Żywopłot|Hedge
+prop.woodpile|Stos polan|Woodpile
+prop.flowerBed|Grządka kwiatów|Flower bed
 prop.groundItem|Coś na ziemi|Something on the ground
 interact.prayed|Klękasz przy kapliczce i mówisz kilka słów, których nie słyszałeś od dzieciństwa. Robi się trochę lżej.|You kneel at the shrine and say a few words you have not heard since childhood. It gets a little lighter.
 interact.prayedAlready|Już dziś się modliłeś. Święty nie lubi natrętów.|You already prayed today. The saint does not like pests.

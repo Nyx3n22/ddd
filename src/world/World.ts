@@ -304,6 +304,8 @@ export class World {
     const id = obj.interactId || '';
     if (obj.kind === 'exit') {
       const to = obj.data?.to || 'world';
+      // pokój na piętrze karczmy jest dla tych, którzy zapłacili Hannie
+      if (to === 'int_room_john' && !s.flags.rented_room) { bus.emit('hud:toast', { text: t('interact.roomNotRented'), tone: 'bad' }); return; }
       this.travel(to, obj.data?.spawnX, obj.data?.spawnY);
       return;
     }
@@ -586,6 +588,7 @@ export class World {
   travel(to: string, spawnX?: number, spawnY?: number) {
     const g = getGame(), s = g.state;
     if (this.transitioning) return;
+    const from = s.scene;
     if (to !== 'world' && !this.interiors.has(to)) { bus.emit('hud:toast', { text: t('interact.cantEnter'), tone: 'bad' }); return; }
     this.transitioning = true;
     bus.emit('world:fade', { dir: 1 });
@@ -599,7 +602,8 @@ export class World {
         else if (spawnX !== undefined) { this.player.x = spawnX; this.player.y = spawnY!; }
       } else {
         const sc = this.interiors.get(to)!;
-        const exit = sc.exits[0];
+        // wchodząc z innego wnętrza (schody), stajemy przy przejściu, którym wróci się tam
+        const exit = sc.exits.find(e => e.data?.to === from) || sc.exits[0];
         // wejście: tuż przy drzwiach wyjściowych, żeby gracz wiedział którędy wrócić
         if (exit) { this.player.x = exit.x; this.player.y = exit.y - 20; }
         else { this.player.x = sc.tilemap.w / 2 * TILE; this.player.y = (sc.tilemap.h - 2) * TILE; }

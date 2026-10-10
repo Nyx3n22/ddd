@@ -1,3 +1,4 @@
+import { decorateDistrict } from './WorldDecor';
 import { TileMap, GROUND_TYPES } from './TileMap';
 import { Scene, SceneObject, SceneLight } from './Scene';
 import { TILE, getProp, PROPS, propOffset, GroundType } from '../render/Art';
@@ -217,6 +218,17 @@ export function loadDistrict(): LoadedWorld {
 
   // --- dymy z kominów ---
   for (const [tx, ty] of DISTRICT.ambience.smoke) scene.smokeSources.push({ x: tx * TILE + 16, y: ty * TILE });
+
+  // --- zagospodarowanie: trawa, ścieżki, roślinność ---
+  const reservedSpots: Array<[number, number]> = [
+    [Math.floor(DISTRICT.spawn.x / TILE), Math.floor(DISTRICT.spawn.y / TILE)],
+    ...DISTRICT.fastTravel.map(f => [f.tx, f.ty] as [number, number]),
+    ...DISTRICT.lamps.map(l => [l[0], l[1]] as [number, number]),
+    ...Object.values(DISTRICT.spawners).flatMap(sp => (sp.points ?? []) as Array<[number, number]>)
+  ];
+  const xs = DISTRICT.walls.filter(w => w.h > w.w).map(w => w.x);
+  const ys = DISTRICT.walls.filter(w => w.w >= w.h).map(w => w.y);
+  decorateDistrict(tm, scene, { wallX0: Math.min(...xs), wallX1: Math.max(...xs), wallY0: Math.min(...ys), wallY1: Math.max(...ys) }, reservedSpots);
 
   // --- wnętrza ---
   const interiors = new Map<string, Scene>();

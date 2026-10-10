@@ -1,4 +1,4 @@
-import { GroundType, groundVariants, waterFrames, TILE } from '../render/Art';
+import { GroundType, groundVariants, groundEdge, waterFrames, TILE } from '../render/Art';
 export { TILE };
 import { hash2 } from '../core/RNG';
 
@@ -17,6 +17,12 @@ const GIDX: Record<string, number> = {};
 GROUND_TYPES.forEach((g, i) => GIDX[g] = i);
 
 export const CHUNK = 16;
+
+/** Kolejność „rozlewania się” terenów na sąsiadów (wyższy zachodzi na niższy). */
+const BLEND_PRIORITY: Partial<Record<GroundType, number>> = {
+  mud: 2, swamp: 2, sand: 3, dirt: 4, ash: 4, gravel: 5, road: 5, field: 5, grass: 6, grassTall: 7, snow: 8
+};
+const NB: Array<[number, number, number]> = [[0, -1, 0], [1, 0, 1], [0, 1, 2], [-1, 0, 3]];
 
 /** Jak głośne jest podłoże (skradanie) i jak szybkie (ruch). */
 export const GROUND_STATS: Record<GroundType, { noise: number; speed: number; step: string }> = {
@@ -205,6 +211,32 @@ export class TileMap {
         else if (g === 'waterDeep') img = waterB[wf];
         else img = groundVariants(g, 3)[this.variant[i] % 3];
         ctx.drawImage(img, sx | 0, sy | 0);
+        // miękkie przejścia między terenami
+        const myP = BLEND_PRIORITY[g];
+        const water = g === 'water' || g === 'waterDeep';
+        for (const [dx, dy, side] of NB) {
+          const nx = tx + dx, ny = ty + dy;
+          if (!this.inside(nx, ny)) continue;
+          const ng = GROUND_TYPES[this.ground[this.idx(nx, ny)]];
+          if (ng === g) continue;
+          if (water) {
+            // piana przy brzegu i pomostach — faluje w rytm klatek wody
+            if (ng !== 'water' && ng !== 'waterDeep') {
+              ctx.fillStyle = 'rgba(220,236,240,0.55)';
+              for (let k = 0; k < TILE; k += 2) {
+                const w = 1 + ((hash2(tx * 32 + k, ty, wf) * 3) | 0);
+                if (side === 0) ctx.fillRect(sx + k, sy, 2, w);
+                else if (side === 2) ctx.fillRect(sx + k, sy + TILE - w, 2, w);
+                else if (side === 3) ctx.fillRect(sx, sy + k, w, 2);
+                else ctx.fillRect(sx + TILE - w, sy + k, w, 2);
+              }
+            }
+            continue;
+          }
+          const nP = BLEND_PRIORITY[ng];
+          if (myP === undefined || nP === undefined || nP <= myP) continue;
+          ctx.drawImage(groundEdge(ng, side, this.variant[this.idx(nx, ny)]), sx | 0, sy | 0);
+        }
         // kałuże w deszczu
         if (rain > 0.3 && (g === 'dirt' || g === 'cobble' || g === 'road' || g === 'mud') && hash2(tx, ty, 55) < rain * 0.25) {
           ctx.fillStyle = 'rgba(40,60,80,0.34)';

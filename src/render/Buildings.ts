@@ -326,6 +326,12 @@ export interface InteriorDef {
   w: number; h: number;            // w kaflach
   floor: 'floorWood' | 'floorStone' | 'rug';
   wall: string;
+  /** charakter ścian: tynk z belkami, kamień, deski */
+  wallStyle?: 'plaster' | 'stone' | 'wood';
+  /** kolumny (w kaflach), w których w górnej ścianie są okna */
+  windows?: number[];
+  /** dywany/chodniki: [tx, ty, tw, th, kolor] */
+  rugs?: Array<[number, number, number, number, string?]>;
   props: Array<[string, number, number, number?]>;
   lights: Array<[number, number, number, string]>;
   exits: Array<{ tx: number; ty: number; w: number; to: string; spawnX?: number; spawnY?: number }>;
@@ -333,33 +339,145 @@ export interface InteriorDef {
   npcs?: string[];
 }
 
+/**
+ * Tło wnętrza: podłoga, ściany, okna, dywany i cień przy ścianach.
+ * Wszystko w jednym obrazie — to statyczna scenografia, propsy stoją na niej.
+ */
 export function renderInteriorWalls(def: InteriorDef): HTMLCanvasElement {
-  const [c, x] = mk(def.w * TILE, def.h * TILE);
+  const W = def.w * TILE, H = def.h * TILE;
+  const [c, x] = mk(W, H);
   const wallH = 44;
-  // podłoga
-  for (let j = 0; j < def.h; j++) for (let i = 0; i < def.w; i++) {
-    const v = (i + j * 3) % 3;
-    const tone = (i + j) % 2 === 0 ? PAL.wood2 : shade(PAL.wood2, 0.05);
-    rect(x, i * TILE, j * TILE, TILE, TILE, def.floor === 'floorStone' ? ((i + j) % 2 ? PAL.stone2 : PAL.stone3) : tone);
+  const stone = def.floor === 'floorStone';
+
+  /* --- podłoga --- */
+  if (stone) {
+    // płyty kamienne o nieregularnych szerokościach, ciemna fuga
+    rect(x, 0, 0, W, H, PAL.stone0);
+    const rowH = 16;
+    for (let ry = 0; ry * rowH < H; ry++) {
+      let px0 = -Math.floor(hash2(ry, 0, 7) * 20);
+      while (px0 < W) {
+        const w = 18 + Math.floor(hash2(px0, ry, 11) * 18);
+        const k = hash2(px0, ry, 13);
+        const tone = k > 0.66 ? PAL.stone3 : k > 0.33 ? PAL.stone2 : mix(PAL.stone2, PAL.stone1, 0.5);
+        rect(x, px0 + 1, ry * rowH + 1, w - 1, rowH - 1, tone);
+        rect(x, px0 + 1, ry * rowH + 1, w - 1, 1, shade(tone, 0.1));
+        if (hash2(px0, ry, 17) > 0.7) px(x, px0 + 4 + Math.floor(k * (w - 8)), ry * rowH + 6, shade(tone, -0.18));
+        px0 += w;
+      }
+    }
+  } else {
+    // deski biegną poziomo, łączenia przesunięte, sęki i słoje
+    const plankH = 8;
+    for (let ry = 0; ry * plankH < H; ry++) {
+      const base = ry % 3 === 0 ? PAL.wood2 : ry % 3 === 1 ? shade(PAL.wood2, 0.05) : shade(PAL.wood2, -0.04);
+      rect(x, 0, ry * plankH, W, plankH - 1, base);
+      rect(x, 0, ry * plankH + plankH - 1, W, 1, PAL.wood0);
+      rect(x, 0, ry * plankH, W, 1, shade(base, 0.08));
+      let jx = Math.floor(hash2(ry, 3, 5) * 60);
+      while (jx < W) {
+        rect(x, jx, ry * plankH, 1, plankH - 1, PAL.wood0);
+        px(x, jx - 3, ry * plankH + 3, PAL.metal0);    // gwóźdź
+        jx += 48 + Math.floor(hash2(jx, ry, 9) * 50);
+      }
+      for (let k = 0; k < W / 24; k++) {
+        const gx = Math.floor(hash2(k, ry, 21) * W);
+        rect(x, gx, ry * plankH + 2 + (k % 3), 4 + (k % 5), 1, shade(base, -0.12));
+        if (hash2(k, ry, 23) > 0.85) { px(x, gx, ry * plankH + 3, PAL.wood0); px(x, gx + 1, ry * plankH + 3, shade(base, -0.2)); }
+      }
+    }
   }
-  if (def.floor === 'rug') {
-    rect(x, def.w * TILE / 2 - 48, def.h * TILE / 2 - 30, 96, 60, PAL.clothRed0);
-    rect(x, def.w * TILE / 2 - 44, def.h * TILE / 2 - 26, 88, 52, PAL.clothRed1);
-    rect(x, def.w * TILE / 2 - 38, def.h * TILE / 2 - 20, 76, 40, PAL.clothYel0);
+  /* --- dywany i chodniki --- */
+  const rugs = def.rugs ?? (def.floor === 'rug' ? [[Math.floor(def.w / 2) - 2, Math.floor(def.h / 2) - 1, 4, 3, PAL.clothRed1]] as any : []);
+  for (const [tx, ty, tw, th, col] of rugs) {
+    const rx = tx * TILE + 4, ry = ty * TILE + 4, rw = tw * TILE - 8, rh = th * TILE - 8;
+    const main = col || PAL.clothRed1;
+    rect(x, rx + 2, ry + 3, rw, rh, 'rgba(0,0,0,0.25)');
+    rect(x, rx, ry, rw, rh, shade(main, -0.25));
+    rect(x, rx + 3, ry + 3, rw - 6, rh - 6, main);
+    rect(x, rx + 7, ry + 7, rw - 14, rh - 14, shade(main, -0.12));
+    rect(x, rx + 10, ry + 10, rw - 20, rh - 20, PAL.clothYel0);
+    rect(x, rx + 12, ry + 12, rw - 24, rh - 24, shade(main, -0.12));
+    for (let i = rx + 6; i < rx + rw - 6; i += 6) { px(x, i, ry + 5, PAL.clothYel2); px(x, i, ry + rh - 6, PAL.clothYel2); }
+    for (let i = rx; i < rx + rw; i += 3) { px(x, i, ry - 1, PAL.clothWhite0); px(x, i, ry + rh, PAL.clothWhite0); }   // frędzle
   }
-  for (let i = 0; i < def.w * def.h * 2; i++) {
-    const nx = Math.floor(hash2(i, 1, def.w) * def.w * TILE), ny = Math.floor(hash2(i, 2, def.h) * def.h * TILE);
-    px(x, nx, ny, 'rgba(0,0,0,0.08)');
+
+  /* --- ściana górna --- */
+  const style = def.wallStyle ?? (stone ? 'stone' : 'plaster');
+  if (style === 'stone') {
+    rect(x, 0, 0, W, wallH, shade(def.wall, -0.1));
+    for (let ry = 0; ry < wallH - 6; ry += 8) {
+      let bx = (ry / 8) % 2 ? -8 : 0;
+      while (bx < W) {
+        const bw = 14 + Math.floor(hash2(bx, ry, 31) * 10);
+        const tone = hash2(bx, ry, 33) > 0.5 ? def.wall : shade(def.wall, 0.08);
+        rect(x, bx + 1, ry + 1, bw - 1, 7, tone);
+        rect(x, bx + 1, ry + 1, bw - 1, 1, shade(tone, 0.12));
+        bx += bw;
+      }
+    }
+  } else if (style === 'wood') {
+    for (let i = 0; i * 8 < W; i++) {
+      const tone = i % 2 ? def.wall : shade(def.wall, 0.06);
+      rect(x, i * 8, 0, 7, wallH, tone);
+      rect(x, i * 8 + 7, 0, 1, wallH, shade(def.wall, -0.35));
+    }
+  } else {
+    // tynk z ryglami (mur pruski od środka)
+    rect(x, 0, 0, W, wallH, def.wall);
+    for (let i = 0; i < W * 2; i++) px(x, Math.floor(hash2(i, 5, 1) * W), Math.floor(hash2(i, 6, 1) * wallH), shade(def.wall, hash2(i, 7, 1) > 0.5 ? 0.06 : -0.06));
+    const beam = shade(PAL.wood1, -0.1);
+    rect(x, 0, 2, W, 4, beam);
+    for (let bx = 0; bx < W; bx += 96) { rect(x, bx, 0, 5, wallH, beam); }
   }
-  // ściany (góra i boki)
-  rect(x, 0, 0, def.w * TILE, wallH, def.wall);
-  rect(x, 0, wallH - 4, def.w * TILE, 4, shade(def.wall, -0.3));
-  rect(x, 0, 0, def.w * TILE, 3, shade(def.wall, 0.15));
-  rect(x, 0, 0, 10, def.h * TILE, shade(def.wall, -0.15));
-  rect(x, def.w * TILE - 10, 0, 10, def.h * TILE, shade(def.wall, -0.25));
-  // belki
-  for (let i = 1; i < 5; i++) rect(x, (i * def.w * TILE) / 5, 0, 5, wallH, shade(def.wall, -0.25));
+  // boazeria i listwa przy podłodze
+  rect(x, 0, wallH - 14, W, 10, shade(PAL.wood1, -0.05));
+  for (let bx = 0; bx < W; bx += 16) rect(x, bx, wallH - 14, 1, 10, PAL.wood0);
+  rect(x, 0, wallH - 14, W, 1, PAL.wood3);
+  rect(x, 0, wallH - 4, W, 4, PAL.wood0);
+
+  /* --- okna i plamy światła na podłodze --- */
+  const wins = def.windows ?? autoWindows(def.w);
+  for (const col of wins) {
+    const wx = col * TILE + 6, wy = 8;
+    rect(x, wx - 2, wy - 2, 24, 22, PAL.wood0);
+    rect(x, wx, wy, 20, 18, mix(PAL.water3, PAL.clothWhite1, 0.4));
+    rect(x, wx, wy, 20, 6, mix(PAL.water4, PAL.clothWhite2, 0.5));
+    rect(x, wx + 9, wy, 2, 18, PAL.wood1); rect(x, wx, wy + 8, 20, 2, PAL.wood1);
+    px(x, wx + 3, wy + 2, PAL.clothWhite2); px(x, wx + 13, wy + 11, PAL.clothWhite2);
+    rect(x, wx - 3, wy + 18, 26, 3, PAL.wood2);                 // parapet
+    // snop światła padający skośnie na podłogę
+    x.save();
+    x.globalAlpha = 0.09;
+    x.fillStyle = '#fff2c0';
+    x.beginPath();
+    x.moveTo(wx, wallH); x.lineTo(wx + 20, wallH); x.lineTo(wx + 34, wallH + 58); x.lineTo(wx + 8, wallH + 58);
+    x.closePath(); x.fill();
+    x.restore();
+  }
+
+  /* --- ściany boczne i cień przy ścianach (głębia pokoju) --- */
+  rect(x, 0, 0, 10, H, shade(def.wall, -0.2));
+  rect(x, W - 10, 0, 10, H, shade(def.wall, -0.3));
+  rect(x, 9, 0, 1, H, PAL.ink1); rect(x, W - 10, 0, 1, H, PAL.ink1);
+  const shadowBand = (sx: number, sy: number, w: number, h: number, horizontal: boolean) => {
+    for (let i = 0; i < 6; i++) {
+      x.fillStyle = `rgba(10,6,3,${0.22 - i * 0.035})`;
+      if (horizontal) x.fillRect(sx, sy + i, w, 1); else x.fillRect(sx + i, sy, 1, h);
+    }
+  };
+  shadowBand(10, wallH, W - 20, 6, true);
+  shadowBand(10, wallH, 6, H - wallH, false);
+  for (let i = 0; i < 6; i++) { x.fillStyle = `rgba(10,6,3,${0.22 - i * 0.035})`; x.fillRect(W - 11 - i, wallH, 1, H - wallH); }
+  // dolna krawędź (ściana od strony kamery) — tylko listwa
+  rect(x, 0, H - 3, W, 3, PAL.ink1);
   return c;
+}
+
+function autoWindows(w: number): number[] {
+  if (w <= 6) return [1];
+  if (w <= 10) return [2, w - 3];
+  return [2, Math.floor(w / 2) - 1, w - 3];
 }
 
 export function clearBuildingCache() { cache.clear(); }

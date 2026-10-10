@@ -103,7 +103,7 @@ function paintGround(type: GroundType, v: number): HTMLCanvasElement {
   switch (type) {
     case 'grass': {
       rect(x, 0, 0, TILE, TILE, PAL.grass1);
-      noiseFill(x, TILE, TILE, seed, [PAL.grass2, PAL.grass0, PAL.grass3], 0.55);
+      noiseFill(x, TILE, TILE, seed, [PAL.grass2, PAL.grass2, PAL.grass0], 0.38);
       for (let i = 0; i < 7; i++) {
         const gx = Math.floor(hash2(i, v, seed + 3) * 30) + 1, gy = Math.floor(hash2(i, v, seed + 77) * 28) + 2;
         px(x, gx, gy, PAL.grass3); px(x, gx, gy - 1, PAL.grass4); px(x, gx + 1, gy, PAL.grass0);
@@ -120,11 +120,16 @@ function paintGround(type: GroundType, v: number): HTMLCanvasElement {
       break;
     }
     case 'dirt': {
+      // ubita ziemia: spokojna baza, kilka kamyków i wgłębień — bez „śniegu” pikseli
       rect(x, 0, 0, TILE, TILE, PAL.dirt2);
-      noiseFill(x, TILE, TILE, seed, [PAL.dirt1, PAL.dirt3, PAL.dirt0, PAL.dirt4], 0.5);
-      for (let i = 0; i < 4; i++) {
+      noiseFill(x, TILE, TILE, seed, [PAL.dirt1, PAL.dirt3], 0.22);
+      for (let i = 0; i < 3; i++) {
         const gx = Math.floor(hash2(i, v, seed + 21) * 26) + 2, gy = Math.floor(hash2(i, v, seed + 31) * 26) + 2;
-        ellipsePx(x, gx, gy, 2, 1, PAL.dirt1);
+        ellipsePx(x, gx, gy, 2, 1, shade(PAL.dirt2, -0.1));
+      }
+      for (let i = 0; i < 3; i++) {
+        const gx = Math.floor(hash2(i, v, seed + 41) * 28) + 2, gy = Math.floor(hash2(i, v, seed + 47) * 28) + 2;
+        px(x, gx, gy, PAL.stone2); px(x, gx, gy + 1, PAL.dirt0);
       }
       break;
     }
@@ -137,18 +142,20 @@ function paintGround(type: GroundType, v: number): HTMLCanvasElement {
       break;
     }
     case 'cobble': {
-      rect(x, 0, 0, TILE, TILE, PAL.stone1);
-      for (let r = 0; r < 4; r++) for (let cc = 0; cc < 4; cc++) {
+      // bruk: zaokrąglone kamienie w ciemnej fudze, światło z góry, cień od dołu
+      rect(x, 0, 0, TILE, TILE, mix(PAL.stone0, PAL.dirt1, 0.4));
+      for (let r = 0; r < 4; r++) for (let cc = -1; cc < 4; cc++) {
         const ox = (r % 2) * 4;
-        const bx = cc * 8 + ox + Math.floor(hash2(cc, r, seed) * 2) - 1;
-        const by = r * 8 + Math.floor(hash2(cc, r, seed + 4) * 2);
-        const w = 6 + Math.floor(hash2(cc, r, seed + 8) * 2), h = 6;
-        const tone = hash2(cc, r, seed + 12) > 0.6 ? PAL.stone3 : (hash2(cc, r, seed + 16) > 0.5 ? PAL.stone2 : PAL.stone1);
-        rect(x, bx + 1, by + 1, w, h, tone);
-        px(x, bx + 1, by + 1, shade(tone, 0.16));
-        px(x, bx + w, by + h, shade(tone, -0.22));
+        const bx = cc * 8 + ox, by = r * 8;
+        const w = 7, h = 7;
+        const k = hash2(cc + 9, r + v * 5, seed + 12);
+        const tone = k > 0.66 ? PAL.stone3 : k > 0.33 ? PAL.stone2 : mix(PAL.stone2, PAL.dirt3, 0.35);
+        rect(x, bx + 1, by + 1, w - 1, h - 1, tone);
+        rect(x, bx + 2, by + 1, w - 3, 1, shade(tone, 0.14));        // światło
+        rect(x, bx + 2, by + h - 1, w - 3, 1, shade(tone, -0.2));    // cień
+        px(x, bx + 1, by + 1, mix(PAL.stone0, PAL.dirt1, 0.4)); px(x, bx + w - 1, by + 1, mix(PAL.stone0, PAL.dirt1, 0.4));
+        px(x, bx + 1, by + h - 1, mix(PAL.stone0, PAL.dirt1, 0.4)); px(x, bx + w - 1, by + h - 1, mix(PAL.stone0, PAL.dirt1, 0.4));
       }
-      noiseFill(x, TILE, TILE, seed + 33, [PAL.stone0], 0.1);
       break;
     }
     case 'stone': {
@@ -272,6 +279,30 @@ function paintGround(type: GroundType, v: number): HTMLCanvasElement {
       break;
     }
   }
+  return c;
+}
+
+/**
+ * Krawędź przejścia: tekstura sąsiedniego terenu przycięta poszarpaną maską
+ * od strony `side` (0=góra, 1=prawo, 2=dół, 3=lewo). Daje miękkie granice
+ * trawa/ziemia/piach zamiast linii jak od linijki.
+ */
+const edgeCache = new Map<string, HTMLCanvasElement>();
+export function groundEdge(type: GroundType, side: number, variant: number): HTMLCanvasElement {
+  const key = `${type}|${side}|${variant}`;
+  const hit = edgeCache.get(key); if (hit) return hit;
+  const src = groundVariants(type, 3)[variant % 3];
+  const [c, x] = mk(TILE, TILE);
+  for (let i = 0; i < TILE; i++) {
+    // głębokość wcięcia zmienia się płynnie wzdłuż krawędzi
+    const d = 3 + Math.round(2.5 * Math.sin(i * 0.45 + variant * 2.1 + side) + 2 * hash2(i, side, variant + 101));
+    const depth = Math.max(1, Math.min(9, d));
+    if (side === 0) x.drawImage(src, i, 0, 1, depth, i, 0, 1, depth);
+    else if (side === 2) x.drawImage(src, i, TILE - depth, 1, depth, i, TILE - depth, 1, depth);
+    else if (side === 3) x.drawImage(src, 0, i, depth, 1, 0, i, depth, 1);
+    else x.drawImage(src, TILE - depth, i, depth, 1, TILE - depth, i, depth, 1);
+  }
+  edgeCache.set(key, c);
   return c;
 }
 
@@ -1128,6 +1159,92 @@ def('corpse', 30, 14, (x, v) => {
   rect(x, 22, 8, 6, 4, PAL.wood1);
   ellipsePx(x, 14, 12, 10, 2, PAL.blood0);
 }, { tall: false, solid: false, grabbable: true });
+
+/* --- drobna roślinność i detale podłoża (dekoracje bez kolizji) --- */
+const DECOR = { tall: false, solid: false, shadow: false } as const;
+def('flowers', 18, 12, (x, v) => {
+  const cols = [[PAL.clothYel2, PAL.clothYel1], [PAL.clothRed2, PAL.clothRed1], [PAL.clothWhite2, PAL.clothWhite0], [PAL.clothBlue2, PAL.clothBlue1]][v % 4];
+  for (let i = 0; i < 7; i++) {
+    const fx = 2 + Math.floor(hash2(i, v, 3) * 13), fy = 2 + Math.floor(hash2(i, v, 5) * 6);
+    linePx(x, fx, fy + 2, fx + (i % 3 - 1), fy + 5, PAL.grass0);
+    rect(x, fx - 1, fy, 3, 2, cols[1]); px(x, fx, fy, cols[0]); px(x, fx, fy - 1, cols[1]);
+  }
+}, DECOR);
+def('tuft', 12, 9, (x, v) => {
+  for (let i = 0; i < 6; i++) {
+    const gx = 2 + i * 1.6, top = 1 + Math.floor(hash2(i, v, 7) * 4);
+    linePx(x, gx, 8, gx + (i - 2.5) * 0.6, top, i % 2 ? PAL.grass3 : PAL.grass2);
+  }
+  rect(x, 2, 7, 8, 1, PAL.grass0);
+}, DECOR);
+def('pebbles', 12, 6, (x, v) => {
+  for (let i = 0; i < 4; i++) {
+    const gx = 1 + Math.floor(hash2(i, v, 11) * 9), gy = 1 + Math.floor(hash2(i, v, 13) * 3);
+    rect(x, gx, gy, 2, 2, i % 2 ? PAL.stone2 : PAL.stone3); px(x, gx + 1, gy + 1, PAL.stone0);
+  }
+}, DECOR);
+def('reeds', 14, 18, (x, v) => {
+  for (let i = 0; i < 6; i++) {
+    const gx = 1 + i * 2 + (v % 2), top = 1 + Math.floor(hash2(i, v, 17) * 6);
+    linePx(x, gx, 17, gx + (i % 3 - 1), top, i % 2 ? PAL.leaf1 : PAL.grass2);
+    if (i % 2 === 0) { rect(x, gx + (i % 3 - 1), top, 1, 3, PAL.wood1); }
+  }
+}, DECOR);
+def('mushrooms', 10, 7, (x, v) => {
+  for (let i = 0; i < 3; i++) {
+    const gx = 1 + i * 3, gy = 2 + (i % 2);
+    rect(x, gx + 1, gy + 2, 1, 2, PAL.clothWhite1);
+    rect(x, gx, gy, 3, 2, v % 2 ? PAL.clothRed1 : PAL.dirt3); px(x, gx + 1, gy, PAL.clothWhite2);
+  }
+}, DECOR);
+def('fern', 16, 11, (x, v) => {
+  for (let i = -3; i <= 3; i++) {
+    linePx(x, 8, 10, 8 + i * 2, 2 + Math.abs(i), i % 2 ? PAL.leaf2 : PAL.leaf1);
+  }
+}, DECOR);
+def('stump', 16, 12, (x, v) => {
+  rect(x, 3, 4, 10, 7, PAL.wood1); rect(x, 3, 4, 10, 2, PAL.wood3);
+  px(x, 7, 5, PAL.wood1); px(x, 8, 5, PAL.wood0);
+  rect(x, 1, 9, 3, 2, PAL.wood0); rect(x, 12, 9, 3, 2, PAL.wood0);
+}, { tall: false, solid: true, shadow: true });
+def('hedge', 30, 18, (x, v) => {
+  ellipsePx(x, 15, 11, 14, 6, PAL.leaf0);
+  ellipsePx(x, 15, 9, 13, 5, PAL.leaf1);
+  for (let i = 0; i < 8; i++) px(x, 3 + Math.floor(hash2(i, v, 3) * 24), 5 + Math.floor(hash2(i, v, 4) * 6), PAL.leaf3);
+}, { tall: false, solid: true });
+def('woodpile', 26, 14, (x, v) => {
+  for (let r = 0; r < 3; r++) for (let i = 0; i < 4 - r; i++) {
+    const cx = 4 + i * 6 + r * 3, cy = 11 - r * 4;
+    ellipsePx(x, cx, cy, 3, 2, PAL.wood2); px(x, cx, cy, PAL.wood4);
+  }
+}, { tall: false });
+def('flowerBed', 30, 10, (x, v) => {
+  rect(x, 1, 4, 28, 5, PAL.dirt1); rect(x, 1, 3, 28, 1, PAL.wood1); rect(x, 1, 9, 28, 1, PAL.wood0);
+  for (let i = 0; i < 9; i++) {
+    const fx = 3 + i * 3, c = [PAL.clothRed2, PAL.clothYel2, PAL.clothWhite2][(i + v) % 3];
+    px(x, fx, 4, PAL.grass2); px(x, fx, 3, c); px(x, fx + 1, 2, c);
+  }
+}, { tall: false, solid: false });
+
+def('stairs', 30, 40, (x, v) => {
+  // schody na piętro: stopnie maleją ku ścianie, poręcz z boku
+  for (let i = 0; i < 6; i++) {
+    const y = 34 - i * 6, inset = i * 1;
+    rect(x, 2 + inset, y, 24 - inset * 2, 6, i % 2 ? PAL.wood2 : PAL.wood3);
+    rect(x, 2 + inset, y, 24 - inset * 2, 1, PAL.wood4);
+    rect(x, 2 + inset, y + 5, 24 - inset * 2, 1, PAL.wood0);
+  }
+  rect(x, 26, 4, 2, 36, PAL.wood0); rect(x, 26, 4, 2, 1, PAL.wood3);
+  for (let i = 0; i < 5; i++) rect(x, 26, 8 + i * 7, 3, 1, PAL.wood1);
+}, { tall: false, solid: false });
+def('candles', 12, 12, (x, v) => {
+  rect(x, 2, 8, 8, 3, PAL.metal1);
+  for (let i = 0; i < 3; i++) { rect(x, 3 + i * 3, 3 + (i % 2), 2, 5, PAL.clothWhite1); px(x, 3 + i * 3, 2 + (i % 2), PAL.fire3); }
+}, { tall: false, solid: false, shadow: false });
+def('pots', 22, 14, (x, v) => {
+  ellipsePx(x, 6, 9, 5, 4, PAL.tile1); ellipsePx(x, 6, 6, 3, 1, PAL.tile0);
+  ellipsePx(x, 15, 10, 5, 3, PAL.dirt3); ellipsePx(x, 15, 8, 3, 1, PAL.dirt1);
+}, { tall: false });
 
 /** Zwraca gotowy (obramowany) sprite propsa; cache'owany per wariant. */
 const propCache = new Map<string, HTMLCanvasElement>();
