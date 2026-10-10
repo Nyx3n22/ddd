@@ -35,7 +35,7 @@ Wymagany Node 18+. Gra działa w przeglądarce, bez wtyczek i bez zewnętrznych 
 | Interakcja | E | rozmowa, drzwi, skrzynie, studnia, tablica… |
 | Dźwiganie | F | skrzynki, beczki, ciała |
 | Pochodnia | R | |
-| Pas szybkiego dostępu | Q | |
+| Pas szybkiego dostępu | Q / 1–4 | 1–4 od razu używa przedmiotu z pasa |
 | Sakwa | I | |
 | Dziennik zadań i długu | J | |
 | Notatnik / umiejętności | K / G | wymaga notatnika (przedmiot) |
@@ -46,6 +46,20 @@ Wymagany Node 18+. Gra działa w przeglądarce, bez wtyczek i bez zewnętrznych 
 | Konsola deweloperska | ` | `help` wypisuje komendy |
 
 Klawisze można zmienić w Esc → Sterowanie. Obsługiwany jest też pad.
+
+---
+
+## 📜 Fabuła i zakończenia
+
+Prolog prowadzi od Baldwina na kei do karczmy i Hanny. Potem gracz sam wybiera, w które wątki wejdzie:
+
+- **Księga Kruka** — prawda o pożarze w Vranoviu. Odpis księgi długów leży w kantorze celnym (lepiej iść nocą). Księgę można oddać straży, Kościołowi (−3000 długu) albo samemu Baldwinowi (−5000 długu).
+- **Rachunek dla Kruka** — spisek z sierżantem Rawiczem: cech, dzwony ojca Teodora, ludzie Vagna i nocne wystąpienie.
+- **Ostatni prom** — znak przewozowy od Idziego i łódź na końcu środkowej kei nocą. W sztorm lepiej nie płynąć.
+- **Płaszcz Kruka** — przysięga Dzikim Rycerzom zamiast długu.
+- **Relikwiarz świętego Elenema** — ruiny opactwa za zachodnim murem. Relikwiarz można oddać albo sprzedać.
+
+**13 zakończeń:** Uczciwy dłużnik, Mieszczanin, Przy szynkwasie, Człowiek z zaułka, Król portu, Ten, który odpłynął, Morze nie wybacza, Koniec dziesiątej części, Kruk w służbie, Azyl, Na żołdzie straży, Więzień długu i Zapomniany. Tydzień po terminie Rycerze przychodzą po Johna. Epilog opisuje losy frakcji i postaci, a menu główne pokazuje odkryte zakończenia i osiągnięcia.
 
 ---
 
@@ -73,6 +87,11 @@ To, co widzisz, ma uzasadnienie w świecie gry. Notatnik, mapa i zegarek to prze
 - **Zapis** — sloty ręczne, autozapis, tryb hardcore (jedno życie).
 - **Dostępność** — skalowanie UI, napisy, wyłączenie błysków i wstrząsów, przełączanie biegu i skradania.
 - **Język** — pełna lokalizacja PL i EN.
+- **Orientacja** — strzałka do celu zadania, minimapa (gdy John ma mapę), imiona nad głowami w kolorze relacji, wóz przewoźnika między rynkiem a portem.
+- **Skradanie** — oko widoczności, stożki widzenia straży, „!” nad świadkami, cios z zaskoczenia.
+- **Czynności** — łowienie ryb z kei (z haczykiem), odpoczynek na ławkach, modlitwa przy kapliczce, ognisko.
+- **Klimat** — mewy, ptaki, motyle, świetliki, cienie chmur, tęcza po deszczu, dymki z kwestiami mieszkańców.
+- **Wygoda** — samouczek kontekstowy, 18 osiągnięć, autopauza, autozapis przy zmianie lokacji, dziennik rozmów i karta nowego dnia. Każdy z tych elementów da się wyłączyć w ustawieniach.
 
 ---
 
@@ -82,11 +101,13 @@ To, co widzisz, ma uzasadnienie w świecie gry. Notatnik, mapa i zegarek to prze
 src/
   main.ts              punkt wejścia
   core/                pętla gry, stan, czas, wejście, zapis, lokalizacja, audio, konsola
-  world/               scena, mapa kafelkowa, ładowanie dzielnicy i wnętrz, logika świata
+  world/               scena, mapa kafelkowa, ładowanie dzielnicy i wnętrz, logika świata,
+                       zagospodarowanie dzielnicy (WorldDecor: trawa, ścieżki, roślinność)
   entities/            Actor → Player (John), NPCActor, EnemyActor
   systems/             dług, potrzeby, walka/przestępstwa, ekonomia, zadania, dialogi, rzemiosło…
   render/              renderer 2D (bufor 640×360), kamera, światło, pogoda,
-                       postacie, zwierzęta, budynki, efekty walki
+                       postacie, zwierzęta, budynki, efekty walki,
+                       HUD w świecie (WorldHud), klimat (Ambient)
   ui/                  HUD, nakładki, dialogi
   data/                cała treść gry w JSON: świat, NPC, dialogi, przedmioty,
                        zadania, umiejętności, tłumaczenia
@@ -104,4 +125,4 @@ tools/
 
 ## 🧪 Konsola deweloperska (`)
 
-Najczęściej używane komendy: `help`, `godmode`, `tp x y`, `scene int_tavern`, `time 22`, `day 10`, `advance 1440`, `weather rain`, `spawn wolf`, `give pocket_watch`, `notebook`, `map`, `quest list`, `rep cityGuard -50`, `wanted 3`, `ending end_honest`, `lang en`.
+Najczęściej używane komendy: `help`, `godmode`, `tp x y`, `scene int_tavern`, `time 22`, `day 10`, `advance 1440`, `weather rain`, `spawn wolf`, `give pocket_watch`, `notebook`, `map`, `quest list`, `rep cityGuard -50`, `wanted 3`, `ending end_honest`, `lang en`, `talk teodor`, `endinglist`.

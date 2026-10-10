@@ -1807,6 +1807,7 @@ item.cod|Dorsz|Cod
 item.cod.desc|Duża ryba z zimnej wody. Kupcy płacą za nią lepiej niż za śledzie.|A big cold-water fish. Merchants pay better for it than for herring.
 item.eel|Węgorz|Eel
 item.eel.desc|Śliski i uparty. Na targu idzie za trzy razy więcej niż dorsz.|Slippery and stubborn. At market it fetches three times a cod.
+station.exitDown|Zejście do izby karczmy|Down to the taproom
 station.fishingSpot|Łowisko na końcu kei|Fishing spot at the pier's end
 station.carter|Wóz przewoźnika|Carter's wagon
 fish.noHook|Bez haczyka nic nie złowisz. Ewa na kei sprzedaje sprzęt.|Without a hook you will catch nothing. Ewa on the pier sells gear.

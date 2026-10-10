@@ -298,7 +298,7 @@ export function loadInterior(def: InteriorDef): Scene {
       kind: 'exit', type: 'exit', id: `${def.id}_exit_${e.tx}`, x: (e.tx + e.w / 2) * TILE, y: e.ty * TILE + TILE,
       box: null, sortY: e.ty * TILE + TILE, tall: false, art: null,
       interactId: `exit:${e.to}`, data: { to: e.to, spawnX: e.spawnX, spawnY: e.spawnY },
-      nameKey: 'station.exit'
+      nameKey: e.to === 'world' ? 'station.exit' : e.to === 'int_room_john' ? 'prop.stairs' : 'station.exitDown'
     });
     // mata podłogowa przy wyjściu
     tm.setOverlay(e.tx, e.ty - 1, 3, 0.6);
