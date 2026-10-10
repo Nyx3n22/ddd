@@ -3,7 +3,7 @@
 **Gatunek:** RPG 2D, pixel art, rzut 3/4 z góry, immersive sim z elementami przetrwania
 **Setting:** średniowiecze, rok 1430, portowe miasto na wyspie Elenem
 **Ton:** przyziemny, brudny realizm; magia tylko jako zabobon i plotka
-**Stan:** grywalny wycinek (vertical slice): dzielnica portowa i 12 wnętrz
+**Stan:** grywalny wycinek (vertical slice): portowe miasto, las i wieś Brzezina, ponad 50 wnętrz
 
 > **Prolog:** John, 36 lat, były najemnik, schodzi ze statku na keję. Ma miecz, 100 koron i 10 000 koron długu u Dzikich Rycerzy — na wpół bandyckiego bractwa, które trzyma wyspę. Na spłatę ma 30 dni.
 
@@ -59,6 +59,8 @@ Prolog prowadzi od Baldwina na kei do karczmy i Hanny. Potem gracz sam wybiera, 
 - **Płaszcz Kruka** — przysięga Dzikim Rycerzom zamiast długu.
 - **Relikwiarz świętego Elenema** — ruiny opactwa za zachodnim murem. Relikwiarz można oddać albo sprzedać.
 
+**Zadania poboczne (11):** Wataha nad Brzeziną, Koło młyńskie, Łaciata, Czerwona czapka (zaginiony drwal), Skóry bez pieczęci, Pismo do Brzeziny, Sukno dla rady, Zakład Ambrożego, Kaszel Kuby, Trzewiki na zaręczyny i Grób bez imienia (nocą, na cmentarzu przy kaplicy w Brzezinie).
+
 **13 zakończeń:** Uczciwy dłużnik, Mieszczanin, Przy szynkwasie, Człowiek z zaułka, Król portu, Ten, który odpłynął, Morze nie wybacza, Koniec dziesiątej części, Kruk w służbie, Azyl, Na żołdzie straży, Więzień długu i Zapomniany. Tydzień po terminie Rycerze przychodzą po Johna. Epilog opisuje losy frakcji i postaci, a menu główne pokazuje odkryte zakończenia i osiągnięcia.
 
 ---
@@ -81,9 +83,11 @@ To, co widzisz, ma uzasadnienie w świecie gry. Notatnik, mapa i zegarek to prze
 - **Ekonomia** — handel, usługi (pokój, łaźnia, medyk), ceny zależne od reputacji i wydarzeń.
 - **Rzemiosło** — kuźnia, warsztat, garbarnia, kuchnia, stół zielarki.
 - **Hazard** — kości i karty, z możliwością oszukiwania.
-- **Zadania** — 6 fabularnych, codzienne zlecenia z tablicy ogłoszeń i 7 zakończeń.
+- **Zadania** — 22 zadania (fabularne i poboczne), codzienne zlecenia z tablicy ogłoszeń i 13 zakończeń.
 - **Pogoda** — deszcz, mgła, burza, śnieg, upał, epidemie.
-- **NPC** — 28 postaci z rozkładem dnia i dialogami, przechodnie krążący po mieście, zwierzęta, nocne wilki.
+- **NPC** — 41 postaci z rozkładem dnia, domem i dialogami (każda opowie o sobie i swoim miejscu), przechodnie krążący po mieście i wsi, zwierzęta, nocne wilki.
+- **Świat** — miasto z portem i 7 nowymi kamienicami, 9 chat rybackich, gęsty las (sosny, dęby, paprocie, grzyby) z obozowiskiem drwali i chatą myśliwego, wieś Brzezina z placem, młynem, kaplicą, cmentarzem, polami, ulami i zagrodami. Wóz kursuje między portem, rynkiem i wsią.
+- **Wnętrza i meble** — każdy dom urządzony inaczej (rodzinny, biedny, bogaty, tkacki, szewski, rybacki, zielarski): łoża, sienniki, kołyski, kanapy, fotele, krzesła, szafy, kredensy, komody, krosna, kołowrotki, miednice. Na ławach, krzesłach i fotelach da się usiąść, a szafy i komody przeszukać. Małe izby są wyśrodkowane na ekranie.
 - **Zapis** — sloty ręczne, autozapis, tryb hardcore (jedno życie).
 - **Dostępność** — skalowanie UI, napisy, wyłączenie błysków i wstrząsów, przełączanie biegu i skradania.
 - **Język** — pełna lokalizacja PL i EN.

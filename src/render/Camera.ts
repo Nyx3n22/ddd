@@ -30,8 +30,9 @@ export class Camera {
 
   clamp() {
     const maxX = Math.max(0, this.bounds.w - this.viewW), maxY = Math.max(0, this.bounds.h - this.viewH);
-    this.x = Math.max(0, Math.min(maxX, this.x));
-    this.y = Math.max(0, Math.min(maxY, this.y));
+    // izba mniejsza niż ekran stoi na środku, a nie w lewym górnym rogu
+    this.x = this.bounds.w < this.viewW ? Math.round((this.bounds.w - this.viewW) / 2) : Math.max(0, Math.min(maxX, this.x));
+    this.y = this.bounds.h < this.viewH ? Math.round((this.bounds.h - this.viewH) / 2) : Math.max(0, Math.min(maxY, this.y));
   }
 
   kick(amount: number) { this.shake = Math.min(6, this.shake + amount); this.shakeT = 0; }

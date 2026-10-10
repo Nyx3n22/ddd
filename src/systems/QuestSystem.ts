@@ -23,11 +23,13 @@ export interface Objective {
 export interface QuestStage {
   id: string; descKey: string; objective: Objective;
   flagOnDone?: string;
-  spawn?: { typeId: string; kind: string; tx: number; ty: number };
+  spawn?: { typeId: string; kind: string; tx: number; ty: number; count?: number };
 }
 export interface QuestRewards {
   crowns?: number; rep?: Record<string, number>; xp?: Record<string, number>;
-  items?: string[]; noteKey?: string; unlockStation?: string; unlockTeacher?: string; flag?: string;
+  items?: string[]; noteKey?: string;
+  /** przedmioty oddawane zleceniodawcy przy ukończeniu: [id, ilość] */
+  consume?: Array<[string, number]>; unlockStation?: string; unlockTeacher?: string; flag?: string;
 }
 export interface QuestDef {
   id: string; titleKey: string; type: string; giver: string | null; autoStart?: boolean;
@@ -65,6 +67,7 @@ export class QuestSystem {
     bus.emit('quest:started', { id, title: t(def.titleKey) });
     bus.emit('hud:toast', { text: t('quest.started', { title: t(def.titleKey) }), tone: 'good' });
     s.addLog(`quest+ ${def.titleKey}`);
+    if ((def.stages[0] as any)?.spawn) bus.emit('quest:spawn', { ...(def.stages[0] as any).spawn, questId: id });
     this.checkStage(q);
     return true;
   }
@@ -135,6 +138,7 @@ export class QuestSystem {
     s.stats.questsDone += 1;
     const r = def.rewards || {};
     if (r.crowns) { s.gold += r.crowns; s.stats.earned += r.crowns; }
+    if (r.consume) for (const [it, qty] of r.consume) InventorySystem.remove(it, qty);
     if (r.items) for (const it of r.items) InventorySystem.add(it, 1);
     if (r.rep) for (const f in r.rep) ReputationSystem.add(f as any, r.rep[f], 'rep.reason.quest');
     if (r.xp) for (const sk in r.xp) SkillsSystem.use(sk, r.xp[sk]);

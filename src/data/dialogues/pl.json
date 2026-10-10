@@ -42,6 +42,10 @@
      "goto": "hanna_threat"
     },
     {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "hanna_about2"
+    },
+    {
      "text": "Nie przeszkadzam.",
      "goto": "exit"
     }
@@ -470,6 +474,10 @@
      "goto": "orlik_guild"
     },
     {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "orlik_about2"
+    },
+    {
      "text": "Nie przeszkadzam.",
      "goto": "exit"
     }
@@ -697,6 +705,10 @@
       "noFlag": "ov_vagn"
      },
      "hidden": true
+    },
+    {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "vagn_about2"
     },
     {
      "text": "Nie będę zabierał czasu.",
@@ -945,6 +957,10 @@
       "noFlag": "idzi_trusts"
      },
      "hidden": true
+    },
+    {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "idzi_about2"
     },
     {
      "text": "Nie widziałem cię.",
@@ -1201,6 +1217,10 @@
      "hidden": true
     },
     {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "rawicz_about2"
+    },
+    {
      "text": "Nie zatrzymuję.",
      "goto": "exit"
     }
@@ -1449,6 +1469,10 @@
       "item": "relic_elenem"
      },
      "hidden": true
+    },
+    {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "teodor_about2"
     },
     {
      "text": "Nie będę zajmować czasu.",
@@ -1758,6 +1782,10 @@
      "goto": "marta_lock"
     },
     {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "marta_about2"
+    },
+    {
      "text": "Uważaj na siebie.",
      "goto": "exit"
     }
@@ -1996,6 +2024,10 @@
      "goto": "goslaw_craft"
     },
     {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "goslaw_about2"
+    },
+    {
      "text": "Nie potrzebuję mapy.",
      "goto": "exit"
     }
@@ -2156,6 +2188,10 @@
       }
      },
      "hidden": true
+    },
+    {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "baldwin_about2"
     },
     {
      "text": "Nie zapłacę ani korony.",
@@ -2339,6 +2375,10 @@
      "goto": "collector_threat"
     },
     {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "collector_about2"
+    },
+    {
      "text": "Nie teraz.",
      "goto": "exit"
     }
@@ -2447,6 +2487,10 @@
     {
      "text": "Co się dzieje, gdy ktoś nie spłaca?",
      "goto": "usurer_consequences"
+    },
+    {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "usurer_about2"
     },
     {
      "text": "Nie dziś.",
@@ -2565,6 +2609,10 @@
      ]
     },
     {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "gambler_about2"
+    },
+    {
      "text": "Tylko patrzę.",
      "goto": "exit"
     }
@@ -2644,6 +2692,18 @@
      ]
     },
     {
+     "text": "Masz dla mnie jakąś robotę?",
+     "goto": "scribe_letter",
+     "cond": {
+      "noQuest": "q_letter_brzezina"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "scribe_about2"
+    },
+    {
      "text": "Przemyślę.",
      "goto": "exit"
     }
@@ -2714,6 +2774,10 @@
      ]
     },
     {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "medic_about2"
+    },
+    {
      "text": "Zdrowy jestem.",
      "goto": "exit"
     }
@@ -2768,6 +2832,10 @@
      },
      "reqKey": "req.saltRumor",
      "goto": "customs_salt"
+    },
+    {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "customs_about2"
     },
     {
      "text": "Odchodzę.",
@@ -2941,6 +3009,10 @@
      "hidden": true
     },
     {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "guild_about2"
+    },
+    {
      "text": "Przyjdę, gdy będę miał towar.",
      "goto": "exit"
     }
@@ -3048,6 +3120,10 @@
      "goto": "tanner_wolves"
     },
     {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "tanner_about2"
+    },
+    {
      "text": "Tylko przechodziłem.",
      "goto": "exit"
     }
@@ -3112,6 +3188,14 @@
     {
      "text": "Gdzie w tym porcie jest cicho?",
      "goto": "fisher_quiet"
+    },
+    {
+     "text": "Ambroży mówi, że łowi lepiej od ciebie.",
+     "goto": "fisher_ambrozy"
+    },
+    {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "fisher_about2"
     },
     {
      "text": "Dobrej sieci.",
@@ -3181,6 +3265,10 @@
      "goto": "baker_dice"
     },
     {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "baker_about2"
+    },
+    {
      "text": "Tylko wącham.",
      "goto": "exit"
     }
@@ -3238,6 +3326,10 @@
      },
      "reqKey": "req.bread",
      "goto": "beggar_bread"
+    },
+    {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "beggar_about2"
     },
     {
      "text": "Nie mam nic.",
@@ -3460,6 +3552,10 @@
      "goto": "executioner_life"
     },
     {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "executioner_about2"
+    },
+    {
      "text": "Odchodzę.",
      "goto": "exit"
     }
@@ -3544,6 +3640,10 @@
      "goto": "washer_gossip"
     },
     {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "washer_about2"
+    },
+    {
      "text": "Może później.",
      "goto": "exit"
     }
@@ -3607,6 +3707,10 @@
      "goto": "stableboy_watch"
     },
     {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "stableboy_about2"
+    },
+    {
      "text": "Tylko pogłaskam.",
      "goto": "exit",
      "effects": [
@@ -3668,6 +3772,10 @@
     {
      "text": "Co czytasz?",
      "goto": "nun_book"
+    },
+    {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "nun_about2"
     },
     {
      "text": "Nie będę przeszkadzać.",
@@ -3760,6 +3868,22 @@
       "noFlag": "oath_wiera"
      },
      "hidden": true
+    },
+    {
+     "text": "Syn wdowy Doroty kaszle od trzech tygodni.",
+     "goto": "wiera_child",
+     "cond": {
+      "quest": {
+       "id": "q_sick_child",
+       "state": "active"
+      },
+      "noFlag": "child_remedy"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Opowiedz o sobie i o tym miejscu.",
+     "goto": "wiera_about2"
     },
     {
      "text": "Dziękuję. Nie zatrzymuję.",
@@ -4532,6 +4656,1692 @@
     },
     {
      "text": "Jeszcze nie jestem gotów.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "halszka_root": {
+   "portrait": "halszka",
+   "emotion": "neutral",
+   "text": "Halszka nie odrywa wzroku od krosna. Czółenko przelatuje tam i z powrotem, równo jak oddech. „Jeśli przyszedłeś po płótno, mam tylko zgrzebne. Dobre idzie do cechu, a cech płaci mi połowę tego, co bierze.”",
+   "options": [
+    {
+     "text": "Kim jesteś?",
+     "goto": "halszka_about"
+    },
+    {
+     "text": "Co to za dom?",
+     "goto": "halszka_place"
+    },
+    {
+     "text": "Wyglądasz na zmartwioną. Mogę pomóc?",
+     "goto": "halszka_quest",
+     "cond": {
+      "noQuest": "q_weaver_wool"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Nie przeszkadzam.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "halszka_about": {
+   "portrait": "halszka",
+   "emotion": "neutral",
+   "text": "„Halszka, córka tkacza z Vranova. Ojciec uczył mnie przy krośnie, zanim nauczył mnie czytać. Po pożarze przypłynęłam tu z krosnem w częściach i z dwoma nożami w rękawie. Krosno się przydało. Noże też.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "halszka_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "halszka_place": {
+   "portrait": "halszka",
+   "emotion": "neutral",
+   "text": "„Dwa krosna, kołowrotek i łóżko, na którym śpię między jednym zamówieniem a drugim. Ściany są cienkie — słyszę każdego pijaka z zaułka. Ale okno wychodzi na wschód, a przy porannym świetle widać każdy błąd w splocie.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "halszka_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "halszka_quest": {
+   "portrait": "halszka",
+   "emotion": "sad",
+   "text": "„Cech zamówił u mnie sukno na płaszcze dla rady. Termin za tydzień, a garbarz Oles sprzedał całą wełnę Rycerzom. Potrzebuję trzech wiązek wełny. Przynieś je, a utkam ci płaszcz, w którym przeżyjesz każdą zimę na tej wyspie.”",
+   "options": [
+    {
+     "text": "Przyniosę trzy wiązki.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_weaver_wool"
+       }
+      }
+     ]
+    },
+    {
+     "text": "Nie teraz.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "klemens_root": {
+   "portrait": "klemens",
+   "emotion": "neutral",
+   "text": "Klemens trzyma but na kopycie i wbija ćwieki z ust, jeden po drugim. Mówi, nie wypluwając ani jednego. „Siadaj, jeśli masz czas. Jeśli nie masz — zostaw buty i przyjdź jutro.”",
+   "options": [
+    {
+     "text": "Kim jesteś?",
+     "goto": "klemens_about"
+    },
+    {
+     "text": "Co słychać w mieście?",
+     "goto": "klemens_rumor"
+    },
+    {
+     "text": "Potrzebujesz czegoś?",
+     "goto": "klemens_quest",
+     "cond": {
+      "noQuest": "q_shoes"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Do zobaczenia.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "klemens_about": {
+   "portrait": "klemens",
+   "emotion": "happy",
+   "text": "„Trzydzieści lat szyję buty w tym mieście. Szyłem dla burmistrza, którego już nie ma, dla rady, która się boi, i dla Rycerzy, którzy nie płacą. Wiesz, czym się różnią? Burmistrz zdzierał podeszwy, rada obcasy, a Rycerze — cudze progi.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "klemens_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "klemens_rumor": {
+   "portrait": "klemens",
+   "emotion": "sly",
+   "text": "„Ktoś chodzi nocą między magazynami w butach z żelaznymi podkówkami. W całym mieście tylko trzech ludzi takie nosi: Gwidon, Bernard Celny i sam Rawicz. Ślady prowadzą do kei. Więcej nie powiem, bo lubię swoje ręce.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "klemens_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "klemens_quest": {
+   "portrait": "klemens",
+   "emotion": "neutral",
+   "text": "„Pani Brygida chce trzewiki z jeleniej skóry na zaręczyny córki, a Oles nie ma skór, bo myśliwi boją się lasu. Przynieś mi jedną jelenią skórę — z lasu albo od kogokolwiek — a zapłacę uczciwie i podbiję ci buty za darmo.”",
+   "options": [
+    {
+     "text": "Załatwię skórę.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_shoes"
+       }
+      }
+     ]
+    },
+    {
+     "text": "Nie teraz.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "dorota_root": {
+   "portrait": "dorota",
+   "emotion": "sad",
+   "text": "Dorota przędzie przy oknie. W kącie, na sienniku, śpi chłopiec owinięty w dwa koce. Oddycha ciężko, z gwizdem. „Mów cicho. I krótko, bo każda godzina przędzy to chleb na jutro.”",
+   "options": [
+    {
+     "text": "Kim jesteś?",
+     "goto": "dorota_about"
+    },
+    {
+     "text": "Co jest chłopcu?",
+     "goto": "dorota_quest",
+     "cond": {
+      "noQuest": "q_sick_child"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Wybacz.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "dorota_about": {
+   "portrait": "dorota",
+   "emotion": "sad",
+   "text": "„Mąż był bednarzem. Wziął od Kruka pożyczkę na nowy warsztat i warsztat spłonął miesiąc później — dziwnym trafem. W noc przed terminem spłaty wyszedł z domu i już nie wrócił. Mówią, że utonął. Ja mówię, że ktoś pomógł mu utonąć.”",
+   "options": [
+    {
+     "text": "Kruk ma na mnie ten sam haczyk.",
+     "goto": "dorota_debt"
+    },
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "dorota_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "dorota_debt": {
+   "portrait": "dorota",
+   "emotion": "neutral",
+   "text": "Dorota po raz pierwszy podnosi wzrok. „To uważaj, gdzie śpisz. I nigdy nie bierz od nich drugiej pożyczki na spłatę pierwszej. Tak to się zaczyna.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "dorota_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "dorota_quest": {
+   "portrait": "dorota",
+   "emotion": "sad",
+   "text": "„Kaszel od trzech tygodni. Balwierz chce za puszczenie krwi więcej, niż zarabiam w miesiąc, a krew Kuby i tak jest już blada. Zielarka Wiera wie, co dać na płuca, ale do niej daleko, a ja nie mogę go zostawić. Gdybyś zapytał ją, czego trzeba...”",
+   "options": [
+    {
+     "text": "Pójdę do Wiery.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_sick_child"
+       }
+      }
+     ]
+    },
+    {
+     "text": "Nie mogę teraz.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "ambrozy_root": {
+   "portrait": "ambrozy",
+   "emotion": "neutral",
+   "text": "Ambroży naprawia sieć z prędkością człowieka, który robił to sześćdziesiąt lat. „Czego? Ryby się skończyły, opowieści nie. Za opowieść stawiasz piwo. Za rybę — płacisz.”",
+   "options": [
+    {
+     "text": "Opowiedz o sobie.",
+     "goto": "ambrozy_about"
+    },
+    {
+     "text": "Jak było w porcie dawniej?",
+     "goto": "ambrozy_place"
+    },
+    {
+     "text": "Szukasz kogoś do pomocy?",
+     "goto": "ambrozy_quest",
+     "cond": {
+      "noQuest": "q_fish_contest"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Dobrego połowu.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "ambrozy_about": {
+   "portrait": "ambrozy",
+   "emotion": "happy",
+   "text": "„Urodziłem się w łodzi, w sztormie, w roku, kiedy król umarł — który król, nie pamiętam, było ich kilku. Pływałem na śledzie do Gotlandii i na dorsze pod lód. Dwie żony pochowałem, trzecia mnie przeżyje, bo jest młodsza o czterdzieści lat i ma więcej rozumu niż ja.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "ambrozy_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "ambrozy_place": {
+   "portrait": "ambrozy",
+   "emotion": "sad",
+   "text": "„Kiedyś Dzicy Rycerze byli strażą wybrzeża. Brali od nas rybę, a w zamian palili łodzie piratów. Uczciwa wymiana. Potem przyszła zaraza, potem pożar, potem Kruk, i nagle bronią nas już tylko przed nami samymi — za dziesiątą część.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "ambrozy_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "ambrozy_quest": {
+   "portrait": "ambrozy",
+   "emotion": "sly",
+   "text": "„Ewa z kei wschodniej mówi, że łowi lepiej ode mnie. Ja mówię, że jest młoda i głupia. Zakład o beczkę piwa: przynieś mi dwa dorsze złowione własną ręką, a pokażę jej, że nawet obcy z moją radą złowi więcej niż ona.”",
+   "options": [
+    {
+     "text": "Przyniosę dwa dorsze.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_fish_contest"
+       }
+      }
+     ]
+    },
+    {
+     "text": "Nie mam czasu na zakłady.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "brygida_root": {
+   "portrait": "brygida",
+   "emotion": "neutral",
+   "text": "Brygida mierzy cię wzrokiem od butów po czoło, jakby wyceniała towar. „Nie przyjmuję żebraków ani zalotników. Jeśli jesteś jednym z nich — drzwi są za tobą.”",
+   "options": [
+    {
+     "text": "Kim pani jest?",
+     "goto": "brygida_about"
+    },
+    {
+     "text": "Piękny dom.",
+     "goto": "brygida_place"
+    },
+    {
+     "text": "Co pani wie o Dzikich Rycerzach?",
+     "goto": "brygida_knights",
+     "cond": {
+      "relation": {
+       "brygida": 5
+      },
+      "noFlag": "knows_knights_origin"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Wybaczy pani.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "brygida_about": {
+   "portrait": "brygida",
+   "emotion": "neutral",
+   "text": "„Brygida, wdowa po Henryku, który przywoził na tę wyspę pieprz, szafran i gałkę muszkatołową. Pół miasta jadło tylko to, co on przywiózł, i nikt nie pamięta jego imienia. Ja pamiętam. I liczę.”",
+   "options": [
+    {
+     "text": "Pomogę pani w czymś?",
+     "goto": "brygida_help"
+    },
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "brygida_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "brygida_help": {
+   "portrait": "brygida",
+   "emotion": "happy",
+   "text": "Kąciki jej ust drgają. „Może. Przynieś mi kiedyś dobrą wiadomość, a zapamiętam twoje imię. Rzadko to robię.”",
+   "options": [
+    {
+     "text": "Zapamiętam.",
+     "goto": "exit",
+     "cond": {
+      "noFlag": "brygida_promise"
+     },
+     "effects": [
+      {
+       "relation": {
+        "brygida": 5
+       }
+      },
+      {
+       "flag": "brygida_promise"
+      }
+     ]
+    },
+    {
+     "text": "Do widzenia.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "brygida_place": {
+   "portrait": "brygida",
+   "emotion": "happy",
+   "text": "„Henryk kupił ją od wdowy po celniku za trzy skrzynie cynamonu. Kanapa przypłynęła z Brugii, szafa z Lubeki, a dywan — z miejsca, którego nazwy nie umiem wymówić. Wszystko tu jest z daleka, poza mną. Ja jestem stąd i to mnie najbardziej martwi.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "brygida_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "brygida_knights": {
+   "portrait": "brygida",
+   "emotion": "sad",
+   "text": "Brygida długo milczy. „Henryk zakładał to bractwo z sześcioma innymi. Mieli bronić wybrzeża, nie ściągać długów. Kiedy umarł, Baldwin przyszedł na pogrzeb i obiecał mi rentę do końca życia. Biorę ją, bo jestem tchórzem. Każda moneta pachnie dymem z Vranova.”",
+   "options": [
+    {
+     "text": "Dziękuję za szczerość.",
+     "goto": "exit",
+     "effects": [
+      {
+       "flag": "knows_knights_origin"
+      },
+      {
+       "relation": {
+        "brygida": 5
+       }
+      },
+      {
+       "xp": {
+        "history": 10
+       }
+      }
+     ]
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "jas_root": {
+   "portrait": "jas",
+   "emotion": "happy",
+   "text": "Jaś podskakuje na palcach, żeby lepiej widzieć twój miecz. „Panie rycerzu! Pan zabił kiedyś smoka? A wilka? A człowieka? Mama mówi, że nie wolno pytać, ale mamy tu nie ma.”",
+   "options": [
+    {
+     "text": "Kim jesteś, mały?",
+     "goto": "jas_about"
+    },
+    {
+     "text": "Wiesz coś ciekawego?",
+     "goto": "jas_rumor"
+    },
+    {
+     "text": "Masz miedziaka. Zmykaj do domu.",
+     "goto": "exit",
+     "cond": {
+      "gold": 1,
+      "noFlag": "jas_copper"
+     },
+     "effects": [
+      {
+       "gold": -1
+      },
+      {
+       "relation": {
+        "jas": 6
+       }
+      },
+      {
+       "rep": {
+        "villagers": 1
+       }
+      },
+      {
+       "flag": "jas_copper"
+      }
+     ],
+     "hidden": true
+    },
+    {
+     "text": "Nie dziś, mały.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "jas_about": {
+   "portrait": "jas",
+   "emotion": "happy",
+   "text": "„Jestem Jaś, syn Małgorzaty, co sprzedaje jaja. Tata był marynarzem i popłynął do Lubeki, jak miałem trzy lata. Jak dorosnę, będę rycerzem i popłynę go znaleźć. Prawdziwym rycerzem, nie od Kruka. Ci od Kruka kopią psy.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "jas_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "jas_rumor": {
+   "portrait": "jas",
+   "emotion": "sly",
+   "text": "„Wiem! Pan Gwidon dał mi wczoraj list do celnika. Ciężki był, brzęczał. A sołtys z Brzeziny przyjeżdża co piątek do Kruka i wraca z płaczem. A w lesie na wschodzie są wilki większe od koni. Tak mówi Kinga od owiec. Kinga nigdy nie kłamie, tylko czasem.”",
+   "options": [
+    {
+     "text": "Masz tu miedziaka za wieści.",
+     "goto": "exit",
+     "cond": {
+      "gold": 1,
+      "noFlag": "jas_news"
+     },
+     "effects": [
+      {
+       "gold": -1
+      },
+      {
+       "relation": {
+        "jas": 4
+       }
+      },
+      {
+       "xp": {
+        "streetwise": 5
+       }
+      },
+      {
+       "flag": "jas_news"
+      }
+     ],
+     "hidden": true
+    },
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "jas_root"
+    }
+   ]
+  },
+  "walenty_root": {
+   "portrait": "walenty",
+   "emotion": "neutral",
+   "text": "Walenty opiera się o laskę sołtysią — wytartą od dłoni trzech pokoleń. „Witaj w Brzezinie. Czterdzieści dymów, młyn, kaplica i las, który co roku zabiera nam kogoś. Czego szukasz tak daleko od portu?”",
+   "options": [
+    {
+     "text": "Opowiedz o wsi.",
+     "goto": "walenty_place"
+    },
+    {
+     "text": "Kim jesteś?",
+     "goto": "walenty_about"
+    },
+    {
+     "text": "Mówiłeś, że las zabiera ludzi?",
+     "goto": "walenty_wolves",
+     "cond": {
+      "noQuest": "q_brzezina_wolves"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Szczęść Boże.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "walenty_place": {
+   "portrait": "walenty",
+   "emotion": "neutral",
+   "text": "„Brzezina leży tu od czasów, kiedy na wyspie nie było jeszcze miasta. Żyto, owies, len, trochę owiec. Bartosz miele, Urszula leczy, ksiądz przyjeżdża z miasta raz w miesiącu, jeśli droga jest sucha. Płacimy haracz Krukowi w zbożu, dziesięcinę Kościołowi w zbożu i podatek do miasta — też w zbożu. Zostaje nam na tyle, żeby nie umrzeć.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "walenty_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "walenty_about": {
+   "portrait": "walenty",
+   "emotion": "sad",
+   "text": "„Sołtysem był mój dziadek i ojciec. Ja jestem pierwszym, który musi wybierać, czyje dzieci będą głodne tej zimy — nasze czy Kruka. Wybieram codziennie. Nie zawsze dobrze.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "walenty_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "walenty_wolves": {
+   "portrait": "walenty",
+   "emotion": "angry",
+   "text": "„Wataha z lasu zagryzła nam w tym miesiącu cztery owce i psa sołeckiego. Wczoraj Kinga widziała je przy zagrodach w biały dzień. Rycerze obiecali przysłać ludzi — od pół roku obiecują. Zabij trzy wilki z tej watahy, a wieś zapłaci ci sto dwadzieścia koron. Zbieraliśmy od wiosny.”",
+   "options": [
+    {
+     "text": "Zajmę się watahą.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_brzezina_wolves"
+       }
+      }
+     ]
+    },
+    {
+     "text": "To nie moja sprawa.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "bartosz_root": {
+   "portrait": "bartosz",
+   "emotion": "neutral",
+   "text": "Bartosz otrzepuje ręce z mąki i podaje ci jedną — białą, ciężką, z odciskami od worków. „Młyn stoi, ale gęba działa. Mów.”",
+   "options": [
+    {
+     "text": "Kim jesteś?",
+     "goto": "bartosz_about"
+    },
+    {
+     "text": "Co z tym młynem?",
+     "goto": "bartosz_quest",
+     "cond": {
+      "noQuest": "q_mill_wheel"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Sprzedasz chleb?",
+     "goto": "exit",
+     "cond": {
+      "gold": 3
+     },
+     "effects": [
+      {
+       "gold": -3
+      },
+      {
+       "give": "bread_loaf"
+      }
+     ]
+    },
+    {
+     "text": "Bywaj, młynarzu.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "bartosz_about": {
+   "portrait": "bartosz",
+   "emotion": "happy",
+   "text": "„Młynarz w czwartym pokoleniu. Dziadek mówił, że młynarz musi być trochę złodziejem, trochę spowiednikiem i trochę cieślą. Złodziejem jestem z urzędu, spowiednikiem z przyzwyczajenia — ludzie przy żarnach gadają — a cieślą, jak widać, marnym.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "bartosz_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "bartosz_quest": {
+   "portrait": "bartosz",
+   "emotion": "sad",
+   "text": "„Wiosenna woda wyrwała dwie łopaty z koła i połamała wał. Bez młyna wieś musi wozić zboże do miasta, a w mieście młynarze cechowi biorą trzecią część. Potrzebuję dwóch garści gwoździ od kowala Orlika i dwóch dębowych desek z domu cechowego. Sam nie pójdę — Kruk wie, że jestem mu winien za kamienie.”",
+   "options": [
+    {
+     "text": "Przyniosę gwoździe i deski.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_mill_wheel"
+       }
+      }
+     ]
+    },
+    {
+     "text": "Nie teraz.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "jadwiga_root": {
+   "portrait": "jadwiga",
+   "emotion": "sad",
+   "text": "Jadwiga stoi na progu chaty i patrzy w las tak, jakby las mógł odpowiedzieć. „Maciek poszedł pięć dni temu. Wziął siekierę i chleb na jeden dzień.”",
+   "options": [
+    {
+     "text": "Kim jest Maciek?",
+     "goto": "jadwiga_about"
+    },
+    {
+     "text": "Pomogę ci go szukać.",
+     "goto": "jadwiga_quest",
+     "cond": {
+      "noQuest": "q_missing_woodcutter"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Znalazłem jego czapkę.",
+     "goto": "jadwiga_cap",
+     "cond": {
+      "item": "woodcutter_cap"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Trzymaj się.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "jadwiga_about": {
+   "portrait": "jadwiga",
+   "emotion": "sad",
+   "text": "„Mój mąż. Drwal. Rudy, wysoki, śmieje się tak, że ptaki odlatują. Rąbie drewno dla młyna i dla Brzeziny, a zimą dla miasta. Nigdy nie spał w lesie. Nigdy.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "jadwiga_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "jadwiga_quest": {
+   "portrait": "jadwiga",
+   "emotion": "sad",
+   "text": "„Błażej, myśliwy z północnej chaty, zna każdą ścieżkę w tym lesie. Ale kiedy go zapytałam, odwrócił wzrok. On coś wie. Idź do niego. Mnie nic nie powie, tobie może.”",
+   "options": [
+    {
+     "text": "Porozmawiam z Błażejem.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_missing_woodcutter"
+       }
+      }
+     ]
+    },
+    {
+     "text": "Nie mogę teraz.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "jadwiga_cap": {
+   "portrait": "jadwiga",
+   "emotion": "sad",
+   "text": "Jadwiga bierze czapkę i długo obraca ją w palcach. Nie płacze. „Dzik. Tak myślałam. Wolę dzika niż Rycerzy — przynajmniej dzik nie kłamie, że to wypadek.” Przynosi z chaty siekierę Maćka. „Weź. Mnie się już nie przyda, a jemu tym bardziej.”",
+   "options": [
+    {
+     "text": "Przykro mi, Jadwigo.",
+     "goto": "exit",
+     "effects": [
+      {
+       "flag": "woodcutter_found"
+      },
+      {
+       "relation": {
+        "jadwiga": 20
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "blazej_root": {
+   "portrait": "blazej",
+   "emotion": "neutral",
+   "text": "Błażej nie przestaje oprawiać zająca. Nóż chodzi szybko i czysto. „Las nie lubi obcych, ja też nie. Ale ty przynajmniej chodzisz ciszej niż ludzie z miasta.”",
+   "options": [
+    {
+     "text": "Kim jesteś?",
+     "goto": "blazej_about"
+    },
+    {
+     "text": "Co jest w tym lesie?",
+     "goto": "blazej_place"
+    },
+    {
+     "text": "Jadwiga szuka męża. Wiesz coś?",
+     "goto": "blazej_maciek",
+     "cond": {
+      "quest": {
+       "id": "q_missing_woodcutter",
+       "state": "active"
+      },
+      "noFlag": "woodcutter_search"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Potrzebujesz czegoś?",
+     "goto": "blazej_quest",
+     "cond": {
+      "noQuest": "q_pelts_oles"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Naucz mnie tropić. (40 koron)",
+     "goto": "exit",
+     "cond": {
+      "gold": 40
+     },
+     "reqKey": "req.gold40",
+     "effects": [
+      {
+       "gold": -40
+      },
+      {
+       "xp": {
+        "tracking": 40
+       }
+      }
+     ]
+    },
+    {
+     "text": "Darz bór.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "blazej_about": {
+   "portrait": "blazej",
+   "emotion": "neutral",
+   "text": "„Byłem łowczym u pana na Vranowie. Po pożarze pan wyjechał, a ja zostałem z łukiem i bez pana. Teraz poluję dla siebie i dla każdego, kto płaci. Rycerze mówią, że las jest ich, bo tak zapisali w księdze. Zwierzęta jeszcze o tym nie wiedzą.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "blazej_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "blazej_place": {
+   "portrait": "blazej",
+   "emotion": "neutral",
+   "text": "„Na północy sosny i moja chata. Na środku stare dęby — tam są dziki, omijaj je o zmierzchu. Na południu polana drwali i strumień, przy którym wilki piją o świcie. Na wschodzie Brzezina. A za Brzeziną już tylko morze i stary cmentarz przy kaplicy, gdzie Urszula mówi, że coś straszy. Urszula mówi wiele rzeczy.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "blazej_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "blazej_maciek": {
+   "portrait": "blazej",
+   "emotion": "sad",
+   "text": "Błażej odkłada nóż. „...Maciek zastawiał wnyki na ziemi Rycerzy, obok moich. Pięć dni temu słyszałem dzika i krzyk przy krwawej polanie, na południowym wschodzie. Nie poszedłem. Bałem się, że znajdę go żywego i będę musiał wyjaśniać, co tam robiłem. Idź tam. Ale uważaj — dzik, który raz zabił człowieka, nie boi się drugiego.”",
+   "options": [
+    {
+     "text": "Pójdę na polanę.",
+     "goto": "exit",
+     "effects": [
+      {
+       "flag": "woodcutter_search"
+      },
+      {
+       "relation": {
+        "blazej": 5
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "blazej_quest": {
+   "portrait": "blazej",
+   "emotion": "neutral",
+   "text": "„Garbarz Oles płaci po czterdzieści koron za wilczą skórę, ale ja do miasta nie chodzę — tam za każdą skórę trzeba pokazać pieczęć Rycerzy. Ty możesz. Przynieś Olesowi dwie wilcze skóry ode mnie... albo własne. On nie zapyta, skąd.”",
+   "options": [
+    {
+     "text": "Zaniosę skóry Olesowi.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_pelts_oles"
+       }
+      }
+     ]
+    },
+    {
+     "text": "Nie teraz.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "kinga_root": {
+   "portrait": "kinga",
+   "emotion": "sad",
+   "text": "Kinga trzyma kij pasterski oburącz i rozgląda się po polu. „Łaciata uciekła. Znowu. Ojciec mnie zabije, a jak nie ojciec, to wilki ją zjedzą, a potem ojciec mnie zabije.”",
+   "options": [
+    {
+     "text": "Kim jesteś?",
+     "goto": "kinga_about"
+    },
+    {
+     "text": "Pomogę ci znaleźć kozę.",
+     "goto": "kinga_quest",
+     "cond": {
+      "noQuest": "q_lost_goat"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Łaciata wróciła?",
+     "goto": "kinga_goat",
+     "cond": {
+      "item": "goat_bell"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Powodzenia.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "kinga_about": {
+   "portrait": "kinga",
+   "emotion": "happy",
+   "text": "„Kinga, córka Szymona. Pasę owce całej wsi, bo nikt inny nie chce — za mało płacą, a za dużo wilków. Ale lubię. Na pastwisku nikt mi nie mówi, za kogo mam wyjść.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "kinga_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "kinga_quest": {
+   "portrait": "kinga",
+   "emotion": "happy",
+   "text": "„Naprawdę? Łaciata zawsze ucieka na południe, do lasu, tam gdzie rośnie słodka trawa przy starych kamieniach. Ma dzwonek na szyi, usłyszysz ją. Tylko uważaj na wilki!”",
+   "options": [
+    {
+     "text": "Znajdę ją.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_lost_goat"
+       }
+      },
+      {
+       "flag": "goat_search"
+      }
+     ]
+    }
+   ]
+  },
+  "kinga_goat": {
+   "portrait": "kinga",
+   "emotion": "happy",
+   "text": "Kinga aż podskakuje. „Wróciła! Przybiegła sama, cała w rzepach, a ty masz jej dzwonek! Ojciec nic nie zauważył!” Wciska ci w rękę zawiniątko. „Ser. Sama robiłam. Nie mów nikomu, że płaczę.”",
+   "options": [
+    {
+     "text": "Nie powiem.",
+     "goto": "exit",
+     "effects": [
+      {
+       "give": "cheese_wheel"
+      },
+      {
+       "flag": "goat_returned"
+      },
+      {
+       "relation": {
+        "kinga": 15
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "urszula_root": {
+   "portrait": "urszula",
+   "emotion": "neutral",
+   "text": "Urszula siedzi na ławie przed chatą i obiera korzenie nożykiem cienkim jak liść. „Siadaj. Nie bój się, nie gryzę — zębów już nie mam.”",
+   "options": [
+    {
+     "text": "Opowiedz o sobie.",
+     "goto": "urszula_about"
+    },
+    {
+     "text": "Opowiedz o świętym Elenemie.",
+     "goto": "urszula_legend"
+    },
+    {
+     "text": "Co straszy na cmentarzu?",
+     "goto": "urszula_quest",
+     "cond": {
+      "noQuest": "q_urszula_legend"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Znalazłem monetę w grobie.",
+     "goto": "urszula_coin",
+     "cond": {
+      "item": "old_coin"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Sprzedasz zioła?",
+     "goto": "exit",
+     "cond": {
+      "gold": 6
+     },
+     "effects": [
+      {
+       "gold": -6
+      },
+      {
+       "give": "herb_yarrow"
+      }
+     ]
+    },
+    {
+     "text": "Zostań z Bogiem.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "urszula_about": {
+   "portrait": "urszula",
+   "emotion": "happy",
+   "text": "„Siedemdziesiąt cztery zimy. Jako dziewczę służyłam w klasztorze świętego Elenema — prałam habity i słuchałam, jak mnisi śpiewają. Potem klasztor spłonął, mnisi się rozeszli, a ja zostałam z tym, czego się nasłuchałam. Zioła, modlitwy i historie. Wszystko leczy, jeśli się wierzy.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "urszula_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "urszula_legend": {
+   "portrait": "urszula",
+   "emotion": "neutral",
+   "text": "„Elenem był rybakiem, jak twój Ambroży. Kiedy na wyspę przyszła zaraza, wypłynął w sztorm po lekarstwo na kontynent. Wrócił po trzech dniach, martwy, przywiązany do masztu — a w łodzi miał worek ziół, które uratowały pół wyspy. Mnisi zrobili z niego świętego, a z worka relikwię. Ja myślę, że to był po prostu uparty człowiek. Święci zwykle tacy są.”",
+   "options": [
+    {
+     "text": "Piękna historia.",
+     "goto": "exit",
+     "effects": [
+      {
+       "xp": {
+        "history": 8
+       }
+      },
+      {
+       "relation": {
+        "urszula": 3
+       }
+      }
+     ]
+    },
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "urszula_root"
+    }
+   ]
+  },
+  "urszula_quest": {
+   "portrait": "urszula",
+   "emotion": "sly",
+   "text": "„Na starym cmentarzu przy kaplicy jest grób bez imienia. Nocą świeci tam światło. Ludzie mówią — duch. Ja mówię — mnich, który uciekł z pożaru klasztoru z czymś, czego nie powinien był brać, i umarł tu, w Brzezinie. Idź tam nocą i przekop ziemię pod kamieniem. Za dnia nic nie znajdziesz — za dnia zawsze patrzy ktoś z wioski.”",
+   "options": [
+    {
+     "text": "Pójdę nocą.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_urszula_legend"
+       }
+      },
+      {
+       "flag": "legend_search"
+      }
+     ]
+    },
+    {
+     "text": "Nie kopię w grobach.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "urszula_coin": {
+   "portrait": "urszula",
+   "emotion": "happy",
+   "text": "Urszula pociera monetę kciukiem, aż spod brudu wychodzi wizerunek mnicha z siecią. „Moneta opactwa. Bito je tylko dla pielgrzymów... i dla tych, którzy płacili za milczenie. Ten mnich wiedział, kto podpalił klasztor, i zabrał do grobu zapłatę za to. Teraz ty wiesz, że to nie był piorun.”",
+   "options": [
+    {
+     "text": "Zachowaj ją, matko.",
+     "goto": "exit",
+     "effects": [
+      {
+       "take": "old_coin"
+      },
+      {
+       "flag": "legend_done"
+      },
+      {
+       "relation": {
+        "urszula": 15
+       }
+      },
+      {
+       "rep": {
+        "church": 5
+       }
+      }
+     ]
+    },
+    {
+     "text": "Zatrzymam ją.",
+     "goto": "exit",
+     "effects": [
+      {
+       "flag": "legend_done"
+      },
+      {
+       "flag": "kept_abbey_coin"
+      }
+     ]
+    }
+   ]
+  },
+  "piotr_root": {
+   "portrait": "piotr",
+   "emotion": "neutral",
+   "text": "Piotr wbija motykę w ziemię i ociera czoło rękawem. „Szczęść Boże. Jeśli jesteś od Kruka — zboże zabraliście w zeszłym tygodniu. Jeśli nie — to dobrze, bo nic więcej nie mam.”",
+   "options": [
+    {
+     "text": "Kim jesteś?",
+     "goto": "piotr_about"
+    },
+    {
+     "text": "Jak się żyje w Brzezinie?",
+     "goto": "piotr_place"
+    },
+    {
+     "text": "Pomogę ci chwilę w polu.",
+     "goto": "exit",
+     "cond": {
+      "noFlag": "helped_piotr"
+     },
+     "effects": [
+      {
+       "flag": "helped_piotr"
+      },
+      {
+       "xp": {
+        "endurance": 12
+       }
+      },
+      {
+       "relation": {
+        "piotr": 6
+       }
+      },
+      {
+       "rep": {
+        "villagers": 2
+       }
+      },
+      {
+       "give": "turnip"
+      }
+     ],
+     "hidden": true
+    },
+    {
+     "text": "Szczęść Boże.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "piotr_about": {
+   "portrait": "piotr",
+   "emotion": "neutral",
+   "text": "„Piotr, kmieć. Trzy łany ziemi, żona, pięcioro dzieci, z czego troje żywych. Ojciec był wolnym chłopem, ja jestem wolny tylko z nazwy — reszta jest w księdze Kruka.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "piotr_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "piotr_place": {
+   "portrait": "piotr",
+   "emotion": "sad",
+   "text": "„Ziemia dobra, ale wiatr od morza kładzie zboże co trzeci rok. Wilki biorą owce, dziki ryją kartofle... rzepę, chciałem powiedzieć. A ludzie z miasta przyjeżdżają tylko po coś. Ty jesteś pierwszy, który pyta, jak się żyje.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "piotr_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "scribe_letter": {
+   "portrait": "skryba_urban",
+   "emotion": "neutral",
+   "text": "„Rada wysyła sołtysowi Brzeziny pismo o nowym podatku od młynów. Nikt nie chce iść, bo w lesie wilki, a sołtys gryzie gorzej od wilków. Zanieś mu list, a dostaniesz dwadzieścia pięć koron od rady.”",
+   "options": [
+    {
+     "text": "Zaniosę.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_letter_brzezina"
+       }
+      },
+      {
+       "give": "letter_village"
+      }
+     ]
+    },
+    {
+     "text": "Nie teraz.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "wiera_child": {
+   "portrait": "wiera",
+   "emotion": "neutral",
+   "text": "„Kaszel z gwizdem? Krwawnik. Trzy pęczki, zaparzone z miodem, dwa razy dziennie przez tydzień. I okno otwarte, nawet jak zimno — dusza i płuca potrzebują powietrza. Zielony krwawnik rośnie na łąkach przy lesie. Mogę ci też sprzedać, jeśli się spieszysz.”",
+   "options": [
+    {
+     "text": "Dziękuję, Wiero.",
+     "goto": "exit",
+     "effects": [
+      {
+       "flag": "child_remedy"
+      },
+      {
+       "xp": {
+        "herbalism": 5
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "fisher_ambrozy": {
+   "portrait": "fisher",
+   "emotion": "happy",
+   "text": "Ewa śmieje się tak, że aż mewy odlatują. „Ambroży łowił lepiej ode mnie, zanim się urodziłam. Teraz łowi głównie opowieści. Ale nie mów mu tego — staruszek żyje tylko tym, że ze mną wygrywa.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "fisher_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "hanna_about2": {
+   "portrait": "hanna",
+   "emotion": "neutral",
+   "text": "Hanna wyciera kufel, który już jest czysty. „Rdzawy Kot był karczmą mojego teścia. Kiedy mąż zginął w pożarze, rada chciała ją sprzedać za długi. Spłaciłam je w dwa lata, nalewając piwo ludziom, którzy podpalili mi dom. Każdy z nich ma tu kredkę. Żaden nie wie, że pamiętam.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "hanna_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "orlik_about2": {
+   "portrait": "orlik",
+   "emotion": "neutral",
+   "text": "Orlik odkłada młot i ociera pot. „Kuźnia ma sto lat. Kowadło jeszcze więcej — przypłynęło z Norymbergi na statku, który zatonął w porcie. Mój dziadek wyciągał je z wody przez trzy dni. Mówi się, że kuźnia bez historii kuje bez duszy. U mnie dusza jest. Gorzej z zapłatą.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "orlik_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "vagn_about2": {
+   "portrait": "vagn",
+   "emotion": "neutral",
+   "text": "Vagn opiera się o pal treningowy. „Ten dziedziniec to wszystko, co mi zostało z dawnej chwały. Pal, dwa miecze, tarcza z dziurą po bełcie i stołek, na którym siedzę, kiedy kolano nie chce. Uczyłem tu chłopców, którzy potem zginęli na bramie. Teraz uczę takich jak ty — żeby nie zginęli głupio.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "vagn_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "idzi_about2": {
+   "portrait": "idzi",
+   "emotion": "neutral",
+   "text": "Idzi zakłada ręce. „Magazyn B? Oficjalnie sól, smoła i liny. Nieoficjalnie — wszystko, czego celnik nie widział. Port ma dwie twarze, przyjacielu: tę za dnia, z pieczęciami, i tę nocą, z łodziami bez latarni. Ja pracuję na obu zmianach.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "idzi_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "rawicz_about2": {
+   "portrait": "rawicz",
+   "emotion": "neutral",
+   "text": "Rawicz patrzy na bramę. „Dwunastu ludzi na całe miasto. Trzech pije, dwóch bierze od Kruka więcej niż ja, a jeden jest głuchy. Wartownia przecieka, kusze są starsze od kuszników. Ale jak ktoś wrzaśnie w nocy, to przybiegamy. Prawie zawsze.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "rawicz_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "teodor_about2": {
+   "portrait": "teodor",
+   "emotion": "neutral",
+   "text": "Teodor zapala świecę od świecy. „Kaplicę zbudowali rybacy z kamieni, które wyciągali z sieci. Każdy kamień to jeden połów, który nie wyżywił rodziny. Dlatego jest taka mała — i dlatego jest święta. Relikwiarz stał tam, na pustym miejscu przy ołtarzu.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "teodor_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "marta_about2": {
+   "portrait": "marta",
+   "emotion": "neutral",
+   "text": "Marta wzrusza ramionami. „Zaułek za piekarnią. Ciepło od pieca, a piekarz udaje, że mnie nie widzi. Mam koc, nóż i skrzynkę na skarby. Lepiej niż przytułek — tam liczą ci łyżki i modlitwy.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "marta_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "goslaw_about2": {
+   "portrait": "goslaw",
+   "emotion": "neutral",
+   "text": "Gosław rozwija mapę z namaszczeniem. „Ta wyspa ma trzy mapy: tę dla rady, tę dla Kruka i tę prawdziwą. Wszystkie rysowałem ja. Las na wschodzie jest większy, niż chce rada, a Brzezina mniejsza, niż mówi Kruk, kiedy liczy haracz.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "goslaw_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "baldwin_about2": {
+   "portrait": "baldwin",
+   "emotion": "neutral",
+   "text": "Baldwin uśmiecha się zimno. „Pokój nad stajnią. Pachnie końmi, słychać karczmę i widać rynek. Widzę stąd każdego dłużnika, który wchodzi do Hanny zamiast do mnie. To najlepszy widok na wyspie.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "baldwin_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "scribe_about2": {
+   "portrait": "scribe",
+   "emotion": "neutral",
+   "text": "Zbylut poprawia okulary. „Kancelaria to pamięć miasta. Umowy, testamenty, wyroki, listy miłosne — piszę wszystko, za stawkę. W tych szufladach jest więcej tajemnic niż w konfesjonale ojca Teodora. I lepiej poukładanych.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "scribe_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "medic_about2": {
+   "portrait": "medic",
+   "emotion": "neutral",
+   "text": "Marcin myje ręce w misce z octem. „Golę, puszczam krew, nastawiam kości i wyrywam zęby. Łaźnia obok daje mi klientów — kto się myje, ten widzi, co mu wyrosło. W zeszłym roku uratowałem dwudziestu ludzi. Pochowałem trzydziestu. Uczciwy rachunek jak na ten zawód.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "medic_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "customs_about2": {
+   "portrait": "customs",
+   "emotion": "neutral",
+   "text": "Bernard przewraca kartę księgi. „Każdy worek, który wpływa do portu, przechodzi przez tę izbę. Każdy — oficjalnie. Rada płaci mi od tego, co zapiszę, Kruk od tego, czego nie zapiszę. Uczciwy człowiek by tu zwariował. Ja mam się dobrze.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "customs_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "guild_about2": {
+   "portrait": "guild",
+   "emotion": "neutral",
+   "text": "Rejne rozkłada ręce, jakby chciał objąć cały dom cechowy. „Sukno, sól, drewno, zboże. Cech trzyma ceny, żeby nikt nie umarł z głodu ani się nie wzbogacił za bardzo. Teoria piękna. W praktyce wzbogacamy się my, a głodują inni.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "guild_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "tanner_about2": {
+   "portrait": "tanner",
+   "emotion": "neutral",
+   "text": "Oles wyciera ręce w fartuch, co niczego nie zmienia. „Garbarnia śmierdzi, wiem. Ale ktoś musi zrobić z krowy but, a z wilka płaszcz. Moje kadzie ciągną się do samego strumienia. Woda tam brązowa, ryby uciekły. Mówią, że to moja wina. Mówią prawdę.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "tanner_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "fisher_about2": {
+   "portrait": "fisher",
+   "emotion": "neutral",
+   "text": "Ewa wskazuje morze ruchem głowy. „Wschodnia keja to moje królestwo. Trzy łodzie, dwadzieścia sieci i wędzarnia, której dym widać aż z rynku. Rybacy z tej strony portu wypływają przed świtem i wracają po zmroku. Rycerze nie wstają tak wcześnie, więc przynajmniej rano jesteśmy wolni.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "fisher_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "baker_about2": {
+   "portrait": "baker",
+   "emotion": "neutral",
+   "text": "Grzegorz otrzepuje fartuch z mąki. „Piec rozpalam o trzeciej w nocy, chleb wychodzi o piątej. Do południa sprzedam wszystko, po południu śpię. Od trzydziestu lat nie widziałem zachodu słońca. Ale znam każdego w mieście po tym, jaki chleb kupuje.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "baker_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "collector_about2": {
+   "portrait": "knight",
+   "emotion": "neutral",
+   "text": "Gwidon stuka palcem w czarnego kruka wymalowanego na drzwiach. „Ludzie spluwają, jak przechodzą obok tego domu. Niech spluwają. Ślina nie zmywa długu. Lista jest długa, a ja mam dobre nogi.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "collector_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "usurer_about2": {
+   "portrait": "usurer",
+   "emotion": "neutral",
+   "text": "Mojsze uśmiecha się przez kraty. „Lombard to apteka biedaków. Przychodzą z obrączką, wychodzą z chlebem. Wracają z pieniędzmi — czasem. Mam tu skrzynię pełną cudzych wspomnień i każdej pilnuję tak, jakby była moja.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "usurer_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "gambler_about2": {
+   "portrait": "gambler",
+   "emotion": "neutral",
+   "text": "„Stolik przy oknie ma najlepsze światło — widać każdą kość i każdą twarz. Grają tu marynarze, strażnicy, czasem nawet ksiądz, choć udaje, że tylko patrzy. Kości nie znają stanów, przyjacielu. Znają tylko szczęście.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "gambler_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "beggar_about2": {
+   "portrait": "beggar",
+   "emotion": "neutral",
+   "text": "Jędrek drapie się po kikucie. „Brama północna to najlepsze miejsce w mieście. Każdy, kto wchodzi, ma jeszcze pieniądze. Każdy, kto wychodzi, ma wyrzuty sumienia. Zarabiam na jednych i na drugich.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "beggar_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "executioner_about2": {
+   "portrait": "executioner",
+   "emotion": "neutral",
+   "text": "Wawrzyniec patrzy na szubienicę jak stolarz na stół. „Mój dom stoi za murami, bo miasto nie chce kata w środku. Ale kiedy jest wyrok, wszyscy przychodzą patrzeć. Ludzie kochają sprawiedliwość, póki nie muszą jej wykonywać.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "executioner_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "washer_about2": {
+   "portrait": "washer",
+   "emotion": "neutral",
+   "text": "Zofia wyżyma koszulę tak mocno, jakby to była czyjaś szyja. „Balie przy strumieniu. Woda zimna, ług gryzie ręce, ale przy praniu ludzie gadają. Wiem, kto ma krew na koszuli, kto perfumy, a kto wymiociny po karczmie. Prawda zawsze wychodzi w praniu.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "washer_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "stableboy_about2": {
+   "portrait": "stableboy",
+   "emotion": "neutral",
+   "text": "Paweł głaszcze konia po chrapach. „Śpię tu, na sianie, między Siwkiem a Kasztanką. Ciepło od koni lepsze niż od pieca. Konie nie biją i nie pytają, czyim jesteś synem.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "stableboy_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "nun_about2": {
+   "portrait": "nun",
+   "emotion": "neutral",
+   "text": "Siostra Agnieszka poprawia welon. „Przytułek ma dwanaście łóżek i zawsze o jedno za mało. Starcy, wdowy, sieroty, rozbitkowie. Karmimy, czym mamy, i modlimy się o resztę. Czasem pomaga. Częściej pomaga Hanna, która przysyła resztki z karczmy.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "nun_root"
+    },
+    {
+     "text": "Bywaj.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "wiera_about2": {
+   "portrait": "wiera",
+   "emotion": "neutral",
+   "text": "Wiera wącha pęczek suszonych ziół. „Bagna za garbarnią to najlepsza apteka na wyspie. Rośnie tam wszystko, co leczy, i połowa tego, co zabija. Trzeba tylko wiedzieć, co jest co. Ludzie z miasta tego nie wiedzą. Dlatego przychodzą do mnie — po zmroku, żeby sąsiad nie widział.”",
+   "options": [
+    {
+     "text": "Wróćmy do czegoś innego.",
+     "goto": "wiera_root"
+    },
+    {
+     "text": "Bywaj.",
      "goto": "exit"
     }
    ]

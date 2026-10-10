@@ -190,6 +190,7 @@ export class World {
       ['crow', 74, 30, 'gallows'], ['crow', 62, 20, 'gate'], ['crow', 20, 70, 'swamp'],
       ['goose', 96, 74, 'water'], ['horse', 104, 40, 'stable']
     ];
+    for (const c of this.loaded.creatures) creatureSpots.push([c[0], c[1], c[2], 'data']);
     for (const [typeId, tx, ty] of creatureSpots) {
       const free = this.freeSpot(tx, ty, 3);
       const e = new EnemyActor(typeId, 'creature', free ? free.x : tx * TILE + TILE / 2, free ? free.y : ty * TILE + TILE / 2, { seed: tx * 977 + ty });
@@ -220,9 +221,9 @@ export class World {
   rollNightPredators() {
     const s = getGame().state;
     if (!s.time.isNight()) return;
-    const count = s.weather.kind === 'fog' ? 4 : 2;
+    const count = s.weather.kind === 'fog' ? 7 : 5;
     for (let i = 0; i < count; i++) {
-      const spots: Array<[number, number]> = [[8, 56], [130, 66], [112, 46], [20, 84]];
+      const spots: Array<[number, number]> = [[8, 56], [130, 66], [168, 30], [176, 70], [196, 60], [20, 84], [154, 12]];
       const [tx, ty] = spots[i % spots.length];
       const free = this.freeSpot(tx, ty, 4);
       const e = new EnemyActor('wolf', 'creature', free ? free.x : tx * TILE + TILE / 2, free ? free.y : ty * TILE + TILE / 2, { packId: 'nightpack', seed: i * 131 + s.time.day });
@@ -282,7 +283,6 @@ export class World {
         a.faceTowards(p.x, p.y);
         a.talking = true;
         DialogueSystem.open(a.npcId);
-        QuestSystem.notify('talk', { npcId: a.npcId });
         SkillsSystem.use('persuade', 4, true);
         return;
       }
@@ -405,11 +405,22 @@ export class World {
       noticeBoard: 'board', signPost: 'sign', signInn: 'sign',
       wellBucket: 'well', waterTrough: 'trough', barrelRain: 'well',
       barrelStack: 'barrel', keg: 'barrel', crateStack: 'crate', fishCrate: 'crate', crateCustoms: 'crate', smugglingCrate: 'crate',
-      haystack: 'straw', hayBale: 'straw', bookshelf: 'shelf'
+      haystack: 'straw', hayBale: 'straw', bookshelf: 'shelf',
+      chair: 'bench', armchair: 'bench', sofa: 'bench', wardrobe: 'search', cupboard: 'search', dresser: 'search',
+      bedDouble: 'ownBed', bedStraw: 'ownBed'
     };
     const kind = alias[obj.type] || obj.type;
     switch (kind) {
       case 'shelf': this.searchObject({ ...obj, type: 'shelf' } as SceneObject); return;
+      case 'search': this.searchObject(obj); return;
+      case 'ownBed':
+        // cudze łóżko: można się zdrzemnąć, ale gospodarz nie będzie zachwycony
+        if (s.scene === 'int_room_john') { bus.emit('ui:openSleep', { obj }); return; }
+        bus.emit('hud:toast', { text: t('interact.notYourBed'), tone: 'bad' });
+        return;
+      case 'loom': case 'spinningWheel': case 'washBasin': case 'scarecrow': case 'beehive': case 'tombstone':
+        bus.emit('ui:showSign', { text: t('look.' + obj.type) });
+        return;
       case 'shrine': {
         const key = 'prayed_day';
         if (s.flags[key] === s.time.day) { bus.emit('hud:toast', { text: t('interact.prayedAlready') }); return; }
@@ -505,11 +516,13 @@ export class World {
       }
       case 'carter': {
         // wóz kursuje między przystankami: chwila jazdy zamiast spaceru przez pół miasta
-        const dest = this.scene.stations.find(st => st.type === 'carter' && st !== obj);
+        const tgtX = (d.destTx ?? 0) * TILE + 16, tgtY = (d.destTy ?? 0) * TILE + TILE - 4;
+        const dest = this.scene.stations.find(st => st.type === 'carter' && st !== obj && Math.hypot(st.x - tgtX, st.y - tgtY) < 40)
+          || this.scene.stations.find(st => st.type === 'carter' && st !== obj);
         if (!dest) return;
-        const cost = 4;
+        const cost = Math.hypot(tgtX - obj.x, tgtY - obj.y) > 3000 ? 10 : 4;
         bus.emit('ui:confirm', {
-          text: t('carter.confirm', { where: t(dest.data?.destKey || 'place.harbour'), gold: cost }),
+          text: t('carter.confirm', { where: t(d.destKey || 'place.harbour'), gold: cost }),
           onYes: () => {
             if (s.gold < cost) { bus.emit('hud:toast', { text: t('carter.noMoney'), tone: 'bad' }); return; }
             s.gold -= cost; s.stats.spent += cost;
@@ -519,7 +532,7 @@ export class World {
               this.player.x = dest.x; this.player.y = dest.y + 22;
               getGame().renderer.camera.follow(this.player.x, this.player.y, 0, true);
               bus.emit('world:fade', { dir: -1 });
-              bus.emit('hud:toast', { text: t('carter.arrived', { where: t(dest.data?.labelHere || dest.nameKey || '') }) });
+              bus.emit('hud:toast', { text: t('carter.arrived', { where: t(d.destKey || '') }) });
             }, 350);
           }
         });
@@ -545,6 +558,7 @@ export class World {
         // skrytka fabularna: jeden przedmiot, czasem tylko gdy John wie, czego szuka
         if (d.needFlag && !s.flags[d.needFlag]) { bus.emit('hud:toast', { text: t(d.emptyKey || 'interact.nothingSpecial') }); return; }
         if (s.flags['taken_' + obj.id]) { bus.emit('hud:toast', { text: t('interact.empty') }); return; }
+        if (d.night && !s.time.isNight()) { bus.emit('hud:toast', { text: t(d.emptyKey || 'interact.nothingSpecial') }); return; }
         const watcher = d.guard ? this.npcs.find(n => n.npcId === d.guard && !n.hidden && n.scene === s.scene) : undefined;
         if (watcher) {
           bus.emit('hud:toast', { text: t('interact.searchSeen', { who: watcher.name }), tone: 'bad' });
@@ -802,11 +816,13 @@ export class World {
     bus.on('combat:spar', (e: any) => this.startSpar(e.npcId));
     // wróg fabularny pojawia się, gdy zadanie wchodzi w jego etap
     bus.on('quest:spawn', (e: any) => {
-      const free = this.freeSpot(e.tx, e.ty, 4);
-      const en = new EnemyActor(e.typeId, e.kind, free ? free.x : e.tx * TILE, free ? free.y : e.ty * TILE, { seed: e.tx * 31 + e.ty });
-      en.scene = 'world';
-      en.hidden = getGame().state.scene !== 'world';
-      this.enemies.push(en); this.actors.push(en);
+      for (let i = 0; i < (e.count || 1); i++) {
+        const free = this.freeSpot(e.tx + (i % 3) * 2, e.ty + Math.floor(i / 3) * 2, 4);
+        const en = new EnemyActor(e.typeId, e.kind, free ? free.x : e.tx * TILE, free ? free.y : e.ty * TILE, { seed: e.tx * 31 + e.ty + i, packId: e.count > 1 ? 'quest_' + e.questId : undefined });
+        en.scene = 'world';
+        en.hidden = getGame().state.scene !== 'world';
+        this.enemies.push(en); this.actors.push(en);
+      }
     });
     bus.on('rumor:seedEvent', (e: any) => RumorSystem.seed(e.textKey, { witness: e.witness, severity: e.severity }));
     bus.on('notes:add', (e: any) => NotesSystem.addEntry(e.kind || 'note', e.key));
@@ -999,6 +1015,9 @@ function defaultLoot(type: string, seed: number): string[] {
     sack: [['grain_sack'], ['turnip'], ['wheat_sack'], []],
     corpse: [['coin_purse_small'], ['dagger_iron'], ['rag_linen'], []],
     shelf: [['candle'], ['book_hours'], []],
+    wardrobe: [['wool_cloak'], ['rag_linen'], [], ['coin_purse_small']],
+    cupboard: [['bread_loaf'], ['apple'], ['candle'], []],
+    dresser: [['rag_linen'], ['coin_purse_small'], ['candle'], []],
     default: [['rag_linen'], [], ['candle'], ['bread_loaf']]
   };
   const opts = table[type] || table.default;

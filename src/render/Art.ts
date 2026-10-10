@@ -1246,6 +1246,134 @@ def('pots', 22, 14, (x, v) => {
   ellipsePx(x, 15, 10, 5, 3, PAL.dirt3); ellipsePx(x, 15, 8, 3, 1, PAL.dirt1);
 }, { tall: false });
 
+/* --- meble domowe: każdy dom urządzony inaczej (warianty kolorów) --- */
+const BLANKETS = [PAL.clothRed1, PAL.clothBlue1, PAL.clothGreen1, PAL.clothYel0, PAL.clothGrey1, PAL.clothWhite0];
+def('bedDouble', 44, 32, (x, v) => {
+  const bl = BLANKETS[v % BLANKETS.length];
+  rect(x, 2, 6, 40, 20, PAL.wood1); rect(x, 2, 2, 40, 6, PAL.wood0); rect(x, 2, 2, 40, 1, PAL.wood2);
+  rect(x, 2, 24, 4, 6, PAL.wood0); rect(x, 38, 24, 4, 6, PAL.wood0);
+  rect(x, 5, 8, 34, 15, PAL.clothWhite1);
+  ellipsePx(x, 13, 10, 6, 3, PAL.clothWhite2); ellipsePx(x, 31, 10, 6, 3, PAL.clothWhite2);
+  rect(x, 5, 14, 34, 9, bl); rect(x, 5, 14, 34, 1, shade(bl, 0.18));
+  for (let i = 0; i < 5; i++) rect(x, 8 + i * 7, 18, 3, 1, shade(bl, -0.18));
+}, { tall: false });
+def('bedStraw', 34, 16, (x, v) => {
+  rect(x, 2, 5, 30, 9, PAL.thatch1); rect(x, 2, 5, 30, 2, PAL.thatch3);
+  for (let i = 0; i < 9; i++) linePx(x, 3 + i * 3, 13, 5 + i * 3, 6, PAL.thatch0);
+  rect(x, 10, 6, 20, 6, BLANKETS[(v + 3) % BLANKETS.length]); ellipsePx(x, 6, 8, 3, 2, PAL.clothWhite1);
+}, { tall: false, solid: false });
+def('cradle', 22, 18, (x, v) => {
+  ellipsePx(x, 11, 13, 9, 3, PAL.wood0);
+  rect(x, 3, 5, 16, 8, PAL.wood2); rect(x, 3, 5, 16, 2, PAL.wood3);
+  rect(x, 5, 6, 12, 4, BLANKETS[v % BLANKETS.length]); ellipsePx(x, 7, 7, 2, 2, PAL.skin3);
+}, { tall: false });
+def('sofa', 42, 26, (x, v) => {
+  const c = BLANKETS[(v + 1) % BLANKETS.length];
+  rect(x, 2, 4, 38, 10, PAL.wood1); rect(x, 2, 4, 38, 2, PAL.wood3);          // oparcie
+  rect(x, 2, 12, 38, 7, PAL.wood2); rect(x, 2, 19, 4, 5, PAL.wood0); rect(x, 36, 19, 4, 5, PAL.wood0);
+  rect(x, 0, 8, 4, 12, PAL.wood0); rect(x, 38, 8, 4, 12, PAL.wood0);         // poręcze
+  rect(x, 5, 9, 15, 6, c); rect(x, 22, 9, 15, 6, c);                         // poduchy
+  rect(x, 5, 9, 15, 1, shade(c, 0.2)); rect(x, 22, 9, 15, 1, shade(c, 0.2));
+}, { tall: false });
+def('armchair', 22, 26, (x, v) => {
+  const c = BLANKETS[(v + 2) % BLANKETS.length];
+  rect(x, 4, 2, 14, 12, PAL.wood1); rect(x, 5, 3, 12, 9, c);
+  rect(x, 2, 10, 18, 8, PAL.wood2); rect(x, 4, 11, 14, 5, shade(c, 0.1));
+  rect(x, 2, 18, 3, 6, PAL.wood0); rect(x, 17, 18, 3, 6, PAL.wood0);
+}, { tall: false });
+def('chair', 14, 22, (x, v) => {
+  rect(x, 3, 1, 8, 2, PAL.wood3); rect(x, 3, 1, 2, 12, PAL.wood1); rect(x, 9, 1, 2, 12, PAL.wood1);
+  rect(x, 2, 11, 10, 3, PAL.wood2); rect(x, 2, 14, 2, 7, PAL.wood0); rect(x, 10, 14, 2, 7, PAL.wood0);
+}, { tall: false, grabbable: true });
+def('wardrobe', 30, 46, (x, v) => {
+  const w = v % 2 ? PAL.wood1 : PAL.wood2;
+  rect(x, 2, 2, 26, 42, PAL.wood0); rect(x, 3, 4, 24, 38, w);
+  rect(x, 3, 4, 11, 38, shade(w, 0.05)); rect(x, 14, 4, 1, 38, PAL.wood0);
+  rect(x, 11, 20, 2, 4, PAL.metal2); rect(x, 16, 20, 2, 4, PAL.metal2);
+  rect(x, 1, 1, 28, 3, PAL.wood3);
+}, { tall: true });
+def('cupboard', 32, 40, (x, v) => {
+  rect(x, 2, 2, 28, 36, PAL.wood0); rect(x, 3, 3, 26, 14, PAL.wood1);
+  const plates = [PAL.clothWhite2, PAL.clothBlue2, PAL.tile2, PAL.clothYel1];
+  for (let i = 0; i < 4; i++) { ellipsePx(x, 7 + i * 6, 9, 3, 3, plates[(i + v) % plates.length]); px(x, 7 + i * 6, 9, PAL.ink2); }
+  rect(x, 3, 15, 26, 2, PAL.wood3);
+  rect(x, 3, 19, 26, 17, PAL.wood2); rect(x, 15, 19, 1, 17, PAL.wood0); rect(x, 12, 26, 2, 3, PAL.metal1); rect(x, 18, 26, 2, 3, PAL.metal1);
+}, { tall: true });
+def('dresser', 28, 22, (x, v) => {
+  rect(x, 2, 4, 24, 16, PAL.wood1); rect(x, 2, 3, 24, 2, PAL.wood3);
+  for (let i = 0; i < 3; i++) { rect(x, 4, 6 + i * 5, 20, 4, PAL.wood2); rect(x, 13, 7 + i * 5, 2, 1, PAL.metal2); }
+  if (v % 2) { rect(x, 6, 0, 4, 4, PAL.tile1); px(x, 8, 0, PAL.leaf2); } else { rect(x, 18, 0, 3, 4, PAL.clothWhite1); px(x, 19, 0, PAL.fire3); }
+}, { tall: false });
+def('loom', 36, 32, (x, v) => {
+  rect(x, 2, 2, 3, 28, PAL.wood0); rect(x, 31, 2, 3, 28, PAL.wood0);
+  rect(x, 2, 2, 32, 3, PAL.wood1); rect(x, 2, 20, 32, 3, PAL.wood1);
+  const c = BLANKETS[v % BLANKETS.length];
+  for (let i = 0; i < 13; i++) linePx(x, 6 + i * 2, 5, 6 + i * 2, 20, PAL.clothWhite0);
+  rect(x, 6, 12, 25, 8, c); for (let i = 0; i < 4; i++) rect(x, 6, 13 + i * 2, 25, 1, shade(c, i % 2 ? 0.15 : -0.12));
+  rect(x, 4, 24, 28, 3, PAL.wood2);
+}, { tall: true });
+def('spinningWheel', 24, 26, (x, v) => {
+  ellipsePx(x, 9, 10, 8, 8, PAL.wood0); ellipsePx(x, 9, 10, 6, 6, PAL.wood2); ellipsePx(x, 9, 10, 1, 1, PAL.wood0);
+  for (let i = 0; i < 4; i++) linePx(x, 9, 10, 9 + Math.cos(i * 0.8) * 6, 10 + Math.sin(i * 0.8) * 6, PAL.wood0);
+  rect(x, 3, 19, 18, 3, PAL.wood1); rect(x, 4, 22, 2, 3, PAL.wood0); rect(x, 18, 22, 2, 3, PAL.wood0);
+  rect(x, 18, 6, 2, 13, PAL.wood1); ellipsePx(x, 19, 6, 2, 2, PAL.clothWhite1);
+}, { tall: false });
+def('washBasin', 18, 20, (x, v) => {
+  rect(x, 3, 10, 12, 2, PAL.wood2); rect(x, 4, 12, 2, 7, PAL.wood0); rect(x, 12, 12, 2, 7, PAL.wood0);
+  ellipsePx(x, 9, 8, 7, 3, PAL.metal1); ellipsePx(x, 9, 7, 5, 2, PAL.water3);
+}, { tall: false });
+def('herbRack', 26, 26, (x, v) => {
+  rect(x, 1, 2, 24, 2, PAL.wood1);
+  const hs = [PAL.leaf1, PAL.leaf2, PAL.clothYel0, PAL.grass2, PAL.clothRed0];
+  for (let i = 0; i < 6; i++) { const c = hs[(i + v) % hs.length]; linePx(x, 3 + i * 4, 4, 3 + i * 4, 9, PAL.wood0); ellipsePx(x, 3 + i * 4, 13, 2, 4, c); }
+}, { tall: false, solid: false });
+def('tableSet', 38, 28, (x, v) => {
+  rect(x, 2, 8, 34, 6, PAL.wood2); rect(x, 2, 6, 34, 3, PAL.wood3);
+  rect(x, 4, 14, 4, 12, PAL.wood1); rect(x, 30, 14, 4, 12, PAL.wood1);
+  rect(x, 5, 6, 28, 2, v % 2 ? PAL.clothWhite1 : PAL.clothRed0);          // obrus
+  ellipsePx(x, 10, 5, 3, 2, PAL.clothWhite2); ellipsePx(x, 27, 5, 3, 2, PAL.clothWhite2);
+  ellipsePx(x, 19, 4, 4, 2, PAL.wood3); px(x, 18, 3, PAL.dirt4);           // chleb
+  rect(x, 14, 1, 2, 4, PAL.tile1);                                            // dzban
+}, { tall: false });
+def('flowerPot', 14, 16, (x, v) => {
+  rect(x, 3, 9, 8, 6, PAL.tile1); rect(x, 2, 8, 10, 2, PAL.tile2);
+  const c = [PAL.clothRed2, PAL.clothYel2, PAL.clothWhite2, PAL.clothBlue2][v % 4];
+  linePx(x, 7, 8, 7, 3, PAL.grass1); linePx(x, 5, 8, 4, 4, PAL.grass1); linePx(x, 9, 8, 10, 4, PAL.grass1);
+  rect(x, 6, 1, 3, 3, c); px(x, 3, 3, c); px(x, 11, 3, c);
+}, { tall: false, solid: false });
+def('toys', 18, 10, (x, v) => {
+  ellipsePx(x, 5, 6, 3, 3, PAL.clothRed1); rect(x, 10, 4, 6, 4, PAL.wood3); px(x, 12, 3, PAL.wood1); rect(x, 9, 8, 2, 1, PAL.ink2); rect(x, 15, 8, 2, 1, PAL.ink2);
+}, { tall: false, solid: false, shadow: false });
+def('fishRack', 34, 30, (x, v) => {
+  rect(x, 2, 4, 3, 24, PAL.wood0); rect(x, 29, 4, 3, 24, PAL.wood0); rect(x, 2, 4, 30, 2, PAL.wood1);
+  for (let i = 0; i < 6; i++) { linePx(x, 6 + i * 4, 6, 6 + i * 4, 9, PAL.wood0); ellipsePx(x, 6 + i * 4, 14, 1, 5, i % 2 ? PAL.metal2 : PAL.stone3); }
+}, { tall: true });
+def('millstone', 34, 22, (x, v) => {
+  ellipsePx(x, 17, 14, 15, 7, PAL.stone0); ellipsePx(x, 17, 11, 15, 7, PAL.stone2); ellipsePx(x, 17, 11, 4, 2, PAL.stone0);
+  for (let i = 0; i < 6; i++) linePx(x, 17, 11, 17 + Math.cos(i) * 13, 11 + Math.sin(i) * 6, PAL.stone1);
+}, { tall: false });
+def('scarecrow', 24, 40, (x, v) => {
+  rect(x, 11, 8, 2, 30, PAL.wood0); rect(x, 2, 14, 20, 2, PAL.wood1);
+  rect(x, 7, 13, 10, 14, PAL.clothGreen0); rect(x, 3, 14, 4, 6, PAL.clothGreen0); rect(x, 17, 14, 4, 6, PAL.clothGreen0);
+  ellipsePx(x, 12, 9, 4, 4, PAL.thatch2); rect(x, 6, 3, 12, 3, PAL.thatch0); rect(x, 8, 0, 8, 4, PAL.thatch1);
+  px(x, 10, 9, PAL.ink0); px(x, 14, 9, PAL.ink0);
+}, { tall: true });
+def('pigpen', 40, 24, (x, v) => {
+  rect(x, 2, 8, 36, 2, PAL.wood1); rect(x, 2, 18, 36, 2, PAL.wood1);
+  for (let i = 0; i < 6; i++) rect(x, 2 + i * 7, 6, 2, 16, PAL.wood0);
+  ellipsePx(x, 20, 15, 14, 3, PAL.mud1);
+}, { tall: false });
+def('beehive', 16, 20, (x, v) => {
+  rect(x, 6, 14, 4, 5, PAL.wood0);
+  ellipsePx(x, 8, 9, 7, 6, PAL.thatch2); for (let i = 0; i < 3; i++) rect(x, 2, 6 + i * 3, 12, 1, PAL.thatch0);
+  rect(x, 7, 12, 2, 2, PAL.ink1);
+}, { tall: false });
+def('tombstone', 16, 20, (x, v) => {
+  rect(x, 3, 4, 10, 14, PAL.stone2); ellipsePx(x, 8, 4, 5, 3, PAL.stone2); rect(x, 3, 4, 10, 1, PAL.stone3);
+  rect(x, 7, 7, 2, 7, PAL.stone0); rect(x, 5, 9, 6, 2, PAL.stone0);
+  if (v % 2) { px(x, 4, 16, PAL.clothRed2); px(x, 5, 16, PAL.grass1); }
+}, { tall: false });
+
 /** Zwraca gotowy (obramowany) sprite propsa; cache'owany per wariant. */
 const propCache = new Map<string, HTMLCanvasElement>();
 export function getProp(name: string, variant = 0, outline = true): HTMLCanvasElement | null {

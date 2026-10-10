@@ -1562,6 +1562,62 @@
     "rare"
    ],
    "feed": 22
+  },
+  {
+   "id": "letter_village",
+   "nameKey": "item.letterVillage",
+   "descKey": "item.letterVillage.desc",
+   "icon": "letter",
+   "weight": 0.05,
+   "volume": 0.05,
+   "value": 0,
+   "cat": "document",
+   "tags": [
+    "quest",
+    "unique"
+   ]
+  },
+  {
+   "id": "goat_bell",
+   "nameKey": "item.goatBell",
+   "descKey": "item.goatBell.desc",
+   "icon": "ring",
+   "weight": 0.2,
+   "volume": 0.1,
+   "value": 2,
+   "cat": "special",
+   "tags": [
+    "quest"
+   ]
+  },
+  {
+   "id": "woodcutter_cap",
+   "nameKey": "item.woodcutterCap",
+   "descKey": "item.woodcutterCap.desc",
+   "icon": "wool",
+   "weight": 0.2,
+   "volume": 0.3,
+   "value": 0,
+   "cat": "special",
+   "tags": [
+    "quest",
+    "unique"
+   ]
+  },
+  {
+   "id": "old_coin",
+   "nameKey": "item.oldCoin",
+   "descKey": "item.oldCoin.desc",
+   "icon": "coins",
+   "weight": 0.02,
+   "volume": 0.01,
+   "value": 25,
+   "cat": "special",
+   "tags": [
+    "quest",
+    "unique",
+    "rare"
+   ]
   }
  ]
 }

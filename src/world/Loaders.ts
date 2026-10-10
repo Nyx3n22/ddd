@@ -38,6 +38,10 @@ interface DistrictJson {
   spawners: Record<string, { count: number; points?: Array<[number, number]>; areas?: Array<[number, number, number, number]> }>;
   fastTravel: Array<{ id: string; nameKey: string; tx: number; ty: number }>;
   stations?: Array<{ tx: number; ty: number; kind: string; labelKey: string; npc?: string; [k: string]: any }>;
+  /** las: [x, y, w, h, gęstość drzew 0..1] */
+  forests?: Array<[number, number, number, number, number]>;
+  /** zwierzęta na stałe: [typ, tx, ty] */
+  creatures?: Array<[string, number, number]>;
   ambience: { birds: number; smoke: Array<[number, number]> };
 }
 
@@ -49,7 +53,8 @@ export const INTERACTIVE_PROPS = new Set([
   'well', 'wellBucket', 'waterTrough', 'barrelRain', 'noticeBoard', 'signPost', 'signInn',
   'barrel', 'barrelStack', 'keg', 'crate', 'crateStack', 'sack', 'chest', 'fishCrate', 'crateCustoms', 'smugglingCrate',
   'bush', 'gallows', 'shrine', 'statue', 'stocks', 'campfire', 'forge', 'anvil', 'haystack', 'hayBale',
-  'trainingDummy', 'shelf', 'bookshelf', 'bench', 'pew'
+  'trainingDummy', 'shelf', 'bookshelf', 'bench', 'pew',
+  'chair', 'armchair', 'sofa', 'wardrobe', 'cupboard', 'dresser', 'bedDouble', 'bedStraw', 'loom', 'spinningWheel', 'washBasin', 'scarecrow', 'beehive', 'tombstone'
 ]);
 
 export interface LoadedWorld {
@@ -61,6 +66,7 @@ export interface LoadedWorld {
   fastTravel: Array<{ id: string; nameKey: string; x: number; y: number }>;
   spawners: DistrictJson['spawners'];
   ambience: DistrictJson['ambience'];
+  creatures: Array<[string, number, number]>;
 }
 
 export function loadDistrict(): LoadedWorld {
@@ -239,7 +245,7 @@ export function loadDistrict(): LoadedWorld {
   ];
   const xs = DISTRICT.walls.filter(w => w.h > w.w).map(w => w.x);
   const ys = DISTRICT.walls.filter(w => w.w >= w.h).map(w => w.y);
-  decorateDistrict(tm, scene, { wallX0: Math.min(...xs), wallX1: Math.max(...xs), wallY0: Math.min(...ys), wallY1: Math.max(...ys) }, reservedSpots);
+  decorateDistrict(tm, scene, { wallX0: Math.min(...xs), wallX1: Math.max(...xs), wallY0: Math.min(...ys), wallY1: Math.max(...ys) }, reservedSpots, DISTRICT.forests ?? []);
 
   // --- wnętrza ---
   const interiors = new Map<string, Scene>();
@@ -251,6 +257,7 @@ export function loadDistrict(): LoadedWorld {
     buildings, gates,
     fastTravel: DISTRICT.fastTravel.map(ft => ({ id: ft.id, nameKey: ft.nameKey, x: ft.tx * TILE + 16, y: (ft.ty + 1) * TILE })),
     spawners: DISTRICT.spawners,
+    creatures: DISTRICT.creatures ?? [],
     ambience: DISTRICT.ambience
   };
 }

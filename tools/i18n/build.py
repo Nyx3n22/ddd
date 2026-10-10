@@ -1909,6 +1909,274 @@ gallery.hint.end_crime|Spłać dług, nie pytając, skąd są pieniądze.|Pay th
 gallery.hint.end_honest|Spłać dług z czystymi rękami.|Pay the debt with clean hands.
 """)
 
+# >>> MIESZKANCY
+add(r"""
+npc.halszka.name|Tkaczka Halszka|Halszka the Weaver
+npc.halszka.role|Tkaczka|Weaver
+npc.halszka.address|Dom z krosnem przy zachodnim zaułku|The house with the loom by the western alley
+npc.halszka.desire|Utkać sukno tak dobre, żeby cech musiał przyjąć ją na mistrzynię, choć jest kobietą.|To weave cloth so fine the guild must accept her as a master, woman or not.
+npc.halszka.secret|Tka po nocach płótno na żagle dla Idziego. Płaci lepiej niż cech i nie pyta, czy ma pieczęć.|At night she weaves sailcloth for Idzi. He pays better than the guild and never asks about seals.
+npc.halszka.greet1|Uważaj na nici, nie depcz. Każda kosztuje mnie godzinę.|Mind the threads, do not step on them. Each one costs me an hour.
+npc.halszka.greet2|Wełna znowu zdrożała. Owce chyba jedzą złoto.|Wool is dearer again. The sheep must be eating gold.
+npc.klemens.name|Szewc Klemens|Klemens the Cobbler
+npc.klemens.role|Szewc|Cobbler
+npc.klemens.address|Warsztat szewski w górnej części miasta|The cobbler's workshop in the upper town
+npc.klemens.desire|Dożyć dnia, w którym ktoś zapłaci mu z góry.|To live to see the day someone pays him in advance.
+npc.klemens.secret|Po butach pozna każdego w mieście. Rawicz płaci mu, żeby mówił, czyje buty widział w błocie przy magazynach.|He knows everyone in town by their boots. Rawicz pays him to say whose boots he saw in the mud by the warehouses.
+npc.klemens.greet1|Pokaż buty. ...Ech. Długo nie pociągną.|Show me your boots. ...Hm. They will not last long.
+npc.klemens.greet2|Człowieka poznasz po tym, jak zdziera obcasy.|You can tell a man by how he wears down his heels.
+npc.dorota.name|Wdowa Dorota|Dorota the Widow
+npc.dorota.role|Wdowa, przędzie na zlecenie|Widow, spins for hire
+npc.dorota.address|Izba w biednym domu przy zachodnim murze|A room in the poor house by the western wall
+npc.dorota.desire|Żeby jej synek Kuba doczekał wiosny.|For her little son Kuba to live until spring.
+npc.dorota.secret|Jej mąż nie utonął. Wisi w księdze Kruka jako dłużnik i zniknął w noc przed terminem spłaty.|Her husband did not drown. He is in the Raven's ledger as a debtor and vanished the night before his payment was due.
+npc.dorota.greet1|Ciszej, proszę. Kuba dopiero zasnął.|Quietly, please. Kuba has only just fallen asleep.
+npc.ambrozy.name|Stary Ambroży|Old Ambroży
+npc.ambrozy.role|Najstarszy rybak w porcie|The oldest fisherman in the harbour
+npc.ambrozy.address|Pierwsza chata rybacka przy zachodnim nabrzeżu|The first fishing hut by the western quay
+npc.ambrozy.desire|Złowić jeszcze raz dorsza większego niż ten z 1402 roku, o którym nikt już nie pamięta.|To catch one more cod bigger than the one from 1402 that nobody remembers anymore.
+npc.ambrozy.secret|Pamięta, jak Dzicy Rycerze byli jeszcze strażą wybrzeża i bronili rybaków przed piratami. Nikt nie chce go słuchać.|He remembers when the Wild Knights were still the coast watch and defended fishermen from pirates. Nobody wants to listen.
+npc.ambrozy.greet1|Wiatr od lądu. Ryba głęboko. Nic dziś nie będzie.|Land wind. Fish run deep. Nothing today.
+npc.ambrozy.greet2|W moich czasach morze było większe.|In my day the sea was bigger.
+npc.brygida.name|Pani Brygida|Lady Brygida
+npc.brygida.role|Wdowa po kupcu korzennym|Widow of a spice merchant
+npc.brygida.address|Kamienica z kwiatami w oknach, przy południowej drodze|The townhouse with flowers in the windows, on the southern road
+npc.brygida.desire|Wydać córkę za kogoś, kto nie jest winien pieniędzy Krukowi. W tym mieście to trudniejsze niż za księcia.|To marry her daughter to someone who owes the Raven nothing. In this town that is harder than marrying a prince.
+npc.brygida.secret|Jej zmarły mąż był jednym z założycieli bractwa Dzikich Rycerzy. Brygida wciąż dostaje od nich rentę i nienawidzi każdej monety.|Her late husband was one of the founders of the Wild Knights. Brygida still receives a pension from them and hates every coin.
+npc.brygida.greet1|Proszę nie stać tak blisko. Pachnie pan portem.|Please do not stand so close. You smell of the harbour.
+npc.brygida.greet2|Dzień dobry. Przynajmniej dla niektórych.|Good day. For some of us, at least.
+npc.jas.name|Mały Jaś|Little Jaś
+npc.jas.role|Chłopak na posyłki, dziewięć lat|Errand boy, nine years old
+npc.jas.address|Dom przekupki Małgorzaty, przy kaplicy|Margaret the hawker's house, near the chapel
+npc.jas.desire|Zostać rycerzem. Prawdziwym, nie takim jak te od Kruka.|To become a knight. A real one, not like the Raven's men.
+npc.jas.secret|Nosi wiadomości dla każdego, kto da miedziaka — także dla Gwidona. Nie wie, co jest w listach, bo nie umie czytać.|He carries messages for anyone with a copper — Gwidon included. He does not know what the letters say, because he cannot read.
+npc.jas.greet1|Panie! Masz pan miecz? Prawdziwy? Mogę dotknąć?|Sir! Is that a sword? A real one? Can I touch it?
+npc.jas.greet2|Za miedziaka zaniosę wszystko wszędzie!|For a copper I will carry anything anywhere!
+npc.walenty.name|Sołtys Walenty|Walenty the Reeve
+npc.walenty.role|Sołtys Brzeziny|Reeve of Brzezina
+npc.walenty.address|Dom sołtysa przy placu we wsi Brzezina|The reeve's house by the square in Brzezina village
+npc.walenty.desire|Utrzymać wieś poza księgą Kruka. Na razie płaci haracz w zbożu, nie w ludziach.|To keep the village out of the Raven's ledger. So far he pays tribute in grain, not in people.
+npc.walenty.secret|Dwa lata temu sam wskazał Rycerzom rodzinę, która ukrywała zboże. Od tamtej pory śpi przy zapalonej świecy.|Two years ago he himself pointed the Knights to a family hiding grain. Since then he sleeps with a candle burning.
+npc.walenty.greet1|Obcy w Brzezinie? Mów, czego chcesz, byle szybko — żniwa nie czekają.|A stranger in Brzezina? Say what you want, but quickly — the harvest will not wait.
+npc.walenty.greet2|Wilki, haracz i susza. A ty co przynosisz?|Wolves, tribute and drought. And what do you bring?
+npc.bartosz.name|Młynarz Bartosz|Bartosz the Miller
+npc.bartosz.role|Młynarz|Miller
+npc.bartosz.address|Młyn na północ od placu w Brzezinie|The mill north of the square in Brzezina
+npc.bartosz.desire|Naprawić koło i mielić znowu dla trzech wsi, nie dla jednej.|To repair the wheel and grind for three villages again, not one.
+npc.bartosz.secret|Odsypuje sobie co dziesiątą miarkę mąki. Wszyscy młynarze tak robią — on przynajmniej się z tego spowiada.|He keeps back every tenth measure of flour. All millers do — at least he confesses it.
+npc.bartosz.greet1|Mąka we włosach, mąka w płucach, mąka w zupie. Taki los.|Flour in my hair, flour in my lungs, flour in my soup. That is the life.
+npc.bartosz.greet2|Koło stoi, a ludzie i tak chcą chleba.|The wheel stands still, and people still want bread.
+npc.jadwiga.name|Jadwiga|Jadwiga
+npc.jadwiga.role|Żona drwala Maćka|Wife of Maciek the woodcutter
+npc.jadwiga.address|Chata drwala na polanie w lesie|The woodcutter's hut in a forest clearing
+npc.jadwiga.desire|Żeby Maciek wrócił. A jeśli nie wróci — żeby wiedzieć, gdzie leży.|For Maciek to come home. And if he will not — to know where he lies.
+npc.jadwiga.secret|Maciek nie poszedł do lasu po drewno. Poszedł sprawdzić wnyki, które zastawił na ziemi Rycerzy. Kłusownictwo karze się tu ręką.|Maciek did not go into the woods for timber. He went to check snares he set on the Knights' land. Poaching costs a hand here.
+npc.jadwiga.greet1|Widziałeś w lesie mężczyznę w czerwonej czapce? Wysoki, rudy...|Did you see a man in a red cap in the woods? Tall, red-haired...
+npc.blazej.name|Myśliwy Błażej|Błażej the Hunter
+npc.blazej.role|Myśliwy i tropiciel|Hunter and tracker
+npc.blazej.address|Chata myśliwego na północy lasu|The hunter's lodge in the north of the forest
+npc.blazej.desire|Polować tam, gdzie chce, a nie tam, gdzie pozwala Kruk.|To hunt where he pleases, not where the Raven allows.
+npc.blazej.secret|Wie, gdzie zginął drwal Maciek. Milczy, bo wnyki Maćka stały obok jego własnych.|He knows where Maciek the woodcutter died. He keeps quiet because Maciek's snares stood next to his own.
+npc.blazej.greet1|Ciszej. Płoszysz zwierzynę na pół mili.|Quieter. You are scaring game half a mile away.
+npc.blazej.greet2|Ślady mówią więcej niż ludzie. I rzadziej kłamią.|Tracks say more than people do. And they lie less often.
+npc.kinga.name|Pasterka Kinga|Kinga the Shepherdess
+npc.kinga.role|Pasterka|Shepherdess
+npc.kinga.address|Zagroda na zachodnim skraju Brzeziny|The farmstead on the western edge of Brzezina
+npc.kinga.desire|Mieć własne stado i nikomu nie oddawać co trzeciego jagnięcia.|To own a flock and give nobody every third lamb.
+npc.kinga.secret|Kocha się w synu młynarza, a ojciec obiecał ją synowi sołtysa.|She loves the miller's son, but her father has promised her to the reeve's son.
+npc.kinga.greet1|Nie widziałeś kozy? Takiej łaciatej, z dzwonkiem?|Have you seen a goat? A spotted one, with a bell?
+npc.kinga.greet2|Owce głupie, ale przynajmniej nie kłamią.|Sheep are stupid, but at least they do not lie.
+npc.urszula.name|Stara Urszula|Old Urszula
+npc.urszula.role|Znachorka i bajarka z Brzeziny|Wise woman and storyteller of Brzezina
+npc.urszula.address|Chata z ziołami pod okapem, za kaplicą w Brzezinie|The hut with herbs under the eaves, behind the chapel in Brzezina
+npc.urszula.desire|Opowiedzieć komuś do końca historię świętego Elenema, zanim umrze.|To tell someone the whole story of Saint Elenem before she dies.
+npc.urszula.secret|Jako dziewczyna służyła w klasztorze, który dziś jest ruiną. Widziała, kto wynosił z niego srebro w noc pożaru.|As a girl she served at the abbey that is now a ruin. She saw who carried out the silver on the night of the fire.
+npc.urszula.greet1|Siadaj, synku. Stare nogi, długie historie.|Sit, son. Old legs, long stories.
+npc.urszula.greet2|Pachniesz żelazem i solą. Daleka droga za tobą.|You smell of iron and salt. A long road behind you.
+npc.piotr.name|Chłop Piotr|Piotr the Farmer
+npc.piotr.role|Kmieć z Brzeziny|Farmer of Brzezina
+npc.piotr.address|Zagroda przy polach na południu Brzeziny|The farmstead by the fields south of Brzezina
+npc.piotr.desire|Jeden rok bez gradu, bez wilków i bez haraczu.|One year without hail, without wolves and without tribute.
+npc.piotr.secret|Zakopał pod gruszą dwa worki zboża przed poborcami Kruka. Wie o tym tylko jego żona i sołtys.|He buried two sacks of grain under the pear tree before the Raven's collectors came. Only his wife and the reeve know.
+npc.piotr.greet1|Ziemia twarda jak serce poborcy.|Soil as hard as a collector's heart.
+npc.piotr.greet2|Szczęść Boże. Jak w mieście? Jeszcze nas nie zjedli?|God bless. How is the town? Have they not eaten us yet?
+# --- zadania: las i wieś ---
+quest.bWolves.title|Wataha nad Brzeziną|The Pack over Brzezina
+quest.bWolves.journal|Wilki z lasu zagryzają owce w Brzezinie, a Rycerze od pół roku obiecują pomoc. Sołtys Walenty zapłaci, jeśli wataha się przerzedzi.|Wolves from the forest are killing sheep in Brzezina, and the Knights have been promising help for half a year. Walenty the reeve will pay if the pack is thinned.
+quest.bWolves.s1|Zabij trzy wilki z watahy przy polach Brzeziny|Kill three wolves from the pack by the Brzezina fields
+quest.bWolves.s2|Wróć do sołtysa Walentego po zapłatę|Return to Walenty the reeve for payment
+quest.mill.title|Koło młyńskie|The Mill Wheel
+quest.mill.journal|Wiosenna woda połamała koło młyna w Brzezinie. Bez młyna wieś wozi zboże do miasta, gdzie cech bierze trzecią część.|The spring flood broke the Brzezina mill wheel. Without the mill the village hauls grain to town, where the guild takes a third.
+quest.mill.s1|Zdobądź dwie garści gwoździ (kowal Orlik)|Get two handfuls of nails (Orlik the smith)
+quest.mill.s2|Zdobądź dwie dębowe deski (dom cechowy)|Get two oak planks (the guild house)
+quest.mill.s3|Zanieś gwoździe i deski młynarzowi Bartoszowi|Bring the nails and planks to Bartosz the miller
+quest.goat.title|Łaciata|Spotty
+quest.goat.journal|Pasterce Kindze uciekła koza z dzwonkiem. Zwykle ucieka na południe, do lasu, gdzie przy starych kamieniach rośnie słodka trawa.|Kinga the shepherdess has lost her goat with a bell. It usually runs south into the forest, where sweet grass grows by the old stones.
+quest.goat.s1|Znajdź kozę w lesie na południe od wsi|Find the goat in the forest south of the village
+quest.goat.s2|Wróć do Kingi z dzwonkiem kozy|Return to Kinga with the goat's bell
+quest.woodcutter.title|Czerwona czapka|The Red Cap
+quest.woodcutter.journal|Drwal Maciek zniknął w lesie pięć dni temu. Jego żona Jadwiga uważa, że myśliwy Błażej wie więcej, niż mówi.|Maciek the woodcutter vanished in the forest five days ago. His wife Jadwiga thinks Błażej the hunter knows more than he says.
+quest.woodcutter.s1|Wypytaj myśliwego Błażeja w jego chacie na północy lasu|Question Błażej the hunter at his lodge in the north of the forest
+quest.woodcutter.s2|Zabij dzika przy krwawej polanie na południowym wschodzie lasu|Kill the boar by the bloody clearing in the south-east of the forest
+quest.woodcutter.s3|Przeszukaj krwawą polanę|Search the bloody clearing
+quest.woodcutter.s4|Powiedz Jadwidze, co się stało|Tell Jadwiga what happened
+quest.pelts.title|Skóry bez pieczęci|Pelts without a Seal
+quest.pelts.journal|Myśliwy Błażej nie chodzi do miasta, bo za każdą skórę trzeba tam pokazać pieczęć Rycerzy. Garbarz Oles kupi wilcze skóry bez pytań.|Błażej the hunter does not go to town, because there every hide needs the Knights' seal. Oles the tanner will buy wolf pelts without questions.
+quest.pelts.s1|Zdobądź dwie wilcze skóry|Get two wolf pelts
+quest.pelts.s2|Zanieś skóry garbarzowi Olesowi|Take the pelts to Oles the tanner
+quest.letter.title|Pismo do Brzeziny|A Letter to Brzezina
+quest.letter.journal|Pisarz Zbylut wysyła z rady pismo o nowym podatku od młynów. Nikt nie chce iść przez las z taką wiadomością.|Zbylut the scribe is sending a council letter about a new mill tax. Nobody wants to walk through the forest with news like that.
+quest.letter.s1|Zanieś list sołtysowi Walentemu we wsi Brzezina (wschodnim traktem przez las)|Deliver the letter to Walenty the reeve in Brzezina village (along the eastern road through the forest)
+quest.wool.title|Sukno dla rady|Cloth for the Council
+quest.wool.journal|Tkaczka Halszka musi utkać sukno na płaszcze dla rady, a garbarz sprzedał całą wełnę Rycerzom.|Halszka the weaver must weave cloth for the council's cloaks, and the tanner sold all the wool to the Knights.
+quest.wool.s1|Zdobądź trzy wiązki wełny|Get three bundles of wool
+quest.wool.s2|Zanieś wełnę Halszce|Bring the wool to Halszka
+quest.fish.title|Zakład Ambrożego|Ambroży's Wager
+quest.fish.journal|Stary Ambroży założył się z rybaczką Ewą o beczkę piwa, że obcy z jego radą złowi więcej niż ona.|Old Ambroży bet Ewa the fisherwoman a barrel of beer that a stranger with his advice will catch more than she does.
+quest.fish.s1|Złów dwa dorsze (wędka z kei, najlepiej o świcie)|Catch two cod (fishing from the pier, best at dawn)
+quest.fish.s2|Zanieś dorsze Ambrożemu|Bring the cod to Ambroży
+quest.child.title|Kaszel Kuby|Kuba's Cough
+quest.child.journal|Synek wdowy Doroty kaszle od trzech tygodni. Balwierza nie stać, a zielarka Wiera wie, co leczy płuca.|Widow Dorota's little son has been coughing for three weeks. She cannot afford the barber, and Wiera the herbwoman knows what heals the lungs.
+quest.child.s1|Zapytaj zielarkę Wierę, co pomoże na kaszel|Ask Wiera the herbwoman what will help the cough
+quest.child.s2|Zdobądź trzy pęczki krwawnika|Get three bunches of yarrow
+quest.child.s3|Zanieś krwawnik Dorocie|Bring the yarrow to Dorota
+quest.shoes.title|Trzewiki na zaręczyny|Slippers for a Betrothal
+quest.shoes.journal|Szewc Klemens ma uszyć trzewiki dla córki pani Brygidy, ale w mieście brakuje jelenich skór.|Klemens the cobbler must make slippers for Lady Brygida's daughter, but there are no deer hides in town.
+quest.shoes.s1|Zdobądź jelenią skórę|Get a deer hide
+quest.shoes.s2|Zanieś skórę szewcowi Klemensowi|Bring the hide to Klemens the cobbler
+quest.legend.title|Grób bez imienia|The Nameless Grave
+quest.legend.journal|Stara Urszula mówi, że w grobie bez imienia przy kaplicy w Brzezinie leży mnich, który uciekł z płonącego klasztoru z czymś, czego nie powinien był brać.|Old Urszula says that the nameless grave by the Brzezina chapel holds a monk who fled the burning abbey with something he should not have taken.
+quest.legend.s1|Nocą przekop ziemię przy grobie bez imienia (cmentarz przy kaplicy w Brzezinie)|At night dig by the nameless grave (the graveyard by the Brzezina chapel)
+quest.legend.s2|Pokaż znalezisko Urszuli|Show the find to Urszula
+# --- przedmioty ---
+item.letterVillage|List do sołtysa Brzeziny|Letter to the Reeve of Brzezina
+item.letterVillage.desc|Zapieczętowane pismo rady o nowym podatku od młynów. Ciężkie jak każda zła wiadomość.|A sealed council letter about a new mill tax. Heavy as any bad news.
+item.goatBell|Dzwonek kozy|Goat's Bell
+item.goatBell.desc|Mosiężny dzwonek na rzemyku. Koza poszła do domu, dzwonek został z tobą.|A brass bell on a leather strap. The goat went home, the bell stayed with you.
+item.woodcutterCap|Czerwona czapka drwala|The Woodcutter's Red Cap
+item.woodcutterCap.desc|Wełniana czapka, rozdarta i sztywna od zaschniętej krwi. Należała do Maćka.|A woollen cap, torn and stiff with dried blood. It belonged to Maciek.
+item.oldCoin|Moneta opactwa|Abbey Coin
+item.oldCoin.desc|Stara srebrna moneta z wizerunkiem mnicha z siecią. Bita w klasztorze świętego Elenema przed pożarem.|An old silver coin showing a monk with a net. Minted at the abbey of Saint Elenem before the fire.
+# --- miejsca (notatnik) ---
+bestiary.forest|Las Brzeziński|The Brzezina Forest
+bestiary.forest.lore|Sosny na północy, stare dęby w środku, polana drwali na południu. Rycerze uważają las za swój, bo tak zapisali w księdze. Wilki i dziki o tym nie wiedzą.|Pines in the north, old oaks in the middle, the woodcutters' clearing in the south. The Knights consider the forest theirs because they wrote it in the ledger. The wolves and boars do not know that.
+bestiary.woodcutterCamp|Obozowisko drwali|The Woodcutters' Camp
+bestiary.woodcutterCamp.lore|Pniaki, stosy drewna i ognisko, przy którym drwale jedzą chleb ze słoniną. Drewno idzie do młyna, do wsi i zimą do miasta.|Stumps, woodpiles and a fire where the woodcutters eat bread and lard. The timber goes to the mill, the village and in winter to the town.
+bestiary.hunterLodge|Chata myśliwego|The Hunter's Lodge
+bestiary.hunterLodge.lore|Chata Błażeja w sosnach. Na zewnątrz suszą się skóry, w środku pachnie dymem i ziołami. Myśliwy zna każdą ścieżkę w lesie.|Błażej's lodge among the pines. Hides dry outside, inside it smells of smoke and herbs. The hunter knows every path in the forest.
+bestiary.village|Wieś Brzezina|Brzezina Village
+bestiary.village.lore|Czterdzieści dymów, młyn, kaplica i pola aż do morza. Brzezina stała tu, zanim powstało miasto. Płaci haracz Krukowi w zbożu i boi się każdej zimy.|Forty hearths, a mill, a chapel and fields down to the sea. Brzezina stood here before the town was built. It pays the Raven tribute in grain and fears every winter.
+bestiary.mill|Młyn w Brzezinie|The Brzezina Mill
+bestiary.mill.lore|Młyn Bartosza miele dla trzech wsi — kiedy koło się kręci. Przy żarnach ludzie mówią więcej niż w konfesjonale.|Bartosz's mill grinds for three villages — when the wheel turns. By the millstones people say more than in confession.
+bestiary.villageChapel|Kaplica w Brzezinie|The Brzezina Chapel
+bestiary.villageChapel.lore|Drewniana kaplica ze starym cmentarzem. Ksiądz przyjeżdża z miasta raz w miesiącu. Na cmentarzu jest grób bez imienia, przy którym nocą ponoć świeci światło.|A wooden chapel with an old graveyard. The priest comes from town once a month. In the graveyard is a nameless grave where, they say, a light glows at night.
+bestiary.piers|Keje|The Piers
+bestiary.piers.lore|Trzy drewniane keje wchodzące w zatokę. Za dnia handel i sieci, nocą łodzie bez latarni. Z końca środkowej kei widać redę i statki, które nie zadają pytań.|Three wooden piers reaching into the bay. By day trade and nets, by night boats without lanterns. From the end of the middle pier you can see the roads and ships that ask no questions.
+bestiary.lowerTown|Dolne Miasto|The Lower Town
+bestiary.lowerTown.lore|Ciasne uliczki między portem a murami. Domy rzemieślników, kramy, kaplica i rynek. Każdy tu jest komuś coś winien.|Narrow streets between the harbour and the walls. Craftsmen's houses, stalls, the chapel and the market. Everyone here owes someone something.
+bestiary.alleyWest|Zachodni zaułek|The Western Alley
+bestiary.alleyWest.lore|Lombard, nocleg Marty i drzwi, które otwierają się tylko po zmroku. Straż zagląda tu rzadko i niechętnie.|The pawnshop, Marta's sleeping spot and doors that open only after dark. The watch looks in rarely and reluctantly.
+bestiary.vagnYard|Dziedziniec Vagna|Vagn's Yard
+bestiary.vagnYard.lore|Ubita ziemia, pal treningowy i stary sierżant, który uczy walczyć tych, którzy chcą przeżyć.|Packed earth, a training post and an old sergeant who teaches fighting to those who want to live.
+bestiary.eastRoad|Wschodni trakt|The Eastern Road
+bestiary.eastRoad.lore|Błotnista droga z miasta przez las do Brzeziny. Wozy z drewnem i zbożem, czasem bandyci, nocą wilki.|A muddy road from town through the forest to Brzezina. Carts of timber and grain, sometimes bandits, at night wolves.
+bestiary.villageSquare|Plac w Brzezinie|Brzezina Square
+bestiary.villageSquare.lore|Studnia, ławy i dom sołtysa. Tu wieś zbiera się, żeby płacić haracz i plotkować.|A well, benches and the reeve's house. Here the village gathers to pay tribute and gossip.
+bestiary.villageFields|Pola Brzeziny|The Brzezina Fields
+bestiary.villageFields.lore|Żyto, owies, len i rzepa aż po las. Strachy na wróble, ule i owce Kingi. Wiatr od morza kładzie zboże co trzeci rok.|Rye, oats, flax and turnips up to the forest. Scarecrows, beehives and Kinga's sheep. The sea wind flattens the grain every third year.
+# --- regiony ---
+place.eastRoad|Wschodni trakt|The Eastern Road
+place.forest|Las Brzeziński|The Brzezina Forest
+place.woodcutterCamp|Obozowisko drwali|The Woodcutters' Camp
+place.hunterLodge|Chata myśliwego|The Hunter's Lodge
+place.village|Wieś Brzezina|Brzezina Village
+place.villageSquare|Plac w Brzezinie|Brzezina Square
+place.villageMill|Młyn w Brzezinie|The Brzezina Mill
+place.villageChapel|Kaplica w Brzezinie|The Brzezina Chapel
+place.villageFields|Pola Brzeziny|The Brzezina Fields
+# --- budynki ---
+bld.barn|Stodoła|Barn
+bld.elderHouse|Dom sołtysa|The Reeve's House
+bld.fisherHut|Chata rybacka|Fisher's Hut
+bld.hunterLodge|Chata myśliwego|The Hunter's Lodge
+bld.mill|Młyn|Mill
+bld.oldWomanHut|Chata znachorki|The Wise Woman's Hut
+bld.villageChapel|Kaplica w Brzezinie|The Brzezina Chapel
+bld.woodcutterHut|Chata drwala|The Woodcutter's Hut
+# --- wnętrza ---
+int.almshouse|Przytułek|The Almshouse
+int.elder_house|Dom sołtysa Walentego|Walenty the Reeve's House
+int.fisher_hut|Chatka rybacza|The Fisher's Hut
+int.harbour_hut_1|Chata starego Ambrożego|Old Ambroży's Hut
+int.harbour_hut_2|Chata sieciarzy|The Net-Makers' Hut
+int.harbour_hut_3|Chata wdowy po rybaku|The Fisherman's Widow's Hut
+int.harbour_hut_4|Chata braci Kosów|The Kos Brothers' Hut
+int.harbour_hut_5|Chata smolarza łodzi|The Boat Tarrer's Hut
+int.harbour_hut_6|Chata przewoźnika|The Ferryman's Hut
+int.harbour_hut_7|Chata rybaka Szczepana|Szczepan the Fisherman's Hut
+int.harbour_hut_8|Chata przy wędzarni|The Hut by the Smokehouse
+int.harbour_hut_9|Chata na skraju kei|The Hut at the End of the Quay
+int.house_a|Dom rodziny Kowalików|The Kowalik Family House
+int.house_b|Dom tkaczki Halszki|Halszka the Weaver's House
+int.house_c|Kamienica kupca Tomasza|Tomasz the Merchant's Townhouse
+int.house_d|Dom pod Dzwonkiem|The House under the Bell
+int.house_e|Izba biedoty|The Paupers' Room
+int.house_f|Warsztat szewca Klemensa|Klemens the Cobbler's Workshop
+int.hunter_lodge|Chata myśliwego Błażeja|Błażej the Hunter's Lodge
+int.marta_shack|Szałas w zaułku|The Shack in the Alley
+int.mill|Młyn Bartosza|Bartosz's Mill
+int.town_house_1|Dom cieśli Mikołaja|Mikołaj the Carpenter's House
+int.town_house_2|Dom rodziny Wronów|The Wron Family House
+int.town_house_3|Izba wdowy Doroty|Widow Dorota's Room
+int.town_house_4|Dom tkaczy przy garbarni|The Weavers' House by the Tannery
+int.town_house_5|Kamienica pani Brygidy|Lady Brygida's Townhouse
+int.town_house_6|Dom starego cholewkarza|The Old Bootmaker's House
+int.town_house_7|Dom przekupki Małgorzaty|Margaret the Hawker's House
+int.village_chapel|Kaplica w Brzezinie|The Brzezina Chapel
+int.village_house_1|Zagroda Kingi|Kinga's Farmstead
+int.village_house_2|Chałupa komornika|The Cottar's Cottage
+int.village_house_3|Zagroda Piotra|Piotr's Farmstead
+int.village_house_4|Chata Urszuli|Urszula's Hut
+int.village_house_5|Chałupa bezrolnych|The Landless Cottage
+int.village_house_6|Zagroda Sowów|The Sowa Farmstead
+int.warehouse_b|Magazyn B|Warehouse B
+int.woodcutter_hut|Chata drwala Maćka|Maciek the Woodcutter's Hut
+# --- meble ---
+prop.armchair|Fotel|Armchair
+prop.bedDouble|Łoże|Double bed
+prop.bedStraw|Siennik|Straw bed
+prop.beehive|Ul|Beehive
+prop.chair|Krzesło|Chair
+prop.cupboard|Kredens|Cupboard
+prop.dresser|Komoda|Dresser
+prop.loom|Krosno|Loom
+prop.scarecrow|Strach na wróble|Scarecrow
+prop.sofa|Ława z poduszkami|Cushioned settle
+prop.spinningWheel|Kołowrotek|Spinning wheel
+prop.tombstone|Nagrobek|Gravestone
+prop.wardrobe|Szafa|Wardrobe
+prop.washBasin|Miednica|Wash basin
+look.loom|Krosno z niedokończonym suknem. Osnowa napięta jak struna, czółenko leży tam, gdzie je odłożono.|A loom with unfinished cloth. The warp is taut as a string, the shuttle lies where it was put down.
+look.spinningWheel|Kołowrotek z kądzielą lnu. Ktoś przędzie tu wieczorami, przy świecy.|A spinning wheel with a distaff of flax. Someone spins here in the evenings, by candlelight.
+look.washBasin|Miednica z zimną wodą i kawałkiem szarego mydła.|A basin of cold water and a piece of grey soap.
+look.scarecrow|Strach na wróble w starym kapturze. Wrony siedzą mu na ramionach i wcale się nie boją.|A scarecrow in an old hood. Crows sit on its shoulders, not afraid at all.
+look.beehive|Ul ze słomy. Pszczoły brzęczą ostrzegawczo — lepiej nie dotykać.|A straw beehive. The bees hum in warning — better not to touch.
+look.tombstone|Omszały kamień. Imię starte przez deszcz i lata, zostały tylko krzyż i data.|A mossy stone. The name worn away by rain and years, only a cross and a date remain.
+# --- interakcje i stanowiska ---
+interact.notYourBed|To nie twoje łóżko. Gospodarze raczej nie byliby zachwyceni.|This is not your bed. The owners would hardly be pleased.
+interact.foundGoat|Łaciata koza skubie trawę między kamieniami. Na twój widok beczy i ucieka w stronę wsi — dzwonek zaczepił się o krzak i został w twojej ręce.|The spotted goat is nibbling grass between the stones. Seeing you, it bleats and runs toward the village — its bell caught on a bush and stays in your hand.
+interact.foundCap|W trawie, wśród śladów racic i zaschniętej krwi, leży czerwona wełniana czapka. Dalej są tylko kości i strzępy kubraka.|In the grass, among hoof prints and dried blood, lies a red woollen cap. Further on there are only bones and shreds of a jerkin.
+interact.foundCoin|Pod przekrzywionym kamieniem ziemia jest miękka. Kilka garści głębiej palce trafiają na zetlały woreczek, a w nim srebrną monetę z wizerunkiem mnicha.|Under the tilted stone the soil is soft. A few handfuls deeper your fingers find a rotted pouch, and inside it a silver coin bearing a monk's image.
+interact.graveDay|Za dnia przy kaplicy kręcą się ludzie. Kopanie w grobie zostawisz na noc.|By day people are about near the chapel. Digging in a grave can wait until night.
+station.bloodyClearing|Krwawa polana|The bloody clearing
+station.lostGoat|Słodka trawa przy kamieniach|Sweet grass by the stones
+station.oldGrave|Grób bez imienia|The nameless grave
+station.carterPort|Wóz do portu|Cart to the harbour
+station.carterTown|Wóz na rynek|Cart to the market
+station.carterVillage|Wóz do Brzeziny|Cart to Brzezina
+""")
+# <<< MIESZKANCY
+
 # ===========================================================================
 # 9. ZAPIS I RAPORT POKRYCIA
 # ===========================================================================

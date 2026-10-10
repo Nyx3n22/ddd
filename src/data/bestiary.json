@@ -263,6 +263,110 @@
     "visit",
     "talk:teodor"
    ]
+  },
+  {
+   "id": "forest",
+   "nameKey": "bestiary.forest",
+   "loreKey": "bestiary.forest.lore",
+   "unlockBy": [
+    "visit:place.forest"
+   ]
+  },
+  {
+   "id": "woodcutterCamp",
+   "nameKey": "bestiary.woodcutterCamp",
+   "loreKey": "bestiary.woodcutterCamp.lore",
+   "unlockBy": [
+    "visit:place.woodcutterCamp"
+   ]
+  },
+  {
+   "id": "hunterLodge",
+   "nameKey": "bestiary.hunterLodge",
+   "loreKey": "bestiary.hunterLodge.lore",
+   "unlockBy": [
+    "visit:place.hunterLodge"
+   ]
+  },
+  {
+   "id": "village",
+   "nameKey": "bestiary.village",
+   "loreKey": "bestiary.village.lore",
+   "unlockBy": [
+    "visit:place.village"
+   ]
+  },
+  {
+   "id": "mill",
+   "nameKey": "bestiary.mill",
+   "loreKey": "bestiary.mill.lore",
+   "unlockBy": [
+    "visit:place.villageMill"
+   ]
+  },
+  {
+   "id": "villageChapel",
+   "nameKey": "bestiary.villageChapel",
+   "loreKey": "bestiary.villageChapel.lore",
+   "unlockBy": [
+    "visit:place.villageChapel"
+   ]
+  },
+  {
+   "id": "piers",
+   "nameKey": "bestiary.piers",
+   "loreKey": "bestiary.piers.lore",
+   "unlockBy": [
+    "visit:place.piers"
+   ]
+  },
+  {
+   "id": "lowerTown",
+   "nameKey": "bestiary.lowerTown",
+   "loreKey": "bestiary.lowerTown.lore",
+   "unlockBy": [
+    "visit:place.lowerTown"
+   ]
+  },
+  {
+   "id": "alleyWest",
+   "nameKey": "bestiary.alleyWest",
+   "loreKey": "bestiary.alleyWest.lore",
+   "unlockBy": [
+    "visit:place.alleyWest"
+   ]
+  },
+  {
+   "id": "vagnYard",
+   "nameKey": "bestiary.vagnYard",
+   "loreKey": "bestiary.vagnYard.lore",
+   "unlockBy": [
+    "visit:place.vagnYard"
+   ]
+  },
+  {
+   "id": "eastRoad",
+   "nameKey": "bestiary.eastRoad",
+   "loreKey": "bestiary.eastRoad.lore",
+   "unlockBy": [
+    "visit:place.eastRoad"
+   ]
+  },
+  {
+   "id": "villageSquare",
+   "nameKey": "bestiary.villageSquare",
+   "loreKey": "bestiary.villageSquare.lore",
+   "unlockBy": [
+    "visit:place.villageSquare"
+   ]
+  },
+  {
+   "id": "villageFields",
+   "nameKey": "bestiary.villageFields",
+   "loreKey": "bestiary.villageFields.lore",
+   "unlockBy": [
+    "visit:place.villageFields"
+   ]
   }
  ],
  "johnNotes": [

@@ -25,7 +25,7 @@ for (const e of ENTRIES) ENTRY_MAP[e.id] = e;
 const JOHN_NOTES = (BESTIARY as any).johnNotes as Array<{ id: string; textKey: string; dayKey?: string }>;
 
 const MAP_CELL = 4;          // ziarno odkrywania mapy (w kafelkach)
-const MAP_W = 140, MAP_H = 112;
+const MAP_W = 300, MAP_H = 112;
 const GRID_W = Math.ceil(MAP_W / MAP_CELL), GRID_H = Math.ceil(MAP_H / MAP_CELL);
 
 export function bestiaryEntry(id: string) { return ENTRY_MAP[id]; }
@@ -175,7 +175,8 @@ export class NotesSystem {
     const r = Math.ceil(radiusTiles / MAP_CELL);
     const cx = Math.floor(tx / MAP_CELL), cy = Math.floor(ty / MAP_CELL);
     let bits = s.maps.visited[region];
-    if (!bits) { bits = new Array(GRID_W * GRID_H).fill('0').join(''); }
+    // zapis sprzed rozbudowy świata miał węższą siatkę — zaczynamy odkrywanie od nowa
+    if (!bits || bits.length !== GRID_W * GRID_H) { bits = new Array(GRID_W * GRID_H).fill('0').join(''); }
     const arr = bits.split('');
     let changed = false;
     for (let y = cy - r; y <= cy + r; y++) {

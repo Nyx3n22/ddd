@@ -17,7 +17,8 @@ const HARD: GroundType[] = ['cobble', 'road', 'planks', 'stone', 'floorStone', '
 
 export interface DecorBounds { wallX0: number; wallX1: number; wallY0: number; wallY1: number }
 
-export function decorateDistrict(tm: TileMap, scene: Scene, walls: DecorBounds, extraReserved: Array<[number, number]>) {
+export function decorateDistrict(tm: TileMap, scene: Scene, walls: DecorBounds, extraReserved: Array<[number, number]>, forests: Array<[number, number, number, number, number]> = []) {
+  const forestAt = (tx: number, ty: number) => { for (const f of forests) if (tx >= f[0] && ty >= f[1] && tx < f[0] + f[2] && ty < f[1] + f[3]) return f[4]; return 0; };
   const W = tm.w, H = tm.h;
   const reserved = new Uint8Array(W * H);
   const reserve = (tx: number, ty: number, r = 0) => {
@@ -101,6 +102,16 @@ export function decorateDistrict(tm: TileMap, scene: Scene, walls: DecorBounds, 
     const r = hash2(tx, ty, 4242), v = Math.floor(hash2(tx, ty, 4243) * 4);
     const nearWater = [[0, 1], [0, -1], [1, 0], [-1, 0]].some(([dx, dy]) => tm.isWater(tx + dx, ty + dy));
     const inTown = inside(tx, ty);
+    const fd = forestAt(tx, ty);
+    if (fd > 0 && (g === 'grass' || g === 'grassTall')) {
+      // las: gęsto drzew, pod nimi paprocie, grzyby i krzaki
+      if (d >= 2 && r < fd) place(hash2(tx, ty, 5) < 0.55 ? 'treePine' : 'treeOak', tx, ty, v);
+      else if (r < fd + 0.06) place('bush', tx, ty, v);
+      else if (r < fd + 0.16) place('fern', tx, ty, v);
+      else if (r < fd + 0.2) place('mushrooms', tx, ty, v);
+      else if (r < fd + 0.23 && d >= 2) place(hash2(tx, ty, 6) < 0.6 ? 'stump' : 'rock', tx, ty, v);
+      continue;
+    }
     if (g === 'grass' || g === 'grassTall') {
       if (!inTown && d >= 3 && r < 0.075) place(hash2(tx, ty, 5) < 0.6 ? 'treeOak' : 'treePine', tx, ty, v);
       else if (inTown && d >= 4 && r < 0.018) place('treeOak', tx, ty, v);

@@ -42,6 +42,10 @@
      "goto": "hanna_threat"
     },
     {
+     "text": "Tell me about yourself and this place.",
+     "goto": "hanna_about2"
+    },
+    {
      "text": "I won't keep you.",
      "goto": "exit"
     }
@@ -469,6 +473,10 @@
      "goto": "orlik_guild"
     },
     {
+     "text": "Tell me about yourself and this place.",
+     "goto": "orlik_about2"
+    },
+    {
      "text": "I won't interrupt.",
      "goto": "exit"
     }
@@ -696,6 +704,10 @@
       "noFlag": "ov_vagn"
      },
      "hidden": true
+    },
+    {
+     "text": "Tell me about yourself and this place.",
+     "goto": "vagn_about2"
     },
     {
      "text": "I won't take your time.",
@@ -944,6 +956,10 @@
       "noFlag": "idzi_trusts"
      },
      "hidden": true
+    },
+    {
+     "text": "Tell me about yourself and this place.",
+     "goto": "idzi_about2"
     },
     {
      "text": "I didn't see you.",
@@ -1200,6 +1216,10 @@
      "hidden": true
     },
     {
+     "text": "Tell me about yourself and this place.",
+     "goto": "rawicz_about2"
+    },
+    {
      "text": "I won't keep you.",
      "goto": "exit"
     }
@@ -1448,6 +1468,10 @@
       "item": "relic_elenem"
      },
      "hidden": true
+    },
+    {
+     "text": "Tell me about yourself and this place.",
+     "goto": "teodor_about2"
     },
     {
      "text": "I won't take your time.",
@@ -1757,6 +1781,10 @@
      "goto": "marta_lock"
     },
     {
+     "text": "Tell me about yourself and this place.",
+     "goto": "marta_about2"
+    },
+    {
      "text": "Take care of yourself.",
      "goto": "exit"
     }
@@ -1995,6 +2023,10 @@
      "goto": "goslaw_craft"
     },
     {
+     "text": "Tell me about yourself and this place.",
+     "goto": "goslaw_about2"
+    },
+    {
      "text": "I don't need a map.",
      "goto": "exit"
     }
@@ -2155,6 +2187,10 @@
       }
      },
      "hidden": true
+    },
+    {
+     "text": "Tell me about yourself and this place.",
+     "goto": "baldwin_about2"
     },
     {
      "text": "I won't pay a single crown.",
@@ -2338,6 +2374,10 @@
      "goto": "collector_threat"
     },
     {
+     "text": "Tell me about yourself and this place.",
+     "goto": "collector_about2"
+    },
+    {
      "text": "Not now.",
      "goto": "exit"
     }
@@ -2446,6 +2486,10 @@
     {
      "text": "What happens when someone doesn't repay?",
      "goto": "usurer_consequences"
+    },
+    {
+     "text": "Tell me about yourself and this place.",
+     "goto": "usurer_about2"
     },
     {
      "text": "Not today.",
@@ -2564,6 +2608,10 @@
      ]
     },
     {
+     "text": "Tell me about yourself and this place.",
+     "goto": "gambler_about2"
+    },
+    {
      "text": "I'll just watch.",
      "goto": "exit"
     }
@@ -2643,6 +2691,18 @@
      ]
     },
     {
+     "text": "Do you have any work for me?",
+     "goto": "scribe_letter",
+     "cond": {
+      "noQuest": "q_letter_brzezina"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Tell me about yourself and this place.",
+     "goto": "scribe_about2"
+    },
+    {
      "text": "I'll think about it.",
      "goto": "exit"
     }
@@ -2713,6 +2773,10 @@
      ]
     },
     {
+     "text": "Tell me about yourself and this place.",
+     "goto": "medic_about2"
+    },
+    {
      "text": "I'm well.",
      "goto": "exit"
     }
@@ -2767,6 +2831,10 @@
      },
      "reqKey": "req.saltRumor",
      "goto": "customs_salt"
+    },
+    {
+     "text": "Tell me about yourself and this place.",
+     "goto": "customs_about2"
     },
     {
      "text": "I'm leaving.",
@@ -2940,6 +3008,10 @@
      "hidden": true
     },
     {
+     "text": "Tell me about yourself and this place.",
+     "goto": "guild_about2"
+    },
+    {
      "text": "I'll come back when I have goods.",
      "goto": "exit"
     }
@@ -3047,6 +3119,10 @@
      "goto": "tanner_wolves"
     },
     {
+     "text": "Tell me about yourself and this place.",
+     "goto": "tanner_about2"
+    },
+    {
      "text": "Just passing.",
      "goto": "exit"
     }
@@ -3111,6 +3187,14 @@
     {
      "text": "Where is it quiet in this harbour?",
      "goto": "fisher_quiet"
+    },
+    {
+     "text": "Ambroży says he fishes better than you.",
+     "goto": "fisher_ambrozy"
+    },
+    {
+     "text": "Tell me about yourself and this place.",
+     "goto": "fisher_about2"
     },
     {
      "text": "Fair nets.",
@@ -3180,6 +3264,10 @@
      "goto": "baker_dice"
     },
     {
+     "text": "Tell me about yourself and this place.",
+     "goto": "baker_about2"
+    },
+    {
      "text": "Only sniffing.",
      "goto": "exit"
     }
@@ -3237,6 +3325,10 @@
      },
      "reqKey": "req.bread",
      "goto": "beggar_bread"
+    },
+    {
+     "text": "Tell me about yourself and this place.",
+     "goto": "beggar_about2"
     },
     {
      "text": "I have nothing.",
@@ -3459,6 +3551,10 @@
      "goto": "executioner_life"
     },
     {
+     "text": "Tell me about yourself and this place.",
+     "goto": "executioner_about2"
+    },
+    {
      "text": "I'm leaving.",
      "goto": "exit"
     }
@@ -3543,6 +3639,10 @@
      "goto": "washer_gossip"
     },
     {
+     "text": "Tell me about yourself and this place.",
+     "goto": "washer_about2"
+    },
+    {
      "text": "Maybe later.",
      "goto": "exit"
     }
@@ -3606,6 +3706,10 @@
      "goto": "stableboy_watch"
     },
     {
+     "text": "Tell me about yourself and this place.",
+     "goto": "stableboy_about2"
+    },
+    {
      "text": "I'll just pat him.",
      "goto": "exit",
      "effects": [
@@ -3667,6 +3771,10 @@
     {
      "text": "What are you reading?",
      "goto": "nun_book"
+    },
+    {
+     "text": "Tell me about yourself and this place.",
+     "goto": "nun_about2"
     },
     {
      "text": "I won't disturb you.",
@@ -3759,6 +3867,22 @@
       "noFlag": "oath_wiera"
      },
      "hidden": true
+    },
+    {
+     "text": "Widow Dorota's son has been coughing for three weeks.",
+     "goto": "wiera_child",
+     "cond": {
+      "quest": {
+       "id": "q_sick_child",
+       "state": "active"
+      },
+      "noFlag": "child_remedy"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Tell me about yourself and this place.",
+     "goto": "wiera_about2"
     },
     {
      "text": "Thank you. I won't keep you.",
@@ -4531,6 +4655,1692 @@
     },
     {
      "text": "I am not ready yet.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "halszka_root": {
+   "portrait": "halszka",
+   "emotion": "neutral",
+   "text": "Halszka does not look up from the loom. The shuttle flies back and forth, steady as breath. “If you came for cloth, I only have coarse linen. The good stuff goes to the guild, and the guild pays me half of what it charges.”",
+   "options": [
+    {
+     "text": "Who are you?",
+     "goto": "halszka_about"
+    },
+    {
+     "text": "What is this house?",
+     "goto": "halszka_place"
+    },
+    {
+     "text": "You look worried. Can I help?",
+     "goto": "halszka_quest",
+     "cond": {
+      "noQuest": "q_weaver_wool"
+     },
+     "hidden": true
+    },
+    {
+     "text": "I will not disturb you.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "halszka_about": {
+   "portrait": "halszka",
+   "emotion": "neutral",
+   "text": "“Halszka, daughter of a weaver from Vranov. Father taught me at the loom before he taught me to read. After the fire I sailed here with the loom in pieces and two knives in my sleeve. The loom came in handy. So did the knives.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "halszka_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "halszka_place": {
+   "portrait": "halszka",
+   "emotion": "neutral",
+   "text": "“Two looms, a spinning wheel and a bed I sleep in between one order and the next. The walls are thin — I hear every drunk in the alley. But the window faces east, and in the morning light you see every flaw in the weave.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "halszka_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "halszka_quest": {
+   "portrait": "halszka",
+   "emotion": "sad",
+   "text": "“The guild ordered cloth from me for the council's cloaks. The deadline is in a week, and Oles the tanner sold all his wool to the Knights. I need three bundles of wool. Bring them and I will weave you a cloak that will see you through every winter on this island.”",
+   "options": [
+    {
+     "text": "I will bring three bundles.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_weaver_wool"
+       }
+      }
+     ]
+    },
+    {
+     "text": "Not now.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "klemens_root": {
+   "portrait": "klemens",
+   "emotion": "neutral",
+   "text": "Klemens holds a boot on the last and drives tacks from his mouth, one by one. He talks without spitting out a single one. “Sit if you have time. If you do not — leave your boots and come back tomorrow.”",
+   "options": [
+    {
+     "text": "Who are you?",
+     "goto": "klemens_about"
+    },
+    {
+     "text": "What is the news in town?",
+     "goto": "klemens_rumor"
+    },
+    {
+     "text": "Do you need anything?",
+     "goto": "klemens_quest",
+     "cond": {
+      "noQuest": "q_shoes"
+     },
+     "hidden": true
+    },
+    {
+     "text": "See you.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "klemens_about": {
+   "portrait": "klemens",
+   "emotion": "happy",
+   "text": "“Thirty years I have made boots in this town. I made them for a mayor who is gone, for a council that is afraid, and for Knights who do not pay. Know the difference? The mayor wore out his soles, the council its heels, and the Knights — other people's doorsteps.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "klemens_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "klemens_rumor": {
+   "portrait": "klemens",
+   "emotion": "sly",
+   "text": "“Someone walks between the warehouses at night in boots with iron heel-plates. In the whole town only three men wear those: Gwidon, Bernard of the customs and Rawicz himself. The tracks lead to the pier. I will say no more, because I like my hands.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "klemens_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "klemens_quest": {
+   "portrait": "klemens",
+   "emotion": "neutral",
+   "text": "“Lady Brygida wants doeskin slippers for her daughter's betrothal, and Oles has no hides because the hunters fear the forest. Bring me one deer hide — from the woods or from anyone — and I will pay honestly and resole your boots for free.”",
+   "options": [
+    {
+     "text": "I will get the hide.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_shoes"
+       }
+      }
+     ]
+    },
+    {
+     "text": "Not now.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "dorota_root": {
+   "portrait": "dorota",
+   "emotion": "sad",
+   "text": "Dorota spins by the window. In the corner, on a straw mattress, a boy sleeps wrapped in two blankets. He breathes heavily, with a whistle. “Speak quietly. And briefly, because every hour of spinning is bread for tomorrow.”",
+   "options": [
+    {
+     "text": "Who are you?",
+     "goto": "dorota_about"
+    },
+    {
+     "text": "What is wrong with the boy?",
+     "goto": "dorota_quest",
+     "cond": {
+      "noQuest": "q_sick_child"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Forgive me.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "dorota_about": {
+   "portrait": "dorota",
+   "emotion": "sad",
+   "text": "“My husband was a cooper. He borrowed from the Raven for a new workshop, and the workshop burned a month later — strangely enough. The night before payment was due he left home and never returned. They say he drowned. I say someone helped him drown.”",
+   "options": [
+    {
+     "text": "The Raven has the same hook in me.",
+     "goto": "dorota_debt"
+    },
+    {
+     "text": "Let us talk about something else.",
+     "goto": "dorota_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "dorota_debt": {
+   "portrait": "dorota",
+   "emotion": "neutral",
+   "text": "Dorota looks up for the first time. “Then watch where you sleep. And never take a second loan from them to pay the first. That is how it starts.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "dorota_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "dorota_quest": {
+   "portrait": "dorota",
+   "emotion": "sad",
+   "text": "“Coughing for three weeks. The barber wants more for bloodletting than I earn in a month, and Kuba's blood is pale enough already. Wiera the herbwoman knows what helps the lungs, but she is far, and I cannot leave him. If you would ask her what is needed...”",
+   "options": [
+    {
+     "text": "I will go to Wiera.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_sick_child"
+       }
+      }
+     ]
+    },
+    {
+     "text": "I cannot now.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "ambrozy_root": {
+   "portrait": "ambrozy",
+   "emotion": "neutral",
+   "text": "Ambroży mends a net with the speed of a man who has done it for sixty years. “What? The fish are gone, the stories are not. For a story you buy the beer. For a fish — you pay.”",
+   "options": [
+    {
+     "text": "Tell me about yourself.",
+     "goto": "ambrozy_about"
+    },
+    {
+     "text": "What was the harbour like in the old days?",
+     "goto": "ambrozy_place"
+    },
+    {
+     "text": "Looking for someone to help?",
+     "goto": "ambrozy_quest",
+     "cond": {
+      "noQuest": "q_fish_contest"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Good fishing.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "ambrozy_about": {
+   "portrait": "ambrozy",
+   "emotion": "happy",
+   "text": "“I was born in a boat, in a storm, the year the king died — which king I do not remember, there were several. I sailed for herring to Gotland and for cod under the ice. I buried two wives, the third will outlive me, because she is forty years younger and wiser than me.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "ambrozy_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "ambrozy_place": {
+   "portrait": "ambrozy",
+   "emotion": "sad",
+   "text": "“Once the Wild Knights were the coast watch. They took fish from us and in return burned the pirates' boats. An honest trade. Then came the plague, then the fire, then the Raven, and suddenly they only defend us from ourselves — for a tenth.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "ambrozy_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "ambrozy_quest": {
+   "portrait": "ambrozy",
+   "emotion": "sly",
+   "text": "“Ewa from the eastern pier says she fishes better than me. I say she is young and foolish. A bet for a barrel of beer: bring me two cod caught with your own hand, and I will show her that even a stranger with my advice catches more than she does.”",
+   "options": [
+    {
+     "text": "I will bring two cod.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_fish_contest"
+       }
+      }
+     ]
+    },
+    {
+     "text": "I have no time for bets.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "brygida_root": {
+   "portrait": "brygida",
+   "emotion": "neutral",
+   "text": "Brygida measures you from boots to brow, as if pricing goods. “I receive neither beggars nor suitors. If you are one of them — the door is behind you.”",
+   "options": [
+    {
+     "text": "Who are you, my lady?",
+     "goto": "brygida_about"
+    },
+    {
+     "text": "A fine house.",
+     "goto": "brygida_place"
+    },
+    {
+     "text": "What do you know of the Wild Knights?",
+     "goto": "brygida_knights",
+     "cond": {
+      "relation": {
+       "brygida": 5
+      },
+      "noFlag": "knows_knights_origin"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Pardon me, my lady.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "brygida_about": {
+   "portrait": "brygida",
+   "emotion": "neutral",
+   "text": "“Brygida, widow of Henryk, who brought pepper, saffron and nutmeg to this island. Half the town ate only what he brought, and nobody remembers his name. I remember. And I count.”",
+   "options": [
+    {
+     "text": "May I help you with something?",
+     "goto": "brygida_help"
+    },
+    {
+     "text": "Let us talk about something else.",
+     "goto": "brygida_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "brygida_help": {
+   "portrait": "brygida",
+   "emotion": "happy",
+   "text": "The corners of her mouth twitch. “Perhaps. Bring me good news one day and I will remember your name. I rarely do.”",
+   "options": [
+    {
+     "text": "I will remember.",
+     "goto": "exit",
+     "cond": {
+      "noFlag": "brygida_promise"
+     },
+     "effects": [
+      {
+       "relation": {
+        "brygida": 5
+       }
+      },
+      {
+       "flag": "brygida_promise"
+      }
+     ]
+    },
+    {
+     "text": "Good day.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "brygida_place": {
+   "portrait": "brygida",
+   "emotion": "happy",
+   "text": "“Henryk bought it from a customs officer's widow for three chests of cinnamon. The sofa came from Bruges, the wardrobe from Lübeck, and the rug — from a place whose name I cannot pronounce. Everything here is from far away, except me. I am from here, and that worries me most.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "brygida_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "brygida_knights": {
+   "portrait": "brygida",
+   "emotion": "sad",
+   "text": "Brygida is silent for a long time. “Henryk founded that brotherhood with six others. They were to defend the coast, not collect debts. When he died, Baldwin came to the funeral and promised me a pension for life. I take it because I am a coward. Every coin smells of smoke from Vranov.”",
+   "options": [
+    {
+     "text": "Thank you for your honesty.",
+     "goto": "exit",
+     "effects": [
+      {
+       "flag": "knows_knights_origin"
+      },
+      {
+       "relation": {
+        "brygida": 5
+       }
+      },
+      {
+       "xp": {
+        "history": 10
+       }
+      }
+     ]
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "jas_root": {
+   "portrait": "jas",
+   "emotion": "happy",
+   "text": "Jaś bounces on his toes to see your sword better. “Sir knight! Have you ever killed a dragon? A wolf? A man? Mum says I must not ask, but Mum is not here.”",
+   "options": [
+    {
+     "text": "Who are you, little one?",
+     "goto": "jas_about"
+    },
+    {
+     "text": "Do you know anything interesting?",
+     "goto": "jas_rumor"
+    },
+    {
+     "text": "Here is a copper. Off home with you.",
+     "goto": "exit",
+     "cond": {
+      "gold": 1,
+      "noFlag": "jas_copper"
+     },
+     "effects": [
+      {
+       "gold": -1
+      },
+      {
+       "relation": {
+        "jas": 6
+       }
+      },
+      {
+       "rep": {
+        "villagers": 1
+       }
+      },
+      {
+       "flag": "jas_copper"
+      }
+     ],
+     "hidden": true
+    },
+    {
+     "text": "Not today, little one.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "jas_about": {
+   "portrait": "jas",
+   "emotion": "happy",
+   "text": "“I am Jaś, son of Margaret who sells eggs. Dad was a sailor and sailed to Lübeck when I was three. When I grow up I will be a knight and sail to find him. A real knight, not the Raven's. The Raven's men kick dogs.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "jas_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "jas_rumor": {
+   "portrait": "jas",
+   "emotion": "sly",
+   "text": "“I know! Master Gwidon gave me a letter for the customs man yesterday. It was heavy and it jingled. And the reeve of Brzezina comes to the Raven every Friday and goes home crying. And in the eastern forest there are wolves bigger than horses. Kinga with the sheep says so. Kinga never lies, only sometimes.”",
+   "options": [
+    {
+     "text": "Here is a copper for the news.",
+     "goto": "exit",
+     "cond": {
+      "gold": 1,
+      "noFlag": "jas_news"
+     },
+     "effects": [
+      {
+       "gold": -1
+      },
+      {
+       "relation": {
+        "jas": 4
+       }
+      },
+      {
+       "xp": {
+        "streetwise": 5
+       }
+      },
+      {
+       "flag": "jas_news"
+      }
+     ],
+     "hidden": true
+    },
+    {
+     "text": "Let us talk about something else.",
+     "goto": "jas_root"
+    }
+   ]
+  },
+  "walenty_root": {
+   "portrait": "walenty",
+   "emotion": "neutral",
+   "text": "Walenty leans on the reeve's staff — worn smooth by the hands of three generations. “Welcome to Brzezina. Forty hearths, a mill, a chapel and a forest that takes someone from us every year. What are you looking for so far from the harbour?”",
+   "options": [
+    {
+     "text": "Tell me about the village.",
+     "goto": "walenty_place"
+    },
+    {
+     "text": "Who are you?",
+     "goto": "walenty_about"
+    },
+    {
+     "text": "You said the forest takes people?",
+     "goto": "walenty_wolves",
+     "cond": {
+      "noQuest": "q_brzezina_wolves"
+     },
+     "hidden": true
+    },
+    {
+     "text": "God bless.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "walenty_place": {
+   "portrait": "walenty",
+   "emotion": "neutral",
+   "text": "“Brzezina has stood here since before there was a town on the island. Rye, oats, flax, a few sheep. Bartosz grinds, Urszula heals, the priest comes from town once a month if the road is dry. We pay tribute to the Raven in grain, the tithe to the Church in grain, and the town tax — also in grain. What remains is enough not to die.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "walenty_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "walenty_about": {
+   "portrait": "walenty",
+   "emotion": "sad",
+   "text": "“My grandfather and father were reeves. I am the first who has to choose whose children will go hungry this winter — ours or the Raven's. I choose every day. Not always well.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "walenty_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "walenty_wolves": {
+   "portrait": "walenty",
+   "emotion": "angry",
+   "text": "“The pack from the forest killed four of our sheep this month and the village dog. Yesterday Kinga saw them by the pens in broad daylight. The Knights promised to send men — they have been promising for half a year. Kill three wolves from that pack and the village will pay you a hundred and twenty crowns. We have been saving since spring.”",
+   "options": [
+    {
+     "text": "I will deal with the pack.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_brzezina_wolves"
+       }
+      }
+     ]
+    },
+    {
+     "text": "That is not my business.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "bartosz_root": {
+   "portrait": "bartosz",
+   "emotion": "neutral",
+   "text": "Bartosz brushes the flour off his hands and offers you one — white, heavy, calloused from sacks. “The mill stands still, but my mouth works. Speak.”",
+   "options": [
+    {
+     "text": "Who are you?",
+     "goto": "bartosz_about"
+    },
+    {
+     "text": "What is wrong with the mill?",
+     "goto": "bartosz_quest",
+     "cond": {
+      "noQuest": "q_mill_wheel"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Will you sell bread?",
+     "goto": "exit",
+     "cond": {
+      "gold": 3
+     },
+     "effects": [
+      {
+       "gold": -3
+      },
+      {
+       "give": "bread_loaf"
+      }
+     ]
+    },
+    {
+     "text": "Farewell, miller.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "bartosz_about": {
+   "portrait": "bartosz",
+   "emotion": "happy",
+   "text": "“A miller in the fourth generation. Grandfather said a miller must be part thief, part confessor and part carpenter. A thief I am by office, a confessor by habit — people talk by the millstones — and a carpenter, as you can see, a poor one.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "bartosz_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "bartosz_quest": {
+   "portrait": "bartosz",
+   "emotion": "sad",
+   "text": "“The spring flood tore two paddles off the wheel and broke the shaft. Without the mill the village must haul grain to town, and the guild millers there take a third. I need two handfuls of nails from Orlik the smith and two oak planks from the guild house. I cannot go myself — the Raven knows I owe him for the millstones.”",
+   "options": [
+    {
+     "text": "I will bring nails and planks.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_mill_wheel"
+       }
+      }
+     ]
+    },
+    {
+     "text": "Not now.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "jadwiga_root": {
+   "portrait": "jadwiga",
+   "emotion": "sad",
+   "text": "Jadwiga stands on the threshold of the hut, staring into the forest as if the forest could answer. “Maciek left five days ago. He took his axe and bread for one day.”",
+   "options": [
+    {
+     "text": "Who is Maciek?",
+     "goto": "jadwiga_about"
+    },
+    {
+     "text": "I will help you look for him.",
+     "goto": "jadwiga_quest",
+     "cond": {
+      "noQuest": "q_missing_woodcutter"
+     },
+     "hidden": true
+    },
+    {
+     "text": "I found his cap.",
+     "goto": "jadwiga_cap",
+     "cond": {
+      "item": "woodcutter_cap"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Stay strong.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "jadwiga_about": {
+   "portrait": "jadwiga",
+   "emotion": "sad",
+   "text": "“My husband. A woodcutter. Red-haired, tall, laughs so the birds fly off. He cuts timber for the mill and for Brzezina, and in winter for the town. He never slept in the forest. Never.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "jadwiga_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "jadwiga_quest": {
+   "portrait": "jadwiga",
+   "emotion": "sad",
+   "text": "“Błażej, the hunter from the northern lodge, knows every path in this forest. But when I asked him, he looked away. He knows something. Go to him. He will tell me nothing, maybe he will tell you.”",
+   "options": [
+    {
+     "text": "I will talk to Błażej.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_missing_woodcutter"
+       }
+      }
+     ]
+    },
+    {
+     "text": "I cannot now.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "jadwiga_cap": {
+   "portrait": "jadwiga",
+   "emotion": "sad",
+   "text": "Jadwiga takes the cap and turns it in her fingers for a long time. She does not cry. “A boar. I thought so. I would rather a boar than the Knights — at least a boar does not lie that it was an accident.” She brings Maciek's axe from the hut. “Take it. It is no use to me anymore, and even less to him.”",
+   "options": [
+    {
+     "text": "I am sorry, Jadwiga.",
+     "goto": "exit",
+     "effects": [
+      {
+       "flag": "woodcutter_found"
+      },
+      {
+       "relation": {
+        "jadwiga": 20
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "blazej_root": {
+   "portrait": "blazej",
+   "emotion": "neutral",
+   "text": "Błażej does not stop skinning the hare. The knife moves fast and clean. “The forest does not like strangers, nor do I. But at least you walk quieter than the town folk.”",
+   "options": [
+    {
+     "text": "Who are you?",
+     "goto": "blazej_about"
+    },
+    {
+     "text": "What is in this forest?",
+     "goto": "blazej_place"
+    },
+    {
+     "text": "Jadwiga is looking for her husband. Do you know anything?",
+     "goto": "blazej_maciek",
+     "cond": {
+      "quest": {
+       "id": "q_missing_woodcutter",
+       "state": "active"
+      },
+      "noFlag": "woodcutter_search"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Do you need anything?",
+     "goto": "blazej_quest",
+     "cond": {
+      "noQuest": "q_pelts_oles"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Teach me to track. (40 crowns)",
+     "goto": "exit",
+     "cond": {
+      "gold": 40
+     },
+     "reqKey": "req.gold40",
+     "effects": [
+      {
+       "gold": -40
+      },
+      {
+       "xp": {
+        "tracking": 40
+       }
+      }
+     ]
+    },
+    {
+     "text": "Good hunting.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "blazej_about": {
+   "portrait": "blazej",
+   "emotion": "neutral",
+   "text": "“I was huntsman to the lord of Vranov. After the fire the lord left, and I was left with a bow and no lord. Now I hunt for myself and for anyone who pays. The Knights say the forest is theirs because they wrote it in the ledger. The animals do not know that yet.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "blazej_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "blazej_place": {
+   "portrait": "blazej",
+   "emotion": "neutral",
+   "text": "“In the north pines and my lodge. In the middle old oaks — that is where the boars are, avoid them at dusk. In the south the woodcutters' clearing and the stream where wolves drink at dawn. To the east Brzezina. And beyond Brzezina only the sea and the old graveyard by the chapel, where Urszula says something haunts. Urszula says many things.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "blazej_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "blazej_maciek": {
+   "portrait": "blazej",
+   "emotion": "sad",
+   "text": "Błażej puts down the knife. “...Maciek set snares on the Knights' land, next to mine. Five days ago I heard a boar and a scream by the bloody clearing, to the south-east. I did not go. I was afraid I would find him alive and have to explain what I was doing there. Go there. But be careful — a boar that has killed a man once does not fear a second.”",
+   "options": [
+    {
+     "text": "I will go to the clearing.",
+     "goto": "exit",
+     "effects": [
+      {
+       "flag": "woodcutter_search"
+      },
+      {
+       "relation": {
+        "blazej": 5
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "blazej_quest": {
+   "portrait": "blazej",
+   "emotion": "neutral",
+   "text": "“Oles the tanner pays forty crowns per wolf pelt, but I do not go to town — there you must show the Knights' seal for every hide. You can. Bring Oles two wolf pelts from me... or your own. He will not ask where from.”",
+   "options": [
+    {
+     "text": "I will take the pelts to Oles.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_pelts_oles"
+       }
+      }
+     ]
+    },
+    {
+     "text": "Not now.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "kinga_root": {
+   "portrait": "kinga",
+   "emotion": "sad",
+   "text": "Kinga holds her shepherd's crook with both hands and scans the field. “Spotty ran away. Again. Father will kill me, and if not Father, the wolves will eat her, and then Father will kill me.”",
+   "options": [
+    {
+     "text": "Who are you?",
+     "goto": "kinga_about"
+    },
+    {
+     "text": "I will help you find the goat.",
+     "goto": "kinga_quest",
+     "cond": {
+      "noQuest": "q_lost_goat"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Is Spotty back?",
+     "goto": "kinga_goat",
+     "cond": {
+      "item": "goat_bell"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Good luck.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "kinga_about": {
+   "portrait": "kinga",
+   "emotion": "happy",
+   "text": "“Kinga, Szymon's daughter. I herd the whole village's sheep because nobody else wants to — too little pay, too many wolves. But I like it. In the pasture nobody tells me whom to marry.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "kinga_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "kinga_quest": {
+   "portrait": "kinga",
+   "emotion": "happy",
+   "text": "“Really? Spotty always runs south, into the forest, where sweet grass grows by the old stones. She has a bell on her neck, you will hear her. Just watch out for wolves!”",
+   "options": [
+    {
+     "text": "I will find her.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_lost_goat"
+       }
+      },
+      {
+       "flag": "goat_search"
+      }
+     ]
+    }
+   ]
+  },
+  "kinga_goat": {
+   "portrait": "kinga",
+   "emotion": "happy",
+   "text": "Kinga jumps for joy. “She is back! She ran in by herself, covered in burrs, and you have her bell! Father noticed nothing!” She presses a bundle into your hand. “Cheese. I made it myself. Do not tell anyone I am crying.”",
+   "options": [
+    {
+     "text": "I will not tell.",
+     "goto": "exit",
+     "effects": [
+      {
+       "give": "cheese_wheel"
+      },
+      {
+       "flag": "goat_returned"
+      },
+      {
+       "relation": {
+        "kinga": 15
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "urszula_root": {
+   "portrait": "urszula",
+   "emotion": "neutral",
+   "text": "Urszula sits on the bench before her hut, peeling roots with a knife thin as a leaf. “Sit. Do not be afraid, I do not bite — I have no teeth left.”",
+   "options": [
+    {
+     "text": "Tell me about yourself.",
+     "goto": "urszula_about"
+    },
+    {
+     "text": "Tell me about Saint Elenem.",
+     "goto": "urszula_legend"
+    },
+    {
+     "text": "What haunts the graveyard?",
+     "goto": "urszula_quest",
+     "cond": {
+      "noQuest": "q_urszula_legend"
+     },
+     "hidden": true
+    },
+    {
+     "text": "I found a coin in the grave.",
+     "goto": "urszula_coin",
+     "cond": {
+      "item": "old_coin"
+     },
+     "hidden": true
+    },
+    {
+     "text": "Will you sell herbs?",
+     "goto": "exit",
+     "cond": {
+      "gold": 6
+     },
+     "effects": [
+      {
+       "gold": -6
+      },
+      {
+       "give": "herb_yarrow"
+      }
+     ]
+    },
+    {
+     "text": "God be with you.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "urszula_about": {
+   "portrait": "urszula",
+   "emotion": "happy",
+   "text": "“Seventy-four winters. As a girl I served at the abbey of Saint Elenem — I washed habits and listened to the monks sing. Then the abbey burned, the monks scattered, and I was left with what I had heard. Herbs, prayers and stories. Everything heals, if you believe.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "urszula_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "urszula_legend": {
+   "portrait": "urszula",
+   "emotion": "neutral",
+   "text": "“Elenem was a fisherman, like your Ambroży. When the plague came to the island, he sailed into a storm for medicine from the mainland. He returned after three days, dead, lashed to the mast — and in his boat was a sack of herbs that saved half the island. The monks made him a saint and the sack a relic. I think he was just a stubborn man. Saints usually are.”",
+   "options": [
+    {
+     "text": "A beautiful story.",
+     "goto": "exit",
+     "effects": [
+      {
+       "xp": {
+        "history": 8
+       }
+      },
+      {
+       "relation": {
+        "urszula": 3
+       }
+      }
+     ]
+    },
+    {
+     "text": "Let us talk about something else.",
+     "goto": "urszula_root"
+    }
+   ]
+  },
+  "urszula_quest": {
+   "portrait": "urszula",
+   "emotion": "sly",
+   "text": "“In the old graveyard by the chapel there is a grave with no name. At night a light glows there. People say — a ghost. I say — a monk who fled the abbey fire with something he should not have taken, and died here, in Brzezina. Go there at night and dig beneath the stone. By day you will find nothing — by day someone from the village is always watching.”",
+   "options": [
+    {
+     "text": "I will go at night.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_urszula_legend"
+       }
+      },
+      {
+       "flag": "legend_search"
+      }
+     ]
+    },
+    {
+     "text": "I do not dig in graves.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "urszula_coin": {
+   "portrait": "urszula",
+   "emotion": "happy",
+   "text": "Urszula rubs the coin with her thumb until the image of a monk with a net appears beneath the dirt. “An abbey coin. They were minted only for pilgrims... and for those paid to keep quiet. That monk knew who set fire to the abbey, and took his payment to the grave. Now you know it was not lightning.”",
+   "options": [
+    {
+     "text": "Keep it, mother.",
+     "goto": "exit",
+     "effects": [
+      {
+       "take": "old_coin"
+      },
+      {
+       "flag": "legend_done"
+      },
+      {
+       "relation": {
+        "urszula": 15
+       }
+      },
+      {
+       "rep": {
+        "church": 5
+       }
+      }
+     ]
+    },
+    {
+     "text": "I will keep it.",
+     "goto": "exit",
+     "effects": [
+      {
+       "flag": "legend_done"
+      },
+      {
+       "flag": "kept_abbey_coin"
+      }
+     ]
+    }
+   ]
+  },
+  "piotr_root": {
+   "portrait": "piotr",
+   "emotion": "neutral",
+   "text": "Piotr drives his hoe into the soil and wipes his brow with his sleeve. “God bless. If you are from the Raven — you took the grain last week. If not — good, because I have nothing else.”",
+   "options": [
+    {
+     "text": "Who are you?",
+     "goto": "piotr_about"
+    },
+    {
+     "text": "How is life in Brzezina?",
+     "goto": "piotr_place"
+    },
+    {
+     "text": "I will give you a hand in the field.",
+     "goto": "exit",
+     "cond": {
+      "noFlag": "helped_piotr"
+     },
+     "effects": [
+      {
+       "flag": "helped_piotr"
+      },
+      {
+       "xp": {
+        "endurance": 12
+       }
+      },
+      {
+       "relation": {
+        "piotr": 6
+       }
+      },
+      {
+       "rep": {
+        "villagers": 2
+       }
+      },
+      {
+       "give": "turnip"
+      }
+     ],
+     "hidden": true
+    },
+    {
+     "text": "God bless.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "piotr_about": {
+   "portrait": "piotr",
+   "emotion": "neutral",
+   "text": "“Piotr, a farmer. Three fields of land, a wife, five children, three of them living. My father was a free peasant, I am free only in name — the rest is in the Raven's ledger.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "piotr_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "piotr_place": {
+   "portrait": "piotr",
+   "emotion": "sad",
+   "text": "“The soil is good, but the sea wind flattens the grain every third year. Wolves take the sheep, boars root up the turnips. And town folk only come to take something. You are the first who asks how life is.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "piotr_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "scribe_letter": {
+   "portrait": "skryba_urban",
+   "emotion": "neutral",
+   "text": "“The council is sending the reeve of Brzezina a letter about a new mill tax. Nobody wants to go, because there are wolves in the forest, and the reeve bites worse than wolves. Take him the letter and you will get twenty-five crowns from the council.”",
+   "options": [
+    {
+     "text": "I will deliver it.",
+     "goto": "exit",
+     "effects": [
+      {
+       "quest": {
+        "action": "start",
+        "id": "q_letter_brzezina"
+       }
+      },
+      {
+       "give": "letter_village"
+      }
+     ]
+    },
+    {
+     "text": "Not now.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "wiera_child": {
+   "portrait": "wiera",
+   "emotion": "neutral",
+   "text": "“A whistling cough? Yarrow. Three bunches, steeped with honey, twice a day for a week. And keep the window open even in the cold — soul and lungs both need air. Yarrow grows in the meadows by the forest. I can also sell you some if you are in a hurry.”",
+   "options": [
+    {
+     "text": "Thank you, Wiera.",
+     "goto": "exit",
+     "effects": [
+      {
+       "flag": "child_remedy"
+      },
+      {
+       "xp": {
+        "herbalism": 5
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "fisher_ambrozy": {
+   "portrait": "fisher",
+   "emotion": "happy",
+   "text": "Ewa laughs so hard the gulls fly off. “Ambroży fished better than me before I was born. Now he mostly catches stories. But do not tell him — the old man lives only for beating me.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "fisher_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "hanna_about2": {
+   "portrait": "hanna",
+   "emotion": "neutral",
+   "text": "Hanna wipes a mug that is already clean. “The Rusty Cat was my father-in-law's tavern. When my husband died in the fire, the council wanted to sell it for debts. I paid them off in two years, pouring beer for the men who burned my home. Each of them has a tally here. None of them knows I remember.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "hanna_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "orlik_about2": {
+   "portrait": "orlik",
+   "emotion": "neutral",
+   "text": "Orlik sets down his hammer and wipes the sweat. “The forge is a hundred years old. The anvil older still — it came from Nuremberg on a ship that sank in the harbour. My grandfather hauled it out of the water for three days. They say a forge without history forges without soul. Mine has soul. Payment is another matter.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "orlik_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "vagn_about2": {
+   "portrait": "vagn",
+   "emotion": "neutral",
+   "text": "Vagn leans on the training post. “This yard is all that is left of my old glory. A post, two swords, a shield with a crossbow hole in it and the stool I sit on when the knee refuses. I trained boys here who later died at the gate. Now I train men like you — so they do not die stupidly.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "vagn_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "idzi_about2": {
+   "portrait": "idzi",
+   "emotion": "neutral",
+   "text": "Idzi folds his arms. “Warehouse B? Officially salt, tar and rope. Unofficially — everything the customs man did not see. The harbour has two faces, friend: the one by day, with seals, and the one by night, with boats without lanterns. I work both shifts.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "idzi_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "rawicz_about2": {
+   "portrait": "rawicz",
+   "emotion": "neutral",
+   "text": "Rawicz looks at the gate. “Twelve men for the whole town. Three drink, two take more from the Raven than I do, and one is deaf. The guardhouse leaks, the crossbows are older than the crossbowmen. But when someone screams at night, we come running. Almost always.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "rawicz_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "teodor_about2": {
+   "portrait": "teodor",
+   "emotion": "neutral",
+   "text": "Teodor lights a candle from a candle. “Fishermen built this chapel from stones they pulled up in their nets. Every stone is a catch that did not feed a family. That is why it is so small — and why it is holy. The reliquary stood there, in the empty place by the altar.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "teodor_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "marta_about2": {
+   "portrait": "marta",
+   "emotion": "neutral",
+   "text": "Marta shrugs. “The alley behind the bakery. Warm from the oven, and the baker pretends not to see me. I have a blanket, a knife and a treasure box. Better than the almshouse — there they count your spoons and your prayers.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "marta_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "goslaw_about2": {
+   "portrait": "goslaw",
+   "emotion": "neutral",
+   "text": "Gosław unrolls a map reverently. “This island has three maps: one for the council, one for the Raven and the true one. I drew them all. The eastern forest is larger than the council would like, and Brzezina smaller than the Raven says when he counts the tribute.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "goslaw_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "baldwin_about2": {
+   "portrait": "baldwin",
+   "emotion": "neutral",
+   "text": "Baldwin smiles coldly. “The room above the stable. It smells of horses, you can hear the tavern and see the square. From here I see every debtor who walks into Hanna's instead of mine. It is the best view on the island.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "baldwin_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "scribe_about2": {
+   "portrait": "scribe",
+   "emotion": "neutral",
+   "text": "Zbylut adjusts his spectacles. “The chancery is the town's memory. Contracts, wills, verdicts, love letters — I write it all, for a fee. These drawers hold more secrets than Father Teodor's confessional. And better organised.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "scribe_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "medic_about2": {
+   "portrait": "medic",
+   "emotion": "neutral",
+   "text": "Marcin washes his hands in a bowl of vinegar. “I shave, let blood, set bones and pull teeth. The bathhouse next door brings me customers — whoever washes sees what has grown on him. Last year I saved twenty people. Buried thirty. An honest tally for this trade.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "medic_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "customs_about2": {
+   "portrait": "customs",
+   "emotion": "neutral",
+   "text": "Bernard turns a page in the ledger. “Every sack that comes into the harbour passes through this room. Every one — officially. The council pays me for what I write down, the Raven for what I do not. An honest man would go mad here. I am doing fine.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "customs_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "guild_about2": {
+   "portrait": "guild",
+   "emotion": "neutral",
+   "text": "Rejne spreads his arms as if to embrace the whole guild house. “Cloth, salt, timber, grain. The guild holds prices so nobody starves or gets too rich. A beautiful theory. In practice we get rich and others starve.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "guild_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "tanner_about2": {
+   "portrait": "tanner",
+   "emotion": "neutral",
+   "text": "Oles wipes his hands on his apron, which changes nothing. “The tannery stinks, I know. But somebody has to turn a cow into a boot and a wolf into a cloak. My vats run all the way to the stream. The water there is brown and the fish have left. They say it is my fault. They tell the truth.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "tanner_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "fisher_about2": {
+   "portrait": "fisher",
+   "emotion": "neutral",
+   "text": "Ewa nods toward the sea. “The eastern pier is my kingdom. Three boats, twenty nets and a smokehouse whose smoke you can see from the square. Fishers on this side leave before dawn and return after dark. The Knights do not rise that early, so at least in the mornings we are free.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "fisher_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "baker_about2": {
+   "portrait": "baker",
+   "emotion": "neutral",
+   "text": "Grzegorz brushes flour off his apron. “I light the oven at three in the morning, the bread is out by five. By noon I have sold everything, in the afternoon I sleep. I have not seen a sunset in thirty years. But I know everyone in town by the bread they buy.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "baker_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "collector_about2": {
+   "portrait": "knight",
+   "emotion": "neutral",
+   "text": "Gwidon taps the black raven painted on his door. “People spit when they walk past this house. Let them spit. Spit does not wash away debt. The list is long, and I have good legs.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "collector_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "usurer_about2": {
+   "portrait": "usurer",
+   "emotion": "neutral",
+   "text": "Mojsze smiles through the bars. “A pawnshop is the poor man's apothecary. They come in with a wedding ring and leave with bread. They come back with money — sometimes. I have a chest full of other people's memories here and I guard each as if it were mine.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "usurer_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "gambler_about2": {
+   "portrait": "gambler",
+   "emotion": "neutral",
+   "text": "“The table by the window has the best light — you see every die and every face. Sailors play here, guards, sometimes even the priest, though he pretends he is only watching. Dice know no ranks, friend. Only luck.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "gambler_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "beggar_about2": {
+   "portrait": "beggar",
+   "emotion": "neutral",
+   "text": "Jędrek scratches his stump. “The north gate is the best spot in town. Everyone coming in still has money. Everyone leaving has a bad conscience. I earn from both.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "beggar_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "executioner_about2": {
+   "portrait": "executioner",
+   "emotion": "neutral",
+   "text": "Wawrzyniec looks at the gallows like a carpenter at a table. “My house stands outside the walls because the town does not want a hangman inside. But when there is a sentence, everyone comes to watch. People love justice, as long as they need not carry it out.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "executioner_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "washer_about2": {
+   "portrait": "washer",
+   "emotion": "neutral",
+   "text": "Zofia wrings a shirt as hard as if it were someone's neck. “The tubs by the stream. The water is cold, the lye bites your hands, but people talk while washing. I know whose shirt has blood on it, whose has perfume and whose has tavern vomit. The truth always comes out in the wash.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "washer_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "stableboy_about2": {
+   "portrait": "stableboy",
+   "emotion": "neutral",
+   "text": "Paweł strokes a horse's muzzle. “I sleep here, in the hay, between Greybeard and Chestnut. Warmth from horses is better than from a stove. Horses do not hit you or ask whose son you are.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "stableboy_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "nun_about2": {
+   "portrait": "nun",
+   "emotion": "neutral",
+   "text": "Sister Agnieszka straightens her veil. “The almshouse has twelve beds and always one too few. Old men, widows, orphans, shipwrecked sailors. We feed them with what we have and pray for the rest. Sometimes it helps. More often Hanna helps, sending leftovers from the tavern.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "nun_root"
+    },
+    {
+     "text": "Farewell.",
+     "goto": "exit"
+    }
+   ]
+  },
+  "wiera_about2": {
+   "portrait": "wiera",
+   "emotion": "neutral",
+   "text": "Wiera sniffs a bunch of dried herbs. “The marsh behind the tannery is the best apothecary on the island. Everything that heals grows there, and half of what kills. You only need to know which is which. Town folk do not. That is why they come to me — after dark, so the neighbours do not see.”",
+   "options": [
+    {
+     "text": "Let us talk about something else.",
+     "goto": "wiera_root"
+    },
+    {
+     "text": "Farewell.",
      "goto": "exit"
     }
    ]

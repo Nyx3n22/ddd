@@ -535,6 +535,582 @@
      "history": 30
     }
    }
+  },
+  {
+   "id": "q_brzezina_wolves",
+   "titleKey": "quest.bWolves.title",
+   "type": "side",
+   "giver": "walenty",
+   "journalKey": "quest.bWolves.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.bWolves.s1",
+     "objective": {
+      "type": "kill",
+      "target": "wolf",
+      "count": 3
+     },
+     "target": {
+      "tx": 214,
+      "ty": 72
+     },
+     "spawn": {
+      "typeId": "wolf",
+      "kind": "creature",
+      "tx": 212,
+      "ty": 72,
+      "count": 3
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.bWolves.s2",
+     "objective": {
+      "type": "talk",
+      "npc": "walenty"
+     },
+     "target": {
+      "npc": "walenty"
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 120,
+    "rep": {
+     "villagers": 10
+    },
+    "xp": {
+     "beasts": 20
+    }
+   }
+  },
+  {
+   "id": "q_mill_wheel",
+   "titleKey": "quest.mill.title",
+   "type": "side",
+   "giver": "bartosz",
+   "journalKey": "quest.mill.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.mill.s1",
+     "objective": {
+      "type": "collect",
+      "item": "nails_handful",
+      "count": 2
+     },
+     "target": {
+      "npc": "orlik"
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.mill.s2",
+     "objective": {
+      "type": "collect",
+      "item": "plank_oak",
+      "count": 2
+     },
+     "target": {
+      "npc": "kupiec_zbylut"
+     }
+    },
+    {
+     "id": "s3",
+     "descKey": "quest.mill.s3",
+     "objective": {
+      "type": "talk",
+      "npc": "bartosz"
+     },
+     "target": {
+      "npc": "bartosz"
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 70,
+    "items": [
+     "bread_loaf",
+     "bread_loaf",
+     "grain_sack"
+    ],
+    "rep": {
+     "villagers": 8
+    },
+    "xp": {
+     "carpentry": 25
+    },
+    "consume": [
+     [
+      "nails_handful",
+      2
+     ],
+     [
+      "plank_oak",
+      2
+     ]
+    ]
+   }
+  },
+  {
+   "id": "q_lost_goat",
+   "titleKey": "quest.goat.title",
+   "type": "side",
+   "giver": "kinga",
+   "journalKey": "quest.goat.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.goat.s1",
+     "objective": {
+      "type": "collect",
+      "item": "goat_bell",
+      "count": 1
+     },
+     "target": {
+      "interior": "world",
+      "station": "questSearch",
+      "tx": 194,
+      "ty": 70
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.goat.s2",
+     "objective": {
+      "type": "custom",
+      "flag": "goat_returned",
+      "count": 1
+     },
+     "target": {
+      "npc": "kinga"
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 15,
+    "rep": {
+     "villagers": 4
+    },
+    "xp": {
+     "tracking": 10
+    },
+    "consume": [
+     [
+      "goat_bell",
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "id": "q_missing_woodcutter",
+   "titleKey": "quest.woodcutter.title",
+   "type": "side",
+   "giver": "jadwiga",
+   "journalKey": "quest.woodcutter.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.woodcutter.s1",
+     "objective": {
+      "type": "custom",
+      "flag": "woodcutter_search",
+      "count": 1
+     },
+     "target": {
+      "npc": "blazej"
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.woodcutter.s2",
+     "objective": {
+      "type": "kill",
+      "target": "boar",
+      "count": 1
+     },
+     "target": {
+      "tx": 176,
+      "ty": 80
+     },
+     "spawn": {
+      "typeId": "boar",
+      "kind": "creature",
+      "tx": 178,
+      "ty": 78
+     }
+    },
+    {
+     "id": "s3",
+     "descKey": "quest.woodcutter.s3",
+     "objective": {
+      "type": "collect",
+      "item": "woodcutter_cap",
+      "count": 1
+     },
+     "target": {
+      "interior": "world",
+      "station": "questSearch",
+      "tx": 176,
+      "ty": 80
+     }
+    },
+    {
+     "id": "s4",
+     "descKey": "quest.woodcutter.s4",
+     "objective": {
+      "type": "custom",
+      "flag": "woodcutter_found",
+      "count": 1
+     },
+     "target": {
+      "npc": "jadwiga"
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 30,
+    "items": [
+     "axe_wood"
+    ],
+    "rep": {
+     "villagers": 12
+    },
+    "xp": {
+     "tracking": 25
+    },
+    "consume": [
+     [
+      "woodcutter_cap",
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "id": "q_pelts_oles",
+   "titleKey": "quest.pelts.title",
+   "type": "side",
+   "giver": "blazej",
+   "journalKey": "quest.pelts.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.pelts.s1",
+     "objective": {
+      "type": "collect",
+      "item": "wolf_pelt",
+      "count": 2
+     },
+     "target": {
+      "tx": 196,
+      "ty": 50
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.pelts.s2",
+     "objective": {
+      "type": "talk",
+      "npc": "garbarz_oles"
+     },
+     "target": {
+      "npc": "garbarz_oles"
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 80,
+    "rep": {
+     "smugglers": 3
+    },
+    "xp": {
+     "tanning": 10,
+     "barter": 10
+    },
+    "consume": [
+     [
+      "wolf_pelt",
+      2
+     ]
+    ]
+   }
+  },
+  {
+   "id": "q_letter_brzezina",
+   "titleKey": "quest.letter.title",
+   "type": "side",
+   "giver": "skryba_urban",
+   "journalKey": "quest.letter.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.letter.s1",
+     "objective": {
+      "type": "talk",
+      "npc": "walenty"
+     },
+     "target": {
+      "npc": "walenty"
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 25,
+    "xp": {
+     "reading": 5
+    },
+    "consume": [
+     [
+      "letter_village",
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "id": "q_weaver_wool",
+   "titleKey": "quest.wool.title",
+   "type": "side",
+   "giver": "halszka",
+   "journalKey": "quest.wool.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.wool.s1",
+     "objective": {
+      "type": "collect",
+      "item": "wool_bundle",
+      "count": 3
+     },
+     "target": {
+      "npc": "garbarz_oles"
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.wool.s2",
+     "objective": {
+      "type": "talk",
+      "npc": "halszka"
+     },
+     "target": {
+      "npc": "halszka"
+     }
+    }
+   ],
+   "rewards": {
+    "items": [
+     "wool_cloak"
+    ],
+    "rep": {
+     "villagers": 5
+    },
+    "consume": [
+     [
+      "wool_bundle",
+      3
+     ]
+    ]
+   }
+  },
+  {
+   "id": "q_fish_contest",
+   "titleKey": "quest.fish.title",
+   "type": "side",
+   "giver": "ambrozy",
+   "journalKey": "quest.fish.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.fish.s1",
+     "objective": {
+      "type": "collect",
+      "item": "fish_cod",
+      "count": 2
+     },
+     "target": {
+      "interior": "world",
+      "station": "fishingSpot"
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.fish.s2",
+     "objective": {
+      "type": "talk",
+      "npc": "ambrozy"
+     },
+     "target": {
+      "npc": "ambrozy"
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 40,
+    "items": [
+     "beer_mug"
+    ],
+    "xp": {
+     "fishing": 25
+    },
+    "consume": [
+     [
+      "fish_cod",
+      2
+     ]
+    ]
+   }
+  },
+  {
+   "id": "q_sick_child",
+   "titleKey": "quest.child.title",
+   "type": "side",
+   "giver": "dorota",
+   "journalKey": "quest.child.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.child.s1",
+     "objective": {
+      "type": "custom",
+      "flag": "child_remedy",
+      "count": 1
+     },
+     "target": {
+      "npc": "wiera"
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.child.s2",
+     "objective": {
+      "type": "collect",
+      "item": "herb_yarrow",
+      "count": 3
+     },
+     "target": {
+      "npc": "wiera"
+     }
+    },
+    {
+     "id": "s3",
+     "descKey": "quest.child.s3",
+     "objective": {
+      "type": "talk",
+      "npc": "dorota"
+     },
+     "target": {
+      "npc": "dorota"
+     }
+    }
+   ],
+   "rewards": {
+    "rep": {
+     "villagers": 12,
+     "church": 3
+    },
+    "xp": {
+     "herbalism": 15,
+     "medicine": 10
+    },
+    "consume": [
+     [
+      "herb_yarrow",
+      3
+     ]
+    ]
+   }
+  },
+  {
+   "id": "q_shoes",
+   "titleKey": "quest.shoes.title",
+   "type": "side",
+   "giver": "klemens",
+   "journalKey": "quest.shoes.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.shoes.s1",
+     "objective": {
+      "type": "collect",
+      "item": "hide_deer",
+      "count": 1
+     },
+     "target": {
+      "npc": "garbarz_oles"
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.shoes.s2",
+     "objective": {
+      "type": "talk",
+      "npc": "klemens"
+     },
+     "target": {
+      "npc": "klemens"
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 45,
+    "rep": {
+     "merchantGuild": 3
+    },
+    "consume": [
+     [
+      "hide_deer",
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "id": "q_urszula_legend",
+   "titleKey": "quest.legend.title",
+   "type": "side",
+   "giver": "urszula",
+   "journalKey": "quest.legend.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.legend.s1",
+     "objective": {
+      "type": "collect",
+      "item": "old_coin",
+      "count": 1
+     },
+     "target": {
+      "interior": "world",
+      "station": "questSearch",
+      "tx": 280,
+      "ty": 37
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.legend.s2",
+     "objective": {
+      "type": "custom",
+      "flag": "legend_done",
+      "count": 1
+     },
+     "target": {
+      "npc": "urszula"
+     }
+    }
+   ],
+   "rewards": {
+    "xp": {
+     "history": 30
+    },
+    "rep": {
+     "villagers": 5
+    }
+   }
   }
  ],
  "board": [

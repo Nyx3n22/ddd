@@ -87,6 +87,7 @@ export class DialogueSystem {
     this.session = { npcId, rootId: root, nodeId: root, node: this.fillPlaceholders(root, npcId), history: [root], usedOnce: [] };
     s.time.paused = true;   // rozmowa zatrzymuje świat — to świadoma decyzja projektowa
     bus.emit('dialogue:open', { npcId, root, session: this.session });
+    QuestSystem.notify('talk', { npcId });
     return true;
   }
 

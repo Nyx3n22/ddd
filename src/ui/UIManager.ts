@@ -136,7 +136,10 @@ export class UIManager {
     } else set('hud-quest', '');
     set('hud-gold', `${esc(t('hud.purse'))}: <b>${s.gold}</b> ${esc(t('hud.crowns'))}`);
     set('hud-weather', `${esc(t('hud.weather'))}: ${esc(t('weather.' + s.weather.kind))} · ${Math.round(WeatherSystem.tempC())}°`);
-    set('hud-place', esc(t(this.game.world?.scene?.nameKey || 'place.harbour')));
+    // na zewnątrz: nazwa okolicy (las, wieś, rynek…), we wnętrzu: nazwa izby
+    const wp = this.game.world?.player;
+    const region = s.scene === 'world' && wp ? this.game.world.scene.regionAt(wp.x, wp.y) : null;
+    set('hud-place', esc(t(region?.nameKey || this.game.world?.scene?.nameKey || 'place.harbour')));
     // witamina i zdrowie
     const vit: Array<[string, number, number]> = [
       ['hp', s.needs.health, s.needs.maxHealth], ['st', s.needs.stamina, s.needs.maxStamina],
