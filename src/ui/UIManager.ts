@@ -42,7 +42,7 @@ export class UIManager {
   paused = false;
   overlay: string | null = null;
   overlayStack: string[] = [];
-  toasts: Array<{ el: HTMLElement; until: number }> = [];
+  toasts: Array<{ el: HTMLElement; text: string; count: number; until: number }> = [];
   radialOpen = false;
   radialSel = 0;
   radialItems: string[] = [];
@@ -174,12 +174,20 @@ export class UIManager {
 
   toast(text: string, tone: 'good' | 'bad' | 'warn' | 'neutral' = 'neutral') {
     const box = $('toasts'); if (!box || !text) return;
+    // ten sam komunikat drugi raz z rzędu nie tworzy nowej ramki — tylko licznik ×N
+    const same = this.toasts.find(x => x.text === text);
+    if (same) {
+      same.count += 1;
+      same.until = performance.now() + 4200;
+      same.el.textContent = `${text} ×${same.count}`;
+      return;
+    }
     const el = document.createElement('div');
     el.className = 'toast ' + (tone === 'neutral' ? '' : tone);
     el.textContent = text;
     box.appendChild(el);
-    this.toasts.push({ el, until: performance.now() + 4200 });
-    while (this.toasts.length > 5) { const old = this.toasts.shift()!; old.el.remove(); }
+    this.toasts.push({ el, text, count: 1, until: performance.now() + 4200 });
+    while (this.toasts.length > 4) { const old = this.toasts.shift()!; old.el.remove(); }
   }
 
   subtitle(text: string, ms = 3200) {
@@ -277,7 +285,6 @@ export class UIManager {
       b.onclick = () => { if (o.ok) DialogueSystem.choose(o.index); else this.toast(o.reason || t('dialogue.cant'), 'bad'); };
       opts.appendChild(b);
     });
-    this.subtitle(session.node.text, 6000);
     bus.emit('ui:page', {});
   }
 
@@ -872,24 +879,27 @@ export class UIManager {
     this.openOverlay('ov-generic');
     const g = $('gen-title'); if (g) g.textContent = t('board.title');
     const body = $('gen-body'); if (!body) return;
-    const offers: Array<{ tpl: string; title: string; desc: string; pay: number }> = [];
+    const offers: Array<{ tpl: string; title: string; desc: string; pay: number; seed: number; questId: string }> = [];
+    // oferty są stałe w ciągu dnia: losujemy je z ziarna dnia, nie ruszając głównego RNG gry
+    const saved = rng.serialize();
     for (const tpl of ['board_delivery', 'board_escort', 'board_pests', 'board_labour', 'board_missing', 'board_debt']) {
-      const seedVal = this.game.state.time.day * 31 + tpl.length;
-      rng.setSeed(seedVal);
+      const seed = this.game.state.time.day * 31 + tpl.length;
+      rng.setSeed(seed);
       try {
-        const q = QuestSystem.generateBoard(tpl);
-        offers.push({ tpl, title: q.title, desc: q.desc, pay: q.pay });
-        // natychmiast kasujemy — gracz wybierze tylko jedno
-        const st = this.game.state.quests.find(x => x.id === q.questId);
-        if (st) { this.game.state.quests = this.game.state.quests.filter(x => x !== st); }
+        const q = QuestSystem.generateBoard(tpl, false);
+        if (this.game.state.quests.some(x => x.id === q.questId)) continue;   // już wzięte dziś
+        offers.push({ tpl, title: q.title, desc: q.desc, pay: q.pay, seed, questId: q.questId });
       } catch { /* szablon może nie istnieć */ }
     }
-    rng.setSeed(Date.now() % 100000);
+    rng.deserialize(saved);
     body.innerHTML = offers.map((o, i) => `<div class="card"><h4>${esc(o.title)}</h4><div class="mut">${esc(o.desc)}</div>
       <button class="clickable board-take" data-i="${i}" style="margin-top:.3em">${esc(t('board.take', { gold: o.pay }))}</button></div>`).join('') || `<div class="mut">${esc(t('board.empty'))}</div>`;
     body.querySelectorAll('.board-take').forEach(b => (b as HTMLElement).onclick = () => {
       const o = offers[Number((b as HTMLElement).dataset.i)];
+      const keep = rng.serialize();
+      rng.setSeed(o.seed);
       const q = QuestSystem.generateBoard(o.tpl);
+      rng.deserialize(keep);
       this.toast(t('quest.started', { title: q.title }), 'good');
       this.closeOverlay();
     });

@@ -145,7 +145,8 @@ export class QuestSystem {
   }
 
   /** Questy z tablicy ogłoszeń — generowane proceduralnie z szablonu. */
-  static generateBoard(templateId?: string): { questId: string; title: string; pay: number; desc: string } {
+  /** Losuje ogłoszenie z tablicy. `take=false` tylko pokazuje ofertę — nie zakłada zadania. */
+  static generateBoard(templateId?: string, take = true): { questId: string; title: string; pay: number; desc: string } {
     const s = getGame().state;
     const tpl = templateId ? BOARD_DEFS.find(b => b.id === templateId) : rng.pick(BOARD_DEFS);
     if (!tpl) throw new Error('[quest] brak szablonu tablicy');
@@ -153,6 +154,8 @@ export class QuestSystem {
     const descKey = rng.pick(tpl.descKeys);
     const questId = `board_${tpl.id}_${s.time.day}`;
     const target = rng.pick(tpl.items || ['bread_loaf']);
+    const offer = { questId, title: t(tpl.titleKey), pay, desc: t(descKey, { what: itemName(target), gold: pay }) };
+    if (!take) return offer;
     QUEST_DEFS[questId] = {
       id: questId, titleKey: tpl.titleKey, type: tpl.type, giver: 'board',
       journalKey: descKey,
@@ -160,7 +163,7 @@ export class QuestSystem {
       rewards: { crowns: pay, rep: tpl.rep, xp: tpl.xp, noteKey: 'quest.board.note' }
     };
     this.start(questId);
-    return { questId, title: t(tpl.titleKey), pay, desc: t(descKey, { what: itemName(target), gold: pay }) };
+    return offer;
   }
 
   static startBoard(templateId: string) { return this.generateBoard(templateId); }

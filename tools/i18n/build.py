@@ -525,6 +525,17 @@ rep.reason.debtCleared|spłacony dług|the debt cleared
 rep.reason.deadline|niedotrzymany termin|the deadline missed
 rep.reason.unpaid|nieoddana pożyczka|an unpaid loan
 rep.reason.alms|jałmużna|alms
+rep.reason.theft|kradzież|theft
+rep.reason.pickpocket|kieszonkowstwo|pickpocketing
+rep.reason.assault|napaść|assault
+rep.reason.trespass|wtargnięcie|trespassing
+rep.reason.smuggling|przemyt|smuggling
+rep.reason.bribery|przekupstwo|bribery
+rep.reason.threat|groźby|threats
+rep.reason.insult|obelga|insult
+rep.reason.informing|donos|informing
+rep.reason.possession|posiadanie zakazanych rzeczy|possession of contraband
+rep.reason.vandalism|niszczenie mienia|vandalism
 rep.reason.fled|ucieczka przed strażą|flight from the guard
 rep.reason.punished|publiczna kara|public punishment
 rep.reason.winner|wygrane w hazardzie|gambling winnings
@@ -1567,6 +1578,101 @@ use.dagger|Pchnięcie|A thrust
 skill.spear|Włócznia|Spear
 skill.spear.desc|Dystans, którego nie ma miecz. Trzyma wroga na długość drzewca, dopóki ktoś nie wejdzie pod grot.|Reach a sword does not have. It keeps an enemy a shaft-length away until somebody steps inside the head.
 use.spear|Pchnięcie włócznią|Spear thrust
+""")
+
+# ===========================================================================
+# 8b. NAZWY OBIEKTÓW ŚWIATA I ICH INTERAKCJE
+# ===========================================================================
+add(r"""
+prop.barrel|Beczka|Barrel
+prop.barrelStack|Sterta beczek|Stack of barrels
+prop.crate|Skrzynka|Crate
+prop.crateStack|Sterta skrzynek|Stack of crates
+prop.sack|Worek|Sack
+prop.cart|Wóz|Cart
+prop.well|Studnia|Well
+prop.haystack|Stóg siana|Haystack
+prop.oven|Piec chlebowy|Bread oven
+prop.stall|Stragan|Market stall
+prop.fence|Płot|Fence
+prop.gate|Furtka|Gate
+prop.lampPost|Latarnia|Lamp post
+prop.torchStand|Kaganiec|Torch stand
+prop.signPost|Drogowskaz|Signpost
+prop.noticeBoard|Tablica ogłoszeń|Notice board
+prop.treeOak|Dąb|Oak
+prop.treePine|Sosna|Pine
+prop.bush|Krzak|Bush
+prop.rock|Głaz|Boulder
+prop.boat|Łódź|Boat
+prop.stocks|Dyby|Stocks
+prop.bench|Ława|Bench
+prop.table|Stół|Table
+prop.anvil|Kowadło|Anvil
+prop.forge|Palenisko kuźni|Forge
+prop.grindstone|Toczydło|Grindstone
+prop.logPile|Stos drewna|Log pile
+prop.toolRack|Stojak na narzędzia|Tool rack
+prop.chest|Skrzynia|Chest
+prop.weaponRack|Stojak na broń|Weapon rack
+prop.shrine|Kapliczka|Wayside shrine
+prop.campfire|Ognisko|Campfire
+prop.chicken|Kura|Chicken
+prop.dog|Pies|Dog
+prop.cat|Kot|Cat
+prop.pig|Świnia|Pig
+prop.horse|Koń|Horse
+prop.crow|Wrona|Crow
+prop.netPile|Sieci rybackie|Fishing nets
+prop.anchor|Kotwica|Anchor
+prop.saltPile|Kopiec soli|Salt heap
+prop.fishCrate|Skrzynka ryb|Crate of fish
+prop.clothesline|Sznur z praniem|Clothesline
+prop.gallows|Szubienica|Gallows
+prop.tent|Namiot|Tent
+prop.wellBucket|Wiadro przy studni|Well bucket
+prop.bed|Łóżko|Bed
+prop.cauldron|Kocioł|Cauldron
+prop.barrelRain|Beczka na deszczówkę|Rain barrel
+prop.quarryCart|Wózek z kamieniołomu|Quarry cart
+prop.statue|Posąg świętego|Statue of a saint
+prop.signInn|Szyld karczmy|Inn sign
+prop.crateCustoms|Skrzynia celna|Customs crate
+prop.smugglingCrate|Podejrzana skrzynia|Suspicious crate
+prop.hayBale|Bela siana|Hay bale
+prop.waterTrough|Koryto z wodą|Water trough
+prop.barCounter|Szynkwas|Bar counter
+prop.keg|Antałek|Keg
+prop.shelf|Półka|Shelf
+prop.bookshelf|Regał z księgami|Bookshelf
+prop.desk|Pulpit|Desk
+prop.stool|Stołek|Stool
+prop.tableRound|Okrągły stół|Round table
+prop.fireplace|Kominek|Fireplace
+prop.quenchBarrel|Beczka do hartowania|Quenching barrel
+prop.rack|Stojak|Rack
+prop.hideRack|Rama ze skórami|Hide rack
+prop.altar|Ołtarz|Altar
+prop.pew|Ława kościelna|Pew
+prop.tub|Balia|Tub
+prop.wallH|Mur|Wall
+prop.wallV|Mur|Wall
+prop.wallTower|Baszta|Wall tower
+prop.cityGate|Brama miejska|City gate
+prop.palisade|Palisada|Palisade
+prop.trainingDummy|Manekin treningowy|Training dummy
+prop.signScribe|Szyld pisarza|Scribe's sign
+prop.signSmith|Szyld kowala|Smith's sign
+prop.marketUmbrella|Daszek straganu|Stall awning
+prop.pileOfSalt|Hałda soli|Pile of salt
+prop.corpse|Zwłoki|Corpse
+prop.groundItem|Coś na ziemi|Something on the ground
+interact.prayed|Klękasz przy kapliczce i mówisz kilka słów, których nie słyszałeś od dzieciństwa. Robi się trochę lżej.|You kneel at the shrine and say a few words you have not heard since childhood. It gets a little lighter.
+interact.prayedAlready|Już dziś się modliłeś. Święty nie lubi natrętów.|You already prayed today. The saint does not like pests.
+interact.statue|Kamienny święty z odtłuczonym nosem. U jego stóp ktoś zostawił suszone kwiaty i miedziaka.|A stone saint with a chipped nose. Someone left dried flowers and a copper coin at his feet.
+interact.campfire|Ogrzewasz ręce przy ognisku. Dym gryzie w oczy, ale ciepło jest prawdziwe.|You warm your hands at the fire. The smoke stings your eyes, but the warmth is real.
+interact.picked|Podnosisz: {what}.|You pick up: {what}.
+interact.purse|Podnosisz sakiewkę: {gold} koron.|You pick up a purse: {gold} crowns.
 """)
 
 # ===========================================================================

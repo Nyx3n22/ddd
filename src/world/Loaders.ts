@@ -42,6 +42,14 @@ interface DistrictJson {
 const DISTRICT = districtJson as unknown as DistrictJson;
 const INTERIORS = (interiorsJson as any).interiors as InteriorDef[];
 
+/** Propsy, które reagują na E (studnia, skrzynie, tablica…) — reszta to scenografia. */
+export const INTERACTIVE_PROPS = new Set([
+  'well', 'wellBucket', 'waterTrough', 'barrelRain', 'noticeBoard', 'signPost', 'signInn',
+  'barrel', 'barrelStack', 'keg', 'crate', 'crateStack', 'sack', 'chest', 'fishCrate', 'crateCustoms', 'smugglingCrate',
+  'bush', 'gallows', 'shrine', 'statue', 'stocks', 'campfire', 'forge', 'anvil', 'haystack', 'hayBale',
+  'trainingDummy', 'shelf', 'bookshelf'
+]);
+
 export interface LoadedWorld {
   district: Scene;
   interiors: Map<string, Scene>;
@@ -185,7 +193,8 @@ export function loadDistrict(): LoadedWorld {
       x: ax, y: ay,
       box: solid ? { x: ax - bw / 2, y: ay - bh, w: bw, h: bh } : null,
       sortY: ay, tall: d.tall, art, dx: off.dx, dy: off.dy, variant: v,
-      solid, grabbable: d.grabbable, dynamic: d.grabbable, nameKey: `prop.${type}`
+      solid, grabbable: d.grabbable, dynamic: d.grabbable, nameKey: `prop.${type}`,
+      interactId: INTERACTIVE_PROPS.has(type) ? `prop:${type}:${tx}_${ty}` : undefined
     });
   }
 
@@ -250,7 +259,8 @@ export function loadInterior(def: InteriorDef): Scene {
       kind: 'prop', type, id: `${def.id}_prop_${type}_${tx}_${ty}`, x: ax, y: ay,
       box: d.solid ? { x: ax - bw / 2, y: ay - bh, w: bw, h: bh } : null,
       sortY: ay, tall: d.tall, art, dx: off.dx, dy: off.dy, variant: v,
-      solid: d.solid, grabbable: d.grabbable, nameKey: `prop.${type}`
+      solid: d.solid, grabbable: d.grabbable, nameKey: `prop.${type}`,
+      interactId: INTERACTIVE_PROPS.has(type) ? `prop:${def.id}:${type}:${tx}_${ty}` : undefined
     });
   }
   for (const l of def.lights) {
@@ -273,7 +283,7 @@ export function loadInterior(def: InteriorDef): Scene {
       kind: 'station', type: s.kind, id: `${def.id}_st_${s.kind}_${s.tx}_${s.ty}`,
       x: s.tx * TILE + 16, y: s.ty * TILE + TILE - 4, box: null,
       sortY: s.ty * TILE + TILE, tall: false, art: null,
-      interactId: `station:${s.kind}`, nameKey: s.labelKey, data: { ...s, interior: def.id }
+      interactId: `station:${s.kind}:${s.tx}_${s.ty}`, nameKey: s.labelKey, data: { ...s, interior: def.id }
     });
   }
   for (const r of (def as any).rooms ?? []) {
@@ -281,7 +291,7 @@ export function loadInterior(def: InteriorDef): Scene {
       kind: 'station', type: r.kind ?? 'bed', id: `${def.id}_room_${r.id}`,
       x: (r.tx + r.tw / 2) * TILE, y: (r.ty + r.th) * TILE, box: null,
       sortY: (r.ty + r.th) * TILE, tall: false, art: null,
-      interactId: `station:${r.kind ?? 'bed'}`, nameKey: r.labelKey, data: { ...r, interior: def.id }
+      interactId: `station:${r.kind ?? 'bed'}:${r.id}`, nameKey: r.labelKey, data: { ...r, interior: def.id }
     });
   }
   scene.interiorAmbient = 0.42;

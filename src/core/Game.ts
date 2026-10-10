@@ -149,10 +149,7 @@ export class Game {
       attackPressed: i.pressed('attack'),
       blockHeld: i.down('block'),
       dodgePressed: i.pressed('dodge'),
-      mouseWorld: this.renderer.camera.screenToWorld(
-        i.mousePos().x / Math.max(1, this.renderer.scale),
-        i.mousePos().y / Math.max(1, this.renderer.scale)
-      )
+      mouseWorld: this.renderer.camera.screenToWorld(...this.renderer.clientToBuffer(i.mousePos().x, i.mousePos().y))
     };
   }
 

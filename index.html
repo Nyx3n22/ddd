@@ -63,9 +63,9 @@
   #hud-left{display:flex;flex-direction:column;gap:4px}
   #hud-right{display:flex;flex-direction:column;gap:4px;align-items:flex-end}
 
-  #vitals{position:absolute;left:calc(8px * var(--ui-scale));bottom:calc(8px * var(--ui-scale));width:calc(210px * var(--ui-scale))}
+  #vitals{position:absolute;left:calc(8px * var(--ui-scale));bottom:calc(8px * var(--ui-scale));width:calc(170px * var(--ui-scale))}
   .vital{display:flex;align-items:center;gap:5px;margin-bottom:3px}
-  .vital .lbl{font-size:.62em;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);width:5.4em;
+  .vital .lbl{font-size:.58em;letter-spacing:.03em;text-transform:uppercase;color:var(--dim);width:7.6em;white-space:nowrap;
     text-shadow:0 1px 2px #000}
   .track{flex:1;height:calc(8px * var(--ui-scale));background:#100d09;border:2px solid #4a3a24;position:relative;overflow:hidden}
   .fill{position:absolute;inset:0;width:50%;transition:width .18s linear}
@@ -94,8 +94,8 @@
   #place{position:absolute;right:calc(8px * var(--ui-scale));bottom:calc(8px * var(--ui-scale));text-align:right}
   #clock-dial{position:absolute;right:calc(8px * var(--ui-scale));top:calc(52px * var(--ui-scale))}
 
-  #toasts{position:absolute;top:calc(56px * var(--ui-scale));left:50%;transform:translateX(-50%);
-    display:flex;flex-direction:column;gap:4px;align-items:center;width:min(560px,90vw)}
+  #toasts{position:absolute;top:calc(64px * var(--ui-scale));right:calc(8px * var(--ui-scale));
+    display:flex;flex-direction:column;gap:4px;align-items:flex-end;width:min(calc(250px * var(--ui-scale)),46vw)}
   .toast{background:rgba(14,11,8,.9);border-left:3px solid var(--gold);border-top:1px solid #4a3a24;
     border-right:1px solid #4a3a24;border-bottom:1px solid #4a3a24;padding:.3em .7em;font-size:.82em;
     animation:tin .25s ease-out;box-shadow:0 4px 14px rgba(0,0,0,.5)}

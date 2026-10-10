@@ -239,8 +239,6 @@ export class Player extends Actor {
     c.combo = Math.min(3, c.combo + 1); c.comboT = 0.9;
     s.time.paused = false;
     bus.emit('player:attack', { dir: c.attackDir, weapon: w?.id || 'fists' });
-    // atak w miejscu publicznym jest widziany
-    bus.emit('crime:publicAct', { type: this.isWeaponDrawnPublicly() ? 'assault' : null, x: this.x, y: this.y });
     SkillsSystem.use(w?.weapon?.skill || 'brawl', 4, true);
   }
 
@@ -303,13 +301,15 @@ export class Player extends Actor {
     this.interactTarget = null; this.carryTarget = null;
     if (!scene) return;
     const near = scene.near(this.x, this.y, 34, ['station', 'exit', 'door', 'gate', 'prop', 'building', 'marker']);
-    let best = Infinity;
+    let best = Infinity, bestCarry = Infinity;
     for (const o of near) {
       if (o.hidden) continue;
       const d = Math.hypot(o.x - this.x, o.y - this.y);
+      // przedmioty do dźwigania obsługuje F, nie E — stół z kośćmi nie może „wygrać” ze stolikiem do gry
+      if (o.grabbable && d < bestCarry) { bestCarry = d; this.carryTarget = { id: o.id, nameKey: o.nameKey || `prop.${o.type}` }; }
       if (d > best) continue;
       // interakcja tylko dla obiektów z identyfikatorem interakcji
-      if (!o.interactId && o.kind !== 'exit' && o.kind !== 'door' && o.kind !== 'gate' && o.kind !== 'station' && !(o.grabbable)) continue;
+      if (!o.interactId && o.kind !== 'exit' && o.kind !== 'door' && o.kind !== 'gate' && o.kind !== 'station') continue;
       best = d;
       const nameKey = o.nameKey || `prop.${o.type}`;
       this.interactTarget = {
@@ -320,10 +320,9 @@ export class Player extends Actor {
           : o.kind === 'station' ? t('prompt.station', { what: t(nameKey) })
           : t('prompt.use', { what: t(nameKey) })
       };
-      if (o.grabbable) this.carryTarget = { id: o.id, nameKey };
     }
     // aktorzy: rozmowa
-    const actors = (g.world?.actors || []).filter(a => a !== this && a.alive && !a.hidden && Math.hypot(a.x - this.x, a.y - this.y) < 30);
+    const actors = (g.world?.actors || []).filter(a => a !== this && a.alive && !a.hidden && !('typeId' in a) && !(a as any).hostile && Math.hypot(a.x - this.x, a.y - this.y) < 30);
     if (actors.length) {
       const a = actors.sort((p, q) => Math.hypot(p.x - this.x, p.y - this.y) - Math.hypot(q.x - this.x, q.y - this.y))[0];
       const d = Math.hypot(a.x - this.x, a.y - this.y);

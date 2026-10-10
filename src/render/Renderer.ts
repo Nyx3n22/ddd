@@ -62,6 +62,14 @@ export class Renderer {
     document.documentElement.style.setProperty('--ui-scale', String(this.scale));
   }
 
+  /** Współrzędne okna (clientX/Y) → piksele bufora 640×360; canvas jest wyśrodkowany. */
+  clientToBuffer(cx: number, cy: number): [number, number] {
+    const r = this.canvas.getBoundingClientRect();
+    const sx = r.width ? VIEW_W / r.width : 1 / Math.max(1, this.scale);
+    const sy = r.height ? VIEW_H / r.height : 1 / Math.max(1, this.scale);
+    return [(cx - r.left) * sx, (cy - r.top) * sy];
+  }
+
   draw(opts: {
     scene: Scene; actors: Actor[]; player: Actor;
     darkness: number; ambient: [number, number, number]; ambientLevel: number;
@@ -102,7 +110,7 @@ export class Renderer {
       if (o.tall) continue;                       // wysokie rysujemy po aktorach
       list.push({ y: o.sortY, obj: o });
     }
-    for (const a of opts.actors) {
+    for (const a of [...opts.actors, opts.player]) {
       if (a.hidden) continue;
       if (!this.camera.visible(a.x, a.y, 64)) continue;
       list.push({ y: a.sortY, actor: a });
@@ -111,7 +119,13 @@ export class Renderer {
 
     for (const e of list) {
       if (e.obj) this.drawObject(ctx, e.obj, camX, camY);
-      else if (e.actor) e.actor.draw(ctx, opts.sunDir);
+      else if (e.actor) {
+        // aktorzy rysują się we współrzędnych świata — przesuwamy kontekst o kamerę
+        ctx.save();
+        ctx.translate(-camX, -camY);
+        e.actor.draw(ctx, opts.sunDir);
+        ctx.restore();
+      }
     }
 
     /* ---- 3. aktorzy i obiekty wysokie ---- */

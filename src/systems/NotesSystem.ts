@@ -84,7 +84,10 @@ export class NotesSystem {
     const s = getGame().state;
     // wpis bez opisu w bestiarium byłby surowym identyfikatorem w notatniku
     if (!ENTRY_MAP[id]) return false;
-    if (!this.hasNotebook()) { bus.emit('hud:toast', { text: t('notes.noNotebook'), tone: 'bad' }); return false; }
+    if (!this.hasNotebook()) {
+      if (!s.flags.hintNoNotebook) { s.flags.hintNoNotebook = true; bus.emit('hud:toast', { text: t('notes.noNotebook'), tone: 'bad' }); }
+      return false;
+    }
     if (s.notes.blurred.includes(id)) return false;
     const list = kind === 'creature' || kind === 'plant' ? s.notes.bestiary : kind === 'place' ? s.notes.places : s.notes.customNotes;
     if (list.includes(id)) return false;

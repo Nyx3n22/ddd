@@ -260,7 +260,8 @@ export class World {
     const g = getGame(), s = g.state;
     const p = this.player;
     // 1) człowiek
-    const near = this.actors.filter(a => a !== p && a.alive && !a.hidden && Math.hypot(a.x - p.x, a.y - p.y) < 30);
+    // szczur pod nogami nie może zasłaniać drzwi — rozmawiamy tylko z ludźmi
+    const near = this.actors.filter(a => a !== p && a.alive && !a.hidden && a instanceof NPCActor && !a.hostile && Math.hypot(a.x - p.x, a.y - p.y) < 30);
     if (near.length) {
       const a = near.sort((x, y) => Math.hypot(x.x - p.x, x.y - p.y) - Math.hypot(y.x - p.x, y.y - p.y))[0];
       if (a instanceof NPCActor) {
@@ -344,6 +345,8 @@ export class World {
       return;
     }
     if (obj.kind === 'station') { this.useStation(obj); return; }
+    if (obj.type === 'groundItem') { this.pickupGround(obj); return; }
+    if (obj.kind === 'prop') { this.useProp(obj); return; }
     if (obj.grabbable) { this.player.toggleCarry(obj.id); return; }
     if (obj.type === 'sign' || obj.type === 'notice' || obj.type === 'board') {
       if (obj.type === 'board') { bus.emit('ui:openBoard', { id: 'board' }); return; }
@@ -378,6 +381,40 @@ export class World {
       if (st) { bus.emit('ui:openCraftStation', { id: st.id }); return; }
     }
     bus.emit('ui:showSign', { text: t(obj.nameKey || ('prop.' + obj.type)) });
+  }
+
+  /** Propsy świata: typy graficzne sprowadzamy do kilku czynności. */
+  useProp(obj: SceneObject) {
+    const s = getGame().state;
+    const alias: Record<string, string> = {
+      noticeBoard: 'board', signPost: 'sign', signInn: 'sign',
+      wellBucket: 'well', waterTrough: 'trough', barrelRain: 'well',
+      barrelStack: 'barrel', keg: 'barrel', crateStack: 'crate', fishCrate: 'crate', crateCustoms: 'crate', smugglingCrate: 'crate',
+      haystack: 'straw', hayBale: 'straw', bookshelf: 'shelf'
+    };
+    const kind = alias[obj.type] || obj.type;
+    switch (kind) {
+      case 'shelf': this.searchObject({ ...obj, type: 'shelf' } as SceneObject); return;
+      case 'shrine': {
+        const key = 'prayed_day';
+        if (s.flags[key] === s.time.day) { bus.emit('hud:toast', { text: t('interact.prayedAlready') }); return; }
+        s.flags[key] = s.time.day;
+        s.time.advanceMinutes(10);
+        ReputationSystem.add('church', 1, 'rep.reason.alms');
+        s.needs.fatigue = Math.max(0, s.needs.fatigue - 5);
+        bus.emit('hud:toast', { text: t('interact.prayed'), tone: 'good' });
+        return;
+      }
+      case 'statue': bus.emit('ui:showSign', { text: t('interact.statue') }); return;
+      case 'stocks': bus.emit('ui:showSign', { text: t('interact.stocks') }); return;
+      case 'campfire':
+        s.needs.warmth = Math.min(100, s.needs.warmth + 30);
+        if (!s.needs.torchLit && InventorySystem.has('torch')) { s.needs.torchLit = true; s.needs.torchFuel = itemDef('torch')?.burns || 90; bus.emit('player:torch', { lit: true }); }
+        bus.emit('hud:toast', { text: t('interact.campfire'), tone: 'good' });
+        return;
+      default:
+        this.useObject({ ...obj, kind: 'marker', type: kind, grabbable: false } as SceneObject);
+    }
   }
 
   pickLock(interior: string, obj: SceneObject) {
@@ -594,7 +631,17 @@ export class World {
     const idx = this.groundItems.findIndex(g => g.obj === obj);
     if (idx < 0) return false;
     const gi = this.groundItems[idx];
+    if (gi.id === 'crown') {
+      const gold = obj.data?.gold || gi.qty;
+      getGame().state.gold += gold;
+      this.scene.remove(gi.obj);
+      this.groundItems.splice(idx, 1);
+      bus.emit('hud:gold', {});
+      bus.emit('hud:toast', { text: t('interact.purse', { gold }), tone: 'good' });
+      return true;
+    }
     if (InventorySystem.add(gi.id, gi.qty, { stolen: gi.stolen })) {
+      bus.emit('hud:toast', { text: t('interact.picked', { what: itemName(gi.id) }), tone: 'good' });
       this.scene.remove(gi.obj);
       this.groundItems.splice(idx, 1);
       return true;
@@ -672,6 +719,7 @@ export class World {
       const dot = (dx * dirVec[0] + dy * dirVec[1]) / (d || 1);
       if (dot < Math.cos(e.arc * 1.1)) continue;
       hitAny = true;
+      if (a instanceof EnemyActor && (a.kind === 'guard' || a.kind === 'knight') && !a.aggroTarget) bus.emit('crime:publicAct', { type: 'assault', x: a.x, y: a.y });
       if (a instanceof EnemyActor) a.takeHit(e.dmg, { vsArmor: e.vsArmor, fromX: this.player.x, fromY: this.player.y, skill: e.weaponSkill });
       else if (a instanceof NPCActor) {
         const real = Math.max(1, Math.round(e.dmg * (1 - (a.combatStats?.armor || 0))));
