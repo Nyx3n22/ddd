@@ -11,6 +11,7 @@ import { CrimeSystem } from '../systems/CrimeSystem';
 import { DebtSystem } from '../systems/DebtSystem';
 import { NotesSystem } from '../systems/NotesSystem';
 import { NPCActor } from '../entities/NPCActor';
+import { DialogueSystem } from '../systems/DialogueSystem';
 import { EnemyActor } from '../entities/EnemyActor';
 import { TILE } from '../world/TileMap';
 
@@ -207,6 +208,8 @@ export class DebugConsole {
     add('save', '[slot]', 'zapisz', (a) => { g().save(a[0] || 'quick'); return 'saved'; });
     add('load', '[slot]', 'wczytaj', (a) => { g().load(a[0] || 'quick'); return 'loaded'; });
     add('seed', '[n]', 'ziarno RNG', (a) => { if (a[0]) rng.setSeed(Number(a[0])); return `seed=${rng.serialize()}`; });
+    add('talk', '<npcId> [nodeId]', 'otwórz rozmowę z NPC (test dialogów)', (a) => DialogueSystem.open(a[0], a[1]) ? 'ok' : 'brak');
+    add('endinglist', '', 'lista zakończeń i które pasuje teraz', () => QuestSystem.endingDefs().map(e => e.id).join(', ') + ' | teraz: ' + (QuestSystem.checkEndings()?.id ?? '—'));
     add('npcs', '', 'lista NPC i ich zajęcia', () => g().world.npcs.filter((n: NPCActor) => !n.isPasserby).map((n: NPCActor) => `${n.npcId}: ${n.activity} @${n.scene} ${n.hidden ? '(hidden)' : Math.round(n.x) + ',' + Math.round(n.y)} hp=${n.hp}`).join('\n'));
     add('godmode', '[on|off]', 'nieśmiertelność (test)', (a) => { g().state.flags.godmode = a[0] !== 'off'; return `godmode=${!!g().state.flags.godmode}`; });
   }

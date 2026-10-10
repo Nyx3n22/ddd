@@ -25,7 +25,7 @@ for (const e of ENTRIES) ENTRY_MAP[e.id] = e;
 const JOHN_NOTES = (BESTIARY as any).johnNotes as Array<{ id: string; textKey: string; dayKey?: string }>;
 
 const MAP_CELL = 4;          // ziarno odkrywania mapy (w kafelkach)
-const MAP_W = 140, MAP_H = 112;
+const MAP_W = 300, MAP_H = 112;
 const GRID_W = Math.ceil(MAP_W / MAP_CELL), GRID_H = Math.ceil(MAP_H / MAP_CELL);
 
 export function bestiaryEntry(id: string) { return ENTRY_MAP[id]; }
@@ -84,7 +84,10 @@ export class NotesSystem {
     const s = getGame().state;
     // wpis bez opisu w bestiarium byłby surowym identyfikatorem w notatniku
     if (!ENTRY_MAP[id]) return false;
-    if (!this.hasNotebook()) { bus.emit('hud:toast', { text: t('notes.noNotebook'), tone: 'bad' }); return false; }
+    if (!this.hasNotebook()) {
+      if (!s.flags.hintNoNotebook) { s.flags.hintNoNotebook = true; bus.emit('hud:toast', { text: t('notes.noNotebook'), tone: 'bad' }); }
+      return false;
+    }
     if (s.notes.blurred.includes(id)) return false;
     const list = kind === 'creature' || kind === 'plant' ? s.notes.bestiary : kind === 'place' ? s.notes.places : s.notes.customNotes;
     if (list.includes(id)) return false;
@@ -114,7 +117,12 @@ export class NotesSystem {
 
   static addJohnNote(id: string) {
     const s = getGame().state;
-    if (!s.notes.johnNotes.includes(id)) { s.notes.johnNotes.push(id); bus.emit('notes:john', { id }); }
+    if (!s.notes.johnNotes.includes(id)) {
+      s.notes.johnNotes.push(id);
+      s.flags['note_day_' + id] = s.time.day;
+      bus.emit('notes:john', { id });
+      if (s.notes.johnNotes.length > 2) bus.emit('hud:toast', { text: t('notes.johnAdded') });
+    }
   }
 
   static isBlurred(id: string) { return getGame().state.notes.blurred.includes(id); }
@@ -167,7 +175,8 @@ export class NotesSystem {
     const r = Math.ceil(radiusTiles / MAP_CELL);
     const cx = Math.floor(tx / MAP_CELL), cy = Math.floor(ty / MAP_CELL);
     let bits = s.maps.visited[region];
-    if (!bits) { bits = new Array(GRID_W * GRID_H).fill('0').join(''); }
+    // zapis sprzed rozbudowy świata miał węższą siatkę — zaczynamy odkrywanie od nowa
+    if (!bits || bits.length !== GRID_W * GRID_H) { bits = new Array(GRID_W * GRID_H).fill('0').join(''); }
     const arr = bits.split('');
     let changed = false;
     for (let y = cy - r; y <= cy + r; y++) {

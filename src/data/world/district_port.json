@@ -2,7 +2,7 @@
  "id": "port_dolne_miasto",
  "nameKey": "region.port_dolne_miasto",
  "sizeTiles": [
-  140,
+  300,
   112
  ],
  "spawn": {
@@ -216,6 +216,132 @@
     66,
     12,
     14
+   ],
+   [
+    "sand",
+    132,
+    84,
+    168,
+    12
+   ],
+   [
+    "road",
+    140,
+    40,
+    160,
+    4
+   ],
+   [
+    "grassTall",
+    142,
+    4,
+    62,
+    34
+   ],
+   [
+    "grassTall",
+    142,
+    46,
+    62,
+    36
+   ],
+   [
+    "dirt",
+    150,
+    44,
+    3,
+    22
+   ],
+   [
+    "dirt",
+    186,
+    8,
+    3,
+    32
+   ],
+   [
+    "dirt",
+    156,
+    58,
+    20,
+    10
+   ],
+   [
+    "dirt",
+    178,
+    12,
+    16,
+    10
+   ],
+   [
+    "dirt",
+    234,
+    34,
+    24,
+    14
+   ],
+   [
+    "gravel",
+    240,
+    38,
+    12,
+    6
+   ],
+   [
+    "dirt",
+    242,
+    10,
+    16,
+    10
+   ],
+   [
+    "road",
+    262,
+    44,
+    4,
+    40
+   ],
+   [
+    "road",
+    245,
+    20,
+    3,
+    14
+   ],
+   [
+    "field",
+    208,
+    56,
+    30,
+    20
+   ],
+   [
+    "field",
+    244,
+    58,
+    20,
+    18
+   ],
+   [
+    "field",
+    270,
+    56,
+    26,
+    20
+   ],
+   [
+    "mud",
+    286,
+    34,
+    8,
+    6
+   ],
+   [
+    "road",
+    112,
+    40,
+    28,
+    4
    ]
   ]
  },
@@ -254,6 +380,20 @@
    16,
    6,
    0
+  ],
+  [
+   134,
+   96,
+   166,
+   16,
+   0
+  ],
+  [
+   134,
+   104,
+   166,
+   8,
+   1
   ]
  ],
  "walls": [
@@ -303,7 +443,14 @@
    "x": 131,
    "y": 4,
    "w": 1,
-   "h": 61,
+   "h": 36,
+   "kind": "stone"
+  },
+  {
+   "x": 131,
+   "y": 44,
+   "w": 1,
+   "h": 21,
    "kind": "stone"
   }
  ],
@@ -367,7 +514,8 @@
    "x": 8,
    "y": 4,
    "w": 124,
-   "h": 60
+   "h": 60,
+   "noteId": "lowerTown"
   },
   {
    "nameKey": "place.marketSquare",
@@ -398,21 +546,96 @@
    "x": 22,
    "y": 14,
    "w": 18,
-   "h": 16
+   "h": 16,
+   "noteId": "vagnYard"
   },
   {
    "nameKey": "place.piers",
    "x": 20,
    "y": 88,
    "w": 96,
-   "h": 24
+   "h": 24,
+   "noteId": "piers"
   },
   {
    "nameKey": "place.alleyWest",
    "x": 10,
    "y": 40,
    "w": 18,
-   "h": 22
+   "h": 22,
+   "noteId": "alleyWest"
+  },
+  {
+   "nameKey": "place.eastRoad",
+   "x": 132,
+   "y": 36,
+   "w": 74,
+   "h": 10,
+   "noteId": "eastRoad"
+  },
+  {
+   "nameKey": "place.forest",
+   "x": 140,
+   "y": 0,
+   "w": 66,
+   "h": 96,
+   "noteId": "forest"
+  },
+  {
+   "nameKey": "place.woodcutterCamp",
+   "x": 154,
+   "y": 54,
+   "w": 24,
+   "h": 16,
+   "noteId": "woodcutterCamp"
+  },
+  {
+   "nameKey": "place.hunterLodge",
+   "x": 176,
+   "y": 8,
+   "w": 20,
+   "h": 16,
+   "noteId": "hunterLodge"
+  },
+  {
+   "nameKey": "place.village",
+   "x": 206,
+   "y": 6,
+   "w": 94,
+   "h": 84,
+   "noteId": "village"
+  },
+  {
+   "nameKey": "place.villageSquare",
+   "x": 232,
+   "y": 32,
+   "w": 28,
+   "h": 18,
+   "noteId": "villageSquare"
+  },
+  {
+   "nameKey": "place.villageMill",
+   "x": 240,
+   "y": 6,
+   "w": 22,
+   "h": 16,
+   "noteId": "mill"
+  },
+  {
+   "nameKey": "place.villageChapel",
+   "x": 270,
+   "y": 20,
+   "w": 24,
+   "h": 18,
+   "noteId": "villageChapel"
+  },
+  {
+   "nameKey": "place.villageFields",
+   "x": 206,
+   "y": 54,
+   "w": 94,
+   "h": 26,
+   "noteId": "villageFields"
   }
  ],
  "buildings": [
@@ -585,7 +808,8 @@
    "windows": 1,
    "ruin": false,
    "doorX": 96,
-   "doorW": 13
+   "doorW": 13,
+   "interior": "int_marta_shack"
   },
   {
    "id": "tannery",
@@ -653,7 +877,8 @@
    "trim": "#4a3220",
    "windows": 2,
    "doorX": 176,
-   "doorW": 22
+   "doorW": 22,
+   "interior": "int_warehouse_b"
   },
   {
    "id": "fisher_hut",
@@ -668,7 +893,8 @@
    "trim": "#4a3220",
    "windows": 1,
    "doorX": 96,
-   "doorW": 13
+   "doorW": 13,
+   "interior": "int_fisher_hut"
   },
   {
    "id": "shack_1",
@@ -709,7 +935,8 @@
    "wall": "#c3b193",
    "trim": "#5a452e",
    "windows": 2,
-   "halfTimber": true
+   "halfTimber": true,
+   "interior": "int_house_a"
   },
   {
    "id": "house_b",
@@ -722,7 +949,8 @@
    "roof": "tile",
    "wall": "#b8a68a",
    "trim": "#5a452e",
-   "windows": 2
+   "windows": 2,
+   "interior": "int_house_b"
   },
   {
    "id": "house_c",
@@ -736,7 +964,8 @@
    "wall": "#cdbb98",
    "trim": "#5a452e",
    "windows": 2,
-   "flowerBoxes": true
+   "flowerBoxes": true,
+   "interior": "int_house_c"
   },
   {
    "id": "house_d",
@@ -749,7 +978,8 @@
    "roof": "thatch",
    "wall": "#bfae90",
    "trim": "#4a3220",
-   "windows": 2
+   "windows": 2,
+   "interior": "int_house_d"
   },
   {
    "id": "house_e",
@@ -762,7 +992,8 @@
    "roof": "tile",
    "wall": "#c8b898",
    "trim": "#5a452e",
-   "windows": 2
+   "windows": 2,
+   "interior": "int_house_e"
   },
   {
    "id": "house_f",
@@ -776,7 +1007,8 @@
    "wall": "#bda98a",
    "trim": "#5a452e",
    "windows": 2,
-   "halfTimber": true
+   "halfTimber": true,
+   "interior": "int_house_f"
   },
   {
    "id": "almshouse",
@@ -790,7 +1022,8 @@
    "wall": "#a9987c",
    "trim": "#4a3220",
    "windows": 2,
-   "ruin": false
+   "ruin": false,
+   "interior": "int_almshouse"
   },
   {
    "id": "ruin_abbey",
@@ -805,6 +1038,482 @@
    "trim": "#4c4842",
    "windows": 2,
    "ruin": true
+  },
+  {
+   "id": "town_house_1",
+   "nameKey": "bld.house",
+   "tx": 34,
+   "ty": 14,
+   "tw": 6,
+   "td": 5,
+   "wallH": 32,
+   "roof": "tile",
+   "wall": "#cdbb98",
+   "trim": "#4a3220",
+   "windows": 1,
+   "halfTimber": false,
+   "chimney": false,
+   "flowerBoxes": true,
+   "interior": "int_town_house_1"
+  },
+  {
+   "id": "town_house_2",
+   "nameKey": "bld.house",
+   "tx": 82,
+   "ty": 20,
+   "tw": 6,
+   "td": 4,
+   "wallH": 27,
+   "roof": "tile",
+   "wall": "#bfae8a",
+   "trim": "#3a2c1e",
+   "windows": 1,
+   "halfTimber": false,
+   "chimney": true,
+   "flowerBoxes": true,
+   "interior": "int_town_house_2"
+  },
+  {
+   "id": "town_house_3",
+   "nameKey": "bld.house",
+   "tx": 12,
+   "ty": 30,
+   "tw": 6,
+   "td": 4,
+   "wallH": 28,
+   "roof": "tile",
+   "wall": "#bfae8a",
+   "trim": "#3a2c1e",
+   "windows": 1,
+   "halfTimber": false,
+   "chimney": false,
+   "flowerBoxes": false,
+   "interior": "int_town_house_3"
+  },
+  {
+   "id": "town_house_4",
+   "nameKey": "bld.house",
+   "tx": 100,
+   "ty": 52,
+   "tw": 6,
+   "td": 5,
+   "wallH": 26,
+   "roof": "shingle",
+   "wall": "#cdbb98",
+   "trim": "#4a3220",
+   "windows": 1,
+   "halfTimber": false,
+   "chimney": true,
+   "flowerBoxes": false,
+   "interior": "int_town_house_4"
+  },
+  {
+   "id": "town_house_5",
+   "nameKey": "bld.house",
+   "tx": 34,
+   "ty": 52,
+   "tw": 6,
+   "td": 5,
+   "wallH": 31,
+   "roof": "shingle",
+   "wall": "#a9987c",
+   "trim": "#5a452e",
+   "windows": 1,
+   "halfTimber": true,
+   "chimney": true,
+   "flowerBoxes": false,
+   "interior": "int_town_house_5"
+  },
+  {
+   "id": "town_house_6",
+   "nameKey": "bld.house",
+   "tx": 12,
+   "ty": 10,
+   "tw": 6,
+   "td": 4,
+   "wallH": 32,
+   "roof": "tile",
+   "wall": "#c3b193",
+   "trim": "#6b4a2c",
+   "windows": 1,
+   "halfTimber": true,
+   "chimney": false,
+   "flowerBoxes": false,
+   "interior": "int_town_house_6"
+  },
+  {
+   "id": "town_house_7",
+   "nameKey": "bld.house",
+   "tx": 38,
+   "ty": 22,
+   "tw": 6,
+   "td": 4,
+   "wallH": 27,
+   "roof": "tile",
+   "wall": "#d4c4a2",
+   "trim": "#4a3220",
+   "windows": 1,
+   "halfTimber": true,
+   "chimney": true,
+   "flowerBoxes": true,
+   "interior": "int_town_house_7"
+  },
+  {
+   "id": "harbour_hut_1",
+   "nameKey": "bld.fisherHut",
+   "tx": 16,
+   "ty": 70,
+   "tw": 6,
+   "td": 4,
+   "wallH": 22,
+   "roof": "thatch",
+   "wall": "#9c8a6c",
+   "trim": "#4a3220",
+   "windows": 1,
+   "halfTimber": false,
+   "chimney": true,
+   "flowerBoxes": false,
+   "interior": "int_harbour_hut_1"
+  },
+  {
+   "id": "harbour_hut_2",
+   "nameKey": "bld.fisherHut",
+   "tx": 24,
+   "ty": 70,
+   "tw": 6,
+   "td": 4,
+   "wallH": 22,
+   "roof": "thatch",
+   "wall": "#cdbb98",
+   "trim": "#3a2c1e",
+   "windows": 1,
+   "halfTimber": false,
+   "chimney": true,
+   "flowerBoxes": true,
+   "interior": "int_harbour_hut_2"
+  },
+  {
+   "id": "harbour_hut_3",
+   "nameKey": "bld.fisherHut",
+   "tx": 32,
+   "ty": 70,
+   "tw": 6,
+   "td": 4,
+   "wallH": 22,
+   "roof": "thatch",
+   "wall": "#b8a98c",
+   "trim": "#6b4a2c",
+   "windows": 1,
+   "halfTimber": false,
+   "chimney": true,
+   "flowerBoxes": false,
+   "interior": "int_harbour_hut_3"
+  },
+  {
+   "id": "harbour_hut_4",
+   "nameKey": "bld.fisherHut",
+   "tx": 40,
+   "ty": 70,
+   "tw": 6,
+   "td": 4,
+   "wallH": 22,
+   "roof": "thatch",
+   "wall": "#d4c4a2",
+   "trim": "#3a2c1e",
+   "windows": 1,
+   "halfTimber": false,
+   "chimney": false,
+   "flowerBoxes": false,
+   "interior": "int_harbour_hut_4"
+  },
+  {
+   "id": "harbour_hut_5",
+   "nameKey": "bld.fisherHut",
+   "tx": 72,
+   "ty": 70,
+   "tw": 6,
+   "td": 4,
+   "wallH": 22,
+   "roof": "thatch",
+   "wall": "#d4c4a2",
+   "trim": "#5a452e",
+   "windows": 1,
+   "halfTimber": false,
+   "chimney": false,
+   "flowerBoxes": false,
+   "interior": "int_harbour_hut_5"
+  },
+  {
+   "id": "harbour_hut_6",
+   "nameKey": "bld.fisherHut",
+   "tx": 80,
+   "ty": 70,
+   "tw": 6,
+   "td": 4,
+   "wallH": 22,
+   "roof": "thatch",
+   "wall": "#9c8a6c",
+   "trim": "#4a3220",
+   "windows": 1,
+   "halfTimber": false,
+   "chimney": true,
+   "flowerBoxes": false,
+   "interior": "int_harbour_hut_6"
+  },
+  {
+   "id": "harbour_hut_7",
+   "nameKey": "bld.fisherHut",
+   "tx": 88,
+   "ty": 70,
+   "tw": 6,
+   "td": 4,
+   "wallH": 22,
+   "roof": "thatch",
+   "wall": "#a9987c",
+   "trim": "#5a452e",
+   "windows": 1,
+   "halfTimber": true,
+   "chimney": false,
+   "flowerBoxes": false,
+   "interior": "int_harbour_hut_7"
+  },
+  {
+   "id": "harbour_hut_8",
+   "nameKey": "bld.fisherHut",
+   "tx": 116,
+   "ty": 76,
+   "tw": 6,
+   "td": 4,
+   "wallH": 22,
+   "roof": "thatch",
+   "wall": "#9c8a6c",
+   "trim": "#6b4a2c",
+   "windows": 1,
+   "halfTimber": false,
+   "chimney": true,
+   "flowerBoxes": false,
+   "interior": "int_harbour_hut_8"
+  },
+  {
+   "id": "harbour_hut_9",
+   "nameKey": "bld.fisherHut",
+   "tx": 16,
+   "ty": 79,
+   "tw": 6,
+   "td": 4,
+   "wallH": 22,
+   "roof": "thatch",
+   "wall": "#b8a98c",
+   "trim": "#6b4a2c",
+   "windows": 1,
+   "halfTimber": false,
+   "chimney": false,
+   "flowerBoxes": false,
+   "interior": "int_harbour_hut_9"
+  },
+  {
+   "id": "woodcutter_hut",
+   "nameKey": "bld.woodcutterHut",
+   "tx": 160,
+   "ty": 62,
+   "tw": 7,
+   "td": 5,
+   "wallH": 26,
+   "roof": "thatch",
+   "wall": "#cdbb98",
+   "trim": "#5a452e",
+   "windows": 2,
+   "halfTimber": false,
+   "chimney": true,
+   "flowerBoxes": false,
+   "interior": "int_woodcutter_hut"
+  },
+  {
+   "id": "hunter_lodge",
+   "nameKey": "bld.hunterLodge",
+   "tx": 182,
+   "ty": 20,
+   "tw": 7,
+   "td": 5,
+   "wallH": 26,
+   "roof": "shingle",
+   "wall": "#b8a98c",
+   "trim": "#6b4a2c",
+   "windows": 2,
+   "halfTimber": false,
+   "chimney": true,
+   "flowerBoxes": true,
+   "interior": "int_hunter_lodge"
+  },
+  {
+   "id": "elder_house",
+   "nameKey": "bld.elderHouse",
+   "tx": 222,
+   "ty": 32,
+   "tw": 9,
+   "td": 6,
+   "wallH": 38,
+   "roof": "tile",
+   "wall": "#a9987c",
+   "trim": "#5a452e",
+   "windows": 3,
+   "halfTimber": true,
+   "chimney": true,
+   "flowerBoxes": true,
+   "interior": "int_elder_house",
+   "stories": 2
+  },
+  {
+   "id": "mill",
+   "nameKey": "bld.mill",
+   "tx": 244,
+   "ty": 18,
+   "tw": 10,
+   "td": 7,
+   "wallH": 40,
+   "roof": "shingle",
+   "wall": "#cdbb98",
+   "trim": "#6b4a2c",
+   "windows": 2,
+   "halfTimber": false,
+   "chimney": false,
+   "flowerBoxes": true,
+   "interior": "int_mill"
+  },
+  {
+   "id": "village_chapel",
+   "nameKey": "bld.villageChapel",
+   "tx": 274,
+   "ty": 32,
+   "tw": 10,
+   "td": 8,
+   "wallH": 42,
+   "roof": "tile",
+   "wall": "#d4cdb8",
+   "trim": "#5a452e",
+   "windows": 2,
+   "halfTimber": false,
+   "chimney": false,
+   "flowerBoxes": false,
+   "interior": "int_village_chapel"
+  },
+  {
+   "id": "village_house_1",
+   "nameKey": "bld.house",
+   "tx": 210,
+   "ty": 46,
+   "tw": 7,
+   "td": 5,
+   "wallH": 27,
+   "roof": "thatch",
+   "wall": "#d4c4a2",
+   "trim": "#3a2c1e",
+   "windows": 2,
+   "halfTimber": false,
+   "chimney": true,
+   "flowerBoxes": false,
+   "interior": "int_village_house_1"
+  },
+  {
+   "id": "village_house_2",
+   "nameKey": "bld.house",
+   "tx": 260,
+   "ty": 47,
+   "tw": 7,
+   "td": 5,
+   "wallH": 29,
+   "roof": "thatch",
+   "wall": "#bfae8a",
+   "trim": "#4a3220",
+   "windows": 2,
+   "halfTimber": true,
+   "chimney": true,
+   "flowerBoxes": false,
+   "interior": "int_village_house_2"
+  },
+  {
+   "id": "village_house_3",
+   "nameKey": "bld.house",
+   "tx": 222,
+   "ty": 52,
+   "tw": 7,
+   "td": 4,
+   "wallH": 27,
+   "roof": "thatch",
+   "wall": "#b8a98c",
+   "trim": "#5a452e",
+   "windows": 2,
+   "halfTimber": false,
+   "chimney": true,
+   "flowerBoxes": true,
+   "interior": "int_village_house_3"
+  },
+  {
+   "id": "village_house_4",
+   "nameKey": "bld.oldWomanHut",
+   "tx": 259,
+   "ty": 30,
+   "tw": 7,
+   "td": 5,
+   "wallH": 31,
+   "roof": "thatch",
+   "wall": "#d4c4a2",
+   "trim": "#3a2c1e",
+   "windows": 2,
+   "halfTimber": true,
+   "chimney": false,
+   "flowerBoxes": false,
+   "interior": "int_village_house_4"
+  },
+  {
+   "id": "village_house_5",
+   "nameKey": "bld.house",
+   "tx": 210,
+   "ty": 32,
+   "tw": 7,
+   "td": 5,
+   "wallH": 32,
+   "roof": "thatch",
+   "wall": "#9c8a6c",
+   "trim": "#5a452e",
+   "windows": 2,
+   "halfTimber": false,
+   "chimney": false,
+   "flowerBoxes": true,
+   "interior": "int_village_house_5"
+  },
+  {
+   "id": "village_house_6",
+   "nameKey": "bld.house",
+   "tx": 286,
+   "ty": 48,
+   "tw": 8,
+   "td": 5,
+   "wallH": 27,
+   "roof": "thatch",
+   "wall": "#9c8a6c",
+   "trim": "#6b4a2c",
+   "windows": 2,
+   "halfTimber": false,
+   "chimney": true,
+   "flowerBoxes": false,
+   "interior": "int_village_house_6"
+  },
+  {
+   "id": "village_barn",
+   "nameKey": "bld.barn",
+   "tx": 290,
+   "ty": 28,
+   "tw": 8,
+   "td": 6,
+   "wallH": 31,
+   "roof": "thatch",
+   "wall": "#8a6a48",
+   "trim": "#5a452e",
+   "windows": 0,
+   "halfTimber": false,
+   "chimney": false,
+   "flowerBoxes": false
   }
  ],
  "props": [
@@ -1260,24 +1969,6 @@
    90
   ],
   [
-   "boat",
-   30,
-   100,
-   0
-  ],
-  [
-   "boat",
-   60,
-   106,
-   0
-  ],
-  [
-   "boat",
-   96,
-   98,
-   0
-  ],
-  [
    "barrel",
    34,
    90
@@ -1449,6 +2140,804 @@
    "bench",
    66,
    18
+  ],
+  [
+   "boat",
+   26,
+   99,
+   0
+  ],
+  [
+   "boat",
+   39,
+   98,
+   1
+  ],
+  [
+   "boat",
+   56,
+   101,
+   0
+  ],
+  [
+   "boat",
+   68,
+   99,
+   1
+  ],
+  [
+   "boat",
+   92,
+   98,
+   0
+  ],
+  [
+   "boat",
+   104,
+   97,
+   1
+  ],
+  [
+   "boat",
+   80,
+   103,
+   0
+  ],
+  [
+   "netPile",
+   29,
+   89
+  ],
+  [
+   "fishCrate",
+   34,
+   94
+  ],
+  [
+   "barrel",
+   29,
+   97
+  ],
+  [
+   "crate",
+   34,
+   99
+  ],
+  [
+   "anchor",
+   30,
+   103
+  ],
+  [
+   "fishCrate",
+   59,
+   90
+  ],
+  [
+   "sack",
+   64,
+   95
+  ],
+  [
+   "netPile",
+   59,
+   99
+  ],
+  [
+   "barrelStack",
+   64,
+   103
+  ],
+  [
+   "crate",
+   59,
+   106
+  ],
+  [
+   "crateStack",
+   95,
+   91
+  ],
+  [
+   "barrel",
+   100,
+   96
+  ],
+  [
+   "fishCrate",
+   95,
+   99
+  ],
+  [
+   "crate",
+   50,
+   36
+  ],
+  [
+   "sack",
+   46,
+   37
+  ],
+  [
+   "crate",
+   58,
+   36
+  ],
+  [
+   "sack",
+   54,
+   37
+  ],
+  [
+   "barrel",
+   58,
+   38
+  ],
+  [
+   "sack",
+   68,
+   37
+  ],
+  [
+   "sack",
+   78,
+   37
+  ],
+  [
+   "barrel",
+   82,
+   38
+  ],
+  [
+   "crate",
+   50,
+   46
+  ],
+  [
+   "sack",
+   46,
+   47
+  ],
+  [
+   "barrel",
+   50,
+   48
+  ],
+  [
+   "crate",
+   64,
+   46
+  ],
+  [
+   "sack",
+   60,
+   47
+  ],
+  [
+   "barrel",
+   64,
+   48
+  ],
+  [
+   "crate",
+   76,
+   46
+  ],
+  [
+   "sack",
+   72,
+   47
+  ],
+  [
+   "barrel",
+   76,
+   48
+  ],
+  [
+   "marketUmbrella",
+   52,
+   48
+  ],
+  [
+   "marketUmbrella",
+   66,
+   44
+  ],
+  [
+   "pileOfSalt",
+   58,
+   50
+  ],
+  [
+   "cart",
+   84,
+   48,
+   1
+  ],
+  [
+   "bench",
+   56,
+   42
+  ],
+  [
+   "bench",
+   72,
+   42
+  ],
+  [
+   "woodpile",
+   44,
+   30
+  ],
+  [
+   "barrelRain",
+   59,
+   30
+  ],
+  [
+   "barrelRain",
+   71,
+   30
+  ],
+  [
+   "flowerBed",
+   63,
+   31
+  ],
+  [
+   "woodpile",
+   76,
+   30
+  ],
+  [
+   "barrelRain",
+   89,
+   30
+  ],
+  [
+   "flowerBed",
+   79,
+   31
+  ],
+  [
+   "flowerBed",
+   93,
+   31
+  ],
+  [
+   "woodpile",
+   62,
+   20
+  ],
+  [
+   "barrelRain",
+   77,
+   20
+  ],
+  [
+   "flowerBed",
+   65,
+   21
+  ],
+  [
+   "woodpile",
+   24,
+   26
+  ],
+  [
+   "barrelRain",
+   34,
+   26
+  ],
+  [
+   "flowerBed",
+   27,
+   27
+  ],
+  [
+   "woodpile",
+   98,
+   32
+  ],
+  [
+   "barrelRain",
+   112,
+   32
+  ],
+  [
+   "flowerBed",
+   101,
+   33
+  ],
+  [
+   "woodpile",
+   42,
+   12
+  ],
+  [
+   "barrelRain",
+   54,
+   12
+  ],
+  [
+   "flowerBed",
+   45,
+   13
+  ],
+  [
+   "woodpile",
+   14,
+   50
+  ],
+  [
+   "flowerBed",
+   17,
+   51
+  ],
+  [
+   "woodpile",
+   112,
+   52
+  ],
+  [
+   "barrelRain",
+   126,
+   52
+  ],
+  [
+   "flowerBed",
+   115,
+   53
+  ],
+  [
+   "woodpile",
+   52,
+   78
+  ],
+  [
+   "barrelRain",
+   66,
+   78
+  ],
+  [
+   "flowerBed",
+   55,
+   79
+  ],
+  [
+   "woodpile",
+   24,
+   84
+  ],
+  [
+   "barrelRain",
+   40,
+   84
+  ],
+  [
+   "woodpile",
+   80,
+   84
+  ],
+  [
+   "barrelRain",
+   94,
+   84
+  ],
+  [
+   "flowerBed",
+   83,
+   85
+  ],
+  [
+   "woodpile",
+   102,
+   88
+  ],
+  [
+   "barrelRain",
+   111,
+   88
+  ],
+  [
+   "woodpile",
+   128,
+   56
+  ],
+  [
+   "barrelRain",
+   136,
+   56
+  ],
+  [
+   "woodpile",
+   18,
+   40
+  ],
+  [
+   "barrelRain",
+   28,
+   40
+  ],
+  [
+   "flowerBed",
+   21,
+   41
+  ],
+  [
+   "woodpile",
+   30,
+   40
+  ],
+  [
+   "barrelRain",
+   40,
+   40
+  ],
+  [
+   "flowerBed",
+   33,
+   41
+  ],
+  [
+   "woodpile",
+   94,
+   18
+  ],
+  [
+   "barrelRain",
+   105,
+   18
+  ],
+  [
+   "woodpile",
+   110,
+   18
+  ],
+  [
+   "barrelRain",
+   121,
+   18
+  ],
+  [
+   "flowerBed",
+   113,
+   19
+  ],
+  [
+   "barrelRain",
+   82,
+   12
+  ],
+  [
+   "woodpile",
+   86,
+   12
+  ],
+  [
+   "barrelRain",
+   96,
+   12
+  ],
+  [
+   "flowerBed",
+   89,
+   13
+  ],
+  [
+   "woodpile",
+   18,
+   14
+  ],
+  [
+   "barrelRain",
+   29,
+   14
+  ],
+  [
+   "flowerBed",
+   21,
+   15
+  ],
+  [
+   "flowerBed",
+   77,
+   23
+  ],
+  [
+   "hedge",
+   62,
+   10
+  ],
+  [
+   "bench",
+   72,
+   23
+  ],
+  [
+   "hayBale",
+   126,
+   24
+  ],
+  [
+   "hayBale",
+   134,
+   30
+  ],
+  [
+   "hayBale",
+   104,
+   66
+  ],
+  [
+   "haystack",
+   112,
+   68
+  ],
+  [
+   "woodpile",
+   102,
+   76
+  ],
+  [
+   "logPile",
+   110,
+   75
+  ],
+  [
+   "barrel",
+   98,
+   72
+  ],
+  [
+   "woodpile",
+   158,
+   66
+  ],
+  [
+   "logPile",
+   168,
+   66
+  ],
+  [
+   "stump",
+   172,
+   60
+  ],
+  [
+   "stump",
+   157,
+   60
+  ],
+  [
+   "campfire",
+   164,
+   66
+  ],
+  [
+   "toolRack",
+   170,
+   63
+  ],
+  [
+   "hideRack",
+   180,
+   22
+  ],
+  [
+   "weaponRack",
+   190,
+   22
+  ],
+  [
+   "campfire",
+   186,
+   16
+  ],
+  [
+   "woodpile",
+   179,
+   17
+  ],
+  [
+   "well",
+   246,
+   40
+  ],
+  [
+   "noticeBoard",
+   238,
+   36
+  ],
+  [
+   "shrine",
+   254,
+   36
+  ],
+  [
+   "bench",
+   242,
+   45
+  ],
+  [
+   "bench",
+   251,
+   45
+  ],
+  [
+   "tableRound",
+   236,
+   44
+  ],
+  [
+   "millstone",
+   256,
+   14
+  ],
+  [
+   "sack",
+   242,
+   16
+  ],
+  [
+   "sack",
+   243,
+   17
+  ],
+  [
+   "cart",
+   256,
+   19,
+   1
+  ],
+  [
+   "pigpen",
+   287,
+   41
+  ],
+  [
+   "beehive",
+   296,
+   58
+  ],
+  [
+   "beehive",
+   297,
+   61
+  ],
+  [
+   "scarecrow",
+   220,
+   64
+  ],
+  [
+   "scarecrow",
+   254,
+   66
+  ],
+  [
+   "scarecrow",
+   282,
+   66
+  ],
+  [
+   "haystack",
+   232,
+   70
+  ],
+  [
+   "hayBale",
+   266,
+   74
+  ],
+  [
+   "haystack",
+   276,
+   76
+  ],
+  [
+   "waterTrough",
+   296,
+   34
+  ],
+  [
+   "fence",
+   284,
+   38
+  ],
+  [
+   "fence",
+   288,
+   38
+  ],
+  [
+   "flowerBed",
+   224,
+   34
+  ],
+  [
+   "flowerBed",
+   212,
+   48
+  ],
+  [
+   "woodpile",
+   208,
+   46
+  ],
+  [
+   "barrelRain",
+   218,
+   46
+  ],
+  [
+   "clothesline",
+   266,
+   48
+  ],
+  [
+   "chicken",
+   228,
+   54,
+   0
+  ],
+  [
+   "chicken",
+   230,
+   55,
+   1
+  ],
+  [
+   "tombstone",
+   276,
+   36
+  ],
+  [
+   "tombstone",
+   278,
+   37,
+   1
+  ],
+  [
+   "tombstone",
+   281,
+   36
+  ],
+  [
+   "tombstone",
+   283,
+   38,
+   1
+  ],
+  [
+   "tombstone",
+   279,
+   39
+  ],
+  [
+   "signPost",
+   204,
+   41
+  ],
+  [
+   "signPost",
+   141,
+   39
+  ],
+  [
+   "lampPost",
+   240,
+   34
+  ],
+  [
+   "lampPost",
+   254,
+   47
+  ],
+  [
+   "signPost",
+   128,
+   44
   ]
  ],
  "lamps": [
@@ -1527,11 +3016,27 @@
   [
    96,
    84
+  ],
+  [
+   240,
+   34
+  ],
+  [
+   254,
+   47
+  ],
+  [
+   133,
+   39
+  ],
+  [
+   133,
+   44
   ]
  ],
  "spawners": {
   "passerby": {
-   "count": 16,
+   "count": 34,
    "areas": [
     [
      16,
@@ -1550,6 +3055,24 @@
      70,
      90,
      16
+    ],
+    [
+     214,
+     30,
+     70,
+     20
+    ],
+    [
+     16,
+     66,
+     110,
+     14
+    ],
+    [
+     150,
+     40,
+     50,
+     4
     ]
    ]
   },
@@ -1607,6 +3130,10 @@
      30
     ]
    ]
+  },
+  "creatures": {
+   "count": 0,
+   "points": []
   }
  },
  "fastTravel": [
@@ -1645,7 +3172,233 @@
    [
     102,
     28
+   ],
+   [
+    226,
+    26
+   ],
+   [
+    248,
+    12
+   ],
+   [
+    213,
+    41
+   ],
+   [
+    290,
+    43
+   ],
+   [
+    163,
+    57
+   ],
+   [
+    185,
+    15
    ]
   ]
- }
+ },
+ "stations": [
+  {
+   "tx": 11,
+   "ty": 23,
+   "kind": "questSearch",
+   "labelKey": "station.abbeyRubble",
+   "item": "relic_elenem",
+   "needFlag": "relic_promise",
+   "emptyKey": "interact.nothingSpecial",
+   "foundKey": "interact.foundRelic"
+  },
+  {
+   "tx": 61,
+   "ty": 108,
+   "kind": "ferryBoat",
+   "labelKey": "station.ferryBoat"
+  },
+  {
+   "tx": 31,
+   "ty": 104,
+   "kind": "fishingSpot",
+   "labelKey": "station.fishingSpot"
+  },
+  {
+   "tx": 64,
+   "ty": 107,
+   "kind": "fishingSpot",
+   "labelKey": "station.fishingSpot"
+  },
+  {
+   "tx": 97,
+   "ty": 100,
+   "kind": "fishingSpot",
+   "labelKey": "station.fishingSpot"
+  },
+  {
+   "tx": 194,
+   "ty": 70,
+   "kind": "questSearch",
+   "labelKey": "station.lostGoat",
+   "item": "goat_bell",
+   "needFlag": "goat_search",
+   "emptyKey": "interact.nothingSpecial",
+   "foundKey": "interact.foundGoat"
+  },
+  {
+   "tx": 176,
+   "ty": 80,
+   "kind": "questSearch",
+   "labelKey": "station.bloodyClearing",
+   "item": "woodcutter_cap",
+   "needFlag": "woodcutter_search",
+   "emptyKey": "interact.nothingSpecial",
+   "foundKey": "interact.foundCap"
+  },
+  {
+   "tx": 280,
+   "ty": 37,
+   "kind": "questSearch",
+   "labelKey": "station.oldGrave",
+   "item": "old_coin",
+   "needFlag": "legend_search",
+   "night": true,
+   "emptyKey": "interact.graveDay",
+   "foundKey": "interact.foundCoin"
+  },
+  {
+   "tx": 57,
+   "ty": 44,
+   "kind": "carter",
+   "labelKey": "station.carterPort",
+   "destKey": "place.piers",
+   "destTx": 66,
+   "destTy": 86
+  },
+  {
+   "tx": 60,
+   "ty": 48,
+   "kind": "carter",
+   "labelKey": "station.carterVillage",
+   "destKey": "place.villageSquare",
+   "destTx": 249,
+   "destTy": 41
+  },
+  {
+   "tx": 66,
+   "ty": 86,
+   "kind": "carter",
+   "labelKey": "station.carterTown",
+   "destKey": "place.marketSquare",
+   "destTx": 57,
+   "destTy": 44
+  },
+  {
+   "tx": 249,
+   "ty": 41,
+   "kind": "carter",
+   "labelKey": "station.carterTown",
+   "destKey": "place.marketSquare",
+   "destTx": 57,
+   "destTy": 44
+  }
+ ],
+ "forests": [
+  [
+   142,
+   2,
+   62,
+   36,
+   0.3
+  ],
+  [
+   142,
+   46,
+   62,
+   38,
+   0.28
+  ],
+  [
+   204,
+   0,
+   96,
+   7,
+   0.22
+  ],
+  [
+   292,
+   8,
+   8,
+   46,
+   0.3
+  ],
+  [
+   204,
+   78,
+   96,
+   6,
+   0.12
+  ]
+ ],
+ "creatures": [
+  [
+   "deer",
+   170,
+   30
+  ],
+  [
+   "deer",
+   196,
+   52
+  ],
+  [
+   "boar",
+   160,
+   80
+  ],
+  [
+   "boar",
+   188,
+   6
+  ],
+  [
+   "wolf",
+   198,
+   86
+  ],
+  [
+   "crow",
+   222,
+   66
+  ],
+  [
+   "crow",
+   260,
+   70
+  ],
+  [
+   "goose",
+   240,
+   50
+  ],
+  [
+   "dog",
+   230,
+   40
+  ],
+  [
+   "horse",
+   288,
+   34
+  ],
+  [
+   "rat",
+   250,
+   16
+  ],
+  [
+   "deer",
+   296,
+   70
+  ]
+ ]
 }

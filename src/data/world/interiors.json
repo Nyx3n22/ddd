@@ -1,155 +1,6554 @@
 {
-  "interiors": [
+ "interiors": [
+  {
+   "id": "int_tavern",
+   "nameKey": "int.tavern",
+   "w": 15,
+   "h": 11,
+   "floor": "floorWood",
+   "wall": "#6b4a2c",
+   "props": [
+    [
+     "barCounter",
+     3,
+     2
+    ],
+    [
+     "keg",
+     1,
+     2
+    ],
+    [
+     "keg",
+     1,
+     3
+    ],
+    [
+     "barrelStack",
+     1,
+     5
+    ],
+    [
+     "sack",
+     1,
+     7
+    ],
+    [
+     "shelf",
+     7,
+     1
+    ],
+    [
+     "shelf",
+     9,
+     1
+    ],
+    [
+     "candles",
+     8,
+     1
+    ],
+    [
+     "fireplace",
+     13,
+     2
+    ],
+    [
+     "woodpile",
+     11,
+     2
+    ],
+    [
+     "cauldron",
+     12,
+     3
+    ],
+    [
+     "tableRound",
+     5,
+     5
+    ],
+    [
+     "stool",
+     4,
+     6
+    ],
+    [
+     "stool",
+     6,
+     6
+    ],
+    [
+     "stool",
+     5,
+     4
+    ],
+    [
+     "tableRound",
+     9,
+     6
+    ],
+    [
+     "stool",
+     8,
+     7
+    ],
+    [
+     "stool",
+     10,
+     7
+    ],
+    [
+     "stool",
+     9,
+     5
+    ],
+    [
+     "tableRound",
+     12,
+     7
+    ],
+    [
+     "stool",
+     11,
+     7
+    ],
+    [
+     "stool",
+     12,
+     6
+    ],
+    [
+     "table",
+     5,
+     9
+    ],
+    [
+     "bench",
+     4,
+     9
+    ],
+    [
+     "chest",
+     14,
+     6
+    ],
+    [
+     "torchStand",
+     1,
+     8
+    ],
+    [
+     "torchStand",
+     14,
+     4
+    ],
+    [
+     "stairs",
+     13,
+     9
+    ],
+    [
+     "pots",
+     10,
+     9
+    ]
+   ],
+   "lights": [
+    [
+     3,
+     2,
+     70,
+     "#ffcf6a"
+    ],
+    [
+     13,
+     3,
+     80,
+     "#ff9a3c"
+    ],
+    [
+     1,
+     8,
+     55,
+     "#ffcf6a"
+    ],
+    [
+     14,
+     4,
+     55,
+     "#ffcf6a"
+    ],
+    [
+     7,
+     6,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
     {
-      "id": "int_tavern", "nameKey": "int.tavern", "w": 15, "h": 11, "floor": "floorWood", "wall": "#6b4a2c",
-      "props": [
-        ["barCounter", 3, 2], ["keg", 2, 3], ["keg", 2, 4], ["barrelStack", 1, 5],
-        ["shelf", 7, 1], ["shelf", 9, 1], ["fireplace", 13, 2],
-        ["tableRound", 5, 5], ["stool", 4, 6], ["stool", 6, 6], ["stool", 5, 4],
-        ["tableRound", 9, 6], ["stool", 8, 7], ["stool", 10, 7], ["stool", 9, 5],
-        ["tableRound", 12, 7], ["stool", 11, 8], ["stool", 13, 8],
-        ["table", 6, 9], ["bench", 5, 9], ["chest", 14, 9], ["torchStand", 1, 8], ["torchStand", 14, 4]
-      ],
-      "lights": [[3, 2, 70, "#ffcf6a"], [13, 3, 80, "#ff9a3c"], [1, 8, 55, "#ffcf6a"], [14, 4, 55, "#ffcf6a"], [7, 6, 45, "#e8d6a8"]],
-      "exits": [{ "tx": 7, "ty": 10, "w": 2, "to": "world" }],
-      "stations": [
-        { "tx": 4, "ty": 2, "kind": "bar", "labelKey": "station.bar", "npc": "hanna" },
-        { "tx": 5, "ty": 5, "kind": "gambleTable", "labelKey": "station.dice", "npc": "gambler_night" },
-        { "tx": 9, "ty": 6, "kind": "gambleTable", "labelKey": "station.cards", "npc": "gambler_day" },
-        { "tx": 14, "ty": 9, "kind": "chest", "labelKey": "station.chest" },
-        { "tx": 13, "ty": 2, "kind": "hearth", "labelKey": "station.hearth" }
-      ],
-      "rooms": [{ "id": "room_1", "tx": 11, "ty": 9, "tw": 3, "th": 2, "labelKey": "int.room", "kind": "bed", "cost": 4 }],
-      "npcs": ["hanna"]
+     "tx": 7,
+     "ty": 10,
+     "w": 2,
+     "to": "world"
     },
     {
-      "id": "int_smithy", "nameKey": "int.smithy", "w": 12, "h": 9, "floor": "floorStone", "wall": "#5a4a3a",
-      "props": [
-        ["forge", 2, 2], ["anvil", 5, 3], ["grindstone", 7, 3], ["toolRack", 9, 1],
-        ["rack", 10, 3], ["crateStack", 1, 6], ["logPile", 3, 7], ["chest", 10, 7],
-        ["quenchBarrel", 6, 2], ["torchStand", 8, 6]
-      ],
-      "lights": [[2, 3, 85, "#ff9a3c"], [8, 6, 50, "#ffcf6a"], [5, 4, 40, "#e8d6a8"]],
-      "exits": [{ "tx": 5, "ty": 8, "w": 2, "to": "world" }],
-      "stations": [
-        { "tx": 5, "ty": 3, "kind": "forgeWork", "labelKey": "station.forge", "npc": "orlik" },
-        { "tx": 10, "ty": 3, "kind": "shop", "labelKey": "station.rack", "npc": "orlik" },
-        { "tx": 10, "ty": 7, "kind": "chest", "labelKey": "station.chest" }
-      ],
-      "npcs": ["orlik"]
-    },
-    {
-      "id": "int_scribe", "nameKey": "int.scribe", "w": 10, "h": 8, "floor": "floorWood", "wall": "#7a6248",
-      "props": [
-        ["bookshelf", 1, 1], ["bookshelf", 3, 1], ["desk", 6, 2], ["stool", 6, 3],
-        ["shelf", 8, 1], ["chest", 9, 6], ["table", 3, 5], ["torchStand", 1, 6]
-      ],
-      "lights": [[6, 2, 55, "#ffcf6a"], [1, 6, 45, "#ffcf6a"], [4, 4, 40, "#e8d6a8"]],
-      "exits": [{ "tx": 4, "ty": 7, "w": 2, "to": "world" }],
-      "stations": [
-        { "tx": 6, "ty": 2, "kind": "shop", "labelKey": "station.scribe", "npc": "skryba_urban" },
-        { "tx": 3, "ty": 5, "kind": "writeDesk", "labelKey": "station.writeDesk" }
-      ],
-      "npcs": ["skryba_urban"]
-    },
-    {
-      "id": "int_warehouse", "nameKey": "int.warehouse", "w": 16, "h": 11, "floor": "floorWood", "wall": "#4a3f30",
-      "props": [
-        ["crateStack", 2, 2], ["crateStack", 4, 2], ["crateStack", 2, 4], ["barrelStack", 6, 3],
-        ["crateStack", 12, 2], ["crateStack", 14, 3], ["barrelStack", 13, 6], ["crateStack", 11, 7],
-        ["crateCustoms", 8, 5], ["smugglingCrate", 9, 8], ["saltPile", 7, 8], ["torchStand", 1, 9],
-        ["torchStand", 15, 1], ["cart", 9, 3]
-      ],
-      "lights": [[1, 9, 60, "#ffcf6a"], [15, 1, 60, "#ffcf6a"], [8, 5, 40, "#c8b48c"]],
-      "exits": [{ "tx": 8, "ty": 10, "w": 2, "to": "world" }],
-      "stations": [
-        { "tx": 9, "ty": 8, "kind": "hideout", "labelKey": "station.hideout" },
-        { "tx": 8, "ty": 5, "kind": "search", "labelKey": "station.searchCrate" }
-      ],
-      "npcs": []
-    },
-    {
-      "id": "int_chapel", "nameKey": "int.chapel", "w": 12, "h": 12, "floor": "floorStone", "wall": "#8a8578",
-      "props": [
-        ["altar", 5, 1], ["pew", 3, 4], ["pew", 7, 4], ["pew", 3, 6], ["pew", 7, 6],
-        ["pew", 3, 8], ["pew", 7, 8], ["torchStand", 1, 2], ["torchStand", 10, 2],
-        ["shrine", 10, 9], ["chest", 1, 10]
-      ],
-      "lights": [[5, 2, 70, "#ffcf6a"], [1, 2, 55, "#ffcf6a"], [10, 2, 55, "#ffcf6a"], [6, 7, 45, "#e8d6a8"]],
-      "exits": [{ "tx": 5, "ty": 11, "w": 2, "to": "world" }],
-      "stations": [
-        { "tx": 5, "ty": 2, "kind": "altar", "labelKey": "station.altar", "npc": "teodor" },
-        { "tx": 1, "ty": 10, "kind": "alms", "labelKey": "station.alms" }
-      ],
-      "npcs": ["teodor"]
-    },
-    {
-      "id": "int_bath", "nameKey": "int.bath", "w": 10, "h": 8, "floor": "floorStone", "wall": "#7d7a72",
-      "props": [["tub", 2, 2], ["tub", 5, 2], ["tub", 2, 5], ["tub", 5, 5], ["barrelRain", 8, 2], ["torchStand", 8, 6], ["bench", 8, 4]],
-      "lights": [[3, 3, 60, "#ffd9a0"], [6, 6, 50, "#ffcf6a"], [8, 6, 45, "#ffcf6a"]],
-      "exits": [{ "tx": 4, "ty": 7, "w": 2, "to": "world" }],
-      "stations": [{ "tx": 2, "ty": 2, "kind": "bath", "labelKey": "station.bath" }, { "tx": 5, "ty": 5, "kind": "medic", "labelKey": "station.medic", "npc": "medyk_elen" }],
-      "npcs": ["medyk_elen"]
-    },
-    {
-      "id": "int_customs", "nameKey": "int.customs", "w": 12, "h": 8, "floor": "floorWood", "wall": "#6a5a44",
-      "props": [["desk", 3, 2], ["desk", 6, 2], ["stool", 3, 3], ["bookshelf", 9, 1], ["chest", 10, 5], ["crateCustoms", 1, 5], ["crateCustoms", 2, 6], ["torchStand", 11, 6]],
-      "lights": [[3, 2, 55, "#ffcf6a"], [11, 6, 50, "#ffcf6a"]],
-      "exits": [{ "tx": 5, "ty": 7, "w": 2, "to": "world" }],
-      "stations": [
-        { "tx": 3, "ty": 2, "kind": "customsDesk", "labelKey": "station.customs" },
-        { "tx": 6, "ty": 2, "kind": "shop", "labelKey": "station.confiscated", "npc": "celnik_bernard" }
-      ],
-      "npcs": ["celnik_bernard"]
-    },
-    {
-      "id": "int_vagn", "nameKey": "int.vagn", "w": 9, "h": 8, "floor": "floorWood", "wall": "#5f4a34",
-      "props": [["weaponRack", 1, 1], ["bed", 6, 1], ["table", 3, 4], ["bench", 3, 5], ["chest", 7, 6], ["fireplace", 8, 2], ["torchStand", 1, 6]],
-      "lights": [[8, 3, 70, "#ff9a3c"], [1, 6, 45, "#ffcf6a"]],
-      "exits": [{ "tx": 4, "ty": 7, "w": 2, "to": "world" }],
-      "stations": [
-        { "tx": 1, "ty": 1, "kind": "teacher", "labelKey": "station.trainingDummy", "npc": "vagn" },
-        { "tx": 6, "ty": 1, "kind": "bed", "labelKey": "station.bed" }
-      ],
-      "npcs": ["vagn"]
-    },
-    {
-      "id": "int_room_john", "nameKey": "int.roomJohn", "w": 7, "h": 6, "floor": "floorWood", "wall": "#6b563e",
-      "props": [["bed", 1, 1], ["chest", 5, 1], ["table", 4, 4], ["stool", 4, 5], ["torchStand", 6, 2]],
-      "lights": [[6, 2, 45, "#ffcf6a"], [3, 3, 35, "#e8d6a8"]],
-      "exits": [{ "tx": 3, "ty": 5, "w": 2, "to": "int_tavern" }],
-      "stations": [{ "tx": 1, "ty": 1, "kind": "bed", "labelKey": "station.bed" }, { "tx": 5, "ty": 1, "kind": "chest", "labelKey": "station.chest" }],
-      "npcs": []
-    },
-    {
-      "id": "int_guard", "nameKey": "int.guard", "w": 10, "h": 8, "floor": "floorStone", "wall": "#6e6a63",
-      "props": [["weaponRack", 1, 1], ["desk", 4, 2], ["table", 7, 4], ["bench", 7, 5], ["stocks", 2, 6], ["torchStand", 9, 1], ["chest", 8, 1]],
-      "lights": [[9, 1, 55, "#ffcf6a"], [4, 2, 45, "#e8d6a8"]],
-      "exits": [{ "tx": 4, "ty": 7, "w": 2, "to": "world" }],
-      "stations": [
-        { "tx": 4, "ty": 2, "kind": "guardDesk", "labelKey": "station.guardDesk", "npc": "rawicz" },
-        { "tx": 2, "ty": 6, "kind": "stocks", "labelKey": "station.stocks" }
-      ],
-      "npcs": ["rawicz"]
-    },
-    {
-      "id": "int_guild", "nameKey": "int.guild", "w": 12, "h": 9, "floor": "rug", "wall": "#7a5f42",
-      "props": [["desk", 5, 2], ["stool", 5, 3], ["bookshelf", 1, 1], ["bookshelf", 10, 1], ["table", 8, 5], ["bench", 8, 6], ["chest", 11, 7], ["torchStand", 2, 7]],
-      "lights": [[5, 2, 60, "#ffcf6a"], [2, 7, 45, "#ffcf6a"], [8, 5, 40, "#e8d6a8"]],
-      "exits": [{ "tx": 5, "ty": 8, "w": 2, "to": "world" }],
-      "stations": [
-        { "tx": 5, "ty": 2, "kind": "guildDesk", "labelKey": "station.guildDesk", "npc": "kupiec_zbylut" },
-        { "tx": 11, "ty": 7, "kind": "chest", "labelKey": "station.chest" }
-      ],
-      "npcs": ["kupiec_zbylut"]
-    },
-    {
-      "id": "int_tannery", "nameKey": "int.tannery", "w": 11, "h": 8, "floor": "floorStone", "wall": "#6b5a44",
-      "props": [["tub", 2, 2], ["tub", 5, 2], ["hideRack", 8, 2], ["crateStack", 9, 6], ["barrel", 1, 6], ["torchStand", 10, 1]],
-      "lights": [[10, 1, 50, "#ffcf6a"], [3, 4, 40, "#c8b48c"]],
-      "exits": [{ "tx": 5, "ty": 7, "w": 2, "to": "world" }],
-      "stations": [{ "tx": 2, "ty": 2, "kind": "tanVat", "labelKey": "station.tanVat" }, { "tx": 8, "ty": 2, "kind": "shop", "labelKey": "station.hides", "npc": "garbarz_oles" }],
-      "npcs": ["garbarz_oles"]
+     "tx": 13,
+     "ty": 9,
+     "w": 1,
+     "to": "int_room_john"
     }
-  ]
+   ],
+   "stations": [
+    {
+     "tx": 4,
+     "ty": 2,
+     "kind": "bar",
+     "labelKey": "station.bar",
+     "npc": "hanna"
+    },
+    {
+     "tx": 5,
+     "ty": 5,
+     "kind": "gambleTable",
+     "labelKey": "station.dice",
+     "npc": "gambler_night"
+    },
+    {
+     "tx": 9,
+     "ty": 6,
+     "kind": "gambleTable",
+     "labelKey": "station.cards",
+     "npc": "gambler_day"
+    },
+    {
+     "tx": 13,
+     "ty": 2,
+     "kind": "hearth",
+     "labelKey": "station.hearth"
+    },
+    {
+     "tx": 14,
+     "ty": 6,
+     "kind": "chest",
+     "labelKey": "station.chest"
+    }
+   ],
+   "npcs": [
+    "hanna"
+   ],
+   "windows": [
+    5,
+    11
+   ],
+   "wallStyle": "plaster",
+   "rugs": [
+    [
+     4,
+     4,
+     3,
+     3,
+     "#8e4433"
+    ],
+    [
+     7,
+     8,
+     2,
+     2,
+     "#4a6b3a"
+    ]
+   ]
+  },
+  {
+   "id": "int_smithy",
+   "nameKey": "int.smithy",
+   "w": 12,
+   "h": 9,
+   "floor": "floorStone",
+   "wall": "#5a4a3a",
+   "props": [
+    [
+     "forge",
+     2,
+     2
+    ],
+    [
+     "quenchBarrel",
+     4,
+     3
+    ],
+    [
+     "anvil",
+     5,
+     3
+    ],
+    [
+     "grindstone",
+     7,
+     3
+    ],
+    [
+     "weaponRack",
+     7,
+     1
+    ],
+    [
+     "toolRack",
+     9,
+     1
+    ],
+    [
+     "rack",
+     10,
+     3
+    ],
+    [
+     "crateStack",
+     1,
+     6
+    ],
+    [
+     "logPile",
+     3,
+     7
+    ],
+    [
+     "woodpile",
+     1,
+     4
+    ],
+    [
+     "sack",
+     8,
+     7
+    ],
+    [
+     "barrel",
+     11,
+     5
+    ],
+    [
+     "chest",
+     10,
+     7
+    ],
+    [
+     "torchStand",
+     8,
+     6
+    ]
+   ],
+   "lights": [
+    [
+     2,
+     3,
+     85,
+     "#ff9a3c"
+    ],
+    [
+     8,
+     6,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     5,
+     4,
+     40,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 5,
+     "ty": 8,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [
+    {
+     "tx": 5,
+     "ty": 3,
+     "kind": "forgeWork",
+     "labelKey": "station.forge",
+     "npc": "orlik"
+    },
+    {
+     "tx": 10,
+     "ty": 3,
+     "kind": "shop",
+     "labelKey": "station.rack",
+     "npc": "orlik"
+    },
+    {
+     "tx": 10,
+     "ty": 7,
+     "kind": "chest",
+     "labelKey": "station.chest"
+    }
+   ],
+   "npcs": [
+    "orlik"
+   ],
+   "windows": [
+    4
+   ],
+   "wallStyle": "stone"
+  },
+  {
+   "id": "int_scribe",
+   "nameKey": "int.scribe",
+   "w": 10,
+   "h": 8,
+   "floor": "floorWood",
+   "wall": "#7a6248",
+   "props": [
+    [
+     "bookshelf",
+     1,
+     1
+    ],
+    [
+     "bookshelf",
+     3,
+     1
+    ],
+    [
+     "desk",
+     6,
+     2
+    ],
+    [
+     "stool",
+     6,
+     3
+    ],
+    [
+     "candles",
+     7,
+     2
+    ],
+    [
+     "shelf",
+     8,
+     1
+    ],
+    [
+     "table",
+     3,
+     5
+    ],
+    [
+     "stool",
+     3,
+     6
+    ],
+    [
+     "candles",
+     4,
+     5
+    ],
+    [
+     "crate",
+     8,
+     6
+    ],
+    [
+     "chest",
+     9,
+     6
+    ],
+    [
+     "torchStand",
+     1,
+     6
+    ],
+    [
+     "pots",
+     1,
+     4
+    ]
+   ],
+   "lights": [
+    [
+     6,
+     2,
+     55,
+     "#ffcf6a"
+    ],
+    [
+     1,
+     6,
+     45,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     4,
+     40,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 4,
+     "ty": 7,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [
+    {
+     "tx": 6,
+     "ty": 2,
+     "kind": "shop",
+     "labelKey": "station.scribe",
+     "npc": "skryba_urban"
+    },
+    {
+     "tx": 3,
+     "ty": 5,
+     "kind": "writeDesk",
+     "labelKey": "station.writeDesk"
+    }
+   ],
+   "npcs": [
+    "skryba_urban"
+   ],
+   "windows": [
+    5
+   ],
+   "wallStyle": "plaster",
+   "rugs": [
+    [
+     4,
+     3,
+     3,
+     2,
+     "#3b5a86"
+    ]
+   ]
+  },
+  {
+   "id": "int_warehouse",
+   "nameKey": "int.warehouse",
+   "w": 16,
+   "h": 11,
+   "floor": "floorWood",
+   "wall": "#4a3f30",
+   "props": [
+    [
+     "crateStack",
+     2,
+     2
+    ],
+    [
+     "crateStack",
+     4,
+     2
+    ],
+    [
+     "crateStack",
+     2,
+     4
+    ],
+    [
+     "barrelStack",
+     6,
+     3
+    ],
+    [
+     "crateStack",
+     12,
+     2
+    ],
+    [
+     "crateStack",
+     14,
+     3
+    ],
+    [
+     "barrelStack",
+     13,
+     6
+    ],
+    [
+     "crateStack",
+     11,
+     7
+    ],
+    [
+     "crateCustoms",
+     8,
+     5
+    ],
+    [
+     "smugglingCrate",
+     9,
+     8
+    ],
+    [
+     "saltPile",
+     7,
+     8
+    ],
+    [
+     "cart",
+     9,
+     3
+    ],
+    [
+     "sack",
+     4,
+     6
+    ],
+    [
+     "sack",
+     5,
+     6
+    ],
+    [
+     "sack",
+     4,
+     7
+    ],
+    [
+     "netPile",
+     13,
+     9
+    ],
+    [
+     "barrel",
+     2,
+     8
+    ],
+    [
+     "barrel",
+     3,
+     8
+    ],
+    [
+     "fishCrate",
+     11,
+     4
+    ],
+    [
+     "torchStand",
+     1,
+     9
+    ],
+    [
+     "torchStand",
+     15,
+     1
+    ]
+   ],
+   "lights": [
+    [
+     1,
+     9,
+     60,
+     "#ffcf6a"
+    ],
+    [
+     15,
+     1,
+     60,
+     "#ffcf6a"
+    ],
+    [
+     8,
+     5,
+     40,
+     "#c8b48c"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 8,
+     "ty": 10,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [
+    {
+     "tx": 9,
+     "ty": 8,
+     "kind": "hideout",
+     "labelKey": "station.hideout"
+    },
+    {
+     "tx": 8,
+     "ty": 5,
+     "kind": "search",
+     "labelKey": "station.searchCrate"
+    }
+   ],
+   "npcs": [],
+   "windows": [
+    7,
+    10
+   ],
+   "wallStyle": "wood"
+  },
+  {
+   "id": "int_chapel",
+   "nameKey": "int.chapel",
+   "w": 12,
+   "h": 12,
+   "floor": "floorStone",
+   "wall": "#8a8578",
+   "props": [
+    [
+     "altar",
+     5,
+     1
+    ],
+    [
+     "candles",
+     4,
+     1
+    ],
+    [
+     "candles",
+     7,
+     1
+    ],
+    [
+     "statue",
+     2,
+     1
+    ],
+    [
+     "statue",
+     9,
+     1
+    ],
+    [
+     "pew",
+     3,
+     4
+    ],
+    [
+     "pew",
+     7,
+     4
+    ],
+    [
+     "pew",
+     3,
+     6
+    ],
+    [
+     "pew",
+     7,
+     6
+    ],
+    [
+     "pew",
+     3,
+     8
+    ],
+    [
+     "pew",
+     7,
+     8
+    ],
+    [
+     "torchStand",
+     1,
+     3
+    ],
+    [
+     "torchStand",
+     10,
+     3
+    ],
+    [
+     "shrine",
+     10,
+     9
+    ],
+    [
+     "chest",
+     1,
+     10
+    ],
+    [
+     "flowerBed",
+     9,
+     10
+    ]
+   ],
+   "lights": [
+    [
+     5,
+     2,
+     70,
+     "#ffcf6a"
+    ],
+    [
+     1,
+     2,
+     55,
+     "#ffcf6a"
+    ],
+    [
+     10,
+     2,
+     55,
+     "#ffcf6a"
+    ],
+    [
+     6,
+     7,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 5,
+     "ty": 11,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [
+    {
+     "tx": 5,
+     "ty": 2,
+     "kind": "altar",
+     "labelKey": "station.altar",
+     "npc": "teodor"
+    },
+    {
+     "tx": 1,
+     "ty": 10,
+     "kind": "alms",
+     "labelKey": "station.alms"
+    }
+   ],
+   "npcs": [
+    "teodor"
+   ],
+   "windows": [
+    4,
+    7
+   ],
+   "wallStyle": "stone",
+   "rugs": [
+    [
+     5,
+     3,
+     2,
+     8,
+     "#6e2318"
+    ]
+   ]
+  },
+  {
+   "id": "int_bath",
+   "nameKey": "int.bath",
+   "w": 10,
+   "h": 8,
+   "floor": "floorStone",
+   "wall": "#7d7a72",
+   "props": [
+    [
+     "tub",
+     2,
+     2
+    ],
+    [
+     "tub",
+     5,
+     2
+    ],
+    [
+     "tub",
+     2,
+     5
+    ],
+    [
+     "tub",
+     5,
+     5
+    ],
+    [
+     "barrelRain",
+     8,
+     2
+    ],
+    [
+     "bench",
+     8,
+     4
+    ],
+    [
+     "cauldron",
+     1,
+     6
+    ],
+    [
+     "shelf",
+     4,
+     1
+    ],
+    [
+     "pots",
+     7,
+     6
+    ],
+    [
+     "torchStand",
+     8,
+     6
+    ]
+   ],
+   "lights": [
+    [
+     3,
+     3,
+     60,
+     "#ffd9a0"
+    ],
+    [
+     6,
+     6,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     8,
+     6,
+     45,
+     "#ffcf6a"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 4,
+     "ty": 7,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [
+    {
+     "tx": 2,
+     "ty": 2,
+     "kind": "bath",
+     "labelKey": "station.bath"
+    },
+    {
+     "tx": 5,
+     "ty": 5,
+     "kind": "medic",
+     "labelKey": "station.medic",
+     "npc": "medyk_elen"
+    }
+   ],
+   "npcs": [
+    "medyk_elen"
+   ],
+   "windows": [
+    7
+   ],
+   "wallStyle": "stone"
+  },
+  {
+   "id": "int_customs",
+   "nameKey": "int.customs",
+   "w": 12,
+   "h": 8,
+   "floor": "floorWood",
+   "wall": "#6a5a44",
+   "props": [
+    [
+     "desk",
+     3,
+     2
+    ],
+    [
+     "stool",
+     3,
+     3
+    ],
+    [
+     "desk",
+     6,
+     2
+    ],
+    [
+     "candles",
+     7,
+     2
+    ],
+    [
+     "shelf",
+     1,
+     1
+    ],
+    [
+     "bookshelf",
+     9,
+     1
+    ],
+    [
+     "chest",
+     10,
+     5
+    ],
+    [
+     "crateCustoms",
+     1,
+     5
+    ],
+    [
+     "crateCustoms",
+     2,
+     6
+    ],
+    [
+     "crateStack",
+     10,
+     3
+    ],
+    [
+     "sack",
+     8,
+     6
+    ],
+    [
+     "torchStand",
+     11,
+     6
+    ]
+   ],
+   "lights": [
+    [
+     3,
+     2,
+     55,
+     "#ffcf6a"
+    ],
+    [
+     11,
+     6,
+     50,
+     "#ffcf6a"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 5,
+     "ty": 7,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [
+    {
+     "tx": 3,
+     "ty": 2,
+     "kind": "customsDesk",
+     "labelKey": "station.customs"
+    },
+    {
+     "tx": 6,
+     "ty": 2,
+     "kind": "shop",
+     "labelKey": "station.confiscated",
+     "npc": "celnik_bernard"
+    },
+    {
+     "tx": 10,
+     "ty": 5,
+     "kind": "questSearch",
+     "labelKey": "station.ledgerChest",
+     "item": "ledger_raven",
+     "needFlag": "ledger_hint",
+     "guard": "celnik_bernard",
+     "stolen": true,
+     "emptyKey": "interact.ledgerNotYet",
+     "foundKey": "interact.foundLedger"
+    }
+   ],
+   "npcs": [
+    "celnik_bernard"
+   ],
+   "windows": [
+    5
+   ],
+   "wallStyle": "wood",
+   "rugs": [
+    [
+     4,
+     4,
+     4,
+     2,
+     "#28405f"
+    ]
+   ]
+  },
+  {
+   "id": "int_vagn",
+   "nameKey": "int.vagn",
+   "w": 9,
+   "h": 8,
+   "floor": "floorWood",
+   "wall": "#5f4a34",
+   "props": [
+    [
+     "weaponRack",
+     1,
+     1
+    ],
+    [
+     "bed",
+     6,
+     1
+    ],
+    [
+     "table",
+     3,
+     4
+    ],
+    [
+     "bench",
+     3,
+     5
+    ],
+    [
+     "chest",
+     7,
+     6
+    ],
+    [
+     "fireplace",
+     8,
+     2
+    ],
+    [
+     "trainingDummy",
+     6,
+     5
+    ],
+    [
+     "woodpile",
+     7,
+     3
+    ],
+    [
+     "torchStand",
+     1,
+     6
+    ]
+   ],
+   "lights": [
+    [
+     8,
+     3,
+     70,
+     "#ff9a3c"
+    ],
+    [
+     1,
+     6,
+     45,
+     "#ffcf6a"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 4,
+     "ty": 7,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [
+    {
+     "tx": 1,
+     "ty": 1,
+     "kind": "teacher",
+     "labelKey": "station.trainingDummy",
+     "npc": "vagn"
+    },
+    {
+     "tx": 6,
+     "ty": 1,
+     "kind": "bed",
+     "labelKey": "station.bed"
+    }
+   ],
+   "npcs": [
+    "vagn"
+   ],
+   "windows": [
+    3
+   ],
+   "wallStyle": "wood",
+   "rugs": [
+    [
+     2,
+     3,
+     3,
+     2,
+     "#5f4a34"
+    ]
+   ]
+  },
+  {
+   "id": "int_room_john",
+   "nameKey": "int.roomJohn",
+   "w": 7,
+   "h": 6,
+   "floor": "floorWood",
+   "wall": "#6b563e",
+   "props": [
+    [
+     "bed",
+     1,
+     1
+    ],
+    [
+     "chest",
+     5,
+     1
+    ],
+    [
+     "table",
+     5,
+     3
+    ],
+    [
+     "stool",
+     5,
+     4
+    ],
+    [
+     "candles",
+     5,
+     2
+    ],
+    [
+     "torchStand",
+     6,
+     2
+    ],
+    [
+     "pots",
+     1,
+     4
+    ]
+   ],
+   "lights": [
+    [
+     6,
+     2,
+     45,
+     "#ffcf6a"
+    ],
+    [
+     3,
+     3,
+     35,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 5,
+     "w": 2,
+     "to": "int_tavern"
+    }
+   ],
+   "stations": [
+    {
+     "tx": 1,
+     "ty": 1,
+     "kind": "bed",
+     "labelKey": "station.bed"
+    },
+    {
+     "tx": 5,
+     "ty": 1,
+     "kind": "chest",
+     "labelKey": "station.chest"
+    }
+   ],
+   "npcs": [],
+   "windows": [
+    3
+   ],
+   "wallStyle": "plaster",
+   "rugs": [
+    [
+     1,
+     3,
+     2,
+     2,
+     "#8e4433"
+    ]
+   ]
+  },
+  {
+   "id": "int_guard",
+   "nameKey": "int.guard",
+   "w": 10,
+   "h": 8,
+   "floor": "floorStone",
+   "wall": "#6e6a63",
+   "props": [
+    [
+     "weaponRack",
+     1,
+     1
+    ],
+    [
+     "desk",
+     4,
+     2
+    ],
+    [
+     "candles",
+     5,
+     2
+    ],
+    [
+     "table",
+     7,
+     4
+    ],
+    [
+     "bench",
+     7,
+     5
+    ],
+    [
+     "stocks",
+     2,
+     6
+    ],
+    [
+     "torchStand",
+     9,
+     1
+    ],
+    [
+     "chest",
+     8,
+     1
+    ],
+    [
+     "barrel",
+     9,
+     5
+    ],
+    [
+     "crateStack",
+     9,
+     6
+    ]
+   ],
+   "lights": [
+    [
+     9,
+     1,
+     55,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 4,
+     "ty": 7,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [
+    {
+     "tx": 4,
+     "ty": 2,
+     "kind": "guardDesk",
+     "labelKey": "station.guardDesk",
+     "npc": "rawicz"
+    },
+    {
+     "tx": 2,
+     "ty": 6,
+     "kind": "stocks",
+     "labelKey": "station.stocks"
+    }
+   ],
+   "npcs": [
+    "rawicz"
+   ],
+   "windows": [
+    6
+   ],
+   "wallStyle": "stone"
+  },
+  {
+   "id": "int_guild",
+   "nameKey": "int.guild",
+   "w": 12,
+   "h": 9,
+   "floor": "floorWood",
+   "wall": "#7a5f42",
+   "props": [
+    [
+     "desk",
+     5,
+     2
+    ],
+    [
+     "stool",
+     5,
+     3
+    ],
+    [
+     "candles",
+     6,
+     2
+    ],
+    [
+     "bookshelf",
+     1,
+     1
+    ],
+    [
+     "shelf",
+     3,
+     1
+    ],
+    [
+     "bookshelf",
+     10,
+     1
+    ],
+    [
+     "table",
+     8,
+     5
+    ],
+    [
+     "bench",
+     8,
+     6
+    ],
+    [
+     "chest",
+     11,
+     7
+    ],
+    [
+     "crateStack",
+     1,
+     6
+    ],
+    [
+     "statue",
+     10,
+     4
+    ],
+    [
+     "torchStand",
+     2,
+     7
+    ]
+   ],
+   "lights": [
+    [
+     5,
+     2,
+     60,
+     "#ffcf6a"
+    ],
+    [
+     2,
+     7,
+     45,
+     "#ffcf6a"
+    ],
+    [
+     8,
+     5,
+     40,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 5,
+     "ty": 8,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [
+    {
+     "tx": 5,
+     "ty": 2,
+     "kind": "guildDesk",
+     "labelKey": "station.guildDesk",
+     "npc": "kupiec_zbylut"
+    },
+    {
+     "tx": 11,
+     "ty": 7,
+     "kind": "chest",
+     "labelKey": "station.chest"
+    }
+   ],
+   "npcs": [
+    "kupiec_zbylut"
+   ],
+   "windows": [
+    7
+   ],
+   "wallStyle": "plaster",
+   "rugs": [
+    [
+     3,
+     4,
+     4,
+     3,
+     "#6e2318"
+    ]
+   ]
+  },
+  {
+   "id": "int_tannery",
+   "nameKey": "int.tannery",
+   "w": 11,
+   "h": 8,
+   "floor": "floorStone",
+   "wall": "#6b5a44",
+   "props": [
+    [
+     "tub",
+     2,
+     2
+    ],
+    [
+     "tub",
+     5,
+     2
+    ],
+    [
+     "hideRack",
+     8,
+     2
+    ],
+    [
+     "hideRack",
+     8,
+     5
+    ],
+    [
+     "crateStack",
+     9,
+     6
+    ],
+    [
+     "barrel",
+     1,
+     6
+    ],
+    [
+     "barrel",
+     1,
+     5
+    ],
+    [
+     "sack",
+     6,
+     6
+    ],
+    [
+     "torchStand",
+     10,
+     1
+    ]
+   ],
+   "lights": [
+    [
+     10,
+     1,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     3,
+     4,
+     40,
+     "#c8b48c"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 5,
+     "ty": 7,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [
+    {
+     "tx": 2,
+     "ty": 2,
+     "kind": "tanVat",
+     "labelKey": "station.tanVat"
+    },
+    {
+     "tx": 8,
+     "ty": 2,
+     "kind": "shop",
+     "labelKey": "station.hides",
+     "npc": "garbarz_oles"
+    }
+   ],
+   "npcs": [
+    "garbarz_oles"
+   ],
+   "windows": [
+    4
+   ],
+   "wallStyle": "wood"
+  },
+  {
+   "id": "int_town_house_1",
+   "nameKey": "int.town_house_1",
+   "w": 8,
+   "h": 8,
+   "floor": "floorWood",
+   "wall": "#7a5a3a",
+   "wallStyle": "plaster",
+   "windows": [
+    2
+   ],
+   "rugs": [
+    [
+     2,
+     2,
+     4,
+     3,
+     "#5f4a34"
+    ],
+    [
+     3,
+     5,
+     2,
+     2,
+     "#5f4a34"
+    ]
+   ],
+   "props": [
+    [
+     "tableSet",
+     3,
+     3,
+     5
+    ],
+    [
+     "bedDouble",
+     1,
+     1,
+     2
+    ],
+    [
+     "cupboard",
+     5,
+     1,
+     4
+    ],
+    [
+     "fireplace",
+     3,
+     1,
+     3
+    ],
+    [
+     "chest",
+     1,
+     4,
+     1
+    ],
+    [
+     "pots",
+     6,
+     6,
+     2
+    ],
+    [
+     "cradle",
+     6,
+     2,
+     3
+    ],
+    [
+     "dresser",
+     6,
+     4,
+     0
+    ],
+    [
+     "toys",
+     5,
+     5,
+     2
+    ],
+    [
+     "chair",
+     2,
+     3,
+     1
+    ],
+    [
+     "spinningWheel",
+     2,
+     2,
+     0
+    ],
+    [
+     "dresser",
+     1,
+     5,
+     0
+    ],
+    [
+     "crate",
+     6,
+     5,
+     3
+    ],
+    [
+     "washBasin",
+     6,
+     3,
+     5
+    ],
+    [
+     "chair",
+     5,
+     3,
+     2
+    ],
+    [
+     "flowerPot",
+     1,
+     3,
+     1
+    ]
+   ],
+   "lights": [
+    [
+     4,
+     2,
+     80,
+     "#ff9a3c"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 7,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_town_house_2",
+   "nameKey": "int.town_house_2",
+   "w": 8,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#7a5a3a",
+   "wallStyle": "plaster",
+   "windows": [
+    4,
+    5
+   ],
+   "rugs": [
+    [
+     2,
+     1,
+     4,
+     3,
+     "#a8862e"
+    ],
+    [
+     3,
+     4,
+     2,
+     2,
+     "#a8862e"
+    ]
+   ],
+   "props": [
+    [
+     "tableSet",
+     3,
+     2,
+     3
+    ],
+    [
+     "fireplace",
+     2,
+     1,
+     4
+    ],
+    [
+     "bedDouble",
+     5,
+     1,
+     4
+    ],
+    [
+     "cupboard",
+     1,
+     1,
+     4
+    ],
+    [
+     "dresser",
+     6,
+     4,
+     5
+    ],
+    [
+     "crate",
+     1,
+     4,
+     1
+    ],
+    [
+     "chair",
+     2,
+     2,
+     0
+    ],
+    [
+     "chair",
+     5,
+     2,
+     2
+    ],
+    [
+     "barrel",
+     6,
+     3,
+     1
+    ],
+    [
+     "spinningWheel",
+     6,
+     2,
+     4
+    ],
+    [
+     "cradle",
+     1,
+     3,
+     1
+    ],
+    [
+     "chest",
+     1,
+     2,
+     1
+    ],
+    [
+     "toys",
+     2,
+     4,
+     4
+    ]
+   ],
+   "lights": [
+    [
+     3,
+     2,
+     80,
+     "#ff9a3c"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_town_house_3",
+   "nameKey": "int.town_house_3",
+   "w": 8,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#5a4430",
+   "wallStyle": "wood",
+   "windows": [
+    2,
+    4,
+    5
+   ],
+   "rugs": [
+    [
+     2,
+     1,
+     4,
+     3,
+     "#8e4433"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     3,
+     2,
+     5
+    ],
+    [
+     "bedStraw",
+     1,
+     1,
+     1
+    ],
+    [
+     "cauldron",
+     4,
+     1,
+     1
+    ],
+    [
+     "bedStraw",
+     5,
+     1,
+     3
+    ],
+    [
+     "herbRack",
+     3,
+     1,
+     1
+    ],
+    [
+     "stool",
+     2,
+     2,
+     1
+    ],
+    [
+     "pots",
+     6,
+     3,
+     5
+    ],
+    [
+     "sack",
+     1,
+     4,
+     5
+    ],
+    [
+     "barrel",
+     6,
+     4,
+     2
+    ],
+    [
+     "barrel",
+     6,
+     5,
+     4
+    ],
+    [
+     "flowerPot",
+     1,
+     3,
+     2
+    ]
+   ],
+   "lights": [
+    [
+     4,
+     3,
+     60,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_town_house_4",
+   "nameKey": "int.town_house_4",
+   "w": 9,
+   "h": 8,
+   "floor": "floorWood",
+   "wall": "#7a6248",
+   "wallStyle": "plaster",
+   "windows": [
+    4
+   ],
+   "rugs": [
+    [
+     2,
+     2,
+     4,
+     3,
+     "#6e2318"
+    ],
+    [
+     3,
+     5,
+     2,
+     2,
+     "#4a6b3a"
+    ]
+   ],
+   "props": [
+    [
+     "tableSet",
+     3,
+     3,
+     4
+    ],
+    [
+     "loom",
+     5,
+     1,
+     2
+    ],
+    [
+     "shelf",
+     2,
+     1,
+     3
+    ],
+    [
+     "bedDouble",
+     1,
+     5,
+     2
+    ],
+    [
+     "bench",
+     7,
+     4,
+     2
+    ],
+    [
+     "sack",
+     1,
+     3,
+     1
+    ],
+    [
+     "chair",
+     2,
+     3,
+     4
+    ],
+    [
+     "crate",
+     7,
+     5,
+     3
+    ],
+    [
+     "flowerPot",
+     6,
+     6,
+     0
+    ],
+    [
+     "spinningWheel",
+     1,
+     2,
+     1
+    ],
+    [
+     "sack",
+     1,
+     4,
+     3
+    ],
+    [
+     "chest",
+     7,
+     3,
+     0
+    ],
+    [
+     "spinningWheel",
+     6,
+     5,
+     2
+    ],
+    [
+     "pots",
+     6,
+     4,
+     3
+    ],
+    [
+     "flowerPot",
+     7,
+     2,
+     5
+    ]
+   ],
+   "lights": [
+    [
+     4,
+     4,
+     60,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 7,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_town_house_5",
+   "nameKey": "int.town_house_5",
+   "w": 11,
+   "h": 9,
+   "floor": "floorWood",
+   "wall": "#6b4a2c",
+   "wallStyle": "plaster",
+   "windows": [
+    2
+   ],
+   "rugs": [
+    [
+     3,
+     2,
+     4,
+     3,
+     "#3b5a86"
+    ],
+    [
+     4,
+     6,
+     2,
+     2,
+     "#4a6b3a"
+    ]
+   ],
+   "props": [
+    [
+     "tableSet",
+     4,
+     3,
+     1
+    ],
+    [
+     "wardrobe",
+     6,
+     1,
+     4
+    ],
+    [
+     "bedDouble",
+     1,
+     1,
+     5
+    ],
+    [
+     "bookshelf",
+     7,
+     1,
+     1
+    ],
+    [
+     "fireplace",
+     4,
+     1,
+     3
+    ],
+    [
+     "dresser",
+     9,
+     2,
+     1
+    ],
+    [
+     "armchair",
+     3,
+     3,
+     3
+    ],
+    [
+     "armchair",
+     6,
+     3,
+     5
+    ],
+    [
+     "candles",
+     7,
+     5,
+     0
+    ],
+    [
+     "chest",
+     1,
+     5,
+     2
+    ],
+    [
+     "chest",
+     1,
+     6,
+     5
+    ],
+    [
+     "sack",
+     2,
+     6,
+     4
+    ],
+    [
+     "flowerPot",
+     9,
+     4,
+     3
+    ],
+    [
+     "candles",
+     9,
+     5,
+     1
+    ],
+    [
+     "chest",
+     9,
+     3,
+     3
+    ],
+    [
+     "sofa",
+     1,
+     3,
+     3
+    ],
+    [
+     "candles",
+     6,
+     4,
+     3
+    ]
+   ],
+   "lights": [
+    [
+     5,
+     2,
+     80,
+     "#ff9a3c"
+    ],
+    [
+     7,
+     5,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     9,
+     5,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     6,
+     4,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     5,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 4,
+     "ty": 8,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_town_house_6",
+   "nameKey": "int.town_house_6",
+   "w": 9,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#6a5a44",
+   "wallStyle": "wood",
+   "windows": [
+    2,
+    4
+   ],
+   "rugs": [
+    [
+     2,
+     1,
+     4,
+     3,
+     "#5f4a34"
+    ],
+    [
+     3,
+     4,
+     2,
+     2,
+     "#3b5a86"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     3,
+     2,
+     1
+    ],
+    [
+     "bedStraw",
+     1,
+     1,
+     3
+    ],
+    [
+     "toolRack",
+     7,
+     1,
+     4
+    ],
+    [
+     "desk",
+     4,
+     1,
+     5
+    ],
+    [
+     "hideRack",
+     5,
+     1,
+     1
+    ],
+    [
+     "chest",
+     1,
+     4,
+     0
+    ],
+    [
+     "crate",
+     1,
+     3,
+     0
+    ],
+    [
+     "pots",
+     6,
+     5,
+     4
+    ],
+    [
+     "candles",
+     7,
+     4,
+     3
+    ],
+    [
+     "stool",
+     2,
+     2,
+     0
+    ],
+    [
+     "flowerPot",
+     6,
+     3,
+     3
+    ],
+    [
+     "crate",
+     7,
+     2,
+     5
+    ],
+    [
+     "chair",
+     5,
+     2,
+     0
+    ]
+   ],
+   "lights": [
+    [
+     7,
+     4,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_town_house_7",
+   "nameKey": "int.town_house_7",
+   "w": 8,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#5f4a34",
+   "wallStyle": "plaster",
+   "windows": [
+    2,
+    4
+   ],
+   "rugs": [
+    [
+     2,
+     1,
+     4,
+     3,
+     "#8e4433"
+    ],
+    [
+     3,
+     4,
+     2,
+     2,
+     "#4a6b3a"
+    ]
+   ],
+   "props": [
+    [
+     "tableSet",
+     3,
+     2,
+     5
+    ],
+    [
+     "bedDouble",
+     1,
+     1,
+     1
+    ],
+    [
+     "fireplace",
+     5,
+     1,
+     5
+    ],
+    [
+     "cupboard",
+     3,
+     1,
+     4
+    ],
+    [
+     "chest",
+     1,
+     5,
+     0
+    ],
+    [
+     "chest",
+     1,
+     3,
+     5
+    ],
+    [
+     "spinningWheel",
+     6,
+     2,
+     5
+    ],
+    [
+     "chair",
+     2,
+     2,
+     5
+    ],
+    [
+     "washBasin",
+     6,
+     4,
+     1
+    ],
+    [
+     "bench",
+     6,
+     5,
+     5
+    ],
+    [
+     "flowerPot",
+     1,
+     4,
+     5
+    ],
+    [
+     "chair",
+     5,
+     2,
+     2
+    ],
+    [
+     "cradle",
+     1,
+     2,
+     1
+    ],
+    [
+     "crate",
+     6,
+     3,
+     0
+    ],
+    [
+     "toys",
+     5,
+     4,
+     5
+    ]
+   ],
+   "lights": [
+    [
+     6,
+     2,
+     80,
+     "#ff9a3c"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_harbour_hut_1",
+   "nameKey": "int.harbour_hut_1",
+   "w": 8,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#4f4436",
+   "wallStyle": "wood",
+   "windows": [
+    2,
+    4
+   ],
+   "rugs": [
+    [
+     2,
+     1,
+     4,
+     3,
+     "#5f4a34"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     3,
+     2,
+     2
+    ],
+    [
+     "fishRack",
+     5,
+     1,
+     4
+    ],
+    [
+     "bedStraw",
+     1,
+     1,
+     1
+    ],
+    [
+     "cauldron",
+     4,
+     1,
+     3
+    ],
+    [
+     "pots",
+     6,
+     3,
+     0
+    ],
+    [
+     "netPile",
+     6,
+     4,
+     5
+    ],
+    [
+     "stool",
+     2,
+     2,
+     1
+    ],
+    [
+     "fishCrate",
+     1,
+     4,
+     1
+    ],
+    [
+     "pots",
+     1,
+     3,
+     3
+    ],
+    [
+     "candles",
+     6,
+     5,
+     5
+    ],
+    [
+     "barrel",
+     6,
+     2,
+     1
+    ]
+   ],
+   "lights": [
+    [
+     6,
+     5,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_harbour_hut_2",
+   "nameKey": "int.harbour_hut_2",
+   "w": 8,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#5a4c3a",
+   "wallStyle": "wood",
+   "windows": [
+    4,
+    5
+   ],
+   "rugs": [
+    [
+     2,
+     1,
+     4,
+     3,
+     "#3b5a86"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     3,
+     2,
+     1
+    ],
+    [
+     "fishRack",
+     2,
+     1,
+     5
+    ],
+    [
+     "cauldron",
+     5,
+     1,
+     3
+    ],
+    [
+     "bedStraw",
+     1,
+     4,
+     4
+    ],
+    [
+     "chest",
+     1,
+     5,
+     5
+    ],
+    [
+     "sack",
+     6,
+     3,
+     5
+    ],
+    [
+     "fishCrate",
+     1,
+     3,
+     2
+    ],
+    [
+     "stool",
+     2,
+     2,
+     2
+    ],
+    [
+     "barrel",
+     6,
+     2,
+     4
+    ],
+    [
+     "netPile",
+     6,
+     4,
+     2
+    ],
+    [
+     "pots",
+     6,
+     5,
+     0
+    ]
+   ],
+   "lights": [
+    [
+     4,
+     3,
+     60,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_harbour_hut_3",
+   "nameKey": "int.harbour_hut_3",
+   "w": 8,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#5a4c3a",
+   "wallStyle": "wood",
+   "windows": [
+    2,
+    4
+   ],
+   "rugs": [
+    [
+     2,
+     1,
+     4,
+     3,
+     "#3b5a86"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     3,
+     2,
+     3
+    ],
+    [
+     "bedStraw",
+     1,
+     1,
+     3
+    ],
+    [
+     "cauldron",
+     3,
+     1,
+     5
+    ],
+    [
+     "fishRack",
+     5,
+     1,
+     0
+    ],
+    [
+     "chest",
+     1,
+     3,
+     0
+    ],
+    [
+     "fishCrate",
+     6,
+     2,
+     3
+    ],
+    [
+     "barrel",
+     1,
+     2,
+     0
+    ],
+    [
+     "netPile",
+     1,
+     4,
+     1
+    ],
+    [
+     "sack",
+     1,
+     5,
+     3
+    ],
+    [
+     "stool",
+     2,
+     2,
+     3
+    ],
+    [
+     "dresser",
+     6,
+     4,
+     3
+    ]
+   ],
+   "lights": [
+    [
+     4,
+     3,
+     60,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_harbour_hut_4",
+   "nameKey": "int.harbour_hut_4",
+   "w": 8,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#4f4436",
+   "wallStyle": "wood",
+   "windows": [
+    2,
+    4
+   ],
+   "rugs": [
+    [
+     2,
+     1,
+     4,
+     3,
+     "#4a6b3a"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     3,
+     2,
+     3
+    ],
+    [
+     "bedStraw",
+     1,
+     1,
+     3
+    ],
+    [
+     "cauldron",
+     4,
+     1,
+     2
+    ],
+    [
+     "fishRack",
+     5,
+     1,
+     2
+    ],
+    [
+     "bench",
+     1,
+     3,
+     2
+    ],
+    [
+     "netPile",
+     1,
+     2,
+     2
+    ],
+    [
+     "stool",
+     2,
+     2,
+     5
+    ],
+    [
+     "fishCrate",
+     6,
+     4,
+     0
+    ],
+    [
+     "barrel",
+     6,
+     2,
+     5
+    ],
+    [
+     "barrel",
+     6,
+     3,
+     1
+    ],
+    [
+     "candles",
+     6,
+     5,
+     2
+    ]
+   ],
+   "lights": [
+    [
+     6,
+     5,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_harbour_hut_5",
+   "nameKey": "int.harbour_hut_5",
+   "w": 9,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#4f4436",
+   "wallStyle": "wood",
+   "windows": [
+    4,
+    6
+   ],
+   "rugs": [
+    [
+     2,
+     1,
+     4,
+     3,
+     "#3b5a86"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     3,
+     2,
+     2
+    ],
+    [
+     "cauldron",
+     7,
+     1,
+     0
+    ],
+    [
+     "fishRack",
+     1,
+     1,
+     3
+    ],
+    [
+     "bedStraw",
+     1,
+     4,
+     4
+    ],
+    [
+     "barrel",
+     7,
+     3,
+     1
+    ],
+    [
+     "barrel",
+     7,
+     5,
+     1
+    ],
+    [
+     "netPile",
+     7,
+     4,
+     2
+    ],
+    [
+     "pots",
+     6,
+     4,
+     2
+    ],
+    [
+     "fishCrate",
+     1,
+     2,
+     2
+    ],
+    [
+     "crate",
+     1,
+     3,
+     0
+    ],
+    [
+     "flowerPot",
+     6,
+     3,
+     3
+    ],
+    [
+     "stool",
+     2,
+     2,
+     4
+    ]
+   ],
+   "lights": [
+    [
+     4,
+     3,
+     60,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_harbour_hut_6",
+   "nameKey": "int.harbour_hut_6",
+   "w": 8,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#5a4c3a",
+   "wallStyle": "wood",
+   "windows": [
+    4,
+    5
+   ],
+   "rugs": [
+    [
+     2,
+     1,
+     4,
+     3,
+     "#4a6b3a"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     3,
+     2,
+     0
+    ],
+    [
+     "cauldron",
+     6,
+     1,
+     1
+    ],
+    [
+     "fishRack",
+     1,
+     1,
+     4
+    ],
+    [
+     "bedStraw",
+     1,
+     4,
+     5
+    ],
+    [
+     "dresser",
+     6,
+     3,
+     5
+    ],
+    [
+     "stool",
+     2,
+     2,
+     0
+    ],
+    [
+     "sack",
+     6,
+     4,
+     4
+    ],
+    [
+     "barrel",
+     1,
+     3,
+     2
+    ],
+    [
+     "fishCrate",
+     6,
+     2,
+     5
+    ],
+    [
+     "flowerPot",
+     1,
+     5,
+     5
+    ],
+    [
+     "netPile",
+     1,
+     2,
+     1
+    ]
+   ],
+   "lights": [
+    [
+     4,
+     3,
+     60,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_harbour_hut_7",
+   "nameKey": "int.harbour_hut_7",
+   "w": 9,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#5a4c3a",
+   "wallStyle": "wood",
+   "windows": [
+    2,
+    4
+   ],
+   "rugs": [
+    [
+     2,
+     1,
+     4,
+     3,
+     "#8e4433"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     3,
+     2,
+     3
+    ],
+    [
+     "fishRack",
+     5,
+     1,
+     4
+    ],
+    [
+     "cauldron",
+     7,
+     1,
+     1
+    ],
+    [
+     "bedStraw",
+     1,
+     1,
+     5
+    ],
+    [
+     "barrel",
+     7,
+     3,
+     0
+    ],
+    [
+     "bench",
+     1,
+     4,
+     4
+    ],
+    [
+     "bench",
+     1,
+     3,
+     0
+    ],
+    [
+     "fishCrate",
+     7,
+     4,
+     3
+    ],
+    [
+     "stool",
+     2,
+     2,
+     1
+    ],
+    [
+     "flowerPot",
+     6,
+     4,
+     5
+    ],
+    [
+     "dresser",
+     7,
+     5,
+     5
+    ],
+    [
+     "netPile",
+     1,
+     2,
+     5
+    ]
+   ],
+   "lights": [
+    [
+     4,
+     3,
+     60,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_harbour_hut_8",
+   "nameKey": "int.harbour_hut_8",
+   "w": 8,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#5a4c3a",
+   "wallStyle": "wood",
+   "windows": [
+    2,
+    5
+   ],
+   "rugs": [
+    [
+     2,
+     1,
+     4,
+     3,
+     "#6e2318"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     3,
+     2,
+     1
+    ],
+    [
+     "bedStraw",
+     1,
+     1,
+     1
+    ],
+    [
+     "cauldron",
+     5,
+     1,
+     2
+    ],
+    [
+     "fishRack",
+     3,
+     1,
+     2
+    ],
+    [
+     "netPile",
+     1,
+     3,
+     1
+    ],
+    [
+     "stool",
+     2,
+     2,
+     0
+    ],
+    [
+     "flowerPot",
+     6,
+     5,
+     4
+    ],
+    [
+     "flowerPot",
+     6,
+     4,
+     1
+    ],
+    [
+     "fishCrate",
+     6,
+     3,
+     0
+    ],
+    [
+     "barrel",
+     1,
+     2,
+     3
+    ],
+    [
+     "chest",
+     1,
+     4,
+     1
+    ]
+   ],
+   "lights": [
+    [
+     4,
+     3,
+     60,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_harbour_hut_9",
+   "nameKey": "int.harbour_hut_9",
+   "w": 8,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#4f4436",
+   "wallStyle": "wood",
+   "windows": [
+    2,
+    4
+   ],
+   "rugs": [
+    [
+     2,
+     1,
+     4,
+     3,
+     "#a8862e"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     3,
+     2,
+     0
+    ],
+    [
+     "bedStraw",
+     1,
+     1,
+     2
+    ],
+    [
+     "fishRack",
+     5,
+     1,
+     1
+    ],
+    [
+     "cauldron",
+     4,
+     1,
+     2
+    ],
+    [
+     "pots",
+     1,
+     5,
+     5
+    ],
+    [
+     "barrel",
+     6,
+     2,
+     1
+    ],
+    [
+     "flowerPot",
+     1,
+     3,
+     3
+    ],
+    [
+     "fishCrate",
+     6,
+     3,
+     1
+    ],
+    [
+     "stool",
+     2,
+     2,
+     4
+    ],
+    [
+     "netPile",
+     1,
+     2,
+     1
+    ],
+    [
+     "bench",
+     1,
+     4,
+     3
+    ]
+   ],
+   "lights": [
+    [
+     4,
+     3,
+     60,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_woodcutter_hut",
+   "nameKey": "int.woodcutter_hut",
+   "w": 9,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#4a3a28",
+   "wallStyle": "wood",
+   "windows": [
+    4,
+    6
+   ],
+   "rugs": [
+    [
+     2,
+     1,
+     4,
+     3,
+     "#8e4433"
+    ],
+    [
+     3,
+     4,
+     2,
+     2,
+     "#4a6b3a"
+    ]
+   ],
+   "props": [
+    [
+     "tableSet",
+     3,
+     2,
+     5
+    ],
+    [
+     "fireplace",
+     1,
+     1,
+     1
+    ],
+    [
+     "bedDouble",
+     6,
+     1,
+     1
+    ],
+    [
+     "toolRack",
+     3,
+     1,
+     2
+    ],
+    [
+     "chest",
+     1,
+     2,
+     5
+    ],
+    [
+     "chair",
+     2,
+     2,
+     2
+    ],
+    [
+     "dresser",
+     6,
+     5,
+     2
+    ],
+    [
+     "barrel",
+     7,
+     3,
+     1
+    ],
+    [
+     "woodpile",
+     1,
+     4,
+     5
+    ],
+    [
+     "sack",
+     7,
+     4,
+     0
+    ],
+    [
+     "bench",
+     7,
+     5,
+     2
+    ],
+    [
+     "logPile",
+     7,
+     2,
+     4
+    ],
+    [
+     "chair",
+     5,
+     2,
+     3
+    ]
+   ],
+   "lights": [
+    [
+     2,
+     2,
+     80,
+     "#ff9a3c"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_hunter_lodge",
+   "nameKey": "int.hunter_lodge",
+   "w": 9,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#5a4430",
+   "wallStyle": "wood",
+   "windows": [
+    2
+   ],
+   "rugs": [
+    [
+     2,
+     1,
+     4,
+     3,
+     "#8e4433"
+    ],
+    [
+     3,
+     4,
+     2,
+     2,
+     "#4a6b3a"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     3,
+     2,
+     3
+    ],
+    [
+     "bedStraw",
+     1,
+     1,
+     0
+    ],
+    [
+     "fireplace",
+     6,
+     1,
+     3
+    ],
+    [
+     "hideRack",
+     3,
+     1,
+     2
+    ],
+    [
+     "herbRack",
+     5,
+     1,
+     3
+    ],
+    [
+     "pots",
+     1,
+     5,
+     0
+    ],
+    [
+     "pots",
+     1,
+     3,
+     2
+    ],
+    [
+     "stool",
+     2,
+     2,
+     3
+    ],
+    [
+     "flowerPot",
+     6,
+     5,
+     1
+    ],
+    [
+     "chest",
+     1,
+     4,
+     3
+    ],
+    [
+     "candles",
+     7,
+     4,
+     5
+    ],
+    [
+     "barrel",
+     7,
+     2,
+     2
+    ]
+   ],
+   "lights": [
+    [
+     7,
+     2,
+     80,
+     "#ff9a3c"
+    ],
+    [
+     7,
+     4,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_elder_house",
+   "nameKey": "int.elder_house",
+   "w": 11,
+   "h": 9,
+   "floor": "floorWood",
+   "wall": "#6b4a2c",
+   "wallStyle": "plaster",
+   "windows": [
+    2,
+    5,
+    8
+   ],
+   "rugs": [
+    [
+     3,
+     2,
+     4,
+     3,
+     "#3b5a86"
+    ],
+    [
+     4,
+     6,
+     2,
+     2,
+     "#5f4a34"
+    ]
+   ],
+   "props": [
+    [
+     "tableSet",
+     4,
+     3,
+     3
+    ],
+    [
+     "bedDouble",
+     1,
+     1,
+     4
+    ],
+    [
+     "wardrobe",
+     3,
+     1,
+     4
+    ],
+    [
+     "fireplace",
+     6,
+     1,
+     3
+    ],
+    [
+     "cupboard",
+     9,
+     1,
+     5
+    ],
+    [
+     "chair",
+     3,
+     3,
+     3
+    ],
+    [
+     "candles",
+     7,
+     6,
+     3
+    ],
+    [
+     "chair",
+     6,
+     3,
+     2
+    ],
+    [
+     "chest",
+     8,
+     5,
+     3
+    ],
+    [
+     "desk",
+     1,
+     4,
+     4
+    ],
+    [
+     "dresser",
+     9,
+     5,
+     0
+    ],
+    [
+     "sack",
+     9,
+     6,
+     0
+    ],
+    [
+     "barrel",
+     8,
+     7,
+     1
+    ],
+    [
+     "sofa",
+     1,
+     5,
+     4
+    ],
+    [
+     "chair",
+     4,
+     4,
+     2
+    ],
+    [
+     "dresser",
+     9,
+     4,
+     4
+    ],
+    [
+     "flowerPot",
+     9,
+     2,
+     3
+    ]
+   ],
+   "lights": [
+    [
+     7,
+     2,
+     80,
+     "#ff9a3c"
+    ],
+    [
+     7,
+     6,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     5,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 4,
+     "ty": 8,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_mill",
+   "nameKey": "int.mill",
+   "w": 12,
+   "h": 9,
+   "floor": "floorStone",
+   "wall": "#7d6e58",
+   "wallStyle": "stone",
+   "windows": [
+    6,
+    9
+   ],
+   "rugs": [],
+   "props": [
+    [
+     "millstone",
+     5,
+     3,
+     4
+    ],
+    [
+     "cupboard",
+     2,
+     1,
+     4
+    ],
+    [
+     "bedDouble",
+     9,
+     1,
+     5
+    ],
+    [
+     "table",
+     7,
+     5,
+     0
+    ],
+    [
+     "sack",
+     3,
+     7,
+     2
+    ],
+    [
+     "chair",
+     3,
+     4,
+     4
+    ],
+    [
+     "barrel",
+     1,
+     5,
+     1
+    ],
+    [
+     "sack",
+     9,
+     7,
+     5
+    ],
+    [
+     "crateStack",
+     10,
+     6,
+     3
+    ],
+    [
+     "sack",
+     1,
+     4,
+     2
+    ],
+    [
+     "crate",
+     9,
+     5,
+     1
+    ],
+    [
+     "barrel",
+     10,
+     4,
+     4
+    ],
+    [
+     "sack",
+     10,
+     2,
+     3
+    ],
+    [
+     "sack",
+     10,
+     5,
+     3
+    ],
+    [
+     "sack",
+     2,
+     6,
+     2
+    ]
+   ],
+   "lights": [
+    [
+     6,
+     4,
+     60,
+     "#ffcf6a"
+    ],
+    [
+     6,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 5,
+     "ty": 8,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_village_chapel",
+   "nameKey": "int.village_chapel",
+   "w": 11,
+   "h": 10,
+   "floor": "floorStone",
+   "wall": "#8a8578",
+   "wallStyle": "stone",
+   "windows": [
+    2,
+    5,
+    8
+   ],
+   "rugs": [
+    [
+     4,
+     2,
+     2,
+     7,
+     "#6e2318"
+    ]
+   ],
+   "props": [
+    [
+     "altar",
+     4,
+     1,
+     2
+    ],
+    [
+     "statue",
+     1,
+     1,
+     5
+    ],
+    [
+     "candles",
+     8,
+     7,
+     3
+    ],
+    [
+     "flowerPot",
+     2,
+     6,
+     4
+    ],
+    [
+     "flowerPot",
+     8,
+     8,
+     0
+    ],
+    [
+     "pew",
+     2,
+     3,
+     0
+    ],
+    [
+     "pew",
+     7,
+     3,
+     5
+    ],
+    [
+     "pew",
+     2,
+     5,
+     1
+    ],
+    [
+     "candles",
+     7,
+     8,
+     0
+    ],
+    [
+     "pew",
+     7,
+     5,
+     0
+    ],
+    [
+     "flowerPot",
+     9,
+     4,
+     0
+    ],
+    [
+     "candles",
+     9,
+     6,
+     1
+    ],
+    [
+     "candles",
+     3,
+     4,
+     2
+    ]
+   ],
+   "lights": [
+    [
+     8,
+     7,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     7,
+     8,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     9,
+     6,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     3,
+     4,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     5,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 4,
+     "ty": 9,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_village_house_1",
+   "nameKey": "int.village_house_1",
+   "w": 10,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#5f4a34",
+   "wallStyle": "plaster",
+   "windows": [
+    2
+   ],
+   "rugs": [
+    [
+     3,
+     1,
+     4,
+     3,
+     "#4a6b3a"
+    ],
+    [
+     4,
+     4,
+     2,
+     2,
+     "#4a6b3a"
+    ]
+   ],
+   "props": [
+    [
+     "tableSet",
+     4,
+     2,
+     2
+    ],
+    [
+     "bedDouble",
+     1,
+     1,
+     0
+    ],
+    [
+     "cupboard",
+     7,
+     1,
+     5
+    ],
+    [
+     "fireplace",
+     5,
+     1,
+     5
+    ],
+    [
+     "dresser",
+     8,
+     3,
+     3
+    ],
+    [
+     "chair",
+     3,
+     2,
+     1
+    ],
+    [
+     "washBasin",
+     8,
+     4,
+     0
+    ],
+    [
+     "chest",
+     1,
+     4,
+     3
+    ],
+    [
+     "chest",
+     2,
+     3,
+     5
+    ],
+    [
+     "spinningWheel",
+     6,
+     4,
+     4
+    ],
+    [
+     "flowerPot",
+     8,
+     2,
+     2
+    ],
+    [
+     "toys",
+     5,
+     3,
+     4
+    ],
+    [
+     "crate",
+     1,
+     5,
+     2
+    ],
+    [
+     "chair",
+     6,
+     2,
+     1
+    ],
+    [
+     "dresser",
+     2,
+     5,
+     3
+    ],
+    [
+     "cradle",
+     1,
+     2,
+     5
+    ]
+   ],
+   "lights": [
+    [
+     6,
+     2,
+     80,
+     "#ff9a3c"
+    ],
+    [
+     5,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 4,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_village_house_2",
+   "nameKey": "int.village_house_2",
+   "w": 10,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#4f3c2a",
+   "wallStyle": "wood",
+   "windows": [
+    5,
+    7
+   ],
+   "rugs": [
+    [
+     3,
+     1,
+     4,
+     3,
+     "#6e2318"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     4,
+     2,
+     2
+    ],
+    [
+     "herbRack",
+     2,
+     1,
+     0
+    ],
+    [
+     "bedStraw",
+     7,
+     1,
+     4
+    ],
+    [
+     "bedStraw",
+     1,
+     4,
+     0
+    ],
+    [
+     "cauldron",
+     4,
+     1,
+     2
+    ],
+    [
+     "barrel",
+     7,
+     5,
+     0
+    ],
+    [
+     "barrel",
+     1,
+     3,
+     1
+    ],
+    [
+     "stool",
+     3,
+     2,
+     2
+    ],
+    [
+     "barrel",
+     2,
+     5,
+     1
+    ],
+    [
+     "chest",
+     8,
+     4,
+     3
+    ],
+    [
+     "crate",
+     8,
+     5,
+     5
+    ],
+    [
+     "sack",
+     1,
+     2,
+     1
+    ]
+   ],
+   "lights": [
+    [
+     5,
+     3,
+     60,
+     "#ffcf6a"
+    ],
+    [
+     5,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 4,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_village_house_3",
+   "nameKey": "int.village_house_3",
+   "w": 9,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#5f4a34",
+   "wallStyle": "plaster",
+   "windows": [
+    2
+   ],
+   "rugs": [
+    [
+     2,
+     1,
+     4,
+     3,
+     "#a8862e"
+    ],
+    [
+     3,
+     4,
+     2,
+     2,
+     "#a8862e"
+    ]
+   ],
+   "props": [
+    [
+     "tableSet",
+     3,
+     2,
+     0
+    ],
+    [
+     "cupboard",
+     6,
+     1,
+     2
+    ],
+    [
+     "fireplace",
+     4,
+     1,
+     4
+    ],
+    [
+     "bedDouble",
+     1,
+     1,
+     3
+    ],
+    [
+     "toys",
+     6,
+     2,
+     3
+    ],
+    [
+     "crate",
+     6,
+     4,
+     3
+    ],
+    [
+     "chair",
+     2,
+     2,
+     2
+    ],
+    [
+     "barrel",
+     1,
+     3,
+     0
+    ],
+    [
+     "flowerPot",
+     7,
+     4,
+     0
+    ],
+    [
+     "crate",
+     6,
+     5,
+     3
+    ],
+    [
+     "chair",
+     5,
+     2,
+     4
+    ],
+    [
+     "spinningWheel",
+     3,
+     3,
+     5
+    ],
+    [
+     "washBasin",
+     1,
+     4,
+     0
+    ],
+    [
+     "flowerPot",
+     1,
+     5,
+     2
+    ],
+    [
+     "cradle",
+     7,
+     3,
+     3
+    ],
+    [
+     "chest",
+     1,
+     2,
+     3
+    ]
+   ],
+   "lights": [
+    [
+     5,
+     2,
+     80,
+     "#ff9a3c"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_village_house_4",
+   "nameKey": "int.village_house_4",
+   "w": 10,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#56462e",
+   "wallStyle": "wood",
+   "windows": [
+    2,
+    7
+   ],
+   "rugs": [
+    [
+     3,
+     1,
+     4,
+     3,
+     "#3b5a86"
+    ],
+    [
+     4,
+     4,
+     2,
+     2,
+     "#5f4a34"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     4,
+     2,
+     1
+    ],
+    [
+     "bedStraw",
+     1,
+     1,
+     3
+    ],
+    [
+     "cauldron",
+     7,
+     1,
+     5
+    ],
+    [
+     "herbRack",
+     3,
+     1,
+     4
+    ],
+    [
+     "herbRack",
+     8,
+     1,
+     3
+    ],
+    [
+     "shelf",
+     5,
+     1,
+     4
+    ],
+    [
+     "candles",
+     2,
+     2,
+     2
+    ],
+    [
+     "stool",
+     3,
+     2,
+     4
+    ],
+    [
+     "dresser",
+     1,
+     3,
+     3
+    ],
+    [
+     "barrel",
+     2,
+     4,
+     3
+    ],
+    [
+     "crate",
+     7,
+     5,
+     1
+    ],
+    [
+     "flowerPot",
+     1,
+     2,
+     1
+    ],
+    [
+     "pots",
+     1,
+     4,
+     5
+    ],
+    [
+     "flowerPot",
+     8,
+     4,
+     2
+    ]
+   ],
+   "lights": [
+    [
+     2,
+     2,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     5,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 4,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_village_house_5",
+   "nameKey": "int.village_house_5",
+   "w": 8,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#5a4430",
+   "wallStyle": "wood",
+   "windows": [
+    2,
+    5
+   ],
+   "rugs": [
+    [
+     2,
+     1,
+     4,
+     3,
+     "#4a6b3a"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     3,
+     2,
+     3
+    ],
+    [
+     "cauldron",
+     5,
+     1,
+     5
+    ],
+    [
+     "bedStraw",
+     1,
+     1,
+     4
+    ],
+    [
+     "bedStraw",
+     1,
+     4,
+     4
+    ],
+    [
+     "herbRack",
+     4,
+     1,
+     1
+    ],
+    [
+     "sack",
+     1,
+     2,
+     1
+    ],
+    [
+     "barrel",
+     6,
+     2,
+     5
+    ],
+    [
+     "stool",
+     2,
+     2,
+     1
+    ],
+    [
+     "crate",
+     6,
+     3,
+     4
+    ],
+    [
+     "crate",
+     6,
+     4,
+     2
+    ],
+    [
+     "barrel",
+     1,
+     5,
+     5
+    ]
+   ],
+   "lights": [
+    [
+     4,
+     3,
+     60,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_village_house_6",
+   "nameKey": "int.village_house_6",
+   "w": 9,
+   "h": 8,
+   "floor": "floorWood",
+   "wall": "#7a5a3a",
+   "wallStyle": "plaster",
+   "windows": [
+    2,
+    4
+   ],
+   "rugs": [
+    [
+     2,
+     2,
+     4,
+     3,
+     "#6e2318"
+    ],
+    [
+     3,
+     5,
+     2,
+     2,
+     "#3b5a86"
+    ]
+   ],
+   "props": [
+    [
+     "tableSet",
+     3,
+     3,
+     0
+    ],
+    [
+     "fireplace",
+     5,
+     1,
+     0
+    ],
+    [
+     "cupboard",
+     3,
+     1,
+     2
+    ],
+    [
+     "bedDouble",
+     1,
+     1,
+     5
+    ],
+    [
+     "toys",
+     2,
+     2,
+     5
+    ],
+    [
+     "pots",
+     6,
+     5,
+     0
+    ],
+    [
+     "flowerPot",
+     7,
+     2,
+     2
+    ],
+    [
+     "washBasin",
+     1,
+     2,
+     0
+    ],
+    [
+     "chair",
+     2,
+     3,
+     1
+    ],
+    [
+     "spinningWheel",
+     6,
+     4,
+     3
+    ],
+    [
+     "pots",
+     7,
+     4,
+     2
+    ],
+    [
+     "bench",
+     7,
+     5,
+     5
+    ],
+    [
+     "chest",
+     1,
+     3,
+     0
+    ],
+    [
+     "cradle",
+     7,
+     3,
+     3
+    ],
+    [
+     "chair",
+     5,
+     3,
+     0
+    ],
+    [
+     "pots",
+     1,
+     5,
+     0
+    ]
+   ],
+   "lights": [
+    [
+     6,
+     2,
+     80,
+     "#ff9a3c"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 7,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_marta_shack",
+   "nameKey": "int.marta_shack",
+   "w": 8,
+   "h": 8,
+   "floor": "floorWood",
+   "wall": "#5a4430",
+   "wallStyle": "wood",
+   "windows": [
+    2,
+    4,
+    5
+   ],
+   "rugs": [
+    [
+     2,
+     2,
+     4,
+     3,
+     "#a8862e"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     3,
+     3,
+     3
+    ],
+    [
+     "bedStraw",
+     1,
+     1,
+     2
+    ],
+    [
+     "herbRack",
+     6,
+     1,
+     2
+    ],
+    [
+     "cauldron",
+     3,
+     1,
+     3
+    ],
+    [
+     "bedStraw",
+     1,
+     5,
+     0
+    ],
+    [
+     "sack",
+     1,
+     6,
+     3
+    ],
+    [
+     "stool",
+     2,
+     3,
+     4
+    ],
+    [
+     "barrel",
+     6,
+     4,
+     3
+    ],
+    [
+     "flowerPot",
+     6,
+     5,
+     2
+    ],
+    [
+     "barrel",
+     1,
+     4,
+     4
+    ],
+    [
+     "sack",
+     6,
+     2,
+     1
+    ],
+    [
+     "chest",
+     6,
+     6,
+     3
+    ]
+   ],
+   "lights": [
+    [
+     4,
+     4,
+     60,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 7,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_warehouse_b",
+   "nameKey": "int.warehouse_b",
+   "w": 12,
+   "h": 10,
+   "floor": "floorWood",
+   "wall": "#4a3f30",
+   "wallStyle": "wood",
+   "windows": [
+    2,
+    6,
+    9
+   ],
+   "rugs": [],
+   "props": [
+    [
+     "cart",
+     5,
+     4,
+     1
+    ],
+    [
+     "crateStack",
+     5,
+     1,
+     2
+    ],
+    [
+     "barrelStack",
+     10,
+     4,
+     3
+    ],
+    [
+     "crate",
+     3,
+     8,
+     0
+    ],
+    [
+     "sack",
+     3,
+     7,
+     4
+    ],
+    [
+     "sack",
+     2,
+     2,
+     3
+    ],
+    [
+     "sack",
+     6,
+     3,
+     0
+    ],
+    [
+     "sack",
+     8,
+     7,
+     0
+    ],
+    [
+     "sack",
+     3,
+     6,
+     1
+    ],
+    [
+     "barrel",
+     7,
+     7,
+     1
+    ],
+    [
+     "crateStack",
+     1,
+     4,
+     4
+    ],
+    [
+     "barrel",
+     8,
+     6,
+     5
+    ],
+    [
+     "sack",
+     9,
+     8,
+     3
+    ],
+    [
+     "crate",
+     10,
+     5,
+     1
+    ]
+   ],
+   "lights": [
+    [
+     6,
+     5,
+     60,
+     "#ffcf6a"
+    ],
+    [
+     6,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 5,
+     "ty": 9,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_fisher_hut",
+   "nameKey": "int.fisher_hut",
+   "w": 9,
+   "h": 7,
+   "floor": "floorWood",
+   "wall": "#5a4c3a",
+   "wallStyle": "wood",
+   "windows": [
+    2,
+    4
+   ],
+   "rugs": [
+    [
+     2,
+     1,
+     4,
+     3,
+     "#8e4433"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     3,
+     2,
+     1
+    ],
+    [
+     "bedStraw",
+     1,
+     1,
+     0
+    ],
+    [
+     "cauldron",
+     4,
+     1,
+     1
+    ],
+    [
+     "fishRack",
+     6,
+     1,
+     1
+    ],
+    [
+     "netPile",
+     1,
+     4,
+     2
+    ],
+    [
+     "barrel",
+     1,
+     3,
+     0
+    ],
+    [
+     "pots",
+     1,
+     5,
+     3
+    ],
+    [
+     "stool",
+     2,
+     2,
+     4
+    ],
+    [
+     "barrel",
+     1,
+     2,
+     1
+    ],
+    [
+     "fishCrate",
+     7,
+     3,
+     5
+    ],
+    [
+     "bench",
+     6,
+     5,
+     1
+    ],
+    [
+     "bench",
+     6,
+     4,
+     2
+    ]
+   ],
+   "lights": [
+    [
+     4,
+     3,
+     60,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 6,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_house_a",
+   "nameKey": "int.house_a",
+   "w": 10,
+   "h": 8,
+   "floor": "floorWood",
+   "wall": "#6b4a2c",
+   "wallStyle": "plaster",
+   "windows": [
+    2
+   ],
+   "rugs": [
+    [
+     3,
+     2,
+     4,
+     3,
+     "#5f4a34"
+    ],
+    [
+     4,
+     5,
+     2,
+     2,
+     "#6e2318"
+    ]
+   ],
+   "props": [
+    [
+     "tableSet",
+     4,
+     3,
+     2
+    ],
+    [
+     "bedDouble",
+     1,
+     1,
+     2
+    ],
+    [
+     "fireplace",
+     7,
+     1,
+     1
+    ],
+    [
+     "cupboard",
+     5,
+     1,
+     5
+    ],
+    [
+     "dresser",
+     2,
+     6,
+     0
+    ],
+    [
+     "chest",
+     8,
+     2,
+     2
+    ],
+    [
+     "washBasin",
+     1,
+     2,
+     1
+    ],
+    [
+     "toys",
+     4,
+     4,
+     2
+    ],
+    [
+     "flowerPot",
+     1,
+     3,
+     2
+    ],
+    [
+     "spinningWheel",
+     5,
+     4,
+     3
+    ],
+    [
+     "crate",
+     8,
+     4,
+     3
+    ],
+    [
+     "chair",
+     3,
+     3,
+     4
+    ],
+    [
+     "cradle",
+     1,
+     4,
+     4
+    ],
+    [
+     "chair",
+     6,
+     3,
+     5
+    ],
+    [
+     "pots",
+     2,
+     5,
+     5
+    ],
+    [
+     "chest",
+     1,
+     5,
+     5
+    ]
+   ],
+   "lights": [
+    [
+     8,
+     2,
+     80,
+     "#ff9a3c"
+    ],
+    [
+     5,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 4,
+     "ty": 7,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_house_b",
+   "nameKey": "int.house_b",
+   "w": 8,
+   "h": 8,
+   "floor": "floorWood",
+   "wall": "#7a6248",
+   "wallStyle": "plaster",
+   "windows": [
+    4,
+    5
+   ],
+   "rugs": [
+    [
+     2,
+     2,
+     4,
+     3,
+     "#5f4a34"
+    ],
+    [
+     3,
+     5,
+     2,
+     2,
+     "#6e2318"
+    ]
+   ],
+   "props": [
+    [
+     "tableSet",
+     3,
+     3,
+     3
+    ],
+    [
+     "loom",
+     2,
+     1,
+     5
+    ],
+    [
+     "bedDouble",
+     5,
+     1,
+     3
+    ],
+    [
+     "crate",
+     1,
+     5,
+     0
+    ],
+    [
+     "pots",
+     1,
+     4,
+     0
+    ],
+    [
+     "chair",
+     2,
+     3,
+     3
+    ],
+    [
+     "bench",
+     6,
+     5,
+     4
+    ],
+    [
+     "sack",
+     6,
+     3,
+     3
+    ],
+    [
+     "flowerPot",
+     6,
+     4,
+     5
+    ],
+    [
+     "spinningWheel",
+     6,
+     2,
+     3
+    ],
+    [
+     "sack",
+     1,
+     2,
+     3
+    ],
+    [
+     "crate",
+     1,
+     6,
+     4
+    ],
+    [
+     "chest",
+     1,
+     3,
+     1
+    ],
+    [
+     "spinningWheel",
+     3,
+     4,
+     0
+    ]
+   ],
+   "lights": [
+    [
+     4,
+     4,
+     60,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 7,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_house_c",
+   "nameKey": "int.house_c",
+   "w": 11,
+   "h": 9,
+   "floor": "floorWood",
+   "wall": "#6b4a2c",
+   "wallStyle": "plaster",
+   "windows": [],
+   "rugs": [
+    [
+     3,
+     2,
+     4,
+     3,
+     "#8e4433"
+    ],
+    [
+     4,
+     6,
+     2,
+     2,
+     "#8e4433"
+    ]
+   ],
+   "props": [
+    [
+     "tableSet",
+     4,
+     3,
+     5
+    ],
+    [
+     "wardrobe",
+     2,
+     1,
+     5
+    ],
+    [
+     "fireplace",
+     7,
+     1,
+     2
+    ],
+    [
+     "bedDouble",
+     1,
+     6,
+     0
+    ],
+    [
+     "bookshelf",
+     5,
+     1,
+     4
+    ],
+    [
+     "dresser",
+     9,
+     4,
+     4
+    ],
+    [
+     "candles",
+     7,
+     6,
+     5
+    ],
+    [
+     "chest",
+     1,
+     5,
+     1
+    ],
+    [
+     "crate",
+     8,
+     5,
+     1
+    ],
+    [
+     "sofa",
+     1,
+     4,
+     3
+    ],
+    [
+     "flowerPot",
+     2,
+     7,
+     2
+    ],
+    [
+     "crate",
+     9,
+     6,
+     5
+    ],
+    [
+     "candles",
+     3,
+     2,
+     1
+    ],
+    [
+     "armchair",
+     3,
+     3,
+     3
+    ],
+    [
+     "armchair",
+     6,
+     3,
+     0
+    ],
+    [
+     "flowerPot",
+     9,
+     2,
+     4
+    ],
+    [
+     "bench",
+     7,
+     5,
+     4
+    ]
+   ],
+   "lights": [
+    [
+     8,
+     2,
+     80,
+     "#ff9a3c"
+    ],
+    [
+     7,
+     6,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     3,
+     2,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     5,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 4,
+     "ty": 8,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_house_d",
+   "nameKey": "int.house_d",
+   "w": 11,
+   "h": 9,
+   "floor": "floorWood",
+   "wall": "#5f4a34",
+   "wallStyle": "plaster",
+   "windows": [
+    2,
+    5,
+    8
+   ],
+   "rugs": [
+    [
+     3,
+     2,
+     4,
+     3,
+     "#6e2318"
+    ],
+    [
+     4,
+     6,
+     2,
+     2,
+     "#6e2318"
+    ]
+   ],
+   "props": [
+    [
+     "tableSet",
+     4,
+     3,
+     3
+    ],
+    [
+     "fireplace",
+     3,
+     1,
+     5
+    ],
+    [
+     "cupboard",
+     7,
+     1,
+     5
+    ],
+    [
+     "bedDouble",
+     1,
+     1,
+     5
+    ],
+    [
+     "chair",
+     3,
+     3,
+     5
+    ],
+    [
+     "chest",
+     1,
+     6,
+     4
+    ],
+    [
+     "chest",
+     1,
+     2,
+     2
+    ],
+    [
+     "flowerPot",
+     9,
+     6,
+     3
+    ],
+    [
+     "candles",
+     7,
+     6,
+     3
+    ],
+    [
+     "chair",
+     6,
+     3,
+     2
+    ],
+    [
+     "crate",
+     7,
+     7,
+     2
+    ],
+    [
+     "cradle",
+     9,
+     5,
+     4
+    ],
+    [
+     "toys",
+     8,
+     6,
+     5
+    ],
+    [
+     "flowerPot",
+     8,
+     5,
+     1
+    ],
+    [
+     "spinningWheel",
+     7,
+     3,
+     5
+    ],
+    [
+     "chest",
+     2,
+     6,
+     3
+    ],
+    [
+     "washBasin",
+     1,
+     5,
+     4
+    ]
+   ],
+   "lights": [
+    [
+     4,
+     2,
+     80,
+     "#ff9a3c"
+    ],
+    [
+     7,
+     6,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     5,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 4,
+     "ty": 8,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_house_e",
+   "nameKey": "int.house_e",
+   "w": 10,
+   "h": 8,
+   "floor": "floorWood",
+   "wall": "#5a4430",
+   "wallStyle": "wood",
+   "windows": [
+    2,
+    5,
+    7
+   ],
+   "rugs": [
+    [
+     3,
+     2,
+     4,
+     3,
+     "#4a6b3a"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     4,
+     3,
+     4
+    ],
+    [
+     "bedStraw",
+     1,
+     1,
+     5
+    ],
+    [
+     "bedStraw",
+     7,
+     1,
+     3
+    ],
+    [
+     "cauldron",
+     4,
+     1,
+     1
+    ],
+    [
+     "herbRack",
+     3,
+     1,
+     4
+    ],
+    [
+     "barrel",
+     1,
+     2,
+     1
+    ],
+    [
+     "bench",
+     7,
+     6,
+     2
+    ],
+    [
+     "flowerPot",
+     8,
+     6,
+     3
+    ],
+    [
+     "candles",
+     7,
+     4,
+     0
+    ],
+    [
+     "sack",
+     8,
+     2,
+     5
+    ],
+    [
+     "stool",
+     3,
+     3,
+     0
+    ],
+    [
+     "barrel",
+     7,
+     5,
+     3
+    ]
+   ],
+   "lights": [
+    [
+     7,
+     4,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     5,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 4,
+     "ty": 7,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_house_f",
+   "nameKey": "int.house_f",
+   "w": 9,
+   "h": 8,
+   "floor": "floorWood",
+   "wall": "#5f4a34",
+   "wallStyle": "wood",
+   "windows": [
+    2,
+    4
+   ],
+   "rugs": [
+    [
+     2,
+     2,
+     4,
+     3,
+     "#a8862e"
+    ],
+    [
+     3,
+     5,
+     2,
+     2,
+     "#a8862e"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     3,
+     3,
+     1
+    ],
+    [
+     "bedStraw",
+     1,
+     1,
+     4
+    ],
+    [
+     "desk",
+     4,
+     1,
+     1
+    ],
+    [
+     "hideRack",
+     6,
+     1,
+     1
+    ],
+    [
+     "toolRack",
+     5,
+     1,
+     3
+    ],
+    [
+     "crate",
+     1,
+     4,
+     3
+    ],
+    [
+     "candles",
+     3,
+     4,
+     4
+    ],
+    [
+     "chair",
+     2,
+     3,
+     3
+    ],
+    [
+     "crate",
+     7,
+     5,
+     2
+    ],
+    [
+     "chest",
+     6,
+     4,
+     5
+    ],
+    [
+     "stool",
+     6,
+     3,
+     3
+    ],
+    [
+     "sack",
+     1,
+     5,
+     3
+    ],
+    [
+     "pots",
+     6,
+     5,
+     2
+    ]
+   ],
+   "lights": [
+    [
+     3,
+     4,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 7,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  },
+  {
+   "id": "int_almshouse",
+   "nameKey": "int.almshouse",
+   "w": 9,
+   "h": 8,
+   "floor": "floorWood",
+   "wall": "#5a4c3a",
+   "wallStyle": "wood",
+   "windows": [
+    2,
+    4,
+    6
+   ],
+   "rugs": [
+    [
+     2,
+     2,
+     4,
+     3,
+     "#5f4a34"
+    ]
+   ],
+   "props": [
+    [
+     "table",
+     3,
+     3,
+     2
+    ],
+    [
+     "bedStraw",
+     1,
+     1,
+     5
+    ],
+    [
+     "bedStraw",
+     6,
+     1,
+     1
+    ],
+    [
+     "cauldron",
+     3,
+     1,
+     2
+    ],
+    [
+     "candles",
+     7,
+     5,
+     2
+    ],
+    [
+     "pots",
+     7,
+     3,
+     3
+    ],
+    [
+     "bench",
+     2,
+     3,
+     1
+    ],
+    [
+     "bedStraw",
+     5,
+     2,
+     3
+    ],
+    [
+     "bedStraw",
+     1,
+     4,
+     3
+    ],
+    [
+     "pots",
+     1,
+     5,
+     2
+    ],
+    [
+     "barrel",
+     6,
+     4,
+     0
+    ],
+    [
+     "pots",
+     1,
+     6,
+     5
+    ]
+   ],
+   "lights": [
+    [
+     7,
+     5,
+     50,
+     "#ffcf6a"
+    ],
+    [
+     4,
+     2,
+     45,
+     "#e8d6a8"
+    ]
+   ],
+   "exits": [
+    {
+     "tx": 3,
+     "ty": 7,
+     "w": 2,
+     "to": "world"
+    }
+   ],
+   "stations": [],
+   "npcs": []
+  }
+ ]
 }

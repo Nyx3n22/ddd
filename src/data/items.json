@@ -1471,6 +1471,153 @@
     "reading",
     "unique"
    ]
+  },
+  {
+   "id": "ledger_raven",
+   "nameKey": "item.ledgerRaven",
+   "descKey": "item.ledgerRaven.desc",
+   "icon": "book",
+   "weight": 1.2,
+   "volume": 1.5,
+   "value": 0,
+   "cat": "document",
+   "tags": [
+    "quest",
+    "unique"
+   ]
+  },
+  {
+   "id": "relic_elenem",
+   "nameKey": "item.relicElenem",
+   "descKey": "item.relicElenem.desc",
+   "icon": "relic",
+   "weight": 1.5,
+   "volume": 1.2,
+   "value": 300,
+   "cat": "special",
+   "tags": [
+    "quest",
+    "unique",
+    "rare"
+   ]
+  },
+  {
+   "id": "passage_token",
+   "nameKey": "item.passageToken",
+   "descKey": "item.passageToken.desc",
+   "icon": "permit",
+   "weight": 0.05,
+   "volume": 0.05,
+   "value": 0,
+   "cat": "document",
+   "tags": [
+    "quest",
+    "unique"
+   ]
+  },
+  {
+   "id": "fish_herring",
+   "nameKey": "item.herring",
+   "descKey": "item.herring.desc",
+   "icon": "fish",
+   "weight": 0.3,
+   "volume": 0.5,
+   "value": 3,
+   "cat": "food",
+   "tags": [
+    "eat",
+    "fish",
+    "riskPoison"
+   ],
+   "feed": 14
+  },
+  {
+   "id": "fish_cod",
+   "nameKey": "item.cod",
+   "descKey": "item.cod.desc",
+   "icon": "fish",
+   "weight": 1.2,
+   "volume": 1.5,
+   "value": 8,
+   "cat": "food",
+   "tags": [
+    "eat",
+    "fish",
+    "riskPoison"
+   ],
+   "feed": 26
+  },
+  {
+   "id": "fish_eel",
+   "nameKey": "item.eel",
+   "descKey": "item.eel.desc",
+   "icon": "fish",
+   "weight": 0.8,
+   "volume": 1.0,
+   "value": 18,
+   "cat": "food",
+   "tags": [
+    "eat",
+    "fish",
+    "rare"
+   ],
+   "feed": 22
+  },
+  {
+   "id": "letter_village",
+   "nameKey": "item.letterVillage",
+   "descKey": "item.letterVillage.desc",
+   "icon": "letter",
+   "weight": 0.05,
+   "volume": 0.05,
+   "value": 0,
+   "cat": "document",
+   "tags": [
+    "quest",
+    "unique"
+   ]
+  },
+  {
+   "id": "goat_bell",
+   "nameKey": "item.goatBell",
+   "descKey": "item.goatBell.desc",
+   "icon": "ring",
+   "weight": 0.2,
+   "volume": 0.1,
+   "value": 2,
+   "cat": "special",
+   "tags": [
+    "quest"
+   ]
+  },
+  {
+   "id": "woodcutter_cap",
+   "nameKey": "item.woodcutterCap",
+   "descKey": "item.woodcutterCap.desc",
+   "icon": "wool",
+   "weight": 0.2,
+   "volume": 0.3,
+   "value": 0,
+   "cat": "special",
+   "tags": [
+    "quest",
+    "unique"
+   ]
+  },
+  {
+   "id": "old_coin",
+   "nameKey": "item.oldCoin",
+   "descKey": "item.oldCoin.desc",
+   "icon": "coins",
+   "weight": 0.02,
+   "volume": 0.01,
+   "value": 25,
+   "cat": "special",
+   "tags": [
+    "quest",
+    "unique",
+    "rare"
+   ]
   }
  ]
 }

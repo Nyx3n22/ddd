@@ -20,10 +20,16 @@ export interface Objective {
   npc?: string; item?: string; count?: number; target?: string; region?: string;
   interior?: string; flag?: string; amount?: number; wins?: number; nightOnly?: boolean;
 }
-export interface QuestStage { id: string; descKey: string; objective: Objective }
+export interface QuestStage {
+  id: string; descKey: string; objective: Objective;
+  flagOnDone?: string;
+  spawn?: { typeId: string; kind: string; tx: number; ty: number; count?: number };
+}
 export interface QuestRewards {
   crowns?: number; rep?: Record<string, number>; xp?: Record<string, number>;
-  items?: string[]; noteKey?: string; unlockStation?: string; unlockTeacher?: string; flag?: string;
+  items?: string[]; noteKey?: string;
+  /** przedmioty oddawane zleceniodawcy przy ukończeniu: [id, ilość] */
+  consume?: Array<[string, number]>; unlockStation?: string; unlockTeacher?: string; flag?: string;
 }
 export interface QuestDef {
   id: string; titleKey: string; type: string; giver: string | null; autoStart?: boolean;
@@ -39,6 +45,8 @@ const QUEST_DEFS: Record<string, QuestDef> = {};
 for (const q of QUESTS.quests as any[]) QUEST_DEFS[q.id] = q;
 const BOARD_DEFS = QUESTS.board as unknown as BoardDef[];
 const ENDINGS = QUESTS.endings as unknown as EndingDef[];
+/** Ile dni po terminie Rycerze czekają (z odsetkami), zanim zabiorą Johna. */
+export const DEADLINE_GRACE = 7;
 
 export function questDef(id: string) { return QUEST_DEFS[id]; }
 export function allQuestDefs() { return Object.values(QUEST_DEFS); }
@@ -59,6 +67,7 @@ export class QuestSystem {
     bus.emit('quest:started', { id, title: t(def.titleKey) });
     bus.emit('hud:toast', { text: t('quest.started', { title: t(def.titleKey) }), tone: 'good' });
     s.addLog(`quest+ ${def.titleKey}`);
+    if ((def.stages[0] as any)?.spawn) bus.emit('quest:spawn', { ...(def.stages[0] as any).spawn, questId: id });
     this.checkStage(q);
     return true;
   }
@@ -94,13 +103,18 @@ export class QuestSystem {
     const def = QUEST_DEFS[id]; if (!def) return;
     q.stageIdx += 1;
     q.data.count = 0;
+    if (def.stages[q.stageIdx - 1]?.flagOnDone) s.flags[def.stages[q.stageIdx - 1].flagOnDone!] = true;
     if (q.stageIdx >= def.stages.length) { this.complete(id); return; }
     const stage = def.stages[q.stageIdx];
+    if ((stage as any).spawn) bus.emit('quest:spawn', { ...(stage as any).spawn, questId: id });
     bus.emit('quest:stageChanged', { id, stage: stage.id, desc: t(stage.descKey) });
     bus.emit('hud:toast', { text: t('quest.newObjective', { what: t(stage.descKey) }) });
     s.addLog(`quest> ${def.titleKey}`);
     this.checkStage(q);
   }
+
+  /** Po każdej zmianie w sakwie: czy ktoś z aktywnych zadań właśnie dostał to, czego chciał. */
+  static recheck() { for (const q of [...this.active()]) this.checkStage(q); }
 
   /** Cele pasywne (collect / custom) sprawdzamy od razu po wejściu w etap. */
   static checkStage(q: QuestState) {
@@ -124,6 +138,7 @@ export class QuestSystem {
     s.stats.questsDone += 1;
     const r = def.rewards || {};
     if (r.crowns) { s.gold += r.crowns; s.stats.earned += r.crowns; }
+    if (r.consume) for (const [it, qty] of r.consume) InventorySystem.remove(it, qty);
     if (r.items) for (const it of r.items) InventorySystem.add(it, 1);
     if (r.rep) for (const f in r.rep) ReputationSystem.add(f as any, r.rep[f], 'rep.reason.quest');
     if (r.xp) for (const sk in r.xp) SkillsSystem.use(sk, r.xp[sk]);
@@ -145,7 +160,8 @@ export class QuestSystem {
   }
 
   /** Questy z tablicy ogłoszeń — generowane proceduralnie z szablonu. */
-  static generateBoard(templateId?: string): { questId: string; title: string; pay: number; desc: string } {
+  /** Losuje ogłoszenie z tablicy. `take=false` tylko pokazuje ofertę — nie zakłada zadania. */
+  static generateBoard(templateId?: string, take = true): { questId: string; title: string; pay: number; desc: string } {
     const s = getGame().state;
     const tpl = templateId ? BOARD_DEFS.find(b => b.id === templateId) : rng.pick(BOARD_DEFS);
     if (!tpl) throw new Error('[quest] brak szablonu tablicy');
@@ -153,6 +169,8 @@ export class QuestSystem {
     const descKey = rng.pick(tpl.descKeys);
     const questId = `board_${tpl.id}_${s.time.day}`;
     const target = rng.pick(tpl.items || ['bread_loaf']);
+    const offer = { questId, title: t(tpl.titleKey), pay, desc: t(descKey, { what: itemName(target), gold: pay }) };
+    if (!take) return offer;
     QUEST_DEFS[questId] = {
       id: questId, titleKey: tpl.titleKey, type: tpl.type, giver: 'board',
       journalKey: descKey,
@@ -160,7 +178,7 @@ export class QuestSystem {
       rewards: { crowns: pay, rep: tpl.rep, xp: tpl.xp, noteKey: 'quest.board.note' }
     };
     this.start(questId);
-    return { questId, title: t(tpl.titleKey), pay, desc: t(descKey, { what: itemName(target), gold: pay }) };
+    return offer;
   }
 
   static startBoard(templateId: string) { return this.generateBoard(templateId); }
@@ -168,31 +186,41 @@ export class QuestSystem {
   /** Zakończenia — sprawdzane gdy dług spłacony, gdy John uciekł, gdy umarł. */
   static checkEndings(): EndingDef | null {
     const s = getGame().state;
+    const flags = (f: string | string[]) => (Array.isArray(f) ? f : [f]).every(k => !!s.flags[k]);
     const cond = (c: Record<string, any>): boolean => {
+      if (c.manual) return false;                                   // tylko przez wybór w fabule
       if (c.dead && !s.needs.dead) return false;
       if (c.debtPaid === true && s.debtRemaining > 0) return false;
       if (c.debtPaid === false && s.debtRemaining <= 0) return false;
-      if (c.crimeLow && s.stats.crimesCommitted > 3) return false;
-      if (c.crimeHigh && s.stats.crimesCommitted < 6) return false;
+      const crimes = s.stats.crimesCommitted;
+      if (c.maxCrime !== undefined && crimes > c.maxCrime) return false;
+      if (c.minCrime !== undefined && crimes < c.minCrime) return false;
       if (c.escaped && !s.flags.escaped_island) return false;
-      if (c.deadline && s.time.day <= s.debt.dueDay) return false;
-      if (c.flag && !s.flags[c.flag]) return false;
+      // po terminie Rycerze czekają tydzień, licząc odsetki; potem przychodzą
+      if (c.deadline && s.time.day <= s.debt.dueDay + DEADLINE_GRACE) return false;
+      if (c.flag && !flags(c.flag)) return false;
+      if (c.noFlag && (Array.isArray(c.noFlag) ? c.noFlag : [c.noFlag]).some((k: string) => s.flags[k])) return false;
       if (c.rep) for (const f in c.rep) if (s.reputation[f as keyof typeof s.reputation] < c.rep[f]) return false;
+      if (c.relation) for (const id in c.relation) if (ReputationSystem.relation(id) < c.relation[id]) return false;
       return true;
     };
-    const order = ['end_death', 'end_captive', 'end_escape', 'end_overthrow', 'end_knights', 'end_crime', 'end_honest'];
-    for (const id of order) {
-      const e = ENDINGS.find(x => x.id === id);
-      if (e && cond(e.cond)) return e;
-    }
+    // kolejność w danych = priorytet (pierwsze pasujące wygrywa)
+    for (const e of ENDINGS) if (cond(e.cond)) return e;
     return null;
   }
+
+  static endingDefs() { return ENDINGS; }
 
   static triggerEnding(id: string) {
     const s = getGame().state;
     const e = ENDINGS.find(x => x.id === id) || this.checkEndings();
     if (!e || s.ending) return;
     s.ending = e.id;
+    // zakończenia, które gracz już widział — do listy w menu głównym
+    try {
+      const seen = JSON.parse(localStorage.getItem('elenem.endings') || '[]') as string[];
+      if (!seen.includes(e.id)) { seen.push(e.id); localStorage.setItem('elenem.endings', JSON.stringify(seen)); }
+    } catch { /* brak pamięci przeglądarki */ }
     bus.emit('game:ending', { id: e.id, name: t(e.nameKey), summary: ReputationSystem.summary() });
   }
 

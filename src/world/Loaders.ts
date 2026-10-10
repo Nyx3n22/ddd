@@ -1,3 +1,4 @@
+import { decorateDistrict } from './WorldDecor';
 import { TileMap, GROUND_TYPES } from './TileMap';
 import { Scene, SceneObject, SceneLight } from './Scene';
 import { TILE, getProp, PROPS, propOffset, GroundType } from '../render/Art';
@@ -36,11 +37,25 @@ interface DistrictJson {
   lamps: Array<[number, number]>;
   spawners: Record<string, { count: number; points?: Array<[number, number]>; areas?: Array<[number, number, number, number]> }>;
   fastTravel: Array<{ id: string; nameKey: string; tx: number; ty: number }>;
+  stations?: Array<{ tx: number; ty: number; kind: string; labelKey: string; npc?: string; [k: string]: any }>;
+  /** las: [x, y, w, h, gęstość drzew 0..1] */
+  forests?: Array<[number, number, number, number, number]>;
+  /** zwierzęta na stałe: [typ, tx, ty] */
+  creatures?: Array<[string, number, number]>;
   ambience: { birds: number; smoke: Array<[number, number]> };
 }
 
 const DISTRICT = districtJson as unknown as DistrictJson;
 const INTERIORS = (interiorsJson as any).interiors as InteriorDef[];
+
+/** Propsy, które reagują na E (studnia, skrzynie, tablica…) — reszta to scenografia. */
+export const INTERACTIVE_PROPS = new Set([
+  'well', 'wellBucket', 'waterTrough', 'barrelRain', 'noticeBoard', 'signPost', 'signInn',
+  'barrel', 'barrelStack', 'keg', 'crate', 'crateStack', 'sack', 'chest', 'fishCrate', 'crateCustoms', 'smugglingCrate',
+  'bush', 'gallows', 'shrine', 'statue', 'stocks', 'campfire', 'forge', 'anvil', 'haystack', 'hayBale',
+  'trainingDummy', 'shelf', 'bookshelf', 'bench', 'pew',
+  'chair', 'armchair', 'sofa', 'wardrobe', 'cupboard', 'dresser', 'bedDouble', 'bedStraw', 'loom', 'spinningWheel', 'washBasin', 'scarecrow', 'beehive', 'tombstone'
+]);
 
 export interface LoadedWorld {
   district: Scene;
@@ -51,6 +66,7 @@ export interface LoadedWorld {
   fastTravel: Array<{ id: string; nameKey: string; x: number; y: number }>;
   spawners: DistrictJson['spawners'];
   ambience: DistrictJson['ambience'];
+  creatures: Array<[string, number, number]>;
 }
 
 export function loadDistrict(): LoadedWorld {
@@ -185,7 +201,8 @@ export function loadDistrict(): LoadedWorld {
       x: ax, y: ay,
       box: solid ? { x: ax - bw / 2, y: ay - bh, w: bw, h: bh } : null,
       sortY: ay, tall: d.tall, art, dx: off.dx, dy: off.dy, variant: v,
-      solid, grabbable: d.grabbable, dynamic: d.grabbable, nameKey: `prop.${type}`
+      solid, grabbable: d.grabbable, dynamic: d.grabbable, nameKey: `prop.${type}`,
+      interactId: INTERACTIVE_PROPS.has(type) ? `prop:${type}:${tx}_${ty}` : undefined
     });
   }
 
@@ -209,6 +226,27 @@ export function loadDistrict(): LoadedWorld {
   // --- dymy z kominów ---
   for (const [tx, ty] of DISTRICT.ambience.smoke) scene.smokeSources.push({ x: tx * TILE + 16, y: ty * TILE });
 
+  // --- stanowiska w plenerze (skrytki, miejsca zadań) ---
+  for (const st of DISTRICT.stations ?? []) {
+    scene.add({
+      kind: 'station', type: st.kind, id: `world_st_${st.kind}_${st.tx}_${st.ty}`,
+      x: st.tx * TILE + 16, y: st.ty * TILE + TILE - 4, box: null,
+      sortY: st.ty * TILE + TILE, tall: false, art: null,
+      interactId: `station:${st.kind}:${st.tx}_${st.ty}`, nameKey: st.labelKey, data: { ...st }
+    });
+  }
+
+  // --- zagospodarowanie: trawa, ścieżki, roślinność ---
+  const reservedSpots: Array<[number, number]> = [
+    [Math.floor(DISTRICT.spawn.x / TILE), Math.floor(DISTRICT.spawn.y / TILE)],
+    ...DISTRICT.fastTravel.map(f => [f.tx, f.ty] as [number, number]),
+    ...DISTRICT.lamps.map(l => [l[0], l[1]] as [number, number]),
+    ...Object.values(DISTRICT.spawners).flatMap(sp => (sp.points ?? []) as Array<[number, number]>)
+  ];
+  const xs = DISTRICT.walls.filter(w => w.h > w.w).map(w => w.x);
+  const ys = DISTRICT.walls.filter(w => w.w >= w.h).map(w => w.y);
+  decorateDistrict(tm, scene, { wallX0: Math.min(...xs), wallX1: Math.max(...xs), wallY0: Math.min(...ys), wallY1: Math.max(...ys) }, reservedSpots, DISTRICT.forests ?? []);
+
   // --- wnętrza ---
   const interiors = new Map<string, Scene>();
   for (const def of INTERIORS) interiors.set(def.id, loadInterior(def));
@@ -219,6 +257,7 @@ export function loadDistrict(): LoadedWorld {
     buildings, gates,
     fastTravel: DISTRICT.fastTravel.map(ft => ({ id: ft.id, nameKey: ft.nameKey, x: ft.tx * TILE + 16, y: (ft.ty + 1) * TILE })),
     spawners: DISTRICT.spawners,
+    creatures: DISTRICT.creatures ?? [],
     ambience: DISTRICT.ambience
   };
 }
@@ -238,6 +277,8 @@ export function loadInterior(def: InteriorDef): Scene {
   tm.blockRect(def.w - 1, 0, 1, def.h, true);
   tm.blockRect(0, def.h - 1, def.w, 1, true);
 
+  // na kaflu ze stanowiskiem prop jest tylko scenografią — E obsługuje stanowisko
+  const stationTiles = new Set((def.stations ?? []).map(st => `${st.tx},${st.ty}`));
   for (const p of def.props) {
     const [type, tx, ty, variant] = p as [string, number, number, number?];
     const d = PROPS[type]; if (!d) { console.warn('[interior] nieznany props:', type); continue; }
@@ -250,7 +291,8 @@ export function loadInterior(def: InteriorDef): Scene {
       kind: 'prop', type, id: `${def.id}_prop_${type}_${tx}_${ty}`, x: ax, y: ay,
       box: d.solid ? { x: ax - bw / 2, y: ay - bh, w: bw, h: bh } : null,
       sortY: ay, tall: d.tall, art, dx: off.dx, dy: off.dy, variant: v,
-      solid: d.solid, grabbable: d.grabbable, nameKey: `prop.${type}`
+      solid: d.solid, grabbable: d.grabbable, nameKey: `prop.${type}`,
+      interactId: INTERACTIVE_PROPS.has(type) && !stationTiles.has(`${tx},${ty}`) ? `prop:${def.id}:${type}:${tx}_${ty}` : undefined
     });
   }
   for (const l of def.lights) {
@@ -263,7 +305,7 @@ export function loadInterior(def: InteriorDef): Scene {
       kind: 'exit', type: 'exit', id: `${def.id}_exit_${e.tx}`, x: (e.tx + e.w / 2) * TILE, y: e.ty * TILE + TILE,
       box: null, sortY: e.ty * TILE + TILE, tall: false, art: null,
       interactId: `exit:${e.to}`, data: { to: e.to, spawnX: e.spawnX, spawnY: e.spawnY },
-      nameKey: 'station.exit'
+      nameKey: e.to === 'world' ? 'station.exit' : e.to === 'int_room_john' ? 'prop.stairs' : 'station.exitDown'
     });
     // mata podłogowa przy wyjściu
     tm.setOverlay(e.tx, e.ty - 1, 3, 0.6);
@@ -273,7 +315,7 @@ export function loadInterior(def: InteriorDef): Scene {
       kind: 'station', type: s.kind, id: `${def.id}_st_${s.kind}_${s.tx}_${s.ty}`,
       x: s.tx * TILE + 16, y: s.ty * TILE + TILE - 4, box: null,
       sortY: s.ty * TILE + TILE, tall: false, art: null,
-      interactId: `station:${s.kind}`, nameKey: s.labelKey, data: { ...s, interior: def.id }
+      interactId: `station:${s.kind}:${s.tx}_${s.ty}`, nameKey: s.labelKey, data: { ...s, interior: def.id }
     });
   }
   for (const r of (def as any).rooms ?? []) {
@@ -281,7 +323,7 @@ export function loadInterior(def: InteriorDef): Scene {
       kind: 'station', type: r.kind ?? 'bed', id: `${def.id}_room_${r.id}`,
       x: (r.tx + r.tw / 2) * TILE, y: (r.ty + r.th) * TILE, box: null,
       sortY: (r.ty + r.th) * TILE, tall: false, art: null,
-      interactId: `station:${r.kind ?? 'bed'}`, nameKey: r.labelKey, data: { ...r, interior: def.id }
+      interactId: `station:${r.kind ?? 'bed'}:${r.id}`, nameKey: r.labelKey, data: { ...r, interior: def.id }
     });
   }
   scene.interiorAmbient = 0.42;

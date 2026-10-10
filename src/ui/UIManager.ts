@@ -14,6 +14,7 @@ import { InventorySystem, itemDef, itemName, allItemDefs } from '../systems/Inve
 import { SkillsSystem, allSkills, allPerks, allBranches, skillDef, perkDef } from '../systems/SkillsSystem';
 import { ReputationSystem, npcDef, npcName } from '../systems/ReputationSystem';
 import { QuestSystem, questDef } from '../systems/QuestSystem';
+import { Achievements, ACHIEVEMENTS, TalkLog } from '../systems/Extras';
 import { NotesSystem, allEntries, johnNotes } from '../systems/NotesSystem';
 import { DialogueSystem } from '../systems/DialogueSystem';
 import { EconomySystem, merchantDef, allMerchants } from '../systems/EconomySystem';
@@ -42,7 +43,7 @@ export class UIManager {
   paused = false;
   overlay: string | null = null;
   overlayStack: string[] = [];
-  toasts: Array<{ el: HTMLElement; until: number }> = [];
+  toasts: Array<{ el: HTMLElement; text: string; count: number; until: number }> = [];
   radialOpen = false;
   radialSel = 0;
   radialItems: string[] = [];
@@ -126,9 +127,19 @@ export class UIManager {
     set('hud-debt', `${esc(t('hud.debt'))}: <b>${Math.round(s.debtRemaining).toLocaleString(getLang() === 'pl' ? 'pl-PL' : 'en-US')}</b> ${esc(t('hud.crowns'))} · <span id="hud-days">${s.time.daysLeft}</span> ${esc(t('hud.days'))}`);
     const debtEl = $('hud-debt');
     if (debtEl) debtEl.classList.toggle('urgent', s.time.daysLeft <= 5 || s.debtOverdue);
+    // ostatnio podjęte zadanie — jedna linijka, żeby gracz nie musiał otwierać dziennika
+    const tracked = [...s.quests].reverse().find(q => q.state === 'active' && questDef(q.id));
+    if (tracked) {
+      const d = questDef(tracked.id)!, stage = d.stages[tracked.stageIdx];
+      const cnt = tracked.data?.count && (stage?.objective?.count ?? 0) > 1 ? ` (${tracked.data.count}/${stage.objective.count})` : '';
+      set('hud-quest', `<span class="qt">${esc(t(d.titleKey))}</span>${stage ? `<span class="qs">▸ ${esc(t(stage.descKey))}${cnt}</span>` : ''}`);
+    } else set('hud-quest', '');
     set('hud-gold', `${esc(t('hud.purse'))}: <b>${s.gold}</b> ${esc(t('hud.crowns'))}`);
     set('hud-weather', `${esc(t('hud.weather'))}: ${esc(t('weather.' + s.weather.kind))} · ${Math.round(WeatherSystem.tempC())}°`);
-    set('hud-place', esc(t(this.game.world?.scene?.nameKey || 'place.harbour')));
+    // na zewnątrz: nazwa okolicy (las, wieś, rynek…), we wnętrzu: nazwa izby
+    const wp = this.game.world?.player;
+    const region = s.scene === 'world' && wp ? this.game.world.scene.regionAt(wp.x, wp.y) : null;
+    set('hud-place', esc(t(region?.nameKey || this.game.world?.scene?.nameKey || 'place.harbour')));
     // witamina i zdrowie
     const vit: Array<[string, number, number]> = [
       ['hp', s.needs.health, s.needs.maxHealth], ['st', s.needs.stamina, s.needs.maxStamina],
@@ -174,13 +185,46 @@ export class UIManager {
 
   toast(text: string, tone: 'good' | 'bad' | 'warn' | 'neutral' = 'neutral') {
     const box = $('toasts'); if (!box || !text) return;
+    // ten sam komunikat drugi raz z rzędu nie tworzy nowej ramki — tylko licznik ×N
+    const same = this.toasts.find(x => x.text === text);
+    if (same) {
+      same.count += 1;
+      same.until = performance.now() + 4200;
+      same.el.textContent = `${text} ×${same.count}`;
+      return;
+    }
     const el = document.createElement('div');
     el.className = 'toast ' + (tone === 'neutral' ? '' : tone);
     el.textContent = text;
     box.appendChild(el);
-    this.toasts.push({ el, until: performance.now() + 4200 });
-    while (this.toasts.length > 5) { const old = this.toasts.shift()!; old.el.remove(); }
+    this.toasts.push({ el, text, count: 1, until: performance.now() + 4200 });
+    while (this.toasts.length > 4) { const old = this.toasts.shift()!; old.el.remove(); }
   }
+
+  /** Świt nowego dnia: duża karta z datą, długiem i plotką dnia. */
+  showDayCard() {
+    const el = $('day-card'); if (!el) return;
+    const s = this.game.state;
+    const left = s.time.daysLeft;
+    el.innerHTML = `<div class="d">${esc(t('hud.day', { day: s.time.day }))}</div>
+      <div class="s">${esc(t('daycard.line', { left, debt: Math.round(s.debtRemaining).toLocaleString(getLang() === 'pl' ? 'pl-PL' : 'en-US'), weather: t('weather.' + s.weather.kind) }))}</div>
+      <div class="r">„${esc(t(RumorSystem.dailyAmbient()))}”</div>`;
+    el.style.color = left <= 5 ? '#e07a5a' : '';
+    el.classList.add('show');
+    clearTimeout(this.dayCardTimer);
+    this.dayCardTimer = window.setTimeout(() => el.classList.remove('show'), 4200);
+  }
+  private dayCardTimer = 0;
+
+  /** Podpowiedź samouczka — jedna naraz, znika sama. */
+  showHint(text: string) {
+    const el = $('hint'); if (!el) return;
+    el.innerHTML = `<b>${esc(t('tut.title'))}</b>${esc(text)}`;
+    el.style.display = 'block';
+    clearTimeout(this.hintTimer);
+    this.hintTimer = window.setTimeout(() => { el.style.display = 'none'; }, 8000);
+  }
+  private hintTimer = 0;
 
   subtitle(text: string, ms = 3200) {
     const el = $('subtitle'); if (!el) return;
@@ -277,7 +321,6 @@ export class UIManager {
       b.onclick = () => { if (o.ok) DialogueSystem.choose(o.index); else this.toast(o.reason || t('dialogue.cant'), 'bad'); };
       opts.appendChild(b);
     });
-    this.subtitle(session.node.text, 6000);
     bus.emit('ui:page', {});
   }
 
@@ -378,7 +421,7 @@ export class UIManager {
       const john = johnNotes();
       html += s.notes.johnNotes.map(id => {
         const n = john.find((x: any) => x.id === id);
-        const day = n?.dayKey ? t(n.dayKey) : t('journal.day', { day: 1 });
+        const day = n?.dayKey ? t(n.dayKey) : t('journal.day', { day: Number(s.flags['note_day_' + id]) || 1 });
         const txt = n?.textKey ? t(n.textKey) : id;
         return `<div class="card"><h4>${esc(day)}</h4><div>${esc(txt)}</div></div>`;
       }).join('') || `<div class="card"><div class="mut">${esc(t('notes.empty.john'))}</div></div>`;
@@ -629,6 +672,8 @@ export class UIManager {
       html += `<h3 style="color:#8e3527;margin-top:.6em">${esc(t('journal.failed'))}</h3>`;
       html += failed.map(q => `<div class="row"><span>${esc(t(questDef(q.id)?.titleKey || q.id))}</span></div>`).join('');
     }
+    const talks = TalkLog.entries().slice(0, 8);
+    if (talks.length) html += `<h3 style="color:var(--gold);margin-top:.6em">${esc(t('journal.talks'))}</h3>` + talks.map(([d, who, txt]) => `<div class="card" style="margin-top:.3em"><h4>${esc(who)} <span class="mut">${esc(t('journal.day', { day: d }))}</span></h4><div class="mut">${esc(txt)}</div></div>`).join('');
     html += `<div class="card" style="margin-top:.6em"><h4>${esc(t('journal.reputation'))}</h4>${FACTIONS.map(f => `<div class="row"><span class="n">${esc(t('faction.' + f))}</span><span>${s.reputation[f]} · ${esc(ReputationSystem.tier(f))}</span></div>`).join('')}</div>`;
     body.innerHTML = html;
   }
@@ -872,24 +917,27 @@ export class UIManager {
     this.openOverlay('ov-generic');
     const g = $('gen-title'); if (g) g.textContent = t('board.title');
     const body = $('gen-body'); if (!body) return;
-    const offers: Array<{ tpl: string; title: string; desc: string; pay: number }> = [];
+    const offers: Array<{ tpl: string; title: string; desc: string; pay: number; seed: number; questId: string }> = [];
+    // oferty są stałe w ciągu dnia: losujemy je z ziarna dnia, nie ruszając głównego RNG gry
+    const saved = rng.serialize();
     for (const tpl of ['board_delivery', 'board_escort', 'board_pests', 'board_labour', 'board_missing', 'board_debt']) {
-      const seedVal = this.game.state.time.day * 31 + tpl.length;
-      rng.setSeed(seedVal);
+      const seed = this.game.state.time.day * 31 + tpl.length;
+      rng.setSeed(seed);
       try {
-        const q = QuestSystem.generateBoard(tpl);
-        offers.push({ tpl, title: q.title, desc: q.desc, pay: q.pay });
-        // natychmiast kasujemy — gracz wybierze tylko jedno
-        const st = this.game.state.quests.find(x => x.id === q.questId);
-        if (st) { this.game.state.quests = this.game.state.quests.filter(x => x !== st); }
+        const q = QuestSystem.generateBoard(tpl, false);
+        if (this.game.state.quests.some(x => x.id === q.questId)) continue;   // już wzięte dziś
+        offers.push({ tpl, title: q.title, desc: q.desc, pay: q.pay, seed, questId: q.questId });
       } catch { /* szablon może nie istnieć */ }
     }
-    rng.setSeed(Date.now() % 100000);
+    rng.deserialize(saved);
     body.innerHTML = offers.map((o, i) => `<div class="card"><h4>${esc(o.title)}</h4><div class="mut">${esc(o.desc)}</div>
       <button class="clickable board-take" data-i="${i}" style="margin-top:.3em">${esc(t('board.take', { gold: o.pay }))}</button></div>`).join('') || `<div class="mut">${esc(t('board.empty'))}</div>`;
     body.querySelectorAll('.board-take').forEach(b => (b as HTMLElement).onclick = () => {
       const o = offers[Number((b as HTMLElement).dataset.i)];
+      const keep = rng.serialize();
+      rng.setSeed(o.seed);
       const q = QuestSystem.generateBoard(o.tpl);
+      rng.deserialize(keep);
       this.toast(t('quest.started', { title: q.title }), 'good');
       this.closeOverlay();
     });
@@ -1037,7 +1085,8 @@ export class UIManager {
     } else if (this.pauseTab === 4) {
       const st = s.stats;
       body.innerHTML = `<div class="grid g3">${Object.entries(st).map(([k, v]) => `<div class="card"><h4>${esc(t('stat.' + k))}</h4><div>${typeof v === 'number' ? Math.round(v).toLocaleString() : v}</div></div>`).join('')}</div>
-        <div class="card" style="margin-top:.6em"><h4>${esc(t('stat.endings'))}</h4><div class="mut">${esc(ReputationSystem.summary())}</div></div>`;
+        <div class="card" style="margin-top:.6em"><h4>${esc(t('stat.endings'))}</h4><div class="mut">${esc(ReputationSystem.summary())}</div></div>
+        ${this.achievementsHtml()}`;
     } else {
       body.innerHTML = `<div class="card parchment"><h4>${esc(t('about.title'))}</h4><div>${esc(t('about.body'))}</div></div>
         <div class="card" style="margin-top:.6em"><h4>${esc(t('about.principle'))}</h4><div class="mut">${esc(t('about.principleBody'))}</div></div>`;
@@ -1068,6 +1117,12 @@ export class UIManager {
       row(t('set.runMode'), select('runMode', [['hold', t('set.hold')], ['toggle', t('set.toggle')]])) +
       row(t('set.visionCones'), check('showVisionCones')) +
       row(t('set.questMarkers'), check('showQuestMarkers')) +
+      row(t('set.minimap'), check('showMinimap')) +
+      row(t('set.nameplates'), check('showNameplates')) +
+      row(t('set.barks'), check('showBarks')) +
+      row(t('set.tutorial'), check('showTutorial')) +
+      row(t('set.ambientLife'), check('ambientLife')) +
+      row(t('set.autoPause'), check('autoPause')) +
       row(t('set.combat'), select('difficultyCombat', [['0', t('diff.easy')], ['1', t('diff.normal')], ['2', t('diff.brutal')]])) +
       row(t('set.economy'), select('difficultyEconomy', [['0', t('diff.easy')], ['1', t('diff.normal')], ['2', t('diff.brutal')]])) +
       row(t('set.law'), select('difficultyLaw', [['0', t('diff.easy')], ['1', t('diff.normal')], ['2', t('diff.brutal')]])) +
@@ -1112,6 +1167,7 @@ export class UIManager {
     ];
     if (SaveSystem.hasAny()) this.titleItems.splice(1, 0, { label: t('title.continue'), act: () => { if (!this.game.load('auto')) this.game.load('quick'); } });
     this.titleItems.push({ label: t('title.settings'), act: () => { this.openOverlay('ov-pause'); this.pauseTab = 2; this.renderPause(); } });
+    this.titleItems.push({ label: t('title.gallery'), act: () => this.openGallery() });
     this.titleItems.push({ label: t('title.about'), act: () => { this.openOverlay('ov-pause'); this.pauseTab = 5; this.renderPause(); } });
     menu.innerHTML = this.titleItems.map((it, i) => `<button class="clickable ${i === 0 ? 'on' : ''}" data-i="${i}">${esc(it.label)}</button>`).join('');
     menu.querySelectorAll('button').forEach(b => (b as HTMLElement).onclick = () => {
@@ -1123,36 +1179,78 @@ export class UIManager {
     this.drawTitleArt();
   }
 
-  drawTitleArt() {
+  drawTitleArt(time = 0) {
     const c = $('title-art') as HTMLCanvasElement | null;
     if (!c) return;
     const x = c.getContext('2d')!;
+    const W = c.width, H = c.height;
     x.imageSmoothingEnabled = false;
-    x.clearRect(0, 0, c.width, c.height);
-    // morze, brzeg, sylwetka miasta — pikselowy herb sceny
-    for (let i = 0; i < c.height; i++) {
-      const t01 = i / c.height;
-      x.fillStyle = t01 < 0.45 ? rgba('#3f5f7a', 1 - t01 * 0.4) : t01 < 0.6 ? '#c9b489' : '#6d7a52';
-      x.fillRect(0, i, c.width, 1);
-    }
+    // niebo o zmierzchu
+    for (let i = 0; i < 60; i++) { x.fillStyle = `rgb(${46 + i * 1.6 | 0},${54 + i * 0.9 | 0},${84 - i * 0.2 | 0})`; x.fillRect(0, i, W, 1); }
+    x.fillStyle = '#f0c27a'; x.fillRect(236, 40, 14, 14); x.fillStyle = '#f7dca0'; x.fillRect(239, 43, 8, 8);
+    // chmury
+    x.fillStyle = 'rgba(220,200,180,0.25)';
+    for (let i = 0; i < 4; i++) { const cx = ((i * 97 + time * (6 + i * 2)) % (W + 80)) - 40; x.fillRect(cx | 0, 10 + i * 9, 40, 3); x.fillRect((cx + 8) | 0, 8 + i * 9, 22, 2); }
+    // sylwetka miasta i światła okien
     x.fillStyle = '#2b2118';
     for (let i = 0; i < 26; i++) {
       const bx = 8 + i * 12 + ((i * 37) % 5), bh = 16 + ((i * 53) % 22);
-      x.fillRect(bx, 74 - bh, 10, bh);
-      x.beginPath(); x.moveTo(bx - 2, 74 - bh); x.lineTo(bx + 5, 74 - bh - 8); x.lineTo(bx + 12, 74 - bh); x.fill();
+      x.fillRect(bx, 70 - bh, 10, bh);
+      x.beginPath(); x.moveTo(bx - 2, 70 - bh); x.lineTo(bx + 5, 70 - bh - 8); x.lineTo(bx + 12, 70 - bh); x.fill();
     }
-    x.fillStyle = '#d8b25c';
-    for (let i = 0; i < 14; i++) x.fillRect(14 + i * 22, 60 + (i % 3) * 4, 2, 2);
-    x.fillStyle = 'rgba(255,255,255,0.12)';
-    for (let i = 0; i < 40; i++) x.fillRect((i * 53) % c.width, 20 + ((i * 29) % 60), 6, 1);
+    for (let i = 0; i < 14; i++) { x.fillStyle = Math.sin(time * 2 + i * 1.7) > -0.6 ? '#e8b55a' : '#6a4a2a'; x.fillRect(14 + i * 22, 56 + (i % 3) * 4, 2, 2); }
+    // morze z falami
+    for (let i = 70; i < H; i++) { x.fillStyle = `rgb(${34 + (i - 70) * 0.3 | 0},${66 + (i - 70) * 0.2 | 0},${92 - (i - 70) * 0.3 | 0})`; x.fillRect(0, i, W, 1); }
+    x.fillStyle = 'rgba(240,210,150,0.35)';
+    for (let i = 0; i < 30; i++) { const wy = 74 + (i % 8) * 6, wx = ((i * 41 + time * (10 + (i % 3) * 4)) % (W + 20)) - 10; x.fillRect(wx | 0, wy, 6 + (i % 4), 1); }
+    // statek kołysze się na redzie
+    const bob = Math.sin(time * 1.4) * 1.5;
+    const sx = 60 + Math.sin(time * 0.1) * 6, sy = 92 + bob;
+    x.fillStyle = '#1e1610'; x.fillRect(sx, sy, 40, 6); x.fillRect(sx + 4, sy + 6, 32, 3);
+    x.fillRect(sx + 18, sy - 30, 2, 30); x.fillRect(sx + 30, sy - 22, 2, 22);
+    x.fillStyle = '#d9c9a3'; x.fillRect(sx + 8, sy - 26, 10, 18); x.fillRect(sx + 21, sy - 20, 9, 14);
+    // mewy
+    x.fillStyle = '#efeae0';
+    for (let i = 0; i < 4; i++) {
+      const gx = ((i * 83 + time * (14 + i * 3)) % (W + 40)) - 20, gy = 22 + i * 7 + Math.sin(time * 2 + i) * 3;
+      const up = Math.sin(time * 8 + i) > 0;
+      x.fillRect(gx | 0, gy | 0, 2, 1); x.fillRect((gx - 3) | 0, (gy + (up ? -1 : 1)) | 0, 3, 1); x.fillRect((gx + 2) | 0, (gy + (up ? -1 : 1)) | 0, 3, 1);
+    }
   }
+
+  achievementsHtml(): string {
+    const got = Achievements.unlocked();
+    return `<div class="card" style="margin-top:.6em"><h4>${esc(t('ach.title'))} · ${got.length}/${ACHIEVEMENTS.length}</h4><div class="grid g2">` +
+      ACHIEVEMENTS.map(a => `<div class="row"><span>${got.includes(a.id) ? '★' : '☆'} ${esc(got.includes(a.id) ? t('ach.' + a.id) : '???')}</span><span class="n">${esc(t('ach.' + a.id + '.desc'))}</span></div>`).join('') + `</div></div>`;
+  }
+
+  /** Menu główne: odkryte zakończenia i osiągnięcia (wspólne dla wszystkich rozgrywek). */
+  openGallery() {
+    this.openOverlay('ov-generic');
+    const g = $('gen-title'); if (g) g.textContent = t('title.gallery');
+    const body = $('gen-body'); if (!body) return;
+    let seen: string[] = [];
+    try { seen = JSON.parse(localStorage.getItem('elenem.endings') || '[]'); } catch { /* */ }
+    const ends = QuestSystem.endingDefs();
+    body.innerHTML = `<div class="card"><h4>${esc(t('epi.endingsFound'))} · ${seen.length}/${ends.length}</h4>` +
+      ends.map(e => `<div class="row"><span>${seen.includes(e.id) ? '✦ ' + esc(t(e.nameKey)) : '— ???'}</span><span class="n">${esc(seen.includes(e.id) ? '' : t('gallery.hint.' + e.id))}</span></div>`).join('') + `</div>` + this.achievementsHtml();
+  }
+
+  /** Animowany obraz w menu: morze, statek na redzie, mewy, światła miasta. */
+  animateTitle(ts: number) {
+    const el = $('title');
+    if (!el || el.classList.contains('hide')) { this.titleAnim = 0; return; }
+    this.drawTitleArt(ts / 1000);
+    this.titleAnim = requestAnimationFrame((t2) => this.animateTitle(t2));
+  }
+  private titleAnim = 0;
 
   titleActivate() {
     const it = this.titleItems[this.titleSel];
     if (it) it.act();
   }
 
-  showTitle() { const el = $('title'); if (el) el.classList.remove('hide'); }
+  showTitle() { const el = $('title'); if (el) el.classList.remove('hide'); if (!this.titleAnim) this.titleAnim = requestAnimationFrame((t2) => this.animateTitle(t2)); }
   hideTitle() { const el = $('title'); if (el) el.classList.add('hide'); this.closeAll(); }
 
   showEnding(e: { id: string; name: string; summary: string }) {
@@ -1161,17 +1259,45 @@ export class UIManager {
     const g = $('gen-title'); if (g) g.textContent = t('ending.title');
     const body = $('gen-body'); if (!body) return;
     const s = this.game.state;
-    body.innerHTML = `<div class="card parchment"><h4>${esc(e.name)}</h4><div style="line-height:1.6">${esc(t('ending.' + e.id + '.text'))}</div></div>
+    const total = QuestSystem.endingDefs().length;
+    let seen = 1;
+    try { seen = (JSON.parse(localStorage.getItem('elenem.endings') || '[]') as string[]).length || 1; } catch { /* brak pamięci */ }
+    const fates = this.epilogueFates().map(([who, txt]) => `<div class="fate"><b>${esc(who)}</b><span>${esc(txt)}</span></div>`).join('');
+    body.innerHTML = `<div class="card parchment"><h4>${esc(e.name)}</h4><div class="epilogue">${esc(t('ending.' + e.id + '.text'))}</div></div>
+      <div class="card" style="margin-top:.6em"><h4>${esc(t('epi.title'))}</h4>${fates}</div>
       <div class="card" style="margin-top:.6em"><h4>${esc(t('ending.summary'))}</h4>
-      <div class="row"><span class="n">${esc(t('stat.daysPlayed'))}</span><span>${s.stats.daysPlayed}</span></div>
+      <div class="row"><span class="n">${esc(t('stat.daysPlayed'))}</span><span>${s.time.day}</span></div>
       <div class="row"><span class="n">${esc(t('stat.earned'))}</span><span>${Math.round(s.stats.earned)}</span></div>
+      <div class="row"><span class="n">${esc(t('epi.debtLeft'))}</span><span>${Math.round(s.debtRemaining)}</span></div>
       <div class="row"><span class="n">${esc(t('stat.killed'))}</span><span>${s.stats.killed}</span></div>
       <div class="row"><span class="n">${esc(t('stat.questsDone'))}</span><span>${s.stats.questsDone}</span></div>
       <div class="row"><span class="n">${esc(t('stat.crimesCommitted'))}</span><span>${s.stats.crimesCommitted}</span></div>
-      <div class="row"><span class="n">${esc(t('ending.reputation'))}</span><span>${esc(e.summary)}</span></div></div>
+      <div class="row"><span class="n">${esc(t('ending.reputation'))}</span><span>${esc(e.summary)}</span></div>
+      <div class="row"><span class="n">${esc(t('epi.endingsFound'))}</span><span>${seen} / ${total}</span></div></div>
       <div class="grid g2" style="margin-top:.6em"><button class="clickable" id="end-title">${esc(t('ending.toTitle'))}</button><button class="clickable" id="end-close">${esc(t('ending.continue'))}</button></div>`;
     $('end-title')!.onclick = () => { this.closeAll(); this.buildTitle(); this.showTitle(); this.game.started = false; };
     $('end-close')!.onclick = () => { this.closeOverlay(); };
+  }
+
+  /** Losy wyspy w epilogu: frakcje według reputacji i kilka postaci według decyzji Johna. */
+  epilogueFates(): Array<[string, string]> {
+    const s = this.game.state;
+    const out: Array<[string, string]> = [];
+    for (const f of Object.keys(s.reputation) as Array<keyof typeof s.reputation>) {
+      const v = s.reputation[f];
+      const tier = v >= 30 ? 'good' : v <= -30 ? 'bad' : 'mid';
+      out.push([t('faction.' + f), t(`epi.${f}.${tier}`)]);
+    }
+    const npc = (id: string, key: string) => out.push([npcName(id), t(key)]);
+    if (s.flags.relic_returned) npc('teodor', 'epi.teodor.relic');
+    else if (s.flags.relic_sold) npc('teodor', 'epi.teodor.sold');
+    if (s.flags.informed_on_idzi || s.flags.betrayed_idzi) npc('idzi', 'epi.idzi.betrayed');
+    else if (s.flags.idzi_trusts) npc('idzi', 'epi.idzi.friend');
+    if (QuestSystem.get('q_marta_satchel')?.state === 'done') npc('marta', 'epi.marta.helped');
+    if (ReputationSystem.relation('hanna') >= 30) npc('hanna', 'epi.hanna.friend');
+    if (s.flags.ledger_to_raven) npc('baldwin', 'epi.baldwin.ledger');
+    else if (s.flags.overthrow) npc('baldwin', 'epi.baldwin.fallen');
+    return out;
   }
 
   refreshAll() {

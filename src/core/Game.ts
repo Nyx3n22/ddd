@@ -11,7 +11,7 @@ import { t, setLang } from './Localization';
 import { Renderer } from '../render/Renderer';
 import { World } from '../world/World';
 import { UIManager } from '../ui/UIManager';
-import { InventorySystem } from '../systems/InventorySystem';
+import { InventorySystem, itemDef } from '../systems/InventorySystem';
 import { NeedsSystem } from '../systems/NeedsSystem';
 import { WeatherSystem } from '../systems/WeatherSystem';
 import { DebtSystem } from '../systems/DebtSystem';
@@ -22,6 +22,7 @@ import { EconomySystem } from '../systems/EconomySystem';
 import { SkillsSystem } from '../systems/SkillsSystem';
 import { NotesSystem } from '../systems/NotesSystem';
 import { DialogueSystem } from '../systems/DialogueSystem';
+import { Tutorial, Achievements, Barks, TalkLog } from '../systems/Extras';
 
 /* ============================================================================
    GRA — orkiestrator pętli
@@ -45,6 +46,8 @@ export class Game {
   private lastHour = -1;
   fpsSmooth = 60;
   loopErrors = 0;
+  /** „zamrożenie” klatki przy trafieniu — cios ma wagę */
+  hitStop = 0;
   bootError: string | null = null;
 
   constructor() { setGame(this); }
@@ -60,6 +63,8 @@ export class Game {
       this.debug.init();
       this.ui.init();
       this.bindEvents();
+      Tutorial.bind(); Achievements.bind(); TalkLog.bind();
+      this.bindWindow();
       this.state.newGame(settings.data.hardcore);
       this.world.init();
       this.renderer.camera.follow(this.world.player.x, this.world.player.y, 0, true);
@@ -72,6 +77,16 @@ export class Game {
       const el = document.getElementById('title');
       if (el) el.innerHTML = `<div class="tt">BŁĄD / ERROR</div><div class="sub">${this.bootError}</div>`;
     }
+  }
+
+  /** Autopauza: przełączenie karty albo utrata fokusu zatrzymuje świat. */
+  bindWindow() {
+    const pause = () => {
+      if (!settings.data.autoPause || !this.started || this.ui.paused || this.ui.anyOverlayOpen() || DialogueSystem.session || this.state.ending) return;
+      this.ui.togglePause();
+    };
+    document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
+    window.addEventListener('blur', pause);
   }
 
   newGame(hardcore = false) {
@@ -120,8 +135,11 @@ export class Game {
       this.handleInput(dt);
       if (this.started) {
         this.updateTime(dt);
-        this.world.update(dt, this.collectInput());
+        let wdt = dt;
+        if (this.hitStop > 0) { this.hitStop -= dt; wdt = dt * 0.08; }
+        this.world.update(wdt, this.collectInput());
         this.updateAudio(dt);
+        Barks.update(dt);
       }
       this.render(dt);
       this.ui.tick(dt);
@@ -149,10 +167,7 @@ export class Game {
       attackPressed: i.pressed('attack'),
       blockHeld: i.down('block'),
       dodgePressed: i.pressed('dodge'),
-      mouseWorld: this.renderer.camera.screenToWorld(
-        i.mousePos().x / Math.max(1, this.renderer.scale),
-        i.mousePos().y / Math.max(1, this.renderer.scale)
-      )
+      mouseWorld: this.renderer.camera.screenToWorld(...this.renderer.clientToBuffer(i.mousePos().x, i.mousePos().y))
     };
   }
 
@@ -179,6 +194,13 @@ export class Game {
     if (i.pressed('torch')) { InventorySystem.use('torch'); return; }
     if (i.pressed('quickbelt')) { this.ui.toggleRadial(); return; }
     if (i.pressed('inventory')) { this.ui.openInventory(); return; }
+    for (let k = 0; k < 4; k++) {
+      if (!i.pressedCode('Digit' + (k + 1))) continue;
+      const belt = this.state.inventory.items.filter(it => itemDef(it.id)?.tags.includes('belt'));
+      const it = belt[k];
+      if (it) InventorySystem.use(it.id); else bus.emit('hud:toast', { text: t('belt.empty') });
+      return;
+    }
 
     /* --- klawisze diegetyczne: działają tylko, jeśli John ma przedmiot --- */
     if (i.pressed('notes')) {
@@ -272,6 +294,7 @@ export class Game {
     });
     if (s.flags.godmode) { s.needs.health = s.needs.maxHealth; }
     bus.emit('minuteTick', { day: s.time.day, hour: s.time.hour, minute: s.time.minuteOfHour });
+    if (s.time.minuteOfHour % 5 === 0) { Tutorial.tick(); Achievements.tick(); }
     // co 15 minut: drobne zdarzenia świata
     if (s.time.minuteOfHour % 15 === 0 || force) {
       if (rng.chance(0.12)) bus.emit('rumor:seedEvent', { textKey: RumorSystem.dailyAmbient(), severity: 1 });
@@ -293,7 +316,7 @@ export class Game {
     this.world.dayTick();
     bus.emit('dayChanged', { day: s.time.day, daysLeft: s.time.daysLeft });
     if (!quiet) {
-      bus.emit('hud:toast', { text: t('day.changed', { day: s.time.day, left: s.time.daysLeft }), tone: s.time.daysLeft <= 5 ? 'bad' : 'neutral' });
+      this.ui.showDayCard();
       SaveSystem.autosave();
     }
     const end = QuestSystem.checkEndings();
@@ -340,7 +363,11 @@ export class Game {
       torchLit: s.needs.torchLit,
       torchFuel: s.needs.torchFuel,
       interactTarget: target ? { x: target.x, y: target.y, label: it!.prompt } : (p.interactTarget?.kind === 'npc' ? this.npcTargetPos(p.interactTarget.id) : null),
-      dt
+      dt,
+      night: s.scene === 'world' && s.time.isNight(),
+      ambientLife: settings.data.ambientLife,
+      lookAhead: p.moveInput,
+      ghosts: p.ghosts
     });
     // HUD aktualizujemy co klatkę — jest tani (tylko DOM text)
     this.ui.updateHud(dt);
@@ -355,6 +382,7 @@ export class Game {
 
   bindEvents() {
     bus.on('hud:toast', (e: any) => this.ui.toast(e.text, e.tone));
+    bus.on('hud:hint', (e: any) => this.ui.showHint(e.text));
     bus.on('hud:gold', () => this.ui.updateHud(0));
     bus.on('world:fade', (e: any) => this.ui.fade(e.dir));
     bus.on('dialogue:open', (e: any) => this.ui.openDialogue(e));
@@ -379,11 +407,15 @@ export class Game {
     bus.on('fx:damageNumber', (e: any) => this.renderer.floats.damage(e.x, e.y, e.amount, { crit: e.crit, self: e.self }));
     bus.on('fx:parry', (e: any) => { this.renderer.floats.label(e.x, e.y - 40, t('combat.parry'), '#8fc4e8', 10, 0.8); if (!settings.data.disableCameraShake) this.renderer.camera.kick(2); });
     bus.on('fx:hit', () => { if (!settings.data.disableCameraShake) this.renderer.camera.kick(1.6); });
-    bus.on('fx:swing', () => {});
+    bus.on('enemy:hit', () => { this.hitStop = Math.max(this.hitStop, 0.055); });
+    bus.on('player:hit', () => { this.hitStop = Math.max(this.hitStop, 0.07); });
+    bus.on('weather:changed', (e: any) => this.renderer.ambient.weatherChanged(e.kind, !this.state.time.isNight()));
+    bus.on('fx:swing', (e: any) => this.renderer.combat.swing(e.x, e.y, e.dir, e.reach, !!e.hit));
     bus.on('combat:parried', () => { if (!settings.data.disableCameraShake) this.renderer.camera.kick(2.4); });
     bus.on('player:died', () => { if (!settings.data.disableCameraShake) this.renderer.camera.kick(5); });
     bus.on('player:step', (e: any) => this.renderer.weather.footstep(e.x, e.y, e.ground, false));
     bus.on('game:ending', (e: any) => this.ui.showEnding(e));
+    bus.on('game:endingRequest', (e: any) => QuestSystem.triggerEnding(e.id));
     bus.on('lang:set', (e: any) => { setLang(e.lang); settings.data.lang = e.lang; settings.save(); this.ui.refreshAll(); });
     bus.on('rep:add', (e: any) => {});
     bus.on('time:skip', (e: any) => this.skipTime(e.hours * 60, e.reason));
@@ -391,7 +423,7 @@ export class Game {
     bus.on('save:written', () => {});
     bus.on('quest:completed', () => audio.questDone());
     bus.on('skill:levelUp', () => audio.levelUp());
-    bus.on('inventory:changed', () => this.ui.updateBelt());
+    bus.on('inventory:changed', () => { this.ui.updateBelt(); QuestSystem.recheck(); });
     bus.on('inventory:full', (e: any) => this.ui.toast(e.msg, 'bad'));
   }
 

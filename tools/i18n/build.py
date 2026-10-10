@@ -525,6 +525,17 @@ rep.reason.debtCleared|spłacony dług|the debt cleared
 rep.reason.deadline|niedotrzymany termin|the deadline missed
 rep.reason.unpaid|nieoddana pożyczka|an unpaid loan
 rep.reason.alms|jałmużna|alms
+rep.reason.theft|kradzież|theft
+rep.reason.pickpocket|kieszonkowstwo|pickpocketing
+rep.reason.assault|napaść|assault
+rep.reason.trespass|wtargnięcie|trespassing
+rep.reason.smuggling|przemyt|smuggling
+rep.reason.bribery|przekupstwo|bribery
+rep.reason.threat|groźby|threats
+rep.reason.insult|obelga|insult
+rep.reason.informing|donos|informing
+rep.reason.possession|posiadanie zakazanych rzeczy|possession of contraband
+rep.reason.vandalism|niszczenie mienia|vandalism
 rep.reason.fled|ucieczka przed strażą|flight from the guard
 rep.reason.punished|publiczna kara|public punishment
 rep.reason.winner|wygrane w hazardzie|gambling winnings
@@ -1568,6 +1579,603 @@ skill.spear|Włócznia|Spear
 skill.spear.desc|Dystans, którego nie ma miecz. Trzyma wroga na długość drzewca, dopóki ktoś nie wejdzie pod grot.|Reach a sword does not have. It keeps an enemy a shaft-length away until somebody steps inside the head.
 use.spear|Pchnięcie włócznią|Spear thrust
 """)
+
+# ===========================================================================
+# 8b. NAZWY OBIEKTÓW ŚWIATA I ICH INTERAKCJE
+# ===========================================================================
+add(r"""
+prop.barrel|Beczka|Barrel
+prop.barrelStack|Sterta beczek|Stack of barrels
+prop.crate|Skrzynka|Crate
+prop.crateStack|Sterta skrzynek|Stack of crates
+prop.sack|Worek|Sack
+prop.cart|Wóz|Cart
+prop.well|Studnia|Well
+prop.haystack|Stóg siana|Haystack
+prop.oven|Piec chlebowy|Bread oven
+prop.stall|Stragan|Market stall
+prop.fence|Płot|Fence
+prop.gate|Furtka|Gate
+prop.lampPost|Latarnia|Lamp post
+prop.torchStand|Kaganiec|Torch stand
+prop.signPost|Drogowskaz|Signpost
+prop.noticeBoard|Tablica ogłoszeń|Notice board
+prop.treeOak|Dąb|Oak
+prop.treePine|Sosna|Pine
+prop.bush|Krzak|Bush
+prop.rock|Głaz|Boulder
+prop.boat|Łódź|Boat
+prop.stocks|Dyby|Stocks
+prop.bench|Ława|Bench
+prop.table|Stół|Table
+prop.anvil|Kowadło|Anvil
+prop.forge|Palenisko kuźni|Forge
+prop.grindstone|Toczydło|Grindstone
+prop.logPile|Stos drewna|Log pile
+prop.toolRack|Stojak na narzędzia|Tool rack
+prop.chest|Skrzynia|Chest
+prop.weaponRack|Stojak na broń|Weapon rack
+prop.shrine|Kapliczka|Wayside shrine
+prop.campfire|Ognisko|Campfire
+prop.chicken|Kura|Chicken
+prop.dog|Pies|Dog
+prop.cat|Kot|Cat
+prop.pig|Świnia|Pig
+prop.horse|Koń|Horse
+prop.crow|Wrona|Crow
+prop.netPile|Sieci rybackie|Fishing nets
+prop.anchor|Kotwica|Anchor
+prop.saltPile|Kopiec soli|Salt heap
+prop.fishCrate|Skrzynka ryb|Crate of fish
+prop.clothesline|Sznur z praniem|Clothesline
+prop.gallows|Szubienica|Gallows
+prop.tent|Namiot|Tent
+prop.wellBucket|Wiadro przy studni|Well bucket
+prop.bed|Łóżko|Bed
+prop.cauldron|Kocioł|Cauldron
+prop.barrelRain|Beczka na deszczówkę|Rain barrel
+prop.quarryCart|Wózek z kamieniołomu|Quarry cart
+prop.statue|Posąg świętego|Statue of a saint
+prop.signInn|Szyld karczmy|Inn sign
+prop.crateCustoms|Skrzynia celna|Customs crate
+prop.smugglingCrate|Podejrzana skrzynia|Suspicious crate
+prop.hayBale|Bela siana|Hay bale
+prop.waterTrough|Koryto z wodą|Water trough
+prop.barCounter|Szynkwas|Bar counter
+prop.keg|Antałek|Keg
+prop.shelf|Półka|Shelf
+prop.bookshelf|Regał z księgami|Bookshelf
+prop.desk|Pulpit|Desk
+prop.stool|Stołek|Stool
+prop.tableRound|Okrągły stół|Round table
+prop.fireplace|Kominek|Fireplace
+prop.quenchBarrel|Beczka do hartowania|Quenching barrel
+prop.rack|Stojak|Rack
+prop.hideRack|Rama ze skórami|Hide rack
+prop.altar|Ołtarz|Altar
+prop.pew|Ława kościelna|Pew
+prop.tub|Balia|Tub
+prop.wallH|Mur|Wall
+prop.wallV|Mur|Wall
+prop.wallTower|Baszta|Wall tower
+prop.cityGate|Brama miejska|City gate
+prop.palisade|Palisada|Palisade
+prop.trainingDummy|Manekin treningowy|Training dummy
+prop.signScribe|Szyld pisarza|Scribe's sign
+prop.signSmith|Szyld kowala|Smith's sign
+prop.marketUmbrella|Daszek straganu|Stall awning
+prop.pileOfSalt|Hałda soli|Pile of salt
+prop.corpse|Zwłoki|Corpse
+interact.roomNotRented|Hanna trzyma klucz do izby na piętrze. Najpierw zapłać za nocleg.|Hanna keeps the key to the room upstairs. Pay for the night first.
+prop.stairs|Schody na piętro|Stairs up
+prop.candles|Świece|Candles
+prop.pots|Garnki|Pots
+prop.flowers|Kwiaty|Flowers
+prop.tuft|Kępa trawy|Tuft of grass
+prop.pebbles|Kamyki|Pebbles
+prop.reeds|Trzciny|Reeds
+prop.mushrooms|Grzyby|Mushrooms
+prop.fern|Paproć|Fern
+prop.stump|Pniak|Stump
+prop.hedge|Żywopłot|Hedge
+prop.woodpile|Stos polan|Woodpile
+prop.flowerBed|Grządka kwiatów|Flower bed
+prop.groundItem|Coś na ziemi|Something on the ground
+interact.prayed|Klękasz przy kapliczce i mówisz kilka słów, których nie słyszałeś od dzieciństwa. Robi się trochę lżej.|You kneel at the shrine and say a few words you have not heard since childhood. It gets a little lighter.
+interact.prayedAlready|Już dziś się modliłeś. Święty nie lubi natrętów.|You already prayed today. The saint does not like pests.
+interact.statue|Kamienny święty z odtłuczonym nosem. U jego stóp ktoś zostawił suszone kwiaty i miedziaka.|A stone saint with a chipped nose. Someone left dried flowers and a copper coin at his feet.
+interact.campfire|Ogrzewasz ręce przy ognisku. Dym gryzie w oczy, ale ciepło jest prawdziwe.|You warm your hands at the fire. The smoke stings your eyes, but the warmth is real.
+interact.picked|Podnosisz: {what}.|You pick up: {what}.
+interact.purse|Podnosisz sakiewkę: {gold} koron.|You pick up a purse: {gold} crowns.
+""")
+
+# ===========================================================================
+# 8c. FABUŁA: KSIĘGA KRUKA, OBALENIE, UCIECZKA, PRZYSIĘGA, RELIKWIARZ
+# ===========================================================================
+add(r"""
+quest.ledger.title|Księga Kruka|The Raven's Ledger
+quest.ledger.journal|Baldwin trzyma ludzi na wyspie nie złotem, tylko pamięcią: kto podpalał Vranov, kto patrzył, kto zapłacił za milczenie. Odpis jego księgi może uwolnić mnie — albo kogoś innego.|Baldwin holds the island's people not with gold but with memory: who burned Vranov, who watched, who paid for silence. A copy of his ledger could free me — or someone else.
+quest.ledger.s1|Zapytaj Idziego, gdzie Kruk trzyma odpisy księgi|Ask Idzi where the Raven keeps copies of the ledger
+quest.ledger.s2|Wykradnij odpis księgi ze skrzyni w kantorze celnym (najlepiej nocą)|Steal the ledger copy from the chest in the customs office (best at night)
+quest.ledger.s3|Zdecyduj, komu oddać księgę: Rawiczowi, ojcu Teodorowi czy Baldwinowi|Decide who gets the ledger: Rawicz, Father Teodor or Baldwin
+quest.overthrow.title|Rachunek dla Kruka|A Reckoning for the Raven
+quest.overthrow.journal|Rawicz ma księgę i dwunastu ludzi. Żeby wyrzucić Dzikich Rycerzy z miasta, potrzebuje cechu, Kościoła i przedmieścia.|Rawicz has the ledger and twelve men. To throw the Wild Knights out of town he needs the guild, the Church and the suburb.
+quest.overthrow.s1|Przekonaj kupca Zbyluta, żeby cech stanął za strażą|Convince Zbylut the merchant to put the guild behind the watch
+quest.overthrow.s2|Poproś ojca Teodora, żeby dzwony zabiły na znak|Ask Father Teodor to ring the bells as the signal
+quest.overthrow.s3|Namów starego Vagna, żeby zebrał ludzi z przedmieścia|Persuade old Vagn to gather the people of the suburb
+quest.overthrow.s4|Nocą stań przy sierżancie Rawiczu — wtedy uderzycie|At night, stand with Sergeant Rawicz — then you strike
+quest.ferry.title|Ostatni prom|The Last Ferry
+quest.ferry.journal|„Szara Mewa” stoi na redzie i nie zadaje pytań, jeśli kapitan dostanie znak od Idziego. Rybacy przewiozą mnie nocą z końca środkowej kei.|The Grey Gull lies in the roads and asks no questions if the captain gets Idzi's token. The fishermen will row me out at night from the end of the middle pier.
+quest.ferry.s1|Kup od Idziego znak przewozowy (600 koron)|Buy the passage token from Idzi (600 crowns)
+quest.ferry.s2|Nocą wsiądź do łodzi na końcu środkowej kei — i nie w sztorm|At night board the boat at the end of the middle pier — and not in a storm
+quest.oath.title|Płaszcz Kruka|The Raven's Cloak
+quest.oath.journal|Baldwin przyjmie mnie do bractwa zamiast długu. Przysięgi nie składa się słowami.|Baldwin will take me into the brotherhood instead of the debt. An oath is not sworn with words.
+quest.oath.s1|Odbierz od zielarki Wiery czterdzieści koron dla Gwidona|Collect forty crowns from Wiera the herbwoman for Gwidon
+quest.oath.s2|Zabij herszta bandy na wschodnim trakcie|Kill the chief of the band on the eastern road
+quest.oath.s3|Wróć do Baldwina i złóż przysięgę|Return to Baldwin and swear the oath
+quest.relic.title|Relikwiarz świętego Elenema|Saint Elenem's Reliquary
+quest.relic.journal|Relikwiarz zniknął z ruin opactwa trzy lata temu. Teodor nie błogosławi poszukiwań, ale nie doniesie, jeśli wróci na ołtarz.|The reliquary vanished from the abbey ruins three years ago. Teodor does not bless the search, but will not report it if it returns to the altar.
+quest.relic.s1|Przeszukaj ruiny opactwa za zachodnim murem|Search the abbey ruins beyond the western wall
+quest.relic.s2|Oddaj relikwiarz ojcu Teodorowi albo sprzedaj go Idziemu|Return the reliquary to Father Teodor or sell it to Idzi
+item.ledgerRaven|Księga Kruka (odpis)|The Raven's Ledger (copy)
+item.ledgerRaven.desc|Odpis księgi długów Dzikich Rycerzy. Nazwiska, kwoty i daty — także z Vranova. Każda strona to czyjś strach.|A copy of the Wild Knights' debt ledger. Names, sums and dates — Vranov among them. Every page is someone's fear.
+item.relicElenem|Relikwiarz świętego Elenema|Saint Elenem's Reliquary
+item.relicElenem.desc|Pozłacana skrzynka z kośćmi świętego. Lżejsza, niż powinna być rzecz, o którą ludzie się zabijają.|A gilded box with the saint's bones. Lighter than a thing people kill for ought to be.
+item.passageToken|Znak przewozowy|Passage token
+item.passageToken.desc|Wycięty z kości znak Idziego. Kapitan „Szarej Mewy” nie zadaje pytań temu, kto go ma.|Idzi's token carved from bone. The captain of the Grey Gull asks no questions of whoever carries it.
+station.ledgerChest|Skrzynia z odpisami ksiąg|Chest of ledger copies
+station.abbeyRubble|Zwalony ołtarz opactwa|Collapsed abbey altar
+station.ferryBoat|Łódź rybacka przy kei|Fishing boat at the pier
+interact.nothingSpecial|Gruz, ptasie gniazda i zimny wiatr. Gdybyś wiedział, czego szukać…|Rubble, birds' nests and a cold wind. If only you knew what to look for…
+interact.ledgerNotYet|Skrzynia z papierami celnymi. Bez powodu nie ma co w niej grzebać.|A chest of customs papers. No reason to dig through it.
+interact.foundLedger|Pod rachunkami za sól leży gruba księga z krukiem na okładce: {what}.|Under the salt receipts lies a thick book with a raven on the cover: {what}.
+interact.foundRelic|Pod zwalonym ołtarzem, w gnieździe z gałęzi, coś błyska złotem: {what}.|Under the collapsed altar, in a nest of twigs, something glints gold: {what}.
+interact.boatNeedToken|Rybacy nie wiozą nikogo na redę bez znaku od Idziego.|The fishermen take nobody out to the roads without a token from Idzi.
+interact.boatDay|W dzień celnik widzi każdą łódź. Przyjdź nocą.|By day the customs man sees every boat. Come back at night.
+interact.boatConfirm|Wsiąść do łodzi i odpłynąć do „Szarej Mewy”? Nie będzie powrotu.|Board the boat and row out to the Grey Gull? There is no coming back.
+interact.boatStorm|Morze ryczy, a rybak kręci głową. Płynąć mimo sztormu? Nie będzie powrotu.|The sea roars and the fisherman shakes his head. Sail despite the storm? There is no coming back.
+notes.johnAdded|John coś zapisał w notatniku (K → Zapiski Johna).|John wrote something in his notebook (K → John's notes).
+debt.forgiven|Umorzono {gold} koron długu. Zostało {remaining}.|{gold} crowns of debt forgiven. {remaining} remaining.
+req.nightOnly|Tylko nocą|Only at night
+req.idziTrust|Idzi musi ci ufać|Idzi must trust you
+ending.drowned|Morze nie wybacza|The Sea Does Not Forgive
+ending.sanctuary|Azyl|Sanctuary
+ending.informer|Na żołdzie straży|In the Watch's Pay
+ending.smuggler|Król portu|King of the Harbour
+ending.guild|Mieszczanin|Burgher
+ending.hanna|Przy szynkwasie|At the Bar
+ending.end_drowned.text|Rybacy mówili, żeby nie płynąć w sztorm. Fala przyszła od strony latarni, czarna i wysoka jak mur, i łódź po prostu przestała istnieć. Dług Johna zapisano w księdze jako „spłacony przez morze”. Baldwin nie lubi takich wpisów — morza nie da się wezwać na rynek.|The fishermen said not to sail in a storm. A wave came from the lighthouse side, black and tall as a wall, and the boat simply stopped existing. John's debt was entered in the ledger as "settled by the sea". Baldwin dislikes such entries — the sea cannot be summoned to the market square.
+ending.end_sanctuary.text|Tydzień po terminie ludzie z krukiem na płaszczu stanęli pod drzwiami kaplicy i nie weszli. Relikwiarz świętego Elenema stał na ołtarzu, a ojciec Teodor siedział na progu z księgą na kolanach. Prawo azylu jest stare jak wyspa. John zamiata kaplicę, dzwoni na nieszpory i nie wychodzi za mur. Dług wciąż istnieje — ale tylko na papierze, którego nikt nie odważy się wnieść do świętego miejsca.|A week after the deadline, men with ravens on their cloaks stood at the chapel door and did not enter. Saint Elenem's reliquary stood on the altar and Father Teodor sat on the threshold with a book on his knees. The law of sanctuary is as old as the island. John sweeps the chapel, rings for vespers and never goes beyond the wall. The debt still exists — but only on paper nobody dares carry into a holy place.
+ending.end_informer.text|Kiedy Rycerze przyszli po Johna, sierżant Rawicz stał już w drzwiach z dokumentem z pieczęcią rady: „W służbie miasta, nietykalny do odwołania”. Dług nie zniknął, tylko przeszedł na kasę miejską — do odpracowania. John nosi włócznię, pilnuje portu i wie, że Idzi wciąż gdzieś tam jest i pamięta, kto na niego doniósł.|When the Knights came for John, Sergeant Rawicz was already in the doorway with a paper bearing the council's seal: "In the town's service, untouchable until revoked." The debt did not vanish; it passed to the town treasury, to be worked off. John carries a spear, guards the harbour, and knows Idzi is still out there, remembering who informed on him.
+ending.end_smuggler.text|Dług spłacony, a pieniądze pachniały solą bez akcyzy. Idzi przekazał Johnowi klucz do magazynu i połowę kontaktów, bo sam postanowił w końcu odpłynąć. Teraz to John wie, która skrzynia nie ma papierów i który strażnik ma długi. Kruk dostał swoje dziesięć tysięcy. Port dostał nowego pana, którego nie ma w żadnej księdze.|The debt is paid, and the money smelled of untaxed salt. Idzi handed John the warehouse key and half his contacts, for he finally decided to sail away himself. Now John knows which crate has no papers and which guard has debts. The Raven got his ten thousand. The harbour got a new master who is in no ledger at all.
+ending.end_guild.text|Zbylut sam przyniósł kwit do kantoru i postawił na nim pieczęć cechu. „Człowiek, który spłaca dziesięć tysięcy uczciwie, jest wart więcej niż dziesięć tysięcy” — powiedział i wpisał Johna do rejestru jako czeladnika handlu. Po roku John ma własny kram na rynku i płaci podatki jak wszyscy. Nudne życie. Najlepsze, jakie miał.|Zbylut brought the receipt to the office himself and set the guild's seal on it. "A man who pays ten thousand honestly is worth more than ten thousand," he said, and entered John in the register as a journeyman of trade. A year later John has his own stall on the square and pays taxes like everyone else. A dull life. The best he ever had.
+ending.end_hanna.text|Dług zamknięty. Statek na kontynent odpływał trzy dni później, a John nie wsiadł. Hanna postawiła przed nim kufel i powiedziała: „Stołek przy szynkwasie się zwolnił. Umiesz nosić beczki?”. Umiał. Wieczorami opowiada nowym z kontynentu, żeby najpierw płacili, potem pytali — i czasem nawet go słuchają.|The debt is closed. The ship to the mainland left three days later and John was not on it. Hanna set a mug in front of him and said, "There's a free stool at the bar. Can you carry barrels?" He could. In the evenings he tells newcomers from the mainland to pay first and ask later — and sometimes they even listen.
+note.vranov_fire|Vranov. Myślałem, że zostawiłem to na kontynencie razem z mieczem, który wtedy nosiłem. Teodor pamięta chłopca. Ja pamiętam dym i to, że stałem trzy kroki dalej. Kruk nie trzyma mnie długiem. Trzyma mnie tym, co wie.|Vranov. I thought I had left it on the mainland with the sword I carried then. Teodor remembers the boy. I remember the smoke, and that I stood three steps away. The Raven does not hold me with the debt. He holds me with what he knows.
+note.choice_guard|Oddałem księgę Rawiczowi. Pierwszy raz od lat zrobiłem coś, za co nikt mi nie zapłacił. Dziwne uczucie — lżejsze, niż myślałem.|I gave the ledger to Rawicz. The first time in years I did something nobody paid me for. A strange feeling — lighter than I expected.
+note.choice_church|Teodor przeczyta imiona z ambony. Moje też — jako świadka. Nie wiem, czy to rozgrzeszenie, czy wyrok. Wiem, że Kruk stracił trzy tysiące i coś więcej.|Teodor will read the names from the pulpit. Mine too — as a witness. I do not know whether that is absolution or a sentence. I know the Raven lost three thousand, and something more.
+note.choice_raven|Sprzedałem Krukowi jego własną księgę. Pięć tysięcy mniej długu i jedna rzecz więcej, której nie powiem Teodorowi.|I sold the Raven his own ledger. Five thousand less debt, and one more thing I will not tell Teodor.
+note.relic|Relikwiarz ważył mniej, niż się spodziewałem. Teodor płakał, a ja udawałem, że nie widzę. Kaplica ma teraz świętego, a ja mam miejsce, do którego Kruk nie wejdzie.|The reliquary weighed less than I expected. Teodor wept and I pretended not to see. The chapel has its saint again, and I have a place the Raven will not enter.
+note.relic_sold|Trzysta koron za świętego. Idzi nawet nie zajrzał do środka. Ja zajrzałem — kości jak kości. Tylko że teraz śnią mi się po nocach.|Three hundred crowns for a saint. Idzi did not even look inside. I did — bones like any bones. Only now they visit me at night.
+note.oath|Uklęknąłem przed Krukiem. Dług zniknął, a razem z nim ktoś, kim byłem do wczoraj.|I knelt before the Raven. The debt vanished, and with it someone I was until yesterday.
+note.ferry|Łódź kołysze się pod nogami. Latarnia celnika gaśnie za plecami. Jeśli ktoś to czyta, to znaczy, że zostawiłem notatnik na wyspie — razem ze wszystkim innym.|The boat rocks under my feet. The customs lantern fades behind me. If someone is reading this, I left the notebook on the island — along with everything else.
+note.overthrow|Dzwon bił przez całą noc. Rano na bramie nie było już kruka, tylko ślad po gwoździach. Nie wiem, czy miasto jest teraz wolne. Wiem, że ja jestem.|The bell rang all night. In the morning there was no raven on the gate, only nail holes. I do not know if the town is free now. I know I am.
+""")
+
+# ===========================================================================
+# 8d. EPILOG: LOSY WYSPY
+# ===========================================================================
+add(r"""
+epi.title|Losy wyspy|The fate of the island
+epi.debtLeft|Pozostały dług|Debt remaining
+epi.endingsFound|Odkryte zakończenia|Endings discovered
+epi.wildKnights.good|Kruk wspomina Johna przy winie jako „jedynego dłużnika, który rozumiał rachunki”.|The Raven speaks of John over wine as "the only debtor who understood accounts".
+epi.wildKnights.mid|Rycerze pobierają dziesiątą część jak dawniej. Nikt już nie pyta, czy mają do tego prawo.|The Knights take their tenth as before. Nobody asks any more whether they have the right.
+epi.wildKnights.bad|Na bramie obozu Rycerzy ktoś wyrył imię Johna. Nie jako ostrzeżenie — jako obietnicę.|Someone carved John's name on the gate of the Knights' camp. Not as a warning — as a promise.
+epi.cityGuard.good|Rawicz dostał od rady dwudziestu nowych ludzi i po raz pierwszy od lat śpi spokojnie.|Rawicz got twenty new men from the council and for the first time in years sleeps soundly.
+epi.cityGuard.mid|Straż pilnuje rynku, nie zamku. Tak było i tak zostało.|The watch guards the market, not the castle. So it was and so it remains.
+epi.cityGuard.bad|List gończy za Johnem wisi na tablicy jeszcze rok po tym, jak deszcz rozmył twarz.|John's wanted poster hangs on the board a year after the rain washed out the face.
+epi.merchantGuild.good|Cech podniósł ceny soli o jedną koronę i wszyscy wiedzą, czyja to zasługa.|The guild raised the price of salt by one crown, and everyone knows whom to thank.
+epi.merchantGuild.mid|Kupcy liczą jak zawsze — dokładnie i bez sentymentów.|The merchants count as always — precisely and without sentiment.
+epi.merchantGuild.bad|Zbylut nie sprzedaje już nikomu, kto wymówi imię Johna.|Zbylut no longer sells to anyone who speaks John's name.
+epi.church.good|W kaplicy co niedzielę pali się jedna świeca więcej. Teodor nie mówi, za kogo.|Every Sunday one more candle burns in the chapel. Teodor does not say for whom.
+epi.church.mid|Dzwon bije o godzinach, jak zawsze. Pan słucha w obu pozycjach.|The bell rings the hours as always. The Lord listens in both positions.
+epi.church.bad|Z ambony padło imię Johna — w modlitwie za zabłąkanych.|John's name was spoken from the pulpit — in the prayer for the lost.
+epi.smugglers.good|W porcie mówią, że skrzynia bez papierów płynie szybciej, jeśli pozdrowi się Johna.|In the harbour they say a crate without papers sails faster if you greet John.
+epi.smugglers.mid|Idzi wciąż stoi w cieniu magazynu i nie wychodzi do światła.|Idzi still stands in the warehouse shadow and does not step into the light.
+epi.smugglers.bad|Przemytnicy omijają kei, na których stał John. Pamięć w porcie jest dłuższa niż cumy.|The smugglers avoid the piers where John stood. Memory in the harbour is longer than the moorings.
+epi.villagers.good|Dzieci z przedmieścia bawią się w „Johna i Kruka”. John zawsze wygrywa.|The suburb children play "John and the Raven". John always wins.
+epi.villagers.mid|Ludzie z Dolnego Miasta pamiętają Johna tak, jak pamięta się pogodę: czasem.|The Lower Town folk remember John the way one remembers weather: sometimes.
+epi.villagers.bad|Przy studni wciąż mówi się o najemniku, który przyniósł wyspie tylko kłopoty.|At the well they still talk of the sellsword who brought the island nothing but trouble.
+epi.teodor.relic|Relikwiarz stoi na ołtarzu, a w Dzień Świętego Elenema Teodor kładzie przy nim jedną różę bez słowa.|The reliquary stands on the altar, and on Saint Elenem's Day Teodor lays a single rose beside it without a word.
+epi.teodor.sold|Teodor odprawia mszę przed pustym ołtarzem i nigdy nie pyta, kto sprzedał świętego.|Teodor says mass before an empty altar and never asks who sold the saint.
+epi.idzi.betrayed|Idzi zniknął z portu. Na jego miejscu w cieniu stoi ktoś nowy, kto zna imię Johna.|Idzi vanished from the harbour. In his shadow stands someone new who knows John's name.
+epi.idzi.friend|Idzi przysyła czasem beczkę soli bez akcyzy. Bez liściku — po co komu liściki.|Idzi sometimes sends a barrel of untaxed salt. No note — who needs notes.
+epi.marta.helped|Marta odkupiła srebrną zapinkę matki i podobno już nie kradnie. Podobno.|Marta bought back her mother's silver brooch and supposedly no longer steals. Supposedly.
+epi.hanna.friend|Hanna trzyma przy szynkwasie kufel, z którego nikt inny nie pije.|Hanna keeps a mug at the bar that nobody else drinks from.
+epi.baldwin.ledger|Baldwin spalił odpis księgi na oczach Johna. Potem założył nową.|Baldwin burned the ledger copy before John's eyes. Then he started a new one.
+epi.baldwin.fallen|Baldwin odpłynął na kontynent z dziesięcioma ludźmi i pustą skrzynią. Księga została na wyspie.|Baldwin sailed for the mainland with ten men and an empty chest. The ledger stayed on the island.
+""")
+
+# ===========================================================================
+# 8e. NOWE FUNKCJE: ŁOWIENIE, WÓZ, SAMOUCZEK, OSIĄGNIĘCIA, KWESTIE NPC
+# ===========================================================================
+add(r"""
+map.north|Pn.|N
+item.herring|Śledź|Herring
+item.herring.desc|Srebrny, tłusty i tani. Najlepszy wędzony, ale głodnemu smakuje i surowy.|Silver, oily and cheap. Best smoked, but a hungry man eats it raw.
+item.cod|Dorsz|Cod
+item.cod.desc|Duża ryba z zimnej wody. Kupcy płacą za nią lepiej niż za śledzie.|A big cold-water fish. Merchants pay better for it than for herring.
+item.eel|Węgorz|Eel
+item.eel.desc|Śliski i uparty. Na targu idzie za trzy razy więcej niż dorsz.|Slippery and stubborn. At market it fetches three times a cod.
+station.exitDown|Zejście do izby karczmy|Down to the taproom
+station.fishingSpot|Łowisko na końcu kei|Fishing spot at the pier's end
+station.carter|Wóz przewoźnika|Carter's wagon
+fish.noHook|Bez haczyka nic nie złowisz. Ewa na kei sprzedaje sprzęt.|Without a hook you will catch nothing. Ewa on the pier sells gear.
+fish.storm|W sztorm fale zalewają keję. Nie dziś.|In a storm the waves wash over the pier. Not today.
+fish.caught|Coś szarpie żyłką! Złowiłeś: {what}.|Something tugs the line! You caught: {what}.
+fish.nothing|Pół godziny patrzenia w wodę. Ryba dziś nie bierze.|Half an hour staring at the water. The fish are not biting.
+carter.confirm|Podwieźć cię: {where}? Za {gold} korony i pół godziny.|Ride to {where}? For {gold} crowns and half an hour.
+carter.noMoney|Woźnica kręci głową. Bez monety nie ruszy.|The carter shakes his head. No coin, no ride.
+carter.arrived|Wóz skrzypi i staje. Jesteś: {where}.|The wagon creaks to a halt. You are at: {where}.
+interact.sat|Siadasz na chwilę. Nogi przestają boleć, a miasto toczy się dalej bez ciebie.|You sit for a while. Your legs stop aching and the town rolls on without you.
+combat.sneakAttack|Z zaskoczenia!|Sneak attack!
+daycard.line|Zostało dni: {left} · Dług: {debt} · Pogoda: {weather}|Days left: {left} · Debt: {debt} · Weather: {weather}
+journal.talks|Ostatnie rozmowy|Recent conversations
+title.gallery|Zakończenia i osiągnięcia|Endings and achievements
+tut.title|Podpowiedź|Tip
+tut.night|Zrobiło się ciemno. [R] zapala pochodnię — widzisz więcej, ale ciebie też widać z daleka.|It got dark. [R] lights a torch — you see more, but you are seen from afar too.
+tut.wound|Krwawisz. Bandaż z pasa użyjesz klawiszami 1–4, a medyk w łaźni zszyje ranę.|You are bleeding. Use a bandage from your belt with keys 1–4; the medic in the bathhouse stitches wounds.
+tut.hunger|Burczy ci w brzuchu. Jedzenie kupisz u Hanny w karczmie albo u piekarza na rynku.|Your stomach growls. Buy food from Hanna at the tavern or the baker on the square.
+tut.enemy|Wróg szarżuje! LPM — cios w stronę kursora, PPM w porę — parowanie, Spacja — unik.|An enemy charges! LMB — strike toward the cursor, RMB at the right moment — parry, Space — dodge.
+tut.sneak|Skradasz się. Oko nad głową pokazuje, czy jesteś w świetle; czerwone stożki — kto cię widzi. Cios z zaskoczenia zadaje podwójne obrażenia.|You are sneaking. The eye above your head shows whether you stand in light; red cones show who sees you. A sneak attack deals double damage.
+tut.tavern|Karczma to serce miasta: Hanna sprzeda jedzenie i izbę, a przy stolikach usłyszysz plotki i zagrasz w kości.|The tavern is the heart of town: Hanna sells food and a room, and at the tables you hear rumours and play dice.
+tut.wanted|Straż cię szuka. Zapłać grzywnę u Rawicza w strażnicy albo trzymaj się z dala od patroli.|The watch is after you. Pay the fine to Rawicz at the guardhouse or keep away from patrols.
+tut.gold|Masz trochę złota. Wpłać część długu u Gwidona przy bramie celnej — każda korona się liczy.|You have some gold. Pay part of the debt to Gwidon at the customs gate — every crown counts.
+tut.map|Masz mapę! [M] ją otwiera, a w rogu ekranu pojawi się minimapa.|You have a map! [M] opens it, and a minimap appears in the corner.
+tut.board|Tablica ogłoszeń daje dorywczą pracę. Płaci mniej niż zadania fabularne, ale zawsze coś jest.|The notice board offers odd jobs. They pay less than story quests, but there is always something.
+set.minimap|Minimapa (gdy John ma mapę)|Minimap (when John has a map)
+set.nameplates|Imiona nad głowami|Names above heads
+set.barks|Kwestie NPC w dymkach|NPC speech bubbles
+set.tutorial|Podpowiedzi samouczka|Tutorial tips
+set.ambientLife|Ptaki, motyle, świetliki, chmury|Birds, butterflies, fireflies, clouds
+set.autoPause|Pauza po przełączeniu okna|Pause when the window loses focus
+bark.greet1|Dzień dobry, panie.|Good day, sir.
+bark.greet2|Z kontynentu, co? Widać po butach.|From the mainland, eh? I can tell by the boots.
+bark.greet3|Uważaj na kieszenie przy straganach.|Mind your purse by the stalls.
+bark.greet4|Sól znowu podrożała.|Salt has gone up again.
+bark.rain1|Leje jak z cebra…|It's pouring…
+bark.rain2|Mokro, zimno i jeszcze ten port śmierdzi.|Wet, cold, and the harbour stinks too.
+bark.night1|Nie łaź po nocy, wilki schodzą z bagien.|Don't wander at night, wolves come down from the marsh.
+bark.night2|Kto tam? A, to ty.|Who's there? Oh, it's you.
+bark.dirty|Fuj. Łaźnia jest za rynkiem, wiesz?|Ugh. The bathhouse is past the square, you know?
+bark.hurt|Krwawisz, człowieku. Idź do medyka.|You're bleeding, man. Go to the medic.
+bark.debt|Ludzie gadają, że Kruk już ostrzy na ciebie pióro.|Folk say the Raven is already sharpening his quill for you.
+bark.wanted1|To ten! Straż go szuka!|That's him! The watch is looking for him!
+bark.wanted2|Nie widziałam cię. Idź już.|I didn't see you. Go.
+bark.friend1|John! Dobrze cię widzieć.|John! Good to see you.
+bark.friend2|Wpadnij kiedyś na piwo.|Drop by for a beer sometime.
+bark.cold1|Czego się gapisz?|What are you staring at?
+bark.cold2|Idź swoją drogą, najemniku.|Go your own way, sellsword.
+ach.title|Osiągnięcia|Achievements
+ach.unlocked|Osiągnięcie: {what}|Achievement: {what}
+ach.first_blood|Pierwsza krew|First blood
+ach.first_blood.desc|Pokonaj pierwszego przeciwnika|Defeat your first enemy
+ach.parry5|Stalowy nadgarstek|Steel wrist
+ach.parry5.desc|Sparuj 5 ciosów|Parry 5 blows
+ach.dodge20|Węgorz|Eel
+ach.dodge20.desc|Zrób 20 uników|Dodge 20 times
+ach.paid1000|Pierwszy tysiąc|The first thousand
+ach.paid1000.desc|Spłać 1000 koron długu|Pay off 1000 crowns of debt
+ach.debt_free|Wolny człowiek|A free man
+ach.debt_free.desc|Spłać cały dług|Pay off the whole debt
+ach.rich|Pełny trzos|Heavy purse
+ach.rich.desc|Miej przy sobie 1500 koron|Carry 1500 crowns
+ach.night_owl|Nocny marek|Night owl
+ach.night_owl.desc|Bądź na ulicy o trzeciej w nocy|Be out on the street at three in the morning
+ach.scholar|Człowiek z notesem|Man with a notebook
+ach.scholar.desc|Zdobądź notatnik|Get a notebook
+ach.cartographer|Kartograf|Cartographer
+ach.cartographer.desc|Zdobądź mapę|Get a map
+ach.week|Tydzień na wyspie|A week on the island
+ach.week.desc|Przetrwaj 7 dni|Survive 7 days
+ach.survivor|Zahartowany|Hardened
+ach.survivor.desc|Przetrwaj 20 dni|Survive 20 days
+ach.quests5|Do roboty|Getting things done
+ach.quests5.desc|Ukończ 5 zadań|Complete 5 quests
+ach.friend|Swój chłop|One of us
+ach.friend.desc|Zdobądź przyjaźń mieszkańca (relacja 40)|Win a townsperson's friendship (relation 40)
+ach.fisher|Rybak|Fisherman
+ach.fisher.desc|Złów 5 ryb|Catch 5 fish
+ach.pious|Pobożny|Pious
+ach.pious.desc|Pomódl się przy kapliczce trzy razy|Pray at the shrine three times
+ach.ledger|Złodziej pamięci|Thief of memory
+ach.ledger.desc|Zdobądź księgę Kruka|Obtain the Raven's ledger
+ach.sneak_attack|Cień z nożem|Shadow with a blade
+ach.sneak_attack.desc|Zadaj cios z zaskoczenia|Land a sneak attack
+ach.two_endings|Inne życie|Another life
+ach.two_endings.desc|Odkryj dwa zakończenia|Discover two endings
+gallery.hint.end_death|Wyspa ma wiele sposobów, by zrobić z człowieka wspomnienie.|The island has many ways to turn a man into a memory.
+gallery.hint.end_drowned|Rybacy mówią: nie płyń w sztorm.|The fishermen say: never sail in a storm.
+gallery.hint.end_escape|Idzi zna kapitana, który nie zadaje pytań.|Idzi knows a captain who asks no questions.
+gallery.hint.end_overthrow|Sierżant Rawicz czeka dwadzieścia lat na jeden dowód.|Sergeant Rawicz has waited twenty years for one piece of proof.
+gallery.hint.end_knights|Baldwin mówi, że przydałby mu się miecz.|Baldwin says he could use a sword.
+gallery.hint.end_sanctuary|Stare prawo, święty i drzwi, przez które Kruk nie przejdzie.|An old law, a saint, and a door the Raven will not pass.
+gallery.hint.end_informer|Donos też jest walutą.|Informing is a currency too.
+gallery.hint.end_captive|Tydzień po terminie Rycerze przychodzą.|A week past the deadline, the Knights come.
+gallery.hint.end_smuggler|Port ma pana, którego nie ma w księgach.|The harbour has a master who is in no ledger.
+gallery.hint.end_guild|Cech ceni uczciwy rachunek.|The guild values an honest account.
+gallery.hint.end_hanna|Ktoś trzyma dla ciebie stołek przy szynkwasie.|Someone keeps a stool for you at the bar.
+gallery.hint.end_crime|Spłać dług, nie pytając, skąd są pieniądze.|Pay the debt without asking where the money came from.
+gallery.hint.end_honest|Spłać dług z czystymi rękami.|Pay the debt with clean hands.
+""")
+
+# >>> MIESZKANCY
+add(r"""
+npc.halszka.name|Tkaczka Halszka|Halszka the Weaver
+npc.halszka.role|Tkaczka|Weaver
+npc.halszka.address|Dom z krosnem przy zachodnim zaułku|The house with the loom by the western alley
+npc.halszka.desire|Utkać sukno tak dobre, żeby cech musiał przyjąć ją na mistrzynię, choć jest kobietą.|To weave cloth so fine the guild must accept her as a master, woman or not.
+npc.halszka.secret|Tka po nocach płótno na żagle dla Idziego. Płaci lepiej niż cech i nie pyta, czy ma pieczęć.|At night she weaves sailcloth for Idzi. He pays better than the guild and never asks about seals.
+npc.halszka.greet1|Uważaj na nici, nie depcz. Każda kosztuje mnie godzinę.|Mind the threads, do not step on them. Each one costs me an hour.
+npc.halszka.greet2|Wełna znowu zdrożała. Owce chyba jedzą złoto.|Wool is dearer again. The sheep must be eating gold.
+npc.klemens.name|Szewc Klemens|Klemens the Cobbler
+npc.klemens.role|Szewc|Cobbler
+npc.klemens.address|Warsztat szewski w górnej części miasta|The cobbler's workshop in the upper town
+npc.klemens.desire|Dożyć dnia, w którym ktoś zapłaci mu z góry.|To live to see the day someone pays him in advance.
+npc.klemens.secret|Po butach pozna każdego w mieście. Rawicz płaci mu, żeby mówił, czyje buty widział w błocie przy magazynach.|He knows everyone in town by their boots. Rawicz pays him to say whose boots he saw in the mud by the warehouses.
+npc.klemens.greet1|Pokaż buty. ...Ech. Długo nie pociągną.|Show me your boots. ...Hm. They will not last long.
+npc.klemens.greet2|Człowieka poznasz po tym, jak zdziera obcasy.|You can tell a man by how he wears down his heels.
+npc.dorota.name|Wdowa Dorota|Dorota the Widow
+npc.dorota.role|Wdowa, przędzie na zlecenie|Widow, spins for hire
+npc.dorota.address|Izba w biednym domu przy zachodnim murze|A room in the poor house by the western wall
+npc.dorota.desire|Żeby jej synek Kuba doczekał wiosny.|For her little son Kuba to live until spring.
+npc.dorota.secret|Jej mąż nie utonął. Wisi w księdze Kruka jako dłużnik i zniknął w noc przed terminem spłaty.|Her husband did not drown. He is in the Raven's ledger as a debtor and vanished the night before his payment was due.
+npc.dorota.greet1|Ciszej, proszę. Kuba dopiero zasnął.|Quietly, please. Kuba has only just fallen asleep.
+npc.ambrozy.name|Stary Ambroży|Old Ambroży
+npc.ambrozy.role|Najstarszy rybak w porcie|The oldest fisherman in the harbour
+npc.ambrozy.address|Pierwsza chata rybacka przy zachodnim nabrzeżu|The first fishing hut by the western quay
+npc.ambrozy.desire|Złowić jeszcze raz dorsza większego niż ten z 1402 roku, o którym nikt już nie pamięta.|To catch one more cod bigger than the one from 1402 that nobody remembers anymore.
+npc.ambrozy.secret|Pamięta, jak Dzicy Rycerze byli jeszcze strażą wybrzeża i bronili rybaków przed piratami. Nikt nie chce go słuchać.|He remembers when the Wild Knights were still the coast watch and defended fishermen from pirates. Nobody wants to listen.
+npc.ambrozy.greet1|Wiatr od lądu. Ryba głęboko. Nic dziś nie będzie.|Land wind. Fish run deep. Nothing today.
+npc.ambrozy.greet2|W moich czasach morze było większe.|In my day the sea was bigger.
+npc.brygida.name|Pani Brygida|Lady Brygida
+npc.brygida.role|Wdowa po kupcu korzennym|Widow of a spice merchant
+npc.brygida.address|Kamienica z kwiatami w oknach, przy południowej drodze|The townhouse with flowers in the windows, on the southern road
+npc.brygida.desire|Wydać córkę za kogoś, kto nie jest winien pieniędzy Krukowi. W tym mieście to trudniejsze niż za księcia.|To marry her daughter to someone who owes the Raven nothing. In this town that is harder than marrying a prince.
+npc.brygida.secret|Jej zmarły mąż był jednym z założycieli bractwa Dzikich Rycerzy. Brygida wciąż dostaje od nich rentę i nienawidzi każdej monety.|Her late husband was one of the founders of the Wild Knights. Brygida still receives a pension from them and hates every coin.
+npc.brygida.greet1|Proszę nie stać tak blisko. Pachnie pan portem.|Please do not stand so close. You smell of the harbour.
+npc.brygida.greet2|Dzień dobry. Przynajmniej dla niektórych.|Good day. For some of us, at least.
+npc.jas.name|Mały Jaś|Little Jaś
+npc.jas.role|Chłopak na posyłki, dziewięć lat|Errand boy, nine years old
+npc.jas.address|Dom przekupki Małgorzaty, przy kaplicy|Margaret the hawker's house, near the chapel
+npc.jas.desire|Zostać rycerzem. Prawdziwym, nie takim jak te od Kruka.|To become a knight. A real one, not like the Raven's men.
+npc.jas.secret|Nosi wiadomości dla każdego, kto da miedziaka — także dla Gwidona. Nie wie, co jest w listach, bo nie umie czytać.|He carries messages for anyone with a copper — Gwidon included. He does not know what the letters say, because he cannot read.
+npc.jas.greet1|Panie! Masz pan miecz? Prawdziwy? Mogę dotknąć?|Sir! Is that a sword? A real one? Can I touch it?
+npc.jas.greet2|Za miedziaka zaniosę wszystko wszędzie!|For a copper I will carry anything anywhere!
+npc.walenty.name|Sołtys Walenty|Walenty the Reeve
+npc.walenty.role|Sołtys Brzeziny|Reeve of Brzezina
+npc.walenty.address|Dom sołtysa przy placu we wsi Brzezina|The reeve's house by the square in Brzezina village
+npc.walenty.desire|Utrzymać wieś poza księgą Kruka. Na razie płaci haracz w zbożu, nie w ludziach.|To keep the village out of the Raven's ledger. So far he pays tribute in grain, not in people.
+npc.walenty.secret|Dwa lata temu sam wskazał Rycerzom rodzinę, która ukrywała zboże. Od tamtej pory śpi przy zapalonej świecy.|Two years ago he himself pointed the Knights to a family hiding grain. Since then he sleeps with a candle burning.
+npc.walenty.greet1|Obcy w Brzezinie? Mów, czego chcesz, byle szybko — żniwa nie czekają.|A stranger in Brzezina? Say what you want, but quickly — the harvest will not wait.
+npc.walenty.greet2|Wilki, haracz i susza. A ty co przynosisz?|Wolves, tribute and drought. And what do you bring?
+npc.bartosz.name|Młynarz Bartosz|Bartosz the Miller
+npc.bartosz.role|Młynarz|Miller
+npc.bartosz.address|Młyn na północ od placu w Brzezinie|The mill north of the square in Brzezina
+npc.bartosz.desire|Naprawić koło i mielić znowu dla trzech wsi, nie dla jednej.|To repair the wheel and grind for three villages again, not one.
+npc.bartosz.secret|Odsypuje sobie co dziesiątą miarkę mąki. Wszyscy młynarze tak robią — on przynajmniej się z tego spowiada.|He keeps back every tenth measure of flour. All millers do — at least he confesses it.
+npc.bartosz.greet1|Mąka we włosach, mąka w płucach, mąka w zupie. Taki los.|Flour in my hair, flour in my lungs, flour in my soup. That is the life.
+npc.bartosz.greet2|Koło stoi, a ludzie i tak chcą chleba.|The wheel stands still, and people still want bread.
+npc.jadwiga.name|Jadwiga|Jadwiga
+npc.jadwiga.role|Żona drwala Maćka|Wife of Maciek the woodcutter
+npc.jadwiga.address|Chata drwala na polanie w lesie|The woodcutter's hut in a forest clearing
+npc.jadwiga.desire|Żeby Maciek wrócił. A jeśli nie wróci — żeby wiedzieć, gdzie leży.|For Maciek to come home. And if he will not — to know where he lies.
+npc.jadwiga.secret|Maciek nie poszedł do lasu po drewno. Poszedł sprawdzić wnyki, które zastawił na ziemi Rycerzy. Kłusownictwo karze się tu ręką.|Maciek did not go into the woods for timber. He went to check snares he set on the Knights' land. Poaching costs a hand here.
+npc.jadwiga.greet1|Widziałeś w lesie mężczyznę w czerwonej czapce? Wysoki, rudy...|Did you see a man in a red cap in the woods? Tall, red-haired...
+npc.blazej.name|Myśliwy Błażej|Błażej the Hunter
+npc.blazej.role|Myśliwy i tropiciel|Hunter and tracker
+npc.blazej.address|Chata myśliwego na północy lasu|The hunter's lodge in the north of the forest
+npc.blazej.desire|Polować tam, gdzie chce, a nie tam, gdzie pozwala Kruk.|To hunt where he pleases, not where the Raven allows.
+npc.blazej.secret|Wie, gdzie zginął drwal Maciek. Milczy, bo wnyki Maćka stały obok jego własnych.|He knows where Maciek the woodcutter died. He keeps quiet because Maciek's snares stood next to his own.
+npc.blazej.greet1|Ciszej. Płoszysz zwierzynę na pół mili.|Quieter. You are scaring game half a mile away.
+npc.blazej.greet2|Ślady mówią więcej niż ludzie. I rzadziej kłamią.|Tracks say more than people do. And they lie less often.
+npc.kinga.name|Pasterka Kinga|Kinga the Shepherdess
+npc.kinga.role|Pasterka|Shepherdess
+npc.kinga.address|Zagroda na zachodnim skraju Brzeziny|The farmstead on the western edge of Brzezina
+npc.kinga.desire|Mieć własne stado i nikomu nie oddawać co trzeciego jagnięcia.|To own a flock and give nobody every third lamb.
+npc.kinga.secret|Kocha się w synu młynarza, a ojciec obiecał ją synowi sołtysa.|She loves the miller's son, but her father has promised her to the reeve's son.
+npc.kinga.greet1|Nie widziałeś kozy? Takiej łaciatej, z dzwonkiem?|Have you seen a goat? A spotted one, with a bell?
+npc.kinga.greet2|Owce głupie, ale przynajmniej nie kłamią.|Sheep are stupid, but at least they do not lie.
+npc.urszula.name|Stara Urszula|Old Urszula
+npc.urszula.role|Znachorka i bajarka z Brzeziny|Wise woman and storyteller of Brzezina
+npc.urszula.address|Chata z ziołami pod okapem, za kaplicą w Brzezinie|The hut with herbs under the eaves, behind the chapel in Brzezina
+npc.urszula.desire|Opowiedzieć komuś do końca historię świętego Elenema, zanim umrze.|To tell someone the whole story of Saint Elenem before she dies.
+npc.urszula.secret|Jako dziewczyna służyła w klasztorze, który dziś jest ruiną. Widziała, kto wynosił z niego srebro w noc pożaru.|As a girl she served at the abbey that is now a ruin. She saw who carried out the silver on the night of the fire.
+npc.urszula.greet1|Siadaj, synku. Stare nogi, długie historie.|Sit, son. Old legs, long stories.
+npc.urszula.greet2|Pachniesz żelazem i solą. Daleka droga za tobą.|You smell of iron and salt. A long road behind you.
+npc.piotr.name|Chłop Piotr|Piotr the Farmer
+npc.piotr.role|Kmieć z Brzeziny|Farmer of Brzezina
+npc.piotr.address|Zagroda przy polach na południu Brzeziny|The farmstead by the fields south of Brzezina
+npc.piotr.desire|Jeden rok bez gradu, bez wilków i bez haraczu.|One year without hail, without wolves and without tribute.
+npc.piotr.secret|Zakopał pod gruszą dwa worki zboża przed poborcami Kruka. Wie o tym tylko jego żona i sołtys.|He buried two sacks of grain under the pear tree before the Raven's collectors came. Only his wife and the reeve know.
+npc.piotr.greet1|Ziemia twarda jak serce poborcy.|Soil as hard as a collector's heart.
+npc.piotr.greet2|Szczęść Boże. Jak w mieście? Jeszcze nas nie zjedli?|God bless. How is the town? Have they not eaten us yet?
+# --- zadania: las i wieś ---
+quest.bWolves.title|Wataha nad Brzeziną|The Pack over Brzezina
+quest.bWolves.journal|Wilki z lasu zagryzają owce w Brzezinie, a Rycerze od pół roku obiecują pomoc. Sołtys Walenty zapłaci, jeśli wataha się przerzedzi.|Wolves from the forest are killing sheep in Brzezina, and the Knights have been promising help for half a year. Walenty the reeve will pay if the pack is thinned.
+quest.bWolves.s1|Zabij trzy wilki z watahy przy polach Brzeziny|Kill three wolves from the pack by the Brzezina fields
+quest.bWolves.s2|Wróć do sołtysa Walentego po zapłatę|Return to Walenty the reeve for payment
+quest.mill.title|Koło młyńskie|The Mill Wheel
+quest.mill.journal|Wiosenna woda połamała koło młyna w Brzezinie. Bez młyna wieś wozi zboże do miasta, gdzie cech bierze trzecią część.|The spring flood broke the Brzezina mill wheel. Without the mill the village hauls grain to town, where the guild takes a third.
+quest.mill.s1|Zdobądź dwie garści gwoździ (kowal Orlik)|Get two handfuls of nails (Orlik the smith)
+quest.mill.s2|Zdobądź dwie dębowe deski (dom cechowy)|Get two oak planks (the guild house)
+quest.mill.s3|Zanieś gwoździe i deski młynarzowi Bartoszowi|Bring the nails and planks to Bartosz the miller
+quest.goat.title|Łaciata|Spotty
+quest.goat.journal|Pasterce Kindze uciekła koza z dzwonkiem. Zwykle ucieka na południe, do lasu, gdzie przy starych kamieniach rośnie słodka trawa.|Kinga the shepherdess has lost her goat with a bell. It usually runs south into the forest, where sweet grass grows by the old stones.
+quest.goat.s1|Znajdź kozę w lesie na południe od wsi|Find the goat in the forest south of the village
+quest.goat.s2|Wróć do Kingi z dzwonkiem kozy|Return to Kinga with the goat's bell
+quest.woodcutter.title|Czerwona czapka|The Red Cap
+quest.woodcutter.journal|Drwal Maciek zniknął w lesie pięć dni temu. Jego żona Jadwiga uważa, że myśliwy Błażej wie więcej, niż mówi.|Maciek the woodcutter vanished in the forest five days ago. His wife Jadwiga thinks Błażej the hunter knows more than he says.
+quest.woodcutter.s1|Wypytaj myśliwego Błażeja w jego chacie na północy lasu|Question Błażej the hunter at his lodge in the north of the forest
+quest.woodcutter.s2|Zabij dzika przy krwawej polanie na południowym wschodzie lasu|Kill the boar by the bloody clearing in the south-east of the forest
+quest.woodcutter.s3|Przeszukaj krwawą polanę|Search the bloody clearing
+quest.woodcutter.s4|Powiedz Jadwidze, co się stało|Tell Jadwiga what happened
+quest.pelts.title|Skóry bez pieczęci|Pelts without a Seal
+quest.pelts.journal|Myśliwy Błażej nie chodzi do miasta, bo za każdą skórę trzeba tam pokazać pieczęć Rycerzy. Garbarz Oles kupi wilcze skóry bez pytań.|Błażej the hunter does not go to town, because there every hide needs the Knights' seal. Oles the tanner will buy wolf pelts without questions.
+quest.pelts.s1|Zdobądź dwie wilcze skóry|Get two wolf pelts
+quest.pelts.s2|Zanieś skóry garbarzowi Olesowi|Take the pelts to Oles the tanner
+quest.letter.title|Pismo do Brzeziny|A Letter to Brzezina
+quest.letter.journal|Pisarz Zbylut wysyła z rady pismo o nowym podatku od młynów. Nikt nie chce iść przez las z taką wiadomością.|Zbylut the scribe is sending a council letter about a new mill tax. Nobody wants to walk through the forest with news like that.
+quest.letter.s1|Zanieś list sołtysowi Walentemu we wsi Brzezina (wschodnim traktem przez las)|Deliver the letter to Walenty the reeve in Brzezina village (along the eastern road through the forest)
+quest.wool.title|Sukno dla rady|Cloth for the Council
+quest.wool.journal|Tkaczka Halszka musi utkać sukno na płaszcze dla rady, a garbarz sprzedał całą wełnę Rycerzom.|Halszka the weaver must weave cloth for the council's cloaks, and the tanner sold all the wool to the Knights.
+quest.wool.s1|Zdobądź trzy wiązki wełny|Get three bundles of wool
+quest.wool.s2|Zanieś wełnę Halszce|Bring the wool to Halszka
+quest.fish.title|Zakład Ambrożego|Ambroży's Wager
+quest.fish.journal|Stary Ambroży założył się z rybaczką Ewą o beczkę piwa, że obcy z jego radą złowi więcej niż ona.|Old Ambroży bet Ewa the fisherwoman a barrel of beer that a stranger with his advice will catch more than she does.
+quest.fish.s1|Złów dwa dorsze (wędka z kei, najlepiej o świcie)|Catch two cod (fishing from the pier, best at dawn)
+quest.fish.s2|Zanieś dorsze Ambrożemu|Bring the cod to Ambroży
+quest.child.title|Kaszel Kuby|Kuba's Cough
+quest.child.journal|Synek wdowy Doroty kaszle od trzech tygodni. Balwierza nie stać, a zielarka Wiera wie, co leczy płuca.|Widow Dorota's little son has been coughing for three weeks. She cannot afford the barber, and Wiera the herbwoman knows what heals the lungs.
+quest.child.s1|Zapytaj zielarkę Wierę, co pomoże na kaszel|Ask Wiera the herbwoman what will help the cough
+quest.child.s2|Zdobądź trzy pęczki krwawnika|Get three bunches of yarrow
+quest.child.s3|Zanieś krwawnik Dorocie|Bring the yarrow to Dorota
+quest.shoes.title|Trzewiki na zaręczyny|Slippers for a Betrothal
+quest.shoes.journal|Szewc Klemens ma uszyć trzewiki dla córki pani Brygidy, ale w mieście brakuje jelenich skór.|Klemens the cobbler must make slippers for Lady Brygida's daughter, but there are no deer hides in town.
+quest.shoes.s1|Zdobądź jelenią skórę|Get a deer hide
+quest.shoes.s2|Zanieś skórę szewcowi Klemensowi|Bring the hide to Klemens the cobbler
+quest.legend.title|Grób bez imienia|The Nameless Grave
+quest.legend.journal|Stara Urszula mówi, że w grobie bez imienia przy kaplicy w Brzezinie leży mnich, który uciekł z płonącego klasztoru z czymś, czego nie powinien był brać.|Old Urszula says that the nameless grave by the Brzezina chapel holds a monk who fled the burning abbey with something he should not have taken.
+quest.legend.s1|Nocą przekop ziemię przy grobie bez imienia (cmentarz przy kaplicy w Brzezinie)|At night dig by the nameless grave (the graveyard by the Brzezina chapel)
+quest.legend.s2|Pokaż znalezisko Urszuli|Show the find to Urszula
+# --- przedmioty ---
+item.letterVillage|List do sołtysa Brzeziny|Letter to the Reeve of Brzezina
+item.letterVillage.desc|Zapieczętowane pismo rady o nowym podatku od młynów. Ciężkie jak każda zła wiadomość.|A sealed council letter about a new mill tax. Heavy as any bad news.
+item.goatBell|Dzwonek kozy|Goat's Bell
+item.goatBell.desc|Mosiężny dzwonek na rzemyku. Koza poszła do domu, dzwonek został z tobą.|A brass bell on a leather strap. The goat went home, the bell stayed with you.
+item.woodcutterCap|Czerwona czapka drwala|The Woodcutter's Red Cap
+item.woodcutterCap.desc|Wełniana czapka, rozdarta i sztywna od zaschniętej krwi. Należała do Maćka.|A woollen cap, torn and stiff with dried blood. It belonged to Maciek.
+item.oldCoin|Moneta opactwa|Abbey Coin
+item.oldCoin.desc|Stara srebrna moneta z wizerunkiem mnicha z siecią. Bita w klasztorze świętego Elenema przed pożarem.|An old silver coin showing a monk with a net. Minted at the abbey of Saint Elenem before the fire.
+# --- miejsca (notatnik) ---
+bestiary.forest|Las Brzeziński|The Brzezina Forest
+bestiary.forest.lore|Sosny na północy, stare dęby w środku, polana drwali na południu. Rycerze uważają las za swój, bo tak zapisali w księdze. Wilki i dziki o tym nie wiedzą.|Pines in the north, old oaks in the middle, the woodcutters' clearing in the south. The Knights consider the forest theirs because they wrote it in the ledger. The wolves and boars do not know that.
+bestiary.woodcutterCamp|Obozowisko drwali|The Woodcutters' Camp
+bestiary.woodcutterCamp.lore|Pniaki, stosy drewna i ognisko, przy którym drwale jedzą chleb ze słoniną. Drewno idzie do młyna, do wsi i zimą do miasta.|Stumps, woodpiles and a fire where the woodcutters eat bread and lard. The timber goes to the mill, the village and in winter to the town.
+bestiary.hunterLodge|Chata myśliwego|The Hunter's Lodge
+bestiary.hunterLodge.lore|Chata Błażeja w sosnach. Na zewnątrz suszą się skóry, w środku pachnie dymem i ziołami. Myśliwy zna każdą ścieżkę w lesie.|Błażej's lodge among the pines. Hides dry outside, inside it smells of smoke and herbs. The hunter knows every path in the forest.
+bestiary.village|Wieś Brzezina|Brzezina Village
+bestiary.village.lore|Czterdzieści dymów, młyn, kaplica i pola aż do morza. Brzezina stała tu, zanim powstało miasto. Płaci haracz Krukowi w zbożu i boi się każdej zimy.|Forty hearths, a mill, a chapel and fields down to the sea. Brzezina stood here before the town was built. It pays the Raven tribute in grain and fears every winter.
+bestiary.mill|Młyn w Brzezinie|The Brzezina Mill
+bestiary.mill.lore|Młyn Bartosza miele dla trzech wsi — kiedy koło się kręci. Przy żarnach ludzie mówią więcej niż w konfesjonale.|Bartosz's mill grinds for three villages — when the wheel turns. By the millstones people say more than in confession.
+bestiary.villageChapel|Kaplica w Brzezinie|The Brzezina Chapel
+bestiary.villageChapel.lore|Drewniana kaplica ze starym cmentarzem. Ksiądz przyjeżdża z miasta raz w miesiącu. Na cmentarzu jest grób bez imienia, przy którym nocą ponoć świeci światło.|A wooden chapel with an old graveyard. The priest comes from town once a month. In the graveyard is a nameless grave where, they say, a light glows at night.
+bestiary.piers|Keje|The Piers
+bestiary.piers.lore|Trzy drewniane keje wchodzące w zatokę. Za dnia handel i sieci, nocą łodzie bez latarni. Z końca środkowej kei widać redę i statki, które nie zadają pytań.|Three wooden piers reaching into the bay. By day trade and nets, by night boats without lanterns. From the end of the middle pier you can see the roads and ships that ask no questions.
+bestiary.lowerTown|Dolne Miasto|The Lower Town
+bestiary.lowerTown.lore|Ciasne uliczki między portem a murami. Domy rzemieślników, kramy, kaplica i rynek. Każdy tu jest komuś coś winien.|Narrow streets between the harbour and the walls. Craftsmen's houses, stalls, the chapel and the market. Everyone here owes someone something.
+bestiary.alleyWest|Zachodni zaułek|The Western Alley
+bestiary.alleyWest.lore|Lombard, nocleg Marty i drzwi, które otwierają się tylko po zmroku. Straż zagląda tu rzadko i niechętnie.|The pawnshop, Marta's sleeping spot and doors that open only after dark. The watch looks in rarely and reluctantly.
+bestiary.vagnYard|Dziedziniec Vagna|Vagn's Yard
+bestiary.vagnYard.lore|Ubita ziemia, pal treningowy i stary sierżant, który uczy walczyć tych, którzy chcą przeżyć.|Packed earth, a training post and an old sergeant who teaches fighting to those who want to live.
+bestiary.eastRoad|Wschodni trakt|The Eastern Road
+bestiary.eastRoad.lore|Błotnista droga z miasta przez las do Brzeziny. Wozy z drewnem i zbożem, czasem bandyci, nocą wilki.|A muddy road from town through the forest to Brzezina. Carts of timber and grain, sometimes bandits, at night wolves.
+bestiary.villageSquare|Plac w Brzezinie|Brzezina Square
+bestiary.villageSquare.lore|Studnia, ławy i dom sołtysa. Tu wieś zbiera się, żeby płacić haracz i plotkować.|A well, benches and the reeve's house. Here the village gathers to pay tribute and gossip.
+bestiary.villageFields|Pola Brzeziny|The Brzezina Fields
+bestiary.villageFields.lore|Żyto, owies, len i rzepa aż po las. Strachy na wróble, ule i owce Kingi. Wiatr od morza kładzie zboże co trzeci rok.|Rye, oats, flax and turnips up to the forest. Scarecrows, beehives and Kinga's sheep. The sea wind flattens the grain every third year.
+# --- regiony ---
+place.eastRoad|Wschodni trakt|The Eastern Road
+place.forest|Las Brzeziński|The Brzezina Forest
+place.woodcutterCamp|Obozowisko drwali|The Woodcutters' Camp
+place.hunterLodge|Chata myśliwego|The Hunter's Lodge
+place.village|Wieś Brzezina|Brzezina Village
+place.villageSquare|Plac w Brzezinie|Brzezina Square
+place.villageMill|Młyn w Brzezinie|The Brzezina Mill
+place.villageChapel|Kaplica w Brzezinie|The Brzezina Chapel
+place.villageFields|Pola Brzeziny|The Brzezina Fields
+# --- budynki ---
+bld.barn|Stodoła|Barn
+bld.elderHouse|Dom sołtysa|The Reeve's House
+bld.fisherHut|Chata rybacka|Fisher's Hut
+bld.hunterLodge|Chata myśliwego|The Hunter's Lodge
+bld.mill|Młyn|Mill
+bld.oldWomanHut|Chata znachorki|The Wise Woman's Hut
+bld.villageChapel|Kaplica w Brzezinie|The Brzezina Chapel
+bld.woodcutterHut|Chata drwala|The Woodcutter's Hut
+# --- wnętrza ---
+int.almshouse|Przytułek|The Almshouse
+int.elder_house|Dom sołtysa Walentego|Walenty the Reeve's House
+int.fisher_hut|Chatka rybacza|The Fisher's Hut
+int.harbour_hut_1|Chata starego Ambrożego|Old Ambroży's Hut
+int.harbour_hut_2|Chata sieciarzy|The Net-Makers' Hut
+int.harbour_hut_3|Chata wdowy po rybaku|The Fisherman's Widow's Hut
+int.harbour_hut_4|Chata braci Kosów|The Kos Brothers' Hut
+int.harbour_hut_5|Chata smolarza łodzi|The Boat Tarrer's Hut
+int.harbour_hut_6|Chata przewoźnika|The Ferryman's Hut
+int.harbour_hut_7|Chata rybaka Szczepana|Szczepan the Fisherman's Hut
+int.harbour_hut_8|Chata przy wędzarni|The Hut by the Smokehouse
+int.harbour_hut_9|Chata na skraju kei|The Hut at the End of the Quay
+int.house_a|Dom rodziny Kowalików|The Kowalik Family House
+int.house_b|Dom tkaczki Halszki|Halszka the Weaver's House
+int.house_c|Kamienica kupca Tomasza|Tomasz the Merchant's Townhouse
+int.house_d|Dom pod Dzwonkiem|The House under the Bell
+int.house_e|Izba biedoty|The Paupers' Room
+int.house_f|Warsztat szewca Klemensa|Klemens the Cobbler's Workshop
+int.hunter_lodge|Chata myśliwego Błażeja|Błażej the Hunter's Lodge
+int.marta_shack|Szałas w zaułku|The Shack in the Alley
+int.mill|Młyn Bartosza|Bartosz's Mill
+int.town_house_1|Dom cieśli Mikołaja|Mikołaj the Carpenter's House
+int.town_house_2|Dom rodziny Wronów|The Wron Family House
+int.town_house_3|Izba wdowy Doroty|Widow Dorota's Room
+int.town_house_4|Dom tkaczy przy garbarni|The Weavers' House by the Tannery
+int.town_house_5|Kamienica pani Brygidy|Lady Brygida's Townhouse
+int.town_house_6|Dom starego cholewkarza|The Old Bootmaker's House
+int.town_house_7|Dom przekupki Małgorzaty|Margaret the Hawker's House
+int.village_chapel|Kaplica w Brzezinie|The Brzezina Chapel
+int.village_house_1|Zagroda Kingi|Kinga's Farmstead
+int.village_house_2|Chałupa komornika|The Cottar's Cottage
+int.village_house_3|Zagroda Piotra|Piotr's Farmstead
+int.village_house_4|Chata Urszuli|Urszula's Hut
+int.village_house_5|Chałupa bezrolnych|The Landless Cottage
+int.village_house_6|Zagroda Sowów|The Sowa Farmstead
+int.warehouse_b|Magazyn B|Warehouse B
+int.woodcutter_hut|Chata drwala Maćka|Maciek the Woodcutter's Hut
+# --- meble ---
+prop.armchair|Fotel|Armchair
+prop.bedDouble|Łoże|Double bed
+prop.bedStraw|Siennik|Straw bed
+prop.beehive|Ul|Beehive
+prop.chair|Krzesło|Chair
+prop.cupboard|Kredens|Cupboard
+prop.dresser|Komoda|Dresser
+prop.loom|Krosno|Loom
+prop.scarecrow|Strach na wróble|Scarecrow
+prop.sofa|Ława z poduszkami|Cushioned settle
+prop.spinningWheel|Kołowrotek|Spinning wheel
+prop.tombstone|Nagrobek|Gravestone
+prop.wardrobe|Szafa|Wardrobe
+prop.washBasin|Miednica|Wash basin
+look.loom|Krosno z niedokończonym suknem. Osnowa napięta jak struna, czółenko leży tam, gdzie je odłożono.|A loom with unfinished cloth. The warp is taut as a string, the shuttle lies where it was put down.
+look.spinningWheel|Kołowrotek z kądzielą lnu. Ktoś przędzie tu wieczorami, przy świecy.|A spinning wheel with a distaff of flax. Someone spins here in the evenings, by candlelight.
+look.washBasin|Miednica z zimną wodą i kawałkiem szarego mydła.|A basin of cold water and a piece of grey soap.
+look.scarecrow|Strach na wróble w starym kapturze. Wrony siedzą mu na ramionach i wcale się nie boją.|A scarecrow in an old hood. Crows sit on its shoulders, not afraid at all.
+look.beehive|Ul ze słomy. Pszczoły brzęczą ostrzegawczo — lepiej nie dotykać.|A straw beehive. The bees hum in warning — better not to touch.
+look.tombstone|Omszały kamień. Imię starte przez deszcz i lata, zostały tylko krzyż i data.|A mossy stone. The name worn away by rain and years, only a cross and a date remain.
+# --- interakcje i stanowiska ---
+interact.notYourBed|To nie twoje łóżko. Gospodarze raczej nie byliby zachwyceni.|This is not your bed. The owners would hardly be pleased.
+interact.foundGoat|Łaciata koza skubie trawę między kamieniami. Na twój widok beczy i ucieka w stronę wsi — dzwonek zaczepił się o krzak i został w twojej ręce.|The spotted goat is nibbling grass between the stones. Seeing you, it bleats and runs toward the village — its bell caught on a bush and stays in your hand.
+interact.foundCap|W trawie, wśród śladów racic i zaschniętej krwi, leży czerwona wełniana czapka. Dalej są tylko kości i strzępy kubraka.|In the grass, among hoof prints and dried blood, lies a red woollen cap. Further on there are only bones and shreds of a jerkin.
+interact.foundCoin|Pod przekrzywionym kamieniem ziemia jest miękka. Kilka garści głębiej palce trafiają na zetlały woreczek, a w nim srebrną monetę z wizerunkiem mnicha.|Under the tilted stone the soil is soft. A few handfuls deeper your fingers find a rotted pouch, and inside it a silver coin bearing a monk's image.
+interact.graveDay|Za dnia przy kaplicy kręcą się ludzie. Kopanie w grobie zostawisz na noc.|By day people are about near the chapel. Digging in a grave can wait until night.
+station.bloodyClearing|Krwawa polana|The bloody clearing
+station.lostGoat|Słodka trawa przy kamieniach|Sweet grass by the stones
+station.oldGrave|Grób bez imienia|The nameless grave
+station.carterPort|Wóz do portu|Cart to the harbour
+station.carterTown|Wóz na rynek|Cart to the market
+station.carterVillage|Wóz do Brzeziny|Cart to Brzezina
+""")
+# <<< MIESZKANCY
 
 # ===========================================================================
 # 9. ZAPIS I RAPORT POKRYCIA

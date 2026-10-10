@@ -2,6 +2,10 @@ import { Camera } from './Camera';
 import { Lighting } from './Lighting';
 import { WeatherParticles } from './WeatherParticles';
 import { FloatingText } from './FloatingText';
+import { CombatFx } from './CombatFx';
+import { Ambient } from './Ambient';
+import { WorldHud } from './WorldHud';
+import { drawActor } from './Characters';
 import { PAL, rgba } from './Palette';
 import { TILE } from '../world/TileMap';
 import type { Scene, SceneObject } from '../world/Scene';
@@ -29,6 +33,9 @@ export class Renderer {
   lighting = new Lighting(VIEW_W, VIEW_H);
   weather = new WeatherParticles();
   floats = new FloatingText();
+  combat = new CombatFx();
+  ambient = new Ambient();
+  hud = new WorldHud();
   scale = 1;
   time = 0;
   private entries: DrawEntry[] = [];
@@ -37,6 +44,7 @@ export class Renderer {
   private fpsAcc = 0; private fpsFrames = 0;
   /** migający znacznik interakcji */
   interactPulse = 0;
+  private lookX = 0; private lookY = 0;
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
@@ -62,6 +70,14 @@ export class Renderer {
     document.documentElement.style.setProperty('--ui-scale', String(this.scale));
   }
 
+  /** Współrzędne okna (clientX/Y) → piksele bufora 640×360; canvas jest wyśrodkowany. */
+  clientToBuffer(cx: number, cy: number): [number, number] {
+    const r = this.canvas.getBoundingClientRect();
+    const sx = r.width ? VIEW_W / r.width : 1 / Math.max(1, this.scale);
+    const sy = r.height ? VIEW_H / r.height : 1 / Math.max(1, this.scale);
+    return [(cx - r.left) * sx, (cy - r.top) * sy];
+  }
+
   draw(opts: {
     scene: Scene; actors: Actor[]; player: Actor;
     darkness: number; ambient: [number, number, number]; ambientLevel: number;
@@ -69,6 +85,12 @@ export class Renderer {
     weatherIntensity: number; wind: number; torchLit: boolean; torchFuel: number;
     interactTarget: { x: number; y: number; label: string } | null;
     dt: number;
+    night?: boolean;
+    ambientLife?: boolean;
+    /** kierunek ruchu gracza (-1..1) — kamera lekko wyprzedza */
+    lookAhead?: { x: number; y: number };
+    /** ślady po uniku: poprzednie pozycje gracza */
+    ghosts?: Array<{ x: number; y: number; dir: any; frame: number; look: any; a: number }>;
   }) {
     const dt = opts.dt;
     this.time = opts.time;
@@ -76,16 +98,26 @@ export class Renderer {
     this.fpsAcc += dt; this.fpsFrames++;
     if (this.fpsAcc >= 0.5) { this.fps = Math.round(this.fpsFrames / this.fpsAcc); this.fpsAcc = 0; this.fpsFrames = 0; }
     this.camera.update(dt);
-    this.camera.follow(opts.player.x, opts.player.y - 12, dt);
+    // kamera wyprzedza ruch o kilkanaście pikseli — widać, dokąd się idzie
+    const la = opts.lookAhead || { x: 0, y: 0 };
+    this.lookX += ((la.x * 34) - this.lookX) * Math.min(1, dt * 2.5);
+    this.lookY += ((la.y * 22) - this.lookY) * Math.min(1, dt * 2.5);
+    this.camera.follow(opts.player.x + this.lookX, opts.player.y - 12 + this.lookY, dt);
     this.camera.setBounds(opts.scene.tilemap.w, opts.scene.tilemap.h);
 
     const ctx = this.bctx;
     const camX = Math.round(this.camera.x + this.camera.ox);
     const camY = Math.round(this.camera.y + this.camera.oy);
 
+    this.hud.update(dt);
+    this.ambient.update(dt, {
+      camX, camY, viewW: VIEW_W, viewH: VIEW_H, outdoor: !opts.scene.isInterior && opts.ambientLife !== false, night: !!opts.night,
+      darkness: opts.darkness, wind: opts.wind, weather: opts.weatherKind, scene: opts.scene
+    });
     this.weather.setWeather(opts.weatherKind, opts.weatherIntensity, opts.wind);
     this.weather.update(dt, camX, camY, VIEW_W, VIEW_H, opts.scene.smokeSources.map(s => ({ x: s.x, y: s.y })));
     this.floats.update(dt);
+    this.combat.update(dt);
 
     /* ---- 1. podłoże ---- */
     ctx.fillStyle = PAL.ink0;
@@ -102,16 +134,30 @@ export class Renderer {
       if (o.tall) continue;                       // wysokie rysujemy po aktorach
       list.push({ y: o.sortY, obj: o });
     }
-    for (const a of opts.actors) {
+    for (const a of [...opts.actors, opts.player]) {
       if (a.hidden) continue;
       if (!this.camera.visible(a.x, a.y, 64)) continue;
       list.push({ y: a.sortY, actor: a });
     }
     list.sort((p, q) => p.y - q.y || (p.obj ? -1 : 1));
 
+    // smuga po uniku: półprzezroczyste sylwetki w poprzednich pozycjach
+    if (opts.ghosts?.length) {
+      ctx.save();
+      ctx.translate(-camX, -camY);
+      for (const gh of opts.ghosts) drawActor(ctx, gh.x, gh.y, { dir: gh.dir, action: 'sneak', frame: gh.frame, look: gh.look, alpha: gh.a });
+      ctx.restore();
+    }
+
     for (const e of list) {
       if (e.obj) this.drawObject(ctx, e.obj, camX, camY);
-      else if (e.actor) e.actor.draw(ctx, opts.sunDir);
+      else if (e.actor) {
+        // aktorzy rysują się we współrzędnych świata — przesuwamy kontekst o kamerę
+        ctx.save();
+        ctx.translate(-camX, -camY);
+        e.actor.draw(ctx, opts.sunDir);
+        ctx.restore();
+      }
     }
 
     /* ---- 3. aktorzy i obiekty wysokie ---- */
@@ -121,8 +167,10 @@ export class Renderer {
       this.drawObject(ctx, o, camX, camY);
     }
 
-    /* ---- 4. cząsteczki świata (dym, krew, kurz) ---- */
+    /* ---- 4. cząsteczki świata (dym, krew, kurz) i ślady cięć ---- */
     this.weather.drawWorld(ctx, camX, camY);
+    this.combat.drawSlashes(ctx, camX, camY);
+    this.ambient.drawWorld(ctx, camX, camY);
 
     /* ---- 5. znacznik interakcji ---- */
     if (opts.interactTarget) {
@@ -167,7 +215,10 @@ export class Renderer {
       ctx.fillRect(0, 0, VIEW_W, VIEW_H);
     }
 
-    /* ---- 8. liczby pływające ---- */
+    /* ---- 8. świetliki i tęcza, paski zdrowia, HUD w świecie, liczby ---- */
+    this.ambient.drawGlow(ctx, camX, camY, VIEW_W, VIEW_H);
+    this.combat.drawHealthBars(ctx, opts.actors, camX, camY);
+    this.hud.draw(ctx, camX, camY, VIEW_W, VIEW_H);
     this.floats.draw(ctx, camX, camY);
 
     /* ---- 9. debug ---- */

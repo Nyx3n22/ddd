@@ -2,6 +2,7 @@ import { bus } from '../core/EventBus';
 import { getGame } from '../core/gameSingleton';
 import { t } from '../core/Localization';
 import { ReputationSystem } from './ReputationSystem';
+import { DEADLINE_GRACE } from './QuestSystem';
 
 /* ============================================================================
    DŁUG — zegar gry
@@ -39,6 +40,18 @@ export class DebtSystem {
     ReputationSystem.add('villagers', 15, 'rep.reason.debtCleared');
     bus.emit('debt:cleared', {});
     bus.emit('hud:toast', { text: t('debt.cleared'), tone: 'good' });
+    bus.emit('ending:check', { reason: 'debtCleared' });
+  }
+
+  /** Umorzenie części długu (układ, wstawiennictwo) — bez wydawania złota. */
+  static forgive(amount: number) {
+    const s = getGame().state;
+    const sum = Math.max(0, Math.min(amount, this.remaining()));
+    if (sum <= 0) return;
+    s.debt.paid += sum;
+    bus.emit('debt:forgiven', { amount: sum });
+    bus.emit('hud:toast', { text: t('debt.forgiven', { gold: sum, remaining: this.remaining() }), tone: 'good' });
+    if (this.remaining() <= 0) this.settle();
   }
 
   /** Przedłużenie terminu — kosztuje 1000 koron i jedną przysługę. */
@@ -91,8 +104,9 @@ export class DebtSystem {
       bus.emit('debt:warning', { daysLeft: left });
       bus.emit('hud:toast', { text: t('debt.deadlineWarn', { days: left }), tone: 'bad' });
     }
-    if (left <= 0 && s.debtRemaining > 0 && !s.ending) {
-      bus.emit('ending:trigger', { id: 'end_captive' });
+    // tydzień po terminie Rycerze przychodzą — które zakończenie, zależy od tego, kto Johna osłoni
+    if (s.debtRemaining > 0 && !s.ending && s.time.day > s.debt.dueDay + DEADLINE_GRACE) {
+      bus.emit('ending:check', { reason: 'deadline' });
     }
     if (s.debtRemaining <= 0 && !s.ending && s.flags.debt_cleared) {
       bus.emit('ending:check', { reason: 'debtCleared' });

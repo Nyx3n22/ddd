@@ -1,132 +1,1366 @@
 {
-  "quests": [
+ "quests": [
+  {
+   "id": "q_prolog_debt",
+   "titleKey": "quest.prolog.title",
+   "type": "story",
+   "giver": null,
+   "autoStart": true,
+   "journalKey": "quest.prolog.journal",
+   "stages": [
     {
-      "id": "q_prolog_debt",
-      "titleKey": "quest.prolog.title",
-      "type": "story",
-      "giver": null,
-      "autoStart": true,
-      "journalKey": "quest.prolog.journal",
-      "stages": [
-        { "id": "s1", "descKey": "quest.prolog.s1", "objective": { "type": "talk", "npc": "poborca_gwidon" } },
-        { "id": "s2", "descKey": "quest.prolog.s2", "objective": { "type": "custom", "flag": "earned_first_crown", "count": 1 } },
-        { "id": "s3", "descKey": "quest.prolog.s3", "objective": { "type": "debtPaid", "amount": 100 } }
-      ],
-      "rewards": { "crowns": 0, "noteKey": "quest.prolog.note" },
-      "failCondition": "deadline"
+     "id": "s1",
+     "descKey": "quest.prolog.s1",
+     "objective": {
+      "type": "talk",
+      "npc": "baldwin"
+     },
+     "target": {
+      "npc": "baldwin"
+     }
     },
     {
-      "id": "q_coal_for_orlik",
-      "titleKey": "quest.coal.title",
-      "type": "work",
-      "giver": "orlik",
-      "journalKey": "quest.coal.journal",
-      "hintKey": "quest.coal.hint",
-      "stages": [
-        { "id": "s1", "descKey": "quest.coal.s1", "objective": { "type": "collect", "item": "coal_lump", "count": 3 } },
-        { "id": "s2", "descKey": "quest.coal.s2", "objective": { "type": "talk", "npc": "orlik" } }
-      ],
-      "rewards": { "crowns": 65, "rep": { "merchantGuild": 6 }, "xp": { "smithing": 40, "barter": 10 }, "noteKey": "quest.coal.note", "unlockStation": "forgeWork" },
-      "failAfterDays": 4,
-      "repeatable": true
+     "id": "s2",
+     "descKey": "quest.prolog.s2",
+     "objective": {
+      "type": "enterInterior",
+      "interior": "int_tavern"
+     },
+     "target": {
+      "interior": "int_tavern"
+     }
     },
     {
-      "id": "q_untaxed_salt",
-      "titleKey": "quest.salt.title",
-      "type": "crime",
-      "giver": "idzi",
-      "journalKey": "quest.salt.journal",
-      "hintKey": "quest.salt.hint",
-      "requiresRep": { "smugglers": 0 },
-      "stages": [
-        { "id": "s1", "descKey": "quest.salt.s1", "objective": { "type": "enterInterior", "interior": "int_warehouse" } },
-        { "id": "s2", "descKey": "quest.salt.s2", "objective": { "type": "collect", "item": "crate_untaxed", "count": 1 } },
-        { "id": "s3", "descKey": "quest.salt.s3", "objective": { "type": "reachArea", "region": "place.piers", "nightOnly": true } },
-        { "id": "s4", "descKey": "quest.salt.s4", "objective": { "type": "talk", "npc": "idzi" } }
-      ],
-      "rewards": { "crowns": 240, "rep": { "smugglers": 18, "cityGuard": -12 }, "xp": { "sneak": 70, "streetwise": 30 }, "noteKey": "quest.salt.note" },
-      "failAfterDays": 3,
-      "crimeOnFail": { "type": "smuggling", "witnesses": 2, "location": "Port" }
-    },
-    {
-      "id": "q_marta_satchel",
-      "titleKey": "quest.marta.title",
-      "type": "story",
-      "giver": "marta",
-      "journalKey": "quest.marta.journal",
-      "hintKey": "quest.marta.hint",
-      "stages": [
-        { "id": "s1", "descKey": "quest.marta.s1", "objective": { "type": "reachArea", "region": "place.alleyWest" } },
-        { "id": "s2", "descKey": "quest.marta.s2", "objective": { "type": "kill", "target": "bandit_marta", "count": 1 } },
-        { "id": "s3", "descKey": "quest.marta.s3", "objective": { "type": "collect", "item": "marta_satchel", "count": 1 } },
-        { "id": "s4", "descKey": "quest.marta.s4", "objective": { "type": "talk", "npc": "marta" } }
-      ],
-      "rewards": { "crowns": 45, "rep": { "smugglers": 10, "villagers": 4 }, "xp": { "sword": 40, "streetwise": 25 }, "noteKey": "quest.marta.note", "unlockTeacher": "marta" },
-      "failAfterDays": 2,
-      "moral": true
-    },
-    {
-      "id": "q_hanna_tab",
-      "titleKey": "quest.tab.title",
-      "type": "story",
-      "giver": "hanna",
-      "journalKey": "quest.tab.journal",
-      "stages": [
-        { "id": "s1", "descKey": "quest.tab.s1", "objective": { "type": "gamble", "wins": 1 } },
-        { "id": "s2", "descKey": "quest.tab.s2", "objective": { "type": "collect", "item": "hanna_tab", "count": 1 } },
-        { "id": "s3", "descKey": "quest.tab.s3", "objective": { "type": "payGold", "amount": 30 } }
-      ],
-      "rewards": { "crowns": 0, "rep": { "villagers": 8 }, "xp": { "gamble": 40, "persuade": 15 }, "noteKey": "quest.tab.note" },
-      "failAfterDays": 5
-    },
-    {
-      "id": "q_vagn_respect",
-      "titleKey": "quest.vagn.title",
-      "type": "story",
-      "giver": "vagn",
-      "journalKey": "quest.vagn.journal",
-      "requiresSkill": { "brawl": 1 },
-      "stages": [
-        { "id": "s1", "descKey": "quest.vagn.s1", "objective": { "type": "custom", "flag": "spar_vagn", "count": 1 } },
-        { "id": "s2", "descKey": "quest.vagn.s2", "objective": { "type": "talk", "npc": "vagn" } }
-      ],
-      "rewards": { "crowns": 0, "rep": { "villagers": 10 }, "xp": { "parry": 60, "sword": 40 }, "noteKey": "quest.vagn.note", "unlockTeacher": "vagn" },
-      "failAfterDays": 6
+     "id": "s3",
+     "descKey": "quest.prolog.s3",
+     "objective": {
+      "type": "talk",
+      "npc": "hanna"
+     },
+     "target": {
+      "npc": "hanna"
+     }
     }
-  ],
-  "board": [
+   ],
+   "rewards": {
+    "crowns": 0,
+    "noteKey": "quest.prolog.note"
+   },
+   "failCondition": "deadline"
+  },
+  {
+   "id": "q_coal_for_orlik",
+   "titleKey": "quest.coal.title",
+   "type": "work",
+   "giver": "orlik",
+   "journalKey": "quest.coal.journal",
+   "hintKey": "quest.coal.hint",
+   "stages": [
     {
-      "id": "board_delivery", "titleKey": "board.delivery.title", "descKeys": ["board.delivery.a", "board.delivery.b", "board.delivery.c"],
-      "type": "delivery", "pay": [18, 45], "rep": { "merchantGuild": 3, "villagers": 2 }, "xp": { "barter": 15 }, "items": ["bread_loaf", "salt_sack", "fish_smoked", "plank_oak"]
+     "id": "s1",
+     "descKey": "quest.coal.s1",
+     "objective": {
+      "type": "collect",
+      "item": "coal_lump",
+      "count": 3
+     }
     },
     {
-      "id": "board_escort", "titleKey": "board.escort.title", "descKeys": ["board.escort.a", "board.escort.b"],
-      "type": "escort", "pay": [40, 90], "rep": { "merchantGuild": 5 }, "xp": { "sword": 25, "endurance": 15 }, "risk": 0.5
-    },
-    {
-      "id": "board_pests", "titleKey": "board.pests.title", "descKeys": ["board.pests.a", "board.pests.b"],
-      "type": "pests", "pay": [25, 55], "rep": { "villagers": 6 }, "xp": { "tracking": 20, "sword": 20 }, "targets": ["wolf", "rat", "boar"]
-    },
-    {
-      "id": "board_debt", "titleKey": "board.debt.title", "descKeys": ["board.debt.a", "board.debt.b"],
-      "type": "debt", "pay": [30, 70], "rep": { "merchantGuild": 4, "villagers": -4 }, "xp": { "intimidate": 25 }, "moral": true
-    },
-    {
-      "id": "board_missing", "titleKey": "board.missing.title", "descKeys": ["board.missing.a", "board.missing.b"],
-      "type": "missing", "pay": [22, 60], "rep": { "villagers": 5 }, "xp": { "tracking": 30 }
-    },
-    {
-      "id": "board_labour", "titleKey": "board.labour.title", "descKeys": ["board.labour.a", "board.labour.b"],
-      "type": "labour", "pay": [12, 26], "rep": { "villagers": 3 }, "xp": { "endurance": 20 }
+     "id": "s2",
+     "descKey": "quest.coal.s2",
+     "objective": {
+      "type": "talk",
+      "npc": "orlik"
+     }
     }
-  ],
-  "endings": [
-    { "id": "end_honest", "nameKey": "ending.honest", "cond": { "debtPaid": true, "crimeLow": true } },
-    { "id": "end_crime", "nameKey": "ending.crime", "cond": { "debtPaid": true, "crimeHigh": true } },
-    { "id": "end_escape", "nameKey": "ending.escape", "cond": { "escaped": true } },
-    { "id": "end_knights", "nameKey": "ending.knights", "cond": { "rep": { "wildKnights": 80 } } },
-    { "id": "end_overthrow", "nameKey": "ending.overthrow", "cond": { "rep": { "cityGuard": 70, "villagers": 70 }, "flag": "overthrow" } },
-    { "id": "end_death", "nameKey": "ending.death", "cond": { "dead": true } },
-    { "id": "end_captive", "nameKey": "ending.captive", "cond": { "deadline": true, "debtPaid": false } }
-  ]
+   ],
+   "rewards": {
+    "crowns": 65,
+    "rep": {
+     "merchantGuild": 6
+    },
+    "xp": {
+     "smithing": 40,
+     "barter": 10
+    },
+    "noteKey": "quest.coal.note",
+    "unlockStation": "forgeWork"
+   },
+   "failAfterDays": 4,
+   "repeatable": true
+  },
+  {
+   "id": "q_untaxed_salt",
+   "titleKey": "quest.salt.title",
+   "type": "crime",
+   "giver": "idzi",
+   "journalKey": "quest.salt.journal",
+   "hintKey": "quest.salt.hint",
+   "requiresRep": {
+    "smugglers": 0
+   },
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.salt.s1",
+     "objective": {
+      "type": "enterInterior",
+      "interior": "int_warehouse"
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.salt.s2",
+     "objective": {
+      "type": "collect",
+      "item": "crate_untaxed",
+      "count": 1
+     }
+    },
+    {
+     "id": "s3",
+     "descKey": "quest.salt.s3",
+     "objective": {
+      "type": "reachArea",
+      "region": "place.piers",
+      "nightOnly": true
+     }
+    },
+    {
+     "id": "s4",
+     "descKey": "quest.salt.s4",
+     "objective": {
+      "type": "talk",
+      "npc": "idzi"
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 240,
+    "rep": {
+     "smugglers": 18,
+     "cityGuard": -12
+    },
+    "xp": {
+     "sneak": 70,
+     "streetwise": 30
+    },
+    "noteKey": "quest.salt.note"
+   },
+   "failAfterDays": 3,
+   "crimeOnFail": {
+    "type": "smuggling",
+    "witnesses": 2,
+    "location": "Port"
+   }
+  },
+  {
+   "id": "q_marta_satchel",
+   "titleKey": "quest.marta.title",
+   "type": "story",
+   "giver": "marta",
+   "journalKey": "quest.marta.journal",
+   "hintKey": "quest.marta.hint",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.marta.s1",
+     "objective": {
+      "type": "reachArea",
+      "region": "place.alleyWest"
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.marta.s2",
+     "objective": {
+      "type": "kill",
+      "target": "bandit_marta",
+      "count": 1
+     }
+    },
+    {
+     "id": "s3",
+     "descKey": "quest.marta.s3",
+     "objective": {
+      "type": "collect",
+      "item": "marta_satchel",
+      "count": 1
+     }
+    },
+    {
+     "id": "s4",
+     "descKey": "quest.marta.s4",
+     "objective": {
+      "type": "talk",
+      "npc": "marta"
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 45,
+    "rep": {
+     "smugglers": 10,
+     "villagers": 4
+    },
+    "xp": {
+     "sword": 40,
+     "streetwise": 25
+    },
+    "noteKey": "quest.marta.note",
+    "unlockTeacher": "marta"
+   },
+   "failAfterDays": 2,
+   "moral": true
+  },
+  {
+   "id": "q_hanna_tab",
+   "titleKey": "quest.tab.title",
+   "type": "story",
+   "giver": "hanna",
+   "journalKey": "quest.tab.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.tab.s1",
+     "objective": {
+      "type": "gamble",
+      "wins": 1
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.tab.s2",
+     "objective": {
+      "type": "collect",
+      "item": "hanna_tab",
+      "count": 1
+     }
+    },
+    {
+     "id": "s3",
+     "descKey": "quest.tab.s3",
+     "objective": {
+      "type": "payGold",
+      "amount": 30
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 0,
+    "rep": {
+     "villagers": 8
+    },
+    "xp": {
+     "gamble": 40,
+     "persuade": 15
+    },
+    "noteKey": "quest.tab.note"
+   },
+   "failAfterDays": 5
+  },
+  {
+   "id": "q_vagn_respect",
+   "titleKey": "quest.vagn.title",
+   "type": "story",
+   "giver": "vagn",
+   "journalKey": "quest.vagn.journal",
+   "requiresSkill": {
+    "brawl": 1
+   },
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.vagn.s1",
+     "objective": {
+      "type": "custom",
+      "flag": "spar_vagn",
+      "count": 1
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.vagn.s2",
+     "objective": {
+      "type": "talk",
+      "npc": "vagn"
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 0,
+    "rep": {
+     "villagers": 10
+    },
+    "xp": {
+     "parry": 60,
+     "sword": 40
+    },
+    "noteKey": "quest.vagn.note",
+    "unlockTeacher": "vagn"
+   },
+   "failAfterDays": 6
+  },
+  {
+   "id": "q_raven_ledger",
+   "titleKey": "quest.ledger.title",
+   "type": "story",
+   "giver": "teodor",
+   "journalKey": "quest.ledger.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.ledger.s1",
+     "objective": {
+      "type": "custom",
+      "flag": "ledger_hint",
+      "count": 1
+     },
+     "target": {
+      "npc": "idzi"
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.ledger.s2",
+     "objective": {
+      "type": "collect",
+      "item": "ledger_raven",
+      "count": 1
+     },
+     "target": {
+      "interior": "int_customs",
+      "station": "questSearch"
+     }
+    },
+    {
+     "id": "s3",
+     "descKey": "quest.ledger.s3",
+     "objective": {
+      "type": "custom",
+      "flag": "ledger_decided",
+      "count": 1
+     },
+     "target": {
+      "npc": "rawicz"
+     }
+    }
+   ],
+   "rewards": {
+    "xp": {
+     "history": 40,
+     "streetwise": 20
+    }
+   }
+  },
+  {
+   "id": "q_overthrow",
+   "titleKey": "quest.overthrow.title",
+   "type": "story",
+   "giver": "rawicz",
+   "journalKey": "quest.overthrow.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.overthrow.s1",
+     "objective": {
+      "type": "custom",
+      "flag": "ov_guild",
+      "count": 1
+     },
+     "target": {
+      "npc": "kupiec_zbylut"
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.overthrow.s2",
+     "objective": {
+      "type": "custom",
+      "flag": "ov_church",
+      "count": 1
+     },
+     "target": {
+      "npc": "teodor"
+     }
+    },
+    {
+     "id": "s3",
+     "descKey": "quest.overthrow.s3",
+     "objective": {
+      "type": "custom",
+      "flag": "ov_vagn",
+      "count": 1
+     },
+     "target": {
+      "npc": "vagn"
+     }
+    },
+    {
+     "id": "s4",
+     "descKey": "quest.overthrow.s4",
+     "objective": {
+      "type": "custom",
+      "flag": "overthrow",
+      "count": 1
+     },
+     "target": {
+      "npc": "rawicz"
+     }
+    }
+   ],
+   "rewards": {
+    "rep": {
+     "villagers": 10
+    }
+   }
+  },
+  {
+   "id": "q_last_ferry",
+   "titleKey": "quest.ferry.title",
+   "type": "story",
+   "giver": "idzi",
+   "journalKey": "quest.ferry.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.ferry.s1",
+     "objective": {
+      "type": "collect",
+      "item": "passage_token",
+      "count": 1
+     },
+     "target": {
+      "npc": "idzi"
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.ferry.s2",
+     "objective": {
+      "type": "custom",
+      "flag": "escaped_island",
+      "count": 1
+     },
+     "target": {
+      "interior": "world",
+      "station": "ferryBoat"
+     }
+    }
+   ]
+  },
+  {
+   "id": "q_knights_oath",
+   "titleKey": "quest.oath.title",
+   "type": "story",
+   "giver": "baldwin",
+   "journalKey": "quest.oath.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.oath.s1",
+     "objective": {
+      "type": "custom",
+      "flag": "oath_wiera",
+      "count": 1
+     },
+     "target": {
+      "npc": "wiera"
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.oath.s2",
+     "objective": {
+      "type": "kill",
+      "target": "bandit_boss",
+      "count": 1
+     },
+     "spawn": {
+      "typeId": "bandit_boss",
+      "kind": "bandit",
+      "tx": 126,
+      "ty": 41
+     }
+    },
+    {
+     "id": "s3",
+     "descKey": "quest.oath.s3",
+     "objective": {
+      "type": "custom",
+      "flag": "knights_oath",
+      "count": 1
+     },
+     "target": {
+      "npc": "baldwin"
+     }
+    }
+   ]
+  },
+  {
+   "id": "q_relic",
+   "titleKey": "quest.relic.title",
+   "type": "side",
+   "giver": "teodor",
+   "journalKey": "quest.relic.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.relic.s1",
+     "objective": {
+      "type": "collect",
+      "item": "relic_elenem",
+      "count": 1
+     },
+     "target": {
+      "interior": "world",
+      "station": "questSearch"
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.relic.s2",
+     "objective": {
+      "type": "custom",
+      "flag": "relic_decided",
+      "count": 1
+     },
+     "target": {
+      "npc": "teodor"
+     }
+    }
+   ],
+   "rewards": {
+    "xp": {
+     "history": 30
+    }
+   }
+  },
+  {
+   "id": "q_brzezina_wolves",
+   "titleKey": "quest.bWolves.title",
+   "type": "side",
+   "giver": "walenty",
+   "journalKey": "quest.bWolves.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.bWolves.s1",
+     "objective": {
+      "type": "kill",
+      "target": "wolf",
+      "count": 3
+     },
+     "target": {
+      "tx": 214,
+      "ty": 72
+     },
+     "spawn": {
+      "typeId": "wolf",
+      "kind": "creature",
+      "tx": 212,
+      "ty": 72,
+      "count": 3
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.bWolves.s2",
+     "objective": {
+      "type": "talk",
+      "npc": "walenty"
+     },
+     "target": {
+      "npc": "walenty"
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 120,
+    "rep": {
+     "villagers": 10
+    },
+    "xp": {
+     "beasts": 20
+    }
+   }
+  },
+  {
+   "id": "q_mill_wheel",
+   "titleKey": "quest.mill.title",
+   "type": "side",
+   "giver": "bartosz",
+   "journalKey": "quest.mill.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.mill.s1",
+     "objective": {
+      "type": "collect",
+      "item": "nails_handful",
+      "count": 2
+     },
+     "target": {
+      "npc": "orlik"
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.mill.s2",
+     "objective": {
+      "type": "collect",
+      "item": "plank_oak",
+      "count": 2
+     },
+     "target": {
+      "npc": "kupiec_zbylut"
+     }
+    },
+    {
+     "id": "s3",
+     "descKey": "quest.mill.s3",
+     "objective": {
+      "type": "talk",
+      "npc": "bartosz"
+     },
+     "target": {
+      "npc": "bartosz"
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 70,
+    "items": [
+     "bread_loaf",
+     "bread_loaf",
+     "grain_sack"
+    ],
+    "rep": {
+     "villagers": 8
+    },
+    "xp": {
+     "carpentry": 25
+    },
+    "consume": [
+     [
+      "nails_handful",
+      2
+     ],
+     [
+      "plank_oak",
+      2
+     ]
+    ]
+   }
+  },
+  {
+   "id": "q_lost_goat",
+   "titleKey": "quest.goat.title",
+   "type": "side",
+   "giver": "kinga",
+   "journalKey": "quest.goat.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.goat.s1",
+     "objective": {
+      "type": "collect",
+      "item": "goat_bell",
+      "count": 1
+     },
+     "target": {
+      "interior": "world",
+      "station": "questSearch",
+      "tx": 194,
+      "ty": 70
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.goat.s2",
+     "objective": {
+      "type": "custom",
+      "flag": "goat_returned",
+      "count": 1
+     },
+     "target": {
+      "npc": "kinga"
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 15,
+    "rep": {
+     "villagers": 4
+    },
+    "xp": {
+     "tracking": 10
+    },
+    "consume": [
+     [
+      "goat_bell",
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "id": "q_missing_woodcutter",
+   "titleKey": "quest.woodcutter.title",
+   "type": "side",
+   "giver": "jadwiga",
+   "journalKey": "quest.woodcutter.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.woodcutter.s1",
+     "objective": {
+      "type": "custom",
+      "flag": "woodcutter_search",
+      "count": 1
+     },
+     "target": {
+      "npc": "blazej"
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.woodcutter.s2",
+     "objective": {
+      "type": "kill",
+      "target": "boar",
+      "count": 1
+     },
+     "target": {
+      "tx": 176,
+      "ty": 80
+     },
+     "spawn": {
+      "typeId": "boar",
+      "kind": "creature",
+      "tx": 178,
+      "ty": 78
+     }
+    },
+    {
+     "id": "s3",
+     "descKey": "quest.woodcutter.s3",
+     "objective": {
+      "type": "collect",
+      "item": "woodcutter_cap",
+      "count": 1
+     },
+     "target": {
+      "interior": "world",
+      "station": "questSearch",
+      "tx": 176,
+      "ty": 80
+     }
+    },
+    {
+     "id": "s4",
+     "descKey": "quest.woodcutter.s4",
+     "objective": {
+      "type": "custom",
+      "flag": "woodcutter_found",
+      "count": 1
+     },
+     "target": {
+      "npc": "jadwiga"
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 30,
+    "items": [
+     "axe_wood"
+    ],
+    "rep": {
+     "villagers": 12
+    },
+    "xp": {
+     "tracking": 25
+    },
+    "consume": [
+     [
+      "woodcutter_cap",
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "id": "q_pelts_oles",
+   "titleKey": "quest.pelts.title",
+   "type": "side",
+   "giver": "blazej",
+   "journalKey": "quest.pelts.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.pelts.s1",
+     "objective": {
+      "type": "collect",
+      "item": "wolf_pelt",
+      "count": 2
+     },
+     "target": {
+      "tx": 196,
+      "ty": 50
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.pelts.s2",
+     "objective": {
+      "type": "talk",
+      "npc": "garbarz_oles"
+     },
+     "target": {
+      "npc": "garbarz_oles"
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 80,
+    "rep": {
+     "smugglers": 3
+    },
+    "xp": {
+     "tanning": 10,
+     "barter": 10
+    },
+    "consume": [
+     [
+      "wolf_pelt",
+      2
+     ]
+    ]
+   }
+  },
+  {
+   "id": "q_letter_brzezina",
+   "titleKey": "quest.letter.title",
+   "type": "side",
+   "giver": "skryba_urban",
+   "journalKey": "quest.letter.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.letter.s1",
+     "objective": {
+      "type": "talk",
+      "npc": "walenty"
+     },
+     "target": {
+      "npc": "walenty"
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 25,
+    "xp": {
+     "reading": 5
+    },
+    "consume": [
+     [
+      "letter_village",
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "id": "q_weaver_wool",
+   "titleKey": "quest.wool.title",
+   "type": "side",
+   "giver": "halszka",
+   "journalKey": "quest.wool.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.wool.s1",
+     "objective": {
+      "type": "collect",
+      "item": "wool_bundle",
+      "count": 3
+     },
+     "target": {
+      "npc": "garbarz_oles"
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.wool.s2",
+     "objective": {
+      "type": "talk",
+      "npc": "halszka"
+     },
+     "target": {
+      "npc": "halszka"
+     }
+    }
+   ],
+   "rewards": {
+    "items": [
+     "wool_cloak"
+    ],
+    "rep": {
+     "villagers": 5
+    },
+    "consume": [
+     [
+      "wool_bundle",
+      3
+     ]
+    ]
+   }
+  },
+  {
+   "id": "q_fish_contest",
+   "titleKey": "quest.fish.title",
+   "type": "side",
+   "giver": "ambrozy",
+   "journalKey": "quest.fish.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.fish.s1",
+     "objective": {
+      "type": "collect",
+      "item": "fish_cod",
+      "count": 2
+     },
+     "target": {
+      "interior": "world",
+      "station": "fishingSpot"
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.fish.s2",
+     "objective": {
+      "type": "talk",
+      "npc": "ambrozy"
+     },
+     "target": {
+      "npc": "ambrozy"
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 40,
+    "items": [
+     "beer_mug"
+    ],
+    "xp": {
+     "fishing": 25
+    },
+    "consume": [
+     [
+      "fish_cod",
+      2
+     ]
+    ]
+   }
+  },
+  {
+   "id": "q_sick_child",
+   "titleKey": "quest.child.title",
+   "type": "side",
+   "giver": "dorota",
+   "journalKey": "quest.child.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.child.s1",
+     "objective": {
+      "type": "custom",
+      "flag": "child_remedy",
+      "count": 1
+     },
+     "target": {
+      "npc": "wiera"
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.child.s2",
+     "objective": {
+      "type": "collect",
+      "item": "herb_yarrow",
+      "count": 3
+     },
+     "target": {
+      "npc": "wiera"
+     }
+    },
+    {
+     "id": "s3",
+     "descKey": "quest.child.s3",
+     "objective": {
+      "type": "talk",
+      "npc": "dorota"
+     },
+     "target": {
+      "npc": "dorota"
+     }
+    }
+   ],
+   "rewards": {
+    "rep": {
+     "villagers": 12,
+     "church": 3
+    },
+    "xp": {
+     "herbalism": 15,
+     "medicine": 10
+    },
+    "consume": [
+     [
+      "herb_yarrow",
+      3
+     ]
+    ]
+   }
+  },
+  {
+   "id": "q_shoes",
+   "titleKey": "quest.shoes.title",
+   "type": "side",
+   "giver": "klemens",
+   "journalKey": "quest.shoes.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.shoes.s1",
+     "objective": {
+      "type": "collect",
+      "item": "hide_deer",
+      "count": 1
+     },
+     "target": {
+      "npc": "garbarz_oles"
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.shoes.s2",
+     "objective": {
+      "type": "talk",
+      "npc": "klemens"
+     },
+     "target": {
+      "npc": "klemens"
+     }
+    }
+   ],
+   "rewards": {
+    "crowns": 45,
+    "rep": {
+     "merchantGuild": 3
+    },
+    "consume": [
+     [
+      "hide_deer",
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "id": "q_urszula_legend",
+   "titleKey": "quest.legend.title",
+   "type": "side",
+   "giver": "urszula",
+   "journalKey": "quest.legend.journal",
+   "stages": [
+    {
+     "id": "s1",
+     "descKey": "quest.legend.s1",
+     "objective": {
+      "type": "collect",
+      "item": "old_coin",
+      "count": 1
+     },
+     "target": {
+      "interior": "world",
+      "station": "questSearch",
+      "tx": 280,
+      "ty": 37
+     }
+    },
+    {
+     "id": "s2",
+     "descKey": "quest.legend.s2",
+     "objective": {
+      "type": "custom",
+      "flag": "legend_done",
+      "count": 1
+     },
+     "target": {
+      "npc": "urszula"
+     }
+    }
+   ],
+   "rewards": {
+    "xp": {
+     "history": 30
+    },
+    "rep": {
+     "villagers": 5
+    }
+   }
+  }
+ ],
+ "board": [
+  {
+   "id": "board_delivery",
+   "titleKey": "board.delivery.title",
+   "descKeys": [
+    "board.delivery.a",
+    "board.delivery.b",
+    "board.delivery.c"
+   ],
+   "type": "delivery",
+   "pay": [
+    18,
+    45
+   ],
+   "rep": {
+    "merchantGuild": 3,
+    "villagers": 2
+   },
+   "xp": {
+    "barter": 15
+   },
+   "items": [
+    "bread_loaf",
+    "salt_sack",
+    "fish_smoked",
+    "plank_oak"
+   ]
+  },
+  {
+   "id": "board_escort",
+   "titleKey": "board.escort.title",
+   "descKeys": [
+    "board.escort.a",
+    "board.escort.b"
+   ],
+   "type": "escort",
+   "pay": [
+    40,
+    90
+   ],
+   "rep": {
+    "merchantGuild": 5
+   },
+   "xp": {
+    "sword": 25,
+    "endurance": 15
+   },
+   "risk": 0.5
+  },
+  {
+   "id": "board_pests",
+   "titleKey": "board.pests.title",
+   "descKeys": [
+    "board.pests.a",
+    "board.pests.b"
+   ],
+   "type": "pests",
+   "pay": [
+    25,
+    55
+   ],
+   "rep": {
+    "villagers": 6
+   },
+   "xp": {
+    "tracking": 20,
+    "sword": 20
+   },
+   "targets": [
+    "wolf",
+    "rat",
+    "boar"
+   ]
+  },
+  {
+   "id": "board_debt",
+   "titleKey": "board.debt.title",
+   "descKeys": [
+    "board.debt.a",
+    "board.debt.b"
+   ],
+   "type": "debt",
+   "pay": [
+    30,
+    70
+   ],
+   "rep": {
+    "merchantGuild": 4,
+    "villagers": -4
+   },
+   "xp": {
+    "intimidate": 25
+   },
+   "moral": true
+  },
+  {
+   "id": "board_missing",
+   "titleKey": "board.missing.title",
+   "descKeys": [
+    "board.missing.a",
+    "board.missing.b"
+   ],
+   "type": "missing",
+   "pay": [
+    22,
+    60
+   ],
+   "rep": {
+    "villagers": 5
+   },
+   "xp": {
+    "tracking": 30
+   }
+  },
+  {
+   "id": "board_labour",
+   "titleKey": "board.labour.title",
+   "descKeys": [
+    "board.labour.a",
+    "board.labour.b"
+   ],
+   "type": "labour",
+   "pay": [
+    12,
+    26
+   ],
+   "rep": {
+    "villagers": 3
+   },
+   "xp": {
+    "endurance": 20
+   }
+  }
+ ],
+ "endings": [
+  {
+   "id": "end_death",
+   "nameKey": "ending.death",
+   "cond": {
+    "dead": true
+   }
+  },
+  {
+   "id": "end_drowned",
+   "nameKey": "ending.drowned",
+   "cond": {
+    "manual": true
+   }
+  },
+  {
+   "id": "end_escape",
+   "nameKey": "ending.escape",
+   "cond": {
+    "escaped": true
+   }
+  },
+  {
+   "id": "end_overthrow",
+   "nameKey": "ending.overthrow",
+   "cond": {
+    "flag": "overthrow"
+   }
+  },
+  {
+   "id": "end_knights",
+   "nameKey": "ending.knights",
+   "cond": {
+    "flag": "knights_oath"
+   }
+  },
+  {
+   "id": "end_sanctuary",
+   "nameKey": "ending.sanctuary",
+   "cond": {
+    "deadline": true,
+    "debtPaid": false,
+    "flag": "relic_returned",
+    "rep": {
+     "church": 25
+    }
+   }
+  },
+  {
+   "id": "end_informer",
+   "nameKey": "ending.informer",
+   "cond": {
+    "deadline": true,
+    "debtPaid": false,
+    "flag": "informed_on_idzi",
+    "rep": {
+     "cityGuard": 15
+    }
+   }
+  },
+  {
+   "id": "end_captive",
+   "nameKey": "ending.captive",
+   "cond": {
+    "deadline": true,
+    "debtPaid": false
+   }
+  },
+  {
+   "id": "end_smuggler",
+   "nameKey": "ending.smuggler",
+   "cond": {
+    "debtPaid": true,
+    "flag": "idzi_trusts",
+    "rep": {
+     "smugglers": 40
+    }
+   }
+  },
+  {
+   "id": "end_guild",
+   "nameKey": "ending.guild",
+   "cond": {
+    "debtPaid": true,
+    "maxCrime": 3,
+    "rep": {
+     "merchantGuild": 30
+    }
+   }
+  },
+  {
+   "id": "end_hanna",
+   "nameKey": "ending.hanna",
+   "cond": {
+    "debtPaid": true,
+    "relation": {
+     "hanna": 30
+    }
+   }
+  },
+  {
+   "id": "end_crime",
+   "nameKey": "ending.crime",
+   "cond": {
+    "debtPaid": true,
+    "minCrime": 4
+   }
+  },
+  {
+   "id": "end_honest",
+   "nameKey": "ending.honest",
+   "cond": {
+    "debtPaid": true
+   }
+  }
+ ]
 }

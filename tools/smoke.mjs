@@ -255,10 +255,14 @@ await step('handel przy szynkwasie', () => {
 }, 8);
 await step('stacja: szynkwas (E)', async () => {
   const h = g.world.npcs.find(n => n.npcId === 'hanna');
-  const stn = (g.world.scene?.stations || []).find(s => s.kind === 'bar');
+  const stn = (g.world.scene?.stations || []).find(s => s.type === 'bar');
   if (stn) { ex(`tp ${Math.round(stn.x)} ${Math.round(stn.y + 16)}`); await wait(150); }
   await press('KeyE', 4);
-  return `trade=${isOpen('ov-trade')} generic=${isOpen('ov-generic')} head="${txt('#ov-generic h2') || txt('#ov-trade h2')}" prompt="${txt('#prompt')}" text="${bodyText('ov-trade', 80) || bodyText('ov-generic', 80)}"`;
+  const r = `trade=${isOpen('ov-trade')} generic=${isOpen('ov-generic')} dialog=${doc.getElementById('dialog')?.classList.contains('open')} prompt="${txt('#prompt')}"`;
+  // zamykamy, co się otworzyło — inaczej gra zostaje zapauzowana i kolejne kroki nic nie sprawdzają
+  await press('Escape', 3);
+  if (g.state.time.paused) throw new Error('czas nadal zapauzowany po zamknięciu: ' + r);
+  return r;
 }, 2);
 await step('zadanie z tablicy + dziennik', () => { ex('quest start q_vagn_respect'); ex('quest start q_coal_for_orlik'); return `quests=${g.state.quests.map(q => q.id + ':' + q.state).join(' ')}`; }, 3);
 await step('dziennik z trzema zadaniami', () => overlayCycle('KeyJ', 'ov-journal', 'dziennik'), 2);
@@ -273,23 +277,29 @@ await step('walka: spawn i cios', async () => {
 await step('atak LPM', async () => {
   const b = g.world.enemies[g.world.enemies.length - 1];
   const hp0 = b?.hp;
-  g.input.mouse.x = 320; g.input.mouse.y = 120;
+  if (g.state.scene !== 'world') throw new Error('walka miała być w świecie, scena=' + g.state.scene);
+  // celujemy kursorem w bandytę (współrzędne okna = bufor × skala)
+  const cam = g.renderer.camera;
+  g.input.mouse.x = (b.x - cam.x) * g.renderer.scale; g.input.mouse.y = (b.y - 8 - cam.y) * g.renderer.scale;
   for (let k = 0; k < 3; k++) { g.input.state.set('attack', true); g.input.just.set('attack', true); await frames(10); g.input.state.set('attack', false); g.input.just.delete('attack'); await frames(6); }
+  if (!(b?.hp < hp0)) throw new Error(`cios nie trafił: hp ${hp0} -> ${b?.hp}, stamina=${Math.round(g.state.needs.stamina)}`);
   return `hp wroga ${hp0} -> ${b?.hp} hp gracza=${Math.round(g.state.needs.health)} stamina=${Math.round(g.state.needs.stamina)} killed=${g.state.stats.killed}`;
 }, 2);
 await step('blok PPM', async () => { g.input.state.set('block', true); await frames(20); g.input.state.set('block', false); await frames(2); return `akcja=${g.world.player.action} stamina=${Math.round(g.state.needs.stamina)}`; }, 2);
 await step('noc i deszcz', () => { ex('time 22'); ex('weather rain'); return `hour=${g.state.time.hour} darkness=${g.state.time.darkness()} weather=${g.state.weather.kind} light=${g.world.lightLevel?.()}`; }, 10);
 await step('pochodnia w nocy', async () => { await press('KeyR', 4); return `torchLit=${g.state.needs.torchLit}`; }, 2);
-await step('nowy dzień (advance)', async () => { const d0 = g.state.time.day; ex('advance'); await wait(200); return `day ${d0} -> ${g.state.time.day} debt=${Math.round(g.state.debtRemaining)} daysLeft=${g.state.time.daysLeft}`; }, 4);
+await step('nowy dzień (advance)', async () => { const d0 = g.state.time.day; ex('advance 1440'); await wait(200); if (g.state.time.day !== d0 + 1) throw new Error(`dzień się nie zmienił: ${d0} -> ${g.state.time.day}`); return `day ${d0} -> ${g.state.time.day} debt=${Math.round(g.state.debtRemaining)} daysLeft=${g.state.time.daysLeft}`; }, 4);
 await step('trzy dni przez konsolę', async () => { const d0 = g.state.time.day; ex('day ' + (d0 + 3)); await wait(300); return `day ${d0} -> ${g.state.time.day} hour=${g.state.time.hour} debt=${Math.round(g.state.debtRemaining)} daysLeft=${g.state.time.daysLeft} autosave=${window.localStorage.getItem('elenem.save.v2.auto') ? 'tak' : 'nie'}`; }, 4);
 await step('sen do świtu', async () => { const d0 = g.state.time.day; ex('time 23'); await frames(2); g.sleepUntil?.(6, 'room'); await wait(300); return `day ${d0} -> ${g.state.time.day} hour=${g.state.time.hour} fatigue=${Math.round(g.state.needs.fatigue)} toast="${txt('#toasts').slice(-70)}"`; }, 4);
 await step('hazard przy stoliku', async () => {
   const sc = await goto('int_tavern');
-  const stn = (g.world.scene?.stations || []).find(s => s.kind === 'gambleTable');
+  ex('flag table_welcome');
+  const stn = (g.world.scene?.stations || []).find(s => s.type === 'gambleTable');
   if (stn) { ex(`tp ${Math.round(stn.x)} ${Math.round(stn.y + 16)}`); await wait(150); }
   await press('KeyE', 4);
   const r = `scene=${sc} generic=${isOpen('ov-generic')} head="${txt('#gen-title')}" text="${bodyText('ov-generic', 90)}"`;
   await press('Escape');
+  if (!r.includes('generic=true')) throw new Error('stół do kości się nie otworzył: ' + r);
   return r;
 }, 2);
 await step('zapis i odczyt', () => {

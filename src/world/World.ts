@@ -23,6 +23,7 @@ import { WeatherSystem } from '../systems/WeatherSystem';
 import { DebtSystem } from '../systems/DebtSystem';
 import { CraftingSystem } from '../systems/CraftingSystem';
 import { GamblingSystem } from '../systems/GamblingSystem';
+import { SaveSystem } from '../core/SaveSystem';
 
 /* ============================================================================
    ŚWIAT
@@ -60,6 +61,7 @@ export class World {
   fade = 0;
   transitioning = false;
   private boundEvents = false;
+  private lastAutosave = 0;
 
   init(fromSave?: WorldDynamic) {
     this.loaded = loadDistrict();
@@ -160,7 +162,7 @@ export class World {
       for (let i = 0; i < sp.passerby.count; i++) {
         const a = areas[i % areas.length];
         const tx = rng.int(a[0], a[0] + a[2]), ty = rng.int(a[1], a[1] + a[3]);
-        const free = this.district.tilemap.nearestFree(tx, ty, 4);
+        const free = this.freeSpot(tx, ty, 4);
         if (!free) continue;
         const n = spawnPasserby(i, free.x, free.y);
         n.scene = 'world';
@@ -172,8 +174,8 @@ export class World {
       for (let i = 0; i < points.length; i++) {
         const [tx, ty] = points[i];
         const typeId = typeIds[i % typeIds.length];
-        const free = this.district.tilemap.nearestFree(tx, ty, 3);
-        const e = new EnemyActor(typeId, kind, free ? free.x : tx * TILE, free ? free.y : ty * TILE, { seed: i * 31 + 7 });
+        const free = this.freeSpot(tx, ty, 3);
+        const e = new EnemyActor(typeId, kind, free ? free.x : tx * TILE + TILE / 2, free ? free.y : ty * TILE + TILE / 2, { seed: i * 31 + 7 });
         e.scene = sceneId;
         this.enemies.push(e); this.actors.push(e);
       }
@@ -188,9 +190,10 @@ export class World {
       ['crow', 74, 30, 'gallows'], ['crow', 62, 20, 'gate'], ['crow', 20, 70, 'swamp'],
       ['goose', 96, 74, 'water'], ['horse', 104, 40, 'stable']
     ];
+    for (const c of this.loaded.creatures) creatureSpots.push([c[0], c[1], c[2], 'data']);
     for (const [typeId, tx, ty] of creatureSpots) {
-      const free = this.district.tilemap.nearestFree(tx, ty, 3);
-      const e = new EnemyActor(typeId, 'creature', free ? free.x : tx * TILE, free ? free.y : ty * TILE, { seed: tx * 977 + ty });
+      const free = this.freeSpot(tx, ty, 3);
+      const e = new EnemyActor(typeId, 'creature', free ? free.x : tx * TILE + TILE / 2, free ? free.y : ty * TILE + TILE / 2, { seed: tx * 977 + ty });
       e.scene = 'world';
       this.enemies.push(e); this.actors.push(e);
     }
@@ -208,15 +211,22 @@ export class World {
     for (const e of this.enemies) e.hidden = e.scene !== getGame().state.scene;
   }
 
+  /** Środek najbliższego wolnego kafla w pikselach świata (nearestFree zwraca kafle). */
+  freeSpot(tx: number, ty: number, radius: number): { x: number; y: number } | null {
+    const map = this.district.tilemap;
+    const t = map.inside(tx, ty) && !map.isBlocked(tx, ty) ? { x: tx, y: ty } : map.nearestFree(tx, ty, radius);
+    return t ? { x: t.x * TILE + TILE / 2, y: t.y * TILE + TILE / 2 } : null;
+  }
+
   rollNightPredators() {
     const s = getGame().state;
     if (!s.time.isNight()) return;
-    const count = s.weather.kind === 'fog' ? 4 : 2;
+    const count = s.weather.kind === 'fog' ? 7 : 5;
     for (let i = 0; i < count; i++) {
-      const spots: Array<[number, number]> = [[8, 56], [130, 66], [112, 46], [20, 84]];
+      const spots: Array<[number, number]> = [[8, 56], [130, 66], [168, 30], [176, 70], [196, 60], [20, 84], [154, 12]];
       const [tx, ty] = spots[i % spots.length];
-      const free = this.district.tilemap.nearestFree(tx, ty, 4);
-      const e = new EnemyActor('wolf', 'creature', free ? free.x : tx * TILE, free ? free.y : ty * TILE, { packId: 'nightpack', seed: i * 131 + s.time.day });
+      const free = this.freeSpot(tx, ty, 4);
+      const e = new EnemyActor('wolf', 'creature', free ? free.x : tx * TILE + TILE / 2, free ? free.y : ty * TILE + TILE / 2, { packId: 'nightpack', seed: i * 131 + s.time.day });
       e.scene = 'world';
       e.hidden = s.scene !== 'world';
       this.enemies.push(e); this.actors.push(e);
@@ -242,6 +252,10 @@ export class World {
       if (e.hidden || !e.alive) { e.update(0, this.player, map, living); continue; }
       e.update(dt, this.player, map, living);
     }
+    // sakiewki leżące pod nogami zbieramy bez E
+    for (const gi of [...this.groundItems]) {
+      if (gi.id === 'crown' && Math.hypot(gi.x - this.player.x, gi.y - this.player.y) < 16) this.pickupGround(gi.obj);
+    }
     // zapis pozycji gracza w stanie
     s.playerPos = { x: Math.round(this.player.x), y: Math.round(this.player.y), dir: this.player.dir };
   }
@@ -260,7 +274,8 @@ export class World {
     const g = getGame(), s = g.state;
     const p = this.player;
     // 1) człowiek
-    const near = this.actors.filter(a => a !== p && a.alive && !a.hidden && Math.hypot(a.x - p.x, a.y - p.y) < 30);
+    // szczur pod nogami nie może zasłaniać drzwi — rozmawiamy tylko z ludźmi
+    const near = this.actors.filter(a => a !== p && a.alive && !a.hidden && a instanceof NPCActor && !a.hostile && Math.hypot(a.x - p.x, a.y - p.y) < 30);
     if (near.length) {
       const a = near.sort((x, y) => Math.hypot(x.x - p.x, x.y - p.y) - Math.hypot(y.x - p.x, y.y - p.y))[0];
       if (a instanceof NPCActor) {
@@ -268,7 +283,6 @@ export class World {
         a.faceTowards(p.x, p.y);
         a.talking = true;
         DialogueSystem.open(a.npcId);
-        QuestSystem.notify('talk', { npcId: a.npcId });
         SkillsSystem.use('persuade', 4, true);
         return;
       }
@@ -296,6 +310,8 @@ export class World {
     const id = obj.interactId || '';
     if (obj.kind === 'exit') {
       const to = obj.data?.to || 'world';
+      // pokój na piętrze karczmy jest dla tych, którzy zapłacili Hannie
+      if (to === 'int_room_john' && !s.flags.rented_room) { bus.emit('hud:toast', { text: t('interact.roomNotRented'), tone: 'bad' }); return; }
       this.travel(to, obj.data?.spawnX, obj.data?.spawnY);
       return;
     }
@@ -344,6 +360,8 @@ export class World {
       return;
     }
     if (obj.kind === 'station') { this.useStation(obj); return; }
+    if (obj.type === 'groundItem') { this.pickupGround(obj); return; }
+    if (obj.kind === 'prop') { this.useProp(obj); return; }
     if (obj.grabbable) { this.player.toggleCarry(obj.id); return; }
     if (obj.type === 'sign' || obj.type === 'notice' || obj.type === 'board') {
       if (obj.type === 'board') { bus.emit('ui:openBoard', { id: 'board' }); return; }
@@ -378,6 +396,61 @@ export class World {
       if (st) { bus.emit('ui:openCraftStation', { id: st.id }); return; }
     }
     bus.emit('ui:showSign', { text: t(obj.nameKey || ('prop.' + obj.type)) });
+  }
+
+  /** Propsy świata: typy graficzne sprowadzamy do kilku czynności. */
+  useProp(obj: SceneObject) {
+    const s = getGame().state;
+    const alias: Record<string, string> = {
+      noticeBoard: 'board', signPost: 'sign', signInn: 'sign',
+      wellBucket: 'well', waterTrough: 'trough', barrelRain: 'well',
+      barrelStack: 'barrel', keg: 'barrel', crateStack: 'crate', fishCrate: 'crate', crateCustoms: 'crate', smugglingCrate: 'crate',
+      haystack: 'straw', hayBale: 'straw', bookshelf: 'shelf',
+      chair: 'bench', armchair: 'bench', sofa: 'bench', wardrobe: 'search', cupboard: 'search', dresser: 'search',
+      bedDouble: 'ownBed', bedStraw: 'ownBed'
+    };
+    const kind = alias[obj.type] || obj.type;
+    switch (kind) {
+      case 'shelf': this.searchObject({ ...obj, type: 'shelf' } as SceneObject); return;
+      case 'search': this.searchObject(obj); return;
+      case 'ownBed':
+        // cudze łóżko: można się zdrzemnąć, ale gospodarz nie będzie zachwycony
+        if (s.scene === 'int_room_john') { bus.emit('ui:openSleep', { obj }); return; }
+        bus.emit('hud:toast', { text: t('interact.notYourBed'), tone: 'bad' });
+        return;
+      case 'loom': case 'spinningWheel': case 'washBasin': case 'scarecrow': case 'beehive': case 'tombstone':
+        bus.emit('ui:showSign', { text: t('look.' + obj.type) });
+        return;
+      case 'shrine': {
+        const key = 'prayed_day';
+        if (s.flags[key] === s.time.day) { bus.emit('hud:toast', { text: t('interact.prayedAlready') }); return; }
+        s.flags[key] = s.time.day;
+        s.time.advanceMinutes(10);
+        ReputationSystem.add('church', 1, 'rep.reason.alms');
+        s.needs.fatigue = Math.max(0, s.needs.fatigue - 5);
+        bus.emit('hud:toast', { text: t('interact.prayed'), tone: 'good' });
+        bus.emit('player:prayed', {});
+        return;
+      }
+      case 'statue': bus.emit('ui:showSign', { text: t('interact.statue') }); return;
+      case 'bench': case 'pew': {
+        // chwila odpoczynku: pół godziny, zmęczenie spada, wytrzymałość wraca
+        s.time.advanceMinutes(30);
+        s.needs.fatigue = Math.max(0, s.needs.fatigue - 8);
+        s.needs.stamina = s.needs.maxStamina;
+        this.player.setAction('sit');
+        bus.emit('hud:toast', { text: t('interact.sat'), tone: 'good' });
+        return;
+      }
+      case 'stocks': bus.emit('ui:showSign', { text: t('interact.stocks') }); return;
+      case 'campfire':
+        s.needs.warmth = Math.min(100, s.needs.warmth + 30);
+        if (!s.needs.torchLit && InventorySystem.has('torch')) { s.needs.torchLit = true; s.needs.torchFuel = itemDef('torch')?.burns || 90; bus.emit('player:torch', { lit: true }); }
+        bus.emit('hud:toast', { text: t('interact.campfire'), tone: 'good' });
+        return;
+      default:
+        this.useObject({ ...obj, kind: 'marker', type: kind, grabbable: false } as SceneObject);
+    }
   }
 
   pickLock(interior: string, obj: SceneObject) {
@@ -420,6 +493,85 @@ export class World {
         if (npcId && s.alive(npcId) && !s.flags.table_welcome) { bus.emit('hud:toast', { text: t('gamble.notWelcome'), tone: 'bad' }); DialogueSystem.open(npcId === 'gambler_night' ? 'gracz_pankracy' : 'graczka_cecylia'); return; }
         bus.emit('ui:openGamble', { game: kind === 'gambleTable' ? 'dice' : 'dice', npcId: d.npc === 'gambler_day' ? 'graczka_cecylia' : 'gracz_pankracy' });
         return;
+      case 'fishingSpot': {
+        if (!InventorySystem.has('fishing_hook')) { bus.emit('hud:toast', { text: t('fish.noHook'), tone: 'bad' }); return; }
+        if (s.weather.kind === 'storm') { bus.emit('hud:toast', { text: t('fish.storm'), tone: 'bad' }); return; }
+        s.time.advanceMinutes(30);
+        this.player.setAction('work');
+        const lvl = SkillsSystem.level('fishing');
+        let chance = 0.38 + lvl * 0.08;
+        if (s.time.hour < 8 || s.time.isNight()) chance += 0.1;          // ryba bierze o świcie i nocą
+        if (s.weather.kind === 'rain' || s.weather.kind === 'cloudy') chance += 0.08;
+        if (rng.chance(Math.min(0.9, chance))) {
+          const fish = rng.chance(0.12 + lvl * 0.02) ? 'fish_eel' : rng.chance(0.35) ? 'fish_cod' : 'fish_herring';
+          InventorySystem.add(fish, 1);
+          SkillsSystem.use('fishing', 14);
+          bus.emit('fish:caught', { id: fish });
+          bus.emit('hud:toast', { text: t('fish.caught', { what: itemName(fish) }), tone: 'good' });
+        } else {
+          SkillsSystem.use('fishing', 5);
+          bus.emit('hud:toast', { text: t('fish.nothing') });
+        }
+        return;
+      }
+      case 'carter': {
+        // wóz kursuje między przystankami: chwila jazdy zamiast spaceru przez pół miasta
+        const tgtX = (d.destTx ?? 0) * TILE + 16, tgtY = (d.destTy ?? 0) * TILE + TILE - 4;
+        const dest = this.scene.stations.find(st => st.type === 'carter' && st !== obj && Math.hypot(st.x - tgtX, st.y - tgtY) < 40)
+          || this.scene.stations.find(st => st.type === 'carter' && st !== obj);
+        if (!dest) return;
+        const cost = Math.hypot(tgtX - obj.x, tgtY - obj.y) > 3000 ? 10 : 4;
+        bus.emit('ui:confirm', {
+          text: t('carter.confirm', { where: t(d.destKey || 'place.harbour'), gold: cost }),
+          onYes: () => {
+            if (s.gold < cost) { bus.emit('hud:toast', { text: t('carter.noMoney'), tone: 'bad' }); return; }
+            s.gold -= cost; s.stats.spent += cost;
+            bus.emit('world:fade', { dir: 1 });
+            setTimeout(() => {
+              s.time.advanceMinutes(25);
+              this.player.x = dest.x; this.player.y = dest.y + 22;
+              getGame().renderer.camera.follow(this.player.x, this.player.y, 0, true);
+              bus.emit('world:fade', { dir: -1 });
+              bus.emit('hud:toast', { text: t('carter.arrived', { where: t(d.destKey || '') }) });
+            }, 350);
+          }
+        });
+        return;
+      }
+      case 'ferryBoat': {
+        // ucieczka z wyspy: znak Idziego, noc i (najlepiej) spokojne morze
+        if (!InventorySystem.has('passage_token')) { bus.emit('hud:toast', { text: t('interact.boatNeedToken'), tone: 'bad' }); return; }
+        if (!s.time.isNight()) { bus.emit('hud:toast', { text: t('interact.boatDay'), tone: 'bad' }); return; }
+        const storm = s.weather.kind === 'storm';
+        bus.emit('ui:confirm', {
+          text: t(storm ? 'interact.boatStorm' : 'interact.boatConfirm'),
+          onYes: () => {
+            InventorySystem.remove('passage_token', 1);
+            NotesSystem.addJohnNote('note_ferry');
+            if (storm) { s.flags.drowned = true; QuestSystem.triggerEnding('end_drowned'); }
+            else { s.flags.escaped_island = true; QuestSystem.notify('flag', { flag: 'escaped_island' }); QuestSystem.triggerEnding('end_escape'); }
+          }
+        });
+        return;
+      }
+      case 'questSearch': {
+        // skrytka fabularna: jeden przedmiot, czasem tylko gdy John wie, czego szuka
+        if (d.needFlag && !s.flags[d.needFlag]) { bus.emit('hud:toast', { text: t(d.emptyKey || 'interact.nothingSpecial') }); return; }
+        if (s.flags['taken_' + obj.id]) { bus.emit('hud:toast', { text: t('interact.empty') }); return; }
+        if (d.night && !s.time.isNight()) { bus.emit('hud:toast', { text: t(d.emptyKey || 'interact.nothingSpecial') }); return; }
+        const watcher = d.guard ? this.npcs.find(n => n.npcId === d.guard && !n.hidden && n.scene === s.scene) : undefined;
+        if (watcher) {
+          bus.emit('hud:toast', { text: t('interact.searchSeen', { who: watcher.name }), tone: 'bad' });
+          bus.emit('crime:witnessEvent', { type: 'theft', npcId: watcher.npcId });
+        }
+        s.time.advanceMinutes(10);
+        this.player.setAction('search');
+        s.flags['taken_' + obj.id] = true;
+        if (InventorySystem.add(d.item, 1, { stolen: !!d.stolen })) {
+          bus.emit('hud:toast', { text: t(d.foundKey || 'interact.found', { what: itemName(d.item) }), tone: 'good' });
+        }
+        return;
+      }
       case 'medic':
         if (npcId && s.alive(npcId)) { DialogueSystem.open(npcId); return; }
         bus.emit('ui:openService', { id: 'treat' });
@@ -542,6 +694,7 @@ export class World {
   travel(to: string, spawnX?: number, spawnY?: number) {
     const g = getGame(), s = g.state;
     if (this.transitioning) return;
+    const from = s.scene;
     if (to !== 'world' && !this.interiors.has(to)) { bus.emit('hud:toast', { text: t('interact.cantEnter'), tone: 'bad' }); return; }
     this.transitioning = true;
     bus.emit('world:fade', { dir: 1 });
@@ -555,7 +708,8 @@ export class World {
         else if (spawnX !== undefined) { this.player.x = spawnX; this.player.y = spawnY!; }
       } else {
         const sc = this.interiors.get(to)!;
-        const exit = sc.exits[0];
+        // wchodząc z innego wnętrza (schody), stajemy przy przejściu, którym wróci się tam
+        const exit = sc.exits.find(e => e.data?.to === from) || sc.exits[0];
         // wejście: tuż przy drzwiach wyjściowych, żeby gracz wiedział którędy wrócić
         if (exit) { this.player.x = exit.x; this.player.y = exit.y - 20; }
         else { this.player.x = sc.tilemap.w / 2 * TILE; this.player.y = (sc.tilemap.h - 2) * TILE; }
@@ -565,6 +719,7 @@ export class World {
       this.refreshNPCVisibility();
       bus.emit('world:fade', { dir: -1 });
       this.transitioning = false;
+      if (!s.hardcore && performance.now() - this.lastAutosave > 120000) { this.lastAutosave = performance.now(); SaveSystem.autosave(); }
       bus.emit('hud:place', { nameKey: this.scene.nameKey });
     }, 260);
   }
@@ -594,7 +749,17 @@ export class World {
     const idx = this.groundItems.findIndex(g => g.obj === obj);
     if (idx < 0) return false;
     const gi = this.groundItems[idx];
+    if (gi.id === 'crown') {
+      const gold = obj.data?.gold || gi.qty;
+      getGame().state.gold += gold;
+      this.scene.remove(gi.obj);
+      this.groundItems.splice(idx, 1);
+      bus.emit('hud:gold', {});
+      bus.emit('hud:toast', { text: t('interact.purse', { gold }), tone: 'good' });
+      return true;
+    }
     if (InventorySystem.add(gi.id, gi.qty, { stolen: gi.stolen })) {
+      bus.emit('hud:toast', { text: t('interact.picked', { what: itemName(gi.id) }), tone: 'good' });
       this.scene.remove(gi.obj);
       this.groundItems.splice(idx, 1);
       return true;
@@ -649,6 +814,16 @@ export class World {
       }
     });
     bus.on('combat:spar', (e: any) => this.startSpar(e.npcId));
+    // wróg fabularny pojawia się, gdy zadanie wchodzi w jego etap
+    bus.on('quest:spawn', (e: any) => {
+      for (let i = 0; i < (e.count || 1); i++) {
+        const free = this.freeSpot(e.tx + (i % 3) * 2, e.ty + Math.floor(i / 3) * 2, 4);
+        const en = new EnemyActor(e.typeId, e.kind, free ? free.x : e.tx * TILE, free ? free.y : e.ty * TILE, { seed: e.tx * 31 + e.ty + i, packId: e.count > 1 ? 'quest_' + e.questId : undefined });
+        en.scene = 'world';
+        en.hidden = getGame().state.scene !== 'world';
+        this.enemies.push(en); this.actors.push(en);
+      }
+    });
     bus.on('rumor:seedEvent', (e: any) => RumorSystem.seed(e.textKey, { witness: e.witness, severity: e.severity }));
     bus.on('notes:add', (e: any) => NotesSystem.addEntry(e.kind || 'note', e.key));
     bus.on('player:died', () => this.onPlayerDeath());
@@ -664,6 +839,7 @@ export class World {
     const dirVec = e.dir === 1 ? [-1, 0] : e.dir === 2 ? [1, 0] : e.dir === 3 ? [0, -1] : [0, 1];
     const reach = e.reach + 10;
     let hitAny = false;
+    const baseDmg = e.dmg;
     for (const a of this.actors) {
       if (a === this.player || !a.alive || a.hidden) continue;
       const dx = a.x - this.player.x, dy = (a.y - this.player.y) * 1.35;
@@ -672,6 +848,17 @@ export class World {
       const dot = (dx * dirVec[0] + dy * dirVec[1]) / (d || 1);
       if (dot < Math.cos(e.arc * 1.1)) continue;
       hitAny = true;
+      if (a instanceof EnemyActor && (a.kind === 'guard' || a.kind === 'knight') && !a.aggroTarget) bus.emit('crime:publicAct', { type: 'assault', x: a.x, y: a.y });
+      // cios z zaskoczenia: wróg, który nie wie o Johnie, dostaje podwójnie (z ukrycia — więcej)
+      let dmg = baseDmg;
+      const unaware = (a instanceof EnemyActor && !a.aggroTarget) || (a instanceof NPCActor && !a.hostile && a.aware < 0.3);
+      if (unaware) {
+        dmg = Math.round(dmg * (this.player.sneak ? 2.5 : 2));
+        getGame().renderer.floats.label(a.x, a.y - 52, t('combat.sneakAttack'), '#ffcf6a', 9, 1.1);
+        bus.emit('combat:sneakAttack', { id: a.id });
+      }
+      if (a instanceof EnemyActor && a.typeId !== 'crow') this.scene.tilemap.setOverlay(a.tx, a.ty, 1, 0.8);
+      e.dmg = dmg;
       if (a instanceof EnemyActor) a.takeHit(e.dmg, { vsArmor: e.vsArmor, fromX: this.player.x, fromY: this.player.y, skill: e.weaponSkill });
       else if (a instanceof NPCActor) {
         const real = Math.max(1, Math.round(e.dmg * (1 - (a.combatStats?.armor || 0))));
@@ -698,7 +885,7 @@ export class World {
       }
       SkillsSystem.use(e.weaponSkill, 4);
     }
-    bus.emit('fx:swing', { x: this.player.x, y: this.player.y, dir: e.dir, reach });
+    bus.emit('fx:swing', { x: this.player.x, y: this.player.y, dir: e.dir, reach, hit: hitAny });
   }
 
   resolveEnemyAttack(e: any) {
@@ -828,6 +1015,9 @@ function defaultLoot(type: string, seed: number): string[] {
     sack: [['grain_sack'], ['turnip'], ['wheat_sack'], []],
     corpse: [['coin_purse_small'], ['dagger_iron'], ['rag_linen'], []],
     shelf: [['candle'], ['book_hours'], []],
+    wardrobe: [['wool_cloak'], ['rag_linen'], [], ['coin_purse_small']],
+    cupboard: [['bread_loaf'], ['apple'], ['candle'], []],
+    dresser: [['rag_linen'], ['coin_purse_small'], ['candle'], []],
     default: [['rag_linen'], [], ['candle'], ['bread_loaf']]
   };
   const opts = table[type] || table.default;

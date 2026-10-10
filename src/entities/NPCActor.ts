@@ -44,6 +44,7 @@ export class NPCActor extends Actor {
   fleeTarget: { x: number; y: number } | null = null;
   activity = '';
   isPasserby = false;
+  homePos: { x: number; y: number } | null = null;
   job = '';
   home = '';
   loot: NpcLoot = { items: [], gold: [0, 3] };
@@ -110,7 +111,11 @@ export class NPCActor extends Actor {
 
   applySchedule(hour: number, scene: string) {
     const e = this.entryAt(hour);
-    if (!e) { this.hidden = true; return; }
+    if (!e) {
+      // przechodzień bez rozkładu: za dnia krąży po swojej okolicy, nocą siedzi w domu
+      if (this.isPasserby) { this.scene = 'world'; this.entry = null; this.hidden = scene !== 'world' || hour < 6 || hour >= 21; return; }
+      this.hidden = true; return;
+    }
     const changed = this.entry !== e;
     this.entry = e;
     this.scene = e.scene;
@@ -187,10 +192,12 @@ export class NPCActor extends Actor {
       }
     } else if (!e) {
       // brak rozkładu: przechodzień krąży
+      if (!this.homePos) this.homePos = { x: this.x, y: this.y };
       if (this.waitTimer <= 0) {
         this.waitTimer = rng.range(2, 6);
-        this.targetX = this.x + rng.range(-140, 140);
-        this.targetY = this.y + rng.range(-110, 110);
+        // krąży wokół miejsca, w którym się pojawił — nie wędruje przez całą mapę
+        this.targetX = this.homePos.x + rng.range(-160, 160);
+        this.targetY = this.homePos.y + rng.range(-120, 120);
       } else this.waitTimer -= dt;
       const arrived = this.seekTo(this.targetX, this.targetY, map, actors);
       this.setAction(arrived ? 'idle' : 'walk');

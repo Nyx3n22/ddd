@@ -50,7 +50,8 @@ export class TimeSystem {
     return 'night';
   }
 
-  isNight() { const p = this.phase(); return p === 'night' || p === 'dusk' && this.hour >= 19.5; }
+  /** Noc w sensie rozgrywki (ciemno, wilki, mniej świadków) — spójna z oświetleniem. */
+  isNight() { const h = this.hour + this.minuteOfHour / 60; return h >= 20.5 || h < 5; }
   /** 0 = pełny dzień, 1 = pełna noc — steruje oświetleniem 2D */
   darkness(): number {
     const h = this.hour + this.minuteOfHour / 60;
