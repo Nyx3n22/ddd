@@ -126,6 +126,13 @@ export class UIManager {
     set('hud-debt', `${esc(t('hud.debt'))}: <b>${Math.round(s.debtRemaining).toLocaleString(getLang() === 'pl' ? 'pl-PL' : 'en-US')}</b> ${esc(t('hud.crowns'))} · <span id="hud-days">${s.time.daysLeft}</span> ${esc(t('hud.days'))}`);
     const debtEl = $('hud-debt');
     if (debtEl) debtEl.classList.toggle('urgent', s.time.daysLeft <= 5 || s.debtOverdue);
+    // ostatnio podjęte zadanie — jedna linijka, żeby gracz nie musiał otwierać dziennika
+    const tracked = [...s.quests].reverse().find(q => q.state === 'active' && questDef(q.id));
+    if (tracked) {
+      const d = questDef(tracked.id)!, stage = d.stages[tracked.stageIdx];
+      const cnt = tracked.data?.count && (stage?.objective?.count ?? 0) > 1 ? ` (${tracked.data.count}/${stage.objective.count})` : '';
+      set('hud-quest', `<span class="qt">${esc(t(d.titleKey))}</span>${stage ? `<span class="qs">▸ ${esc(t(stage.descKey))}${cnt}</span>` : ''}`);
+    } else set('hud-quest', '');
     set('hud-gold', `${esc(t('hud.purse'))}: <b>${s.gold}</b> ${esc(t('hud.crowns'))}`);
     set('hud-weather', `${esc(t('hud.weather'))}: ${esc(t('weather.' + s.weather.kind))} · ${Math.round(WeatherSystem.tempC())}°`);
     set('hud-place', esc(t(this.game.world?.scene?.nameKey || 'place.harbour')));

@@ -9,7 +9,8 @@ import { NotesSystem } from '../systems/NotesSystem';
 import { QuestSystem } from '../systems/QuestSystem';
 import { ReputationSystem } from '../systems/ReputationSystem';
 import ENEMIES from '../data/enemies.json';
-import { randomPasserbyLook, lookOf } from '../render/Characters';
+import { randomPasserbyLook, lookOf, drawActorShadow } from '../render/Characters';
+import { drawAnimal, hasAnimalArt } from '../render/Animals';
 
 /* ============================================================================
    PRZECIWNICY I ZWIERZĘTA
@@ -92,13 +93,13 @@ export class EnemyActor extends Actor {
     if (s.needs.torchLit) sense *= 1.35;
     if (s.needs.hygiene < 25) sense *= 1.15;         // psy i wilki czują krew i brud
     if (s.injuries.some(i => i.bleeding > 0)) sense *= 1.6;
-    if (dist < sense && !this.aggroTarget && !st.skittish) {
+    if (dist < sense && !this.aggroTarget && !st.skittish && this.wantsToFight()) {
       this.aggroTarget = player;
       bus.emit('enemy:aggro', { id: this.id, type: this.typeId, kind: this.kind });
       if (this.packId && st.packs) bus.emit('enemy:callPack', { packId: this.packId, x: player.x, y: player.y });
       if (this.kind === 'creature') NotesSystem.addEntry('creature', this.typeId === 'wildKnight' ? 'knight' : this.typeId);
     }
-    if (st.skittish && dist < (st.aggro ? 60 : 90)) {
+    if ((st.skittish || this.typeId === 'crow') && dist < (st.aggro ? 60 : 90) && !this.aggroTarget) {
       this.aggroTarget = null;
       this.fleeFrom(player.x, player.y, map, actors);
       super.update(dt);
@@ -163,6 +164,28 @@ export class EnemyActor extends Actor {
       }
     }
     super.update(dt);
+  }
+
+  /** Kto rzuca się na Johna bez prowokacji — straż i Rycerze potrzebują powodu. */
+  wantsToFight(): boolean {
+    const s = getGame().state;
+    if (this.kind === 'guard') return s.crime.wanted >= 2;
+    if (this.kind === 'knight') return s.reputation.wildKnights <= -40 || s.debtOverdue;
+    if (this.typeId === 'dog') return s.time.isNight();       // pies podwórzowy pilnuje po zmroku
+    if (this.typeId === 'crow') return false;
+    return true;
+  }
+
+  /** Zwierzęta mają własne sprite'y — szkielet człowieka zostaje dla ludzi i rycerzy. */
+  draw(ctx: CanvasRenderingContext2D, sunDir: { x: number; y: number }) {
+    if (this.kind !== 'creature' || !hasAnimalArt(this.typeId)) { super.draw(ctx, sunDir); return; }
+    if (this.hidden) return;
+    const big = this.typeId === 'horse' || this.typeId === 'boar' || this.typeId === 'deer' || this.typeId === 'wolf';
+    if (this.alive) drawActorShadow(ctx, this.x, this.y, sunDir.x, big ? 16 : 8, 4, 0.3);
+    drawAnimal(ctx, this.typeId, this.x, this.y, {
+      dir: this.dir, action: this.action, frame: this.frame,
+      hurt: Math.max(0, Math.min(1, 1 - this.hp / Math.max(1, this.maxHp))), telegraph: this.telegraph
+    });
   }
 
   fleeFrom(x: number, y: number, map: any, actors: Actor[]) {

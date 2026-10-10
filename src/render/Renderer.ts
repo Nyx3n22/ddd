@@ -2,6 +2,7 @@ import { Camera } from './Camera';
 import { Lighting } from './Lighting';
 import { WeatherParticles } from './WeatherParticles';
 import { FloatingText } from './FloatingText';
+import { CombatFx } from './CombatFx';
 import { PAL, rgba } from './Palette';
 import { TILE } from '../world/TileMap';
 import type { Scene, SceneObject } from '../world/Scene';
@@ -29,6 +30,7 @@ export class Renderer {
   lighting = new Lighting(VIEW_W, VIEW_H);
   weather = new WeatherParticles();
   floats = new FloatingText();
+  combat = new CombatFx();
   scale = 1;
   time = 0;
   private entries: DrawEntry[] = [];
@@ -94,6 +96,7 @@ export class Renderer {
     this.weather.setWeather(opts.weatherKind, opts.weatherIntensity, opts.wind);
     this.weather.update(dt, camX, camY, VIEW_W, VIEW_H, opts.scene.smokeSources.map(s => ({ x: s.x, y: s.y })));
     this.floats.update(dt);
+    this.combat.update(dt);
 
     /* ---- 1. podłoże ---- */
     ctx.fillStyle = PAL.ink0;
@@ -135,8 +138,9 @@ export class Renderer {
       this.drawObject(ctx, o, camX, camY);
     }
 
-    /* ---- 4. cząsteczki świata (dym, krew, kurz) ---- */
+    /* ---- 4. cząsteczki świata (dym, krew, kurz) i ślady cięć ---- */
     this.weather.drawWorld(ctx, camX, camY);
+    this.combat.drawSlashes(ctx, camX, camY);
 
     /* ---- 5. znacznik interakcji ---- */
     if (opts.interactTarget) {
@@ -181,7 +185,8 @@ export class Renderer {
       ctx.fillRect(0, 0, VIEW_W, VIEW_H);
     }
 
-    /* ---- 8. liczby pływające ---- */
+    /* ---- 8. paski zdrowia wrogów i liczby pływające ---- */
+    this.combat.drawHealthBars(ctx, opts.actors, camX, camY);
     this.floats.draw(ctx, camX, camY);
 
     /* ---- 9. debug ---- */

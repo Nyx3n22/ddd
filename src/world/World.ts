@@ -160,7 +160,7 @@ export class World {
       for (let i = 0; i < sp.passerby.count; i++) {
         const a = areas[i % areas.length];
         const tx = rng.int(a[0], a[0] + a[2]), ty = rng.int(a[1], a[1] + a[3]);
-        const free = this.district.tilemap.nearestFree(tx, ty, 4);
+        const free = this.freeSpot(tx, ty, 4);
         if (!free) continue;
         const n = spawnPasserby(i, free.x, free.y);
         n.scene = 'world';
@@ -172,8 +172,8 @@ export class World {
       for (let i = 0; i < points.length; i++) {
         const [tx, ty] = points[i];
         const typeId = typeIds[i % typeIds.length];
-        const free = this.district.tilemap.nearestFree(tx, ty, 3);
-        const e = new EnemyActor(typeId, kind, free ? free.x : tx * TILE, free ? free.y : ty * TILE, { seed: i * 31 + 7 });
+        const free = this.freeSpot(tx, ty, 3);
+        const e = new EnemyActor(typeId, kind, free ? free.x : tx * TILE + TILE / 2, free ? free.y : ty * TILE + TILE / 2, { seed: i * 31 + 7 });
         e.scene = sceneId;
         this.enemies.push(e); this.actors.push(e);
       }
@@ -189,8 +189,8 @@ export class World {
       ['goose', 96, 74, 'water'], ['horse', 104, 40, 'stable']
     ];
     for (const [typeId, tx, ty] of creatureSpots) {
-      const free = this.district.tilemap.nearestFree(tx, ty, 3);
-      const e = new EnemyActor(typeId, 'creature', free ? free.x : tx * TILE, free ? free.y : ty * TILE, { seed: tx * 977 + ty });
+      const free = this.freeSpot(tx, ty, 3);
+      const e = new EnemyActor(typeId, 'creature', free ? free.x : tx * TILE + TILE / 2, free ? free.y : ty * TILE + TILE / 2, { seed: tx * 977 + ty });
       e.scene = 'world';
       this.enemies.push(e); this.actors.push(e);
     }
@@ -208,6 +208,13 @@ export class World {
     for (const e of this.enemies) e.hidden = e.scene !== getGame().state.scene;
   }
 
+  /** Środek najbliższego wolnego kafla w pikselach świata (nearestFree zwraca kafle). */
+  freeSpot(tx: number, ty: number, radius: number): { x: number; y: number } | null {
+    const map = this.district.tilemap;
+    const t = map.inside(tx, ty) && !map.isBlocked(tx, ty) ? { x: tx, y: ty } : map.nearestFree(tx, ty, radius);
+    return t ? { x: t.x * TILE + TILE / 2, y: t.y * TILE + TILE / 2 } : null;
+  }
+
   rollNightPredators() {
     const s = getGame().state;
     if (!s.time.isNight()) return;
@@ -215,8 +222,8 @@ export class World {
     for (let i = 0; i < count; i++) {
       const spots: Array<[number, number]> = [[8, 56], [130, 66], [112, 46], [20, 84]];
       const [tx, ty] = spots[i % spots.length];
-      const free = this.district.tilemap.nearestFree(tx, ty, 4);
-      const e = new EnemyActor('wolf', 'creature', free ? free.x : tx * TILE, free ? free.y : ty * TILE, { packId: 'nightpack', seed: i * 131 + s.time.day });
+      const free = this.freeSpot(tx, ty, 4);
+      const e = new EnemyActor('wolf', 'creature', free ? free.x : tx * TILE + TILE / 2, free ? free.y : ty * TILE + TILE / 2, { packId: 'nightpack', seed: i * 131 + s.time.day });
       e.scene = 'world';
       e.hidden = s.scene !== 'world';
       this.enemies.push(e); this.actors.push(e);
@@ -746,7 +753,7 @@ export class World {
       }
       SkillsSystem.use(e.weaponSkill, 4);
     }
-    bus.emit('fx:swing', { x: this.player.x, y: this.player.y, dir: e.dir, reach });
+    bus.emit('fx:swing', { x: this.player.x, y: this.player.y, dir: e.dir, reach, hit: hitAny });
   }
 
   resolveEnemyAttack(e: any) {

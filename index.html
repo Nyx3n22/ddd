@@ -61,6 +61,10 @@
   #hud-debt.urgent{border-color:var(--blood);animation:throb 1.6s infinite}
   @keyframes throb{0%,100%{box-shadow:inset 0 0 12px rgba(0,0,0,.6)}50%{box-shadow:inset 0 0 18px rgba(190,60,40,.55)}}
   #hud-left{display:flex;flex-direction:column;gap:4px}
+  #hud-quest{max-width:calc(190px * var(--ui-scale));font-size:.72em;line-height:1.3}
+  #hud-quest:empty{display:none}
+  #hud-quest .qt{font-family:var(--font-head);color:var(--gold);letter-spacing:.03em;display:block}
+  #hud-quest .qs{color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   #hud-right{display:flex;flex-direction:column;gap:4px;align-items:flex-end}
 
   #vitals{position:absolute;left:calc(8px * var(--ui-scale));bottom:calc(8px * var(--ui-scale));width:calc(170px * var(--ui-scale))}
@@ -219,6 +223,7 @@
     <div id="hud-left">
       <div class="hud-box" id="hud-date"></div>
       <div class="hud-box" id="hud-debt"></div>
+      <div class="hud-box" id="hud-quest"></div>
     </div>
     <div id="hud-right">
       <div class="hud-box" id="hud-gold"></div>

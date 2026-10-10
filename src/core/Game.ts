@@ -376,7 +376,7 @@ export class Game {
     bus.on('fx:damageNumber', (e: any) => this.renderer.floats.damage(e.x, e.y, e.amount, { crit: e.crit, self: e.self }));
     bus.on('fx:parry', (e: any) => { this.renderer.floats.label(e.x, e.y - 40, t('combat.parry'), '#8fc4e8', 10, 0.8); if (!settings.data.disableCameraShake) this.renderer.camera.kick(2); });
     bus.on('fx:hit', () => { if (!settings.data.disableCameraShake) this.renderer.camera.kick(1.6); });
-    bus.on('fx:swing', () => {});
+    bus.on('fx:swing', (e: any) => this.renderer.combat.swing(e.x, e.y, e.dir, e.reach, !!e.hit));
     bus.on('combat:parried', () => { if (!settings.data.disableCameraShake) this.renderer.camera.kick(2.4); });
     bus.on('player:died', () => { if (!settings.data.disableCameraShake) this.renderer.camera.kick(5); });
     bus.on('player:step', (e: any) => this.renderer.weather.footstep(e.x, e.y, e.ground, false));
