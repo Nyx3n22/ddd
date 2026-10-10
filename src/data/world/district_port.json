@@ -2194,6 +2194,40 @@
    "ty": 108,
    "kind": "ferryBoat",
    "labelKey": "station.ferryBoat"
+  },
+  {
+   "tx": 31,
+   "ty": 104,
+   "kind": "fishingSpot",
+   "labelKey": "station.fishingSpot"
+  },
+  {
+   "tx": 64,
+   "ty": 107,
+   "kind": "fishingSpot",
+   "labelKey": "station.fishingSpot"
+  },
+  {
+   "tx": 97,
+   "ty": 100,
+   "kind": "fishingSpot",
+   "labelKey": "station.fishingSpot"
+  },
+  {
+   "tx": 57,
+   "ty": 44,
+   "kind": "carter",
+   "labelKey": "station.carter",
+   "destKey": "place.piers",
+   "labelHere": "place.marketSquare"
+  },
+  {
+   "tx": 66,
+   "ty": 86,
+   "kind": "carter",
+   "labelKey": "station.carter",
+   "destKey": "place.marketSquare",
+   "labelHere": "place.piers"
   }
  ]
 }

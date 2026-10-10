@@ -23,6 +23,7 @@ import { WeatherSystem } from '../systems/WeatherSystem';
 import { DebtSystem } from '../systems/DebtSystem';
 import { CraftingSystem } from '../systems/CraftingSystem';
 import { GamblingSystem } from '../systems/GamblingSystem';
+import { SaveSystem } from '../core/SaveSystem';
 
 /* ============================================================================
    ŚWIAT
@@ -60,6 +61,7 @@ export class World {
   fade = 0;
   transitioning = false;
   private boundEvents = false;
+  private lastAutosave = 0;
 
   init(fromSave?: WorldDynamic) {
     this.loaded = loadDistrict();
@@ -249,6 +251,10 @@ export class World {
       if (e.hidden || !e.alive) { e.update(0, this.player, map, living); continue; }
       e.update(dt, this.player, map, living);
     }
+    // sakiewki leżące pod nogami zbieramy bez E
+    for (const gi of [...this.groundItems]) {
+      if (gi.id === 'crown' && Math.hypot(gi.x - this.player.x, gi.y - this.player.y) < 16) this.pickupGround(gi.obj);
+    }
     // zapis pozycji gracza w stanie
     s.playerPos = { x: Math.round(this.player.x), y: Math.round(this.player.y), dir: this.player.dir };
   }
@@ -412,9 +418,19 @@ export class World {
         ReputationSystem.add('church', 1, 'rep.reason.alms');
         s.needs.fatigue = Math.max(0, s.needs.fatigue - 5);
         bus.emit('hud:toast', { text: t('interact.prayed'), tone: 'good' });
+        bus.emit('player:prayed', {});
         return;
       }
       case 'statue': bus.emit('ui:showSign', { text: t('interact.statue') }); return;
+      case 'bench': case 'pew': {
+        // chwila odpoczynku: pół godziny, zmęczenie spada, wytrzymałość wraca
+        s.time.advanceMinutes(30);
+        s.needs.fatigue = Math.max(0, s.needs.fatigue - 8);
+        s.needs.stamina = s.needs.maxStamina;
+        this.player.setAction('sit');
+        bus.emit('hud:toast', { text: t('interact.sat'), tone: 'good' });
+        return;
+      }
       case 'stocks': bus.emit('ui:showSign', { text: t('interact.stocks') }); return;
       case 'campfire':
         s.needs.warmth = Math.min(100, s.needs.warmth + 30);
@@ -466,6 +482,49 @@ export class World {
         if (npcId && s.alive(npcId) && !s.flags.table_welcome) { bus.emit('hud:toast', { text: t('gamble.notWelcome'), tone: 'bad' }); DialogueSystem.open(npcId === 'gambler_night' ? 'gracz_pankracy' : 'graczka_cecylia'); return; }
         bus.emit('ui:openGamble', { game: kind === 'gambleTable' ? 'dice' : 'dice', npcId: d.npc === 'gambler_day' ? 'graczka_cecylia' : 'gracz_pankracy' });
         return;
+      case 'fishingSpot': {
+        if (!InventorySystem.has('fishing_hook')) { bus.emit('hud:toast', { text: t('fish.noHook'), tone: 'bad' }); return; }
+        if (s.weather.kind === 'storm') { bus.emit('hud:toast', { text: t('fish.storm'), tone: 'bad' }); return; }
+        s.time.advanceMinutes(30);
+        this.player.setAction('work');
+        const lvl = SkillsSystem.level('fishing');
+        let chance = 0.38 + lvl * 0.08;
+        if (s.time.hour < 8 || s.time.isNight()) chance += 0.1;          // ryba bierze o świcie i nocą
+        if (s.weather.kind === 'rain' || s.weather.kind === 'cloudy') chance += 0.08;
+        if (rng.chance(Math.min(0.9, chance))) {
+          const fish = rng.chance(0.12 + lvl * 0.02) ? 'fish_eel' : rng.chance(0.35) ? 'fish_cod' : 'fish_herring';
+          InventorySystem.add(fish, 1);
+          SkillsSystem.use('fishing', 14);
+          bus.emit('fish:caught', { id: fish });
+          bus.emit('hud:toast', { text: t('fish.caught', { what: itemName(fish) }), tone: 'good' });
+        } else {
+          SkillsSystem.use('fishing', 5);
+          bus.emit('hud:toast', { text: t('fish.nothing') });
+        }
+        return;
+      }
+      case 'carter': {
+        // wóz kursuje między przystankami: chwila jazdy zamiast spaceru przez pół miasta
+        const dest = this.scene.stations.find(st => st.type === 'carter' && st !== obj);
+        if (!dest) return;
+        const cost = 4;
+        bus.emit('ui:confirm', {
+          text: t('carter.confirm', { where: t(dest.data?.destKey || 'place.harbour'), gold: cost }),
+          onYes: () => {
+            if (s.gold < cost) { bus.emit('hud:toast', { text: t('carter.noMoney'), tone: 'bad' }); return; }
+            s.gold -= cost; s.stats.spent += cost;
+            bus.emit('world:fade', { dir: 1 });
+            setTimeout(() => {
+              s.time.advanceMinutes(25);
+              this.player.x = dest.x; this.player.y = dest.y + 22;
+              getGame().renderer.camera.follow(this.player.x, this.player.y, 0, true);
+              bus.emit('world:fade', { dir: -1 });
+              bus.emit('hud:toast', { text: t('carter.arrived', { where: t(dest.data?.labelHere || dest.nameKey || '') }) });
+            }, 350);
+          }
+        });
+        return;
+      }
       case 'ferryBoat': {
         // ucieczka z wyspy: znak Idziego, noc i (najlepiej) spokojne morze
         if (!InventorySystem.has('passage_token')) { bus.emit('hud:toast', { text: t('interact.boatNeedToken'), tone: 'bad' }); return; }
@@ -646,6 +705,7 @@ export class World {
       this.refreshNPCVisibility();
       bus.emit('world:fade', { dir: -1 });
       this.transitioning = false;
+      if (!s.hardcore && performance.now() - this.lastAutosave > 120000) { this.lastAutosave = performance.now(); SaveSystem.autosave(); }
       bus.emit('hud:place', { nameKey: this.scene.nameKey });
     }, 260);
   }
@@ -763,6 +823,7 @@ export class World {
     const dirVec = e.dir === 1 ? [-1, 0] : e.dir === 2 ? [1, 0] : e.dir === 3 ? [0, -1] : [0, 1];
     const reach = e.reach + 10;
     let hitAny = false;
+    const baseDmg = e.dmg;
     for (const a of this.actors) {
       if (a === this.player || !a.alive || a.hidden) continue;
       const dx = a.x - this.player.x, dy = (a.y - this.player.y) * 1.35;
@@ -772,6 +833,16 @@ export class World {
       if (dot < Math.cos(e.arc * 1.1)) continue;
       hitAny = true;
       if (a instanceof EnemyActor && (a.kind === 'guard' || a.kind === 'knight') && !a.aggroTarget) bus.emit('crime:publicAct', { type: 'assault', x: a.x, y: a.y });
+      // cios z zaskoczenia: wróg, który nie wie o Johnie, dostaje podwójnie (z ukrycia — więcej)
+      let dmg = baseDmg;
+      const unaware = (a instanceof EnemyActor && !a.aggroTarget) || (a instanceof NPCActor && !a.hostile && a.aware < 0.3);
+      if (unaware) {
+        dmg = Math.round(dmg * (this.player.sneak ? 2.5 : 2));
+        getGame().renderer.floats.label(a.x, a.y - 52, t('combat.sneakAttack'), '#ffcf6a', 9, 1.1);
+        bus.emit('combat:sneakAttack', { id: a.id });
+      }
+      if (a instanceof EnemyActor && a.typeId !== 'crow') this.scene.tilemap.setOverlay(a.tx, a.ty, 1, 0.8);
+      e.dmg = dmg;
       if (a instanceof EnemyActor) a.takeHit(e.dmg, { vsArmor: e.vsArmor, fromX: this.player.x, fromY: this.player.y, skill: e.weaponSkill });
       else if (a instanceof NPCActor) {
         const real = Math.max(1, Math.round(e.dmg * (1 - (a.combatStats?.armor || 0))));

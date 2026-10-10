@@ -49,7 +49,7 @@ export const INTERACTIVE_PROPS = new Set([
   'well', 'wellBucket', 'waterTrough', 'barrelRain', 'noticeBoard', 'signPost', 'signInn',
   'barrel', 'barrelStack', 'keg', 'crate', 'crateStack', 'sack', 'chest', 'fishCrate', 'crateCustoms', 'smugglingCrate',
   'bush', 'gallows', 'shrine', 'statue', 'stocks', 'campfire', 'forge', 'anvil', 'haystack', 'hayBale',
-  'trainingDummy', 'shelf', 'bookshelf'
+  'trainingDummy', 'shelf', 'bookshelf', 'bench', 'pew'
 ]);
 
 export interface LoadedWorld {

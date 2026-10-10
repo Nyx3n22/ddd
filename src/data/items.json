@@ -1514,6 +1514,54 @@
     "quest",
     "unique"
    ]
+  },
+  {
+   "id": "fish_herring",
+   "nameKey": "item.herring",
+   "descKey": "item.herring.desc",
+   "icon": "fish",
+   "weight": 0.3,
+   "volume": 0.5,
+   "value": 3,
+   "cat": "food",
+   "tags": [
+    "eat",
+    "fish",
+    "riskPoison"
+   ],
+   "feed": 14
+  },
+  {
+   "id": "fish_cod",
+   "nameKey": "item.cod",
+   "descKey": "item.cod.desc",
+   "icon": "fish",
+   "weight": 1.2,
+   "volume": 1.5,
+   "value": 8,
+   "cat": "food",
+   "tags": [
+    "eat",
+    "fish",
+    "riskPoison"
+   ],
+   "feed": 26
+  },
+  {
+   "id": "fish_eel",
+   "nameKey": "item.eel",
+   "descKey": "item.eel.desc",
+   "icon": "fish",
+   "weight": 0.8,
+   "volume": 1.0,
+   "value": 18,
+   "cat": "food",
+   "tags": [
+    "eat",
+    "fish",
+    "rare"
+   ],
+   "feed": 22
   }
  ]
 }

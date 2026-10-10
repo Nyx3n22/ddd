@@ -13,24 +13,32 @@
      "descKey": "quest.prolog.s1",
      "objective": {
       "type": "talk",
-      "npc": "poborca_gwidon"
+      "npc": "baldwin"
+     },
+     "target": {
+      "npc": "baldwin"
      }
     },
     {
      "id": "s2",
      "descKey": "quest.prolog.s2",
      "objective": {
-      "type": "custom",
-      "flag": "earned_first_crown",
-      "count": 1
+      "type": "enterInterior",
+      "interior": "int_tavern"
+     },
+     "target": {
+      "interior": "int_tavern"
      }
     },
     {
      "id": "s3",
      "descKey": "quest.prolog.s3",
      "objective": {
-      "type": "debtPaid",
-      "amount": 100
+      "type": "talk",
+      "npc": "hanna"
+     },
+     "target": {
+      "npc": "hanna"
      }
     }
    ],
@@ -307,6 +315,9 @@
       "type": "custom",
       "flag": "ledger_hint",
       "count": 1
+     },
+     "target": {
+      "npc": "idzi"
      }
     },
     {
@@ -316,6 +327,10 @@
       "type": "collect",
       "item": "ledger_raven",
       "count": 1
+     },
+     "target": {
+      "interior": "int_customs",
+      "station": "questSearch"
      }
     },
     {
@@ -325,6 +340,9 @@
       "type": "custom",
       "flag": "ledger_decided",
       "count": 1
+     },
+     "target": {
+      "npc": "rawicz"
      }
     }
    ],
@@ -349,6 +367,9 @@
       "type": "custom",
       "flag": "ov_guild",
       "count": 1
+     },
+     "target": {
+      "npc": "kupiec_zbylut"
      }
     },
     {
@@ -358,6 +379,9 @@
       "type": "custom",
       "flag": "ov_church",
       "count": 1
+     },
+     "target": {
+      "npc": "teodor"
      }
     },
     {
@@ -367,6 +391,9 @@
       "type": "custom",
       "flag": "ov_vagn",
       "count": 1
+     },
+     "target": {
+      "npc": "vagn"
      }
     },
     {
@@ -376,6 +403,9 @@
       "type": "custom",
       "flag": "overthrow",
       "count": 1
+     },
+     "target": {
+      "npc": "rawicz"
      }
     }
    ],
@@ -399,6 +429,9 @@
       "type": "collect",
       "item": "passage_token",
       "count": 1
+     },
+     "target": {
+      "npc": "idzi"
      }
     },
     {
@@ -408,6 +441,10 @@
       "type": "custom",
       "flag": "escaped_island",
       "count": 1
+     },
+     "target": {
+      "interior": "world",
+      "station": "ferryBoat"
      }
     }
    ]
@@ -426,6 +463,9 @@
       "type": "custom",
       "flag": "oath_wiera",
       "count": 1
+     },
+     "target": {
+      "npc": "wiera"
      }
     },
     {
@@ -450,6 +490,9 @@
       "type": "custom",
       "flag": "knights_oath",
       "count": 1
+     },
+     "target": {
+      "npc": "baldwin"
      }
     }
    ]
@@ -468,6 +511,10 @@
       "type": "collect",
       "item": "relic_elenem",
       "count": 1
+     },
+     "target": {
+      "interior": "world",
+      "station": "questSearch"
      }
     },
     {
@@ -477,6 +524,9 @@
       "type": "custom",
       "flag": "relic_decided",
       "count": 1
+     },
+     "target": {
+      "npc": "teodor"
      }
     }
    ],

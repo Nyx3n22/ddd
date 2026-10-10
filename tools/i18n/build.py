@@ -1797,6 +1797,118 @@ epi.baldwin.fallen|Baldwin odpłynął na kontynent z dziesięcioma ludźmi i pu
 """)
 
 # ===========================================================================
+# 8e. NOWE FUNKCJE: ŁOWIENIE, WÓZ, SAMOUCZEK, OSIĄGNIĘCIA, KWESTIE NPC
+# ===========================================================================
+add(r"""
+map.north|Pn.|N
+item.herring|Śledź|Herring
+item.herring.desc|Srebrny, tłusty i tani. Najlepszy wędzony, ale głodnemu smakuje i surowy.|Silver, oily and cheap. Best smoked, but a hungry man eats it raw.
+item.cod|Dorsz|Cod
+item.cod.desc|Duża ryba z zimnej wody. Kupcy płacą za nią lepiej niż za śledzie.|A big cold-water fish. Merchants pay better for it than for herring.
+item.eel|Węgorz|Eel
+item.eel.desc|Śliski i uparty. Na targu idzie za trzy razy więcej niż dorsz.|Slippery and stubborn. At market it fetches three times a cod.
+station.fishingSpot|Łowisko na końcu kei|Fishing spot at the pier's end
+station.carter|Wóz przewoźnika|Carter's wagon
+fish.noHook|Bez haczyka nic nie złowisz. Ewa na kei sprzedaje sprzęt.|Without a hook you will catch nothing. Ewa on the pier sells gear.
+fish.storm|W sztorm fale zalewają keję. Nie dziś.|In a storm the waves wash over the pier. Not today.
+fish.caught|Coś szarpie żyłką! Złowiłeś: {what}.|Something tugs the line! You caught: {what}.
+fish.nothing|Pół godziny patrzenia w wodę. Ryba dziś nie bierze.|Half an hour staring at the water. The fish are not biting.
+carter.confirm|Podwieźć cię: {where}? Za {gold} korony i pół godziny.|Ride to {where}? For {gold} crowns and half an hour.
+carter.noMoney|Woźnica kręci głową. Bez monety nie ruszy.|The carter shakes his head. No coin, no ride.
+carter.arrived|Wóz skrzypi i staje. Jesteś: {where}.|The wagon creaks to a halt. You are at: {where}.
+interact.sat|Siadasz na chwilę. Nogi przestają boleć, a miasto toczy się dalej bez ciebie.|You sit for a while. Your legs stop aching and the town rolls on without you.
+combat.sneakAttack|Z zaskoczenia!|Sneak attack!
+daycard.line|Zostało dni: {left} · Dług: {debt} · Pogoda: {weather}|Days left: {left} · Debt: {debt} · Weather: {weather}
+journal.talks|Ostatnie rozmowy|Recent conversations
+title.gallery|Zakończenia i osiągnięcia|Endings and achievements
+tut.title|Podpowiedź|Tip
+tut.night|Zrobiło się ciemno. [R] zapala pochodnię — widzisz więcej, ale ciebie też widać z daleka.|It got dark. [R] lights a torch — you see more, but you are seen from afar too.
+tut.wound|Krwawisz. Bandaż z pasa użyjesz klawiszami 1–4, a medyk w łaźni zszyje ranę.|You are bleeding. Use a bandage from your belt with keys 1–4; the medic in the bathhouse stitches wounds.
+tut.hunger|Burczy ci w brzuchu. Jedzenie kupisz u Hanny w karczmie albo u piekarza na rynku.|Your stomach growls. Buy food from Hanna at the tavern or the baker on the square.
+tut.enemy|Wróg szarżuje! LPM — cios w stronę kursora, PPM w porę — parowanie, Spacja — unik.|An enemy charges! LMB — strike toward the cursor, RMB at the right moment — parry, Space — dodge.
+tut.sneak|Skradasz się. Oko nad głową pokazuje, czy jesteś w świetle; czerwone stożki — kto cię widzi. Cios z zaskoczenia zadaje podwójne obrażenia.|You are sneaking. The eye above your head shows whether you stand in light; red cones show who sees you. A sneak attack deals double damage.
+tut.tavern|Karczma to serce miasta: Hanna sprzeda jedzenie i izbę, a przy stolikach usłyszysz plotki i zagrasz w kości.|The tavern is the heart of town: Hanna sells food and a room, and at the tables you hear rumours and play dice.
+tut.wanted|Straż cię szuka. Zapłać grzywnę u Rawicza w strażnicy albo trzymaj się z dala od patroli.|The watch is after you. Pay the fine to Rawicz at the guardhouse or keep away from patrols.
+tut.gold|Masz trochę złota. Wpłać część długu u Gwidona przy bramie celnej — każda korona się liczy.|You have some gold. Pay part of the debt to Gwidon at the customs gate — every crown counts.
+tut.map|Masz mapę! [M] ją otwiera, a w rogu ekranu pojawi się minimapa.|You have a map! [M] opens it, and a minimap appears in the corner.
+tut.board|Tablica ogłoszeń daje dorywczą pracę. Płaci mniej niż zadania fabularne, ale zawsze coś jest.|The notice board offers odd jobs. They pay less than story quests, but there is always something.
+set.minimap|Minimapa (gdy John ma mapę)|Minimap (when John has a map)
+set.nameplates|Imiona nad głowami|Names above heads
+set.barks|Kwestie NPC w dymkach|NPC speech bubbles
+set.tutorial|Podpowiedzi samouczka|Tutorial tips
+set.ambientLife|Ptaki, motyle, świetliki, chmury|Birds, butterflies, fireflies, clouds
+set.autoPause|Pauza po przełączeniu okna|Pause when the window loses focus
+bark.greet1|Dzień dobry, panie.|Good day, sir.
+bark.greet2|Z kontynentu, co? Widać po butach.|From the mainland, eh? I can tell by the boots.
+bark.greet3|Uważaj na kieszenie przy straganach.|Mind your purse by the stalls.
+bark.greet4|Sól znowu podrożała.|Salt has gone up again.
+bark.rain1|Leje jak z cebra…|It's pouring…
+bark.rain2|Mokro, zimno i jeszcze ten port śmierdzi.|Wet, cold, and the harbour stinks too.
+bark.night1|Nie łaź po nocy, wilki schodzą z bagien.|Don't wander at night, wolves come down from the marsh.
+bark.night2|Kto tam? A, to ty.|Who's there? Oh, it's you.
+bark.dirty|Fuj. Łaźnia jest za rynkiem, wiesz?|Ugh. The bathhouse is past the square, you know?
+bark.hurt|Krwawisz, człowieku. Idź do medyka.|You're bleeding, man. Go to the medic.
+bark.debt|Ludzie gadają, że Kruk już ostrzy na ciebie pióro.|Folk say the Raven is already sharpening his quill for you.
+bark.wanted1|To ten! Straż go szuka!|That's him! The watch is looking for him!
+bark.wanted2|Nie widziałam cię. Idź już.|I didn't see you. Go.
+bark.friend1|John! Dobrze cię widzieć.|John! Good to see you.
+bark.friend2|Wpadnij kiedyś na piwo.|Drop by for a beer sometime.
+bark.cold1|Czego się gapisz?|What are you staring at?
+bark.cold2|Idź swoją drogą, najemniku.|Go your own way, sellsword.
+ach.title|Osiągnięcia|Achievements
+ach.unlocked|Osiągnięcie: {what}|Achievement: {what}
+ach.first_blood|Pierwsza krew|First blood
+ach.first_blood.desc|Pokonaj pierwszego przeciwnika|Defeat your first enemy
+ach.parry5|Stalowy nadgarstek|Steel wrist
+ach.parry5.desc|Sparuj 5 ciosów|Parry 5 blows
+ach.dodge20|Węgorz|Eel
+ach.dodge20.desc|Zrób 20 uników|Dodge 20 times
+ach.paid1000|Pierwszy tysiąc|The first thousand
+ach.paid1000.desc|Spłać 1000 koron długu|Pay off 1000 crowns of debt
+ach.debt_free|Wolny człowiek|A free man
+ach.debt_free.desc|Spłać cały dług|Pay off the whole debt
+ach.rich|Pełny trzos|Heavy purse
+ach.rich.desc|Miej przy sobie 1500 koron|Carry 1500 crowns
+ach.night_owl|Nocny marek|Night owl
+ach.night_owl.desc|Bądź na ulicy o trzeciej w nocy|Be out on the street at three in the morning
+ach.scholar|Człowiek z notesem|Man with a notebook
+ach.scholar.desc|Zdobądź notatnik|Get a notebook
+ach.cartographer|Kartograf|Cartographer
+ach.cartographer.desc|Zdobądź mapę|Get a map
+ach.week|Tydzień na wyspie|A week on the island
+ach.week.desc|Przetrwaj 7 dni|Survive 7 days
+ach.survivor|Zahartowany|Hardened
+ach.survivor.desc|Przetrwaj 20 dni|Survive 20 days
+ach.quests5|Do roboty|Getting things done
+ach.quests5.desc|Ukończ 5 zadań|Complete 5 quests
+ach.friend|Swój chłop|One of us
+ach.friend.desc|Zdobądź przyjaźń mieszkańca (relacja 40)|Win a townsperson's friendship (relation 40)
+ach.fisher|Rybak|Fisherman
+ach.fisher.desc|Złów 5 ryb|Catch 5 fish
+ach.pious|Pobożny|Pious
+ach.pious.desc|Pomódl się przy kapliczce trzy razy|Pray at the shrine three times
+ach.ledger|Złodziej pamięci|Thief of memory
+ach.ledger.desc|Zdobądź księgę Kruka|Obtain the Raven's ledger
+ach.sneak_attack|Cień z nożem|Shadow with a blade
+ach.sneak_attack.desc|Zadaj cios z zaskoczenia|Land a sneak attack
+ach.two_endings|Inne życie|Another life
+ach.two_endings.desc|Odkryj dwa zakończenia|Discover two endings
+gallery.hint.end_death|Wyspa ma wiele sposobów, by zrobić z człowieka wspomnienie.|The island has many ways to turn a man into a memory.
+gallery.hint.end_drowned|Rybacy mówią: nie płyń w sztorm.|The fishermen say: never sail in a storm.
+gallery.hint.end_escape|Idzi zna kapitana, który nie zadaje pytań.|Idzi knows a captain who asks no questions.
+gallery.hint.end_overthrow|Sierżant Rawicz czeka dwadzieścia lat na jeden dowód.|Sergeant Rawicz has waited twenty years for one piece of proof.
+gallery.hint.end_knights|Baldwin mówi, że przydałby mu się miecz.|Baldwin says he could use a sword.
+gallery.hint.end_sanctuary|Stare prawo, święty i drzwi, przez które Kruk nie przejdzie.|An old law, a saint, and a door the Raven will not pass.
+gallery.hint.end_informer|Donos też jest walutą.|Informing is a currency too.
+gallery.hint.end_captive|Tydzień po terminie Rycerze przychodzą.|A week past the deadline, the Knights come.
+gallery.hint.end_smuggler|Port ma pana, którego nie ma w księgach.|The harbour has a master who is in no ledger.
+gallery.hint.end_guild|Cech ceni uczciwy rachunek.|The guild values an honest account.
+gallery.hint.end_hanna|Ktoś trzyma dla ciebie stołek przy szynkwasie.|Someone keeps a stool for you at the bar.
+gallery.hint.end_crime|Spłać dług, nie pytając, skąd są pieniądze.|Pay the debt without asking where the money came from.
+gallery.hint.end_honest|Spłać dług z czystymi rękami.|Pay the debt with clean hands.
+""")
+
+# ===========================================================================
 # 9. ZAPIS I RAPORT POKRYCIA
 # ===========================================================================
 def write(path, data):

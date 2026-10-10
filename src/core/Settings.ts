@@ -25,6 +25,12 @@ export interface SettingsData {
   hardcore: boolean;          // jeden zapis, brak F5/F9, śmierć = koniec
   cameraZoom: number;         // 1..2 (ograniczony zoom kółkiem myszy)
   showFps: boolean;
+  showTutorial: boolean;     // podpowiedzi przy pierwszej okazji
+  showNameplates: boolean;   // imiona nad głowami
+  showBarks: boolean;        // kwestie NPC w dymkach
+  showMinimap: boolean;      // minimapa (gdy John ma mapę)
+  ambientLife: boolean;      // ptaki, motyle, świetliki, chmury
+  autoPause: boolean;        // pauza po przełączeniu karty
   screenShakeIntensity: number;
 }
 
@@ -45,7 +51,7 @@ export const DEFAULT_SETTINGS: SettingsData = {
   sneakMode: 'hold',
   runMode: 'hold',
   showVisionCones: true,
-  showQuestMarkers: false,
+  showQuestMarkers: true,
   showMinimapCompass: true,
   difficultyCombat: 1,
   difficultyEconomy: 1,
@@ -53,6 +59,12 @@ export const DEFAULT_SETTINGS: SettingsData = {
   hardcore: false,
   cameraZoom: 1,
   showFps: false,
+  showTutorial: true,
+  showNameplates: true,
+  showBarks: true,
+  showMinimap: true,
+  ambientLife: true,
+  autoPause: true,
   screenShakeIntensity: 1
 };
 

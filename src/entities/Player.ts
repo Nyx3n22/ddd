@@ -44,6 +44,9 @@ export class Player extends Actor {
   stepTimer = 0;
   lastRegion = '';
   breathTimer = 0;
+  /** sylwetki po uniku (smuga) */
+  ghosts: Array<{ x: number; y: number; dir: Dir; frame: number; look: any; a: number }> = [];
+  private ghostTimer = 0;
 
   constructor() {
     super('john', 2016, 3260, 'john', { weapon: 'sword', cloak: true, beard: false, bulk: 1, height: 0 });
@@ -107,7 +110,12 @@ export class Player extends Actor {
         if (ahead === 'water' || ahead === 'grassTall') bus.emit('fx:vault', { x: this.x, y: this.y });
       }
     }
+    // smuga po uniku: co kilka klatek zostawiamy sylwetkę, która gaśnie
+    for (const gh of this.ghosts) gh.a -= dt * 1.6;
+    this.ghosts = this.ghosts.filter(gh => gh.a > 0.02);
     if (c.dodging) {
+      this.ghostTimer -= dt;
+      if (this.ghostTimer <= 0) { this.ghostTimer = 0.045; this.ghosts.push({ x: this.x, y: this.y, dir: this.dir, frame: this.frame, look: this.look, a: 0.4 }); }
       c.dodgeT -= dt; c.invuln -= dt;
       const map = g.world?.scene?.tilemap;
       if (map) this.move(c.dodgeDx * dt, c.dodgeDy * dt, map, g.world?.actors || []);
