@@ -117,7 +117,12 @@ export class NotesSystem {
 
   static addJohnNote(id: string) {
     const s = getGame().state;
-    if (!s.notes.johnNotes.includes(id)) { s.notes.johnNotes.push(id); bus.emit('notes:john', { id }); }
+    if (!s.notes.johnNotes.includes(id)) {
+      s.notes.johnNotes.push(id);
+      s.flags['note_day_' + id] = s.time.day;
+      bus.emit('notes:john', { id });
+      if (s.notes.johnNotes.length > 2) bus.emit('hud:toast', { text: t('notes.johnAdded') });
+    }
   }
 
   static isBlurred(id: string) { return getGame().state.notes.blurred.includes(id); }

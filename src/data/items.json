@@ -1471,6 +1471,49 @@
     "reading",
     "unique"
    ]
+  },
+  {
+   "id": "ledger_raven",
+   "nameKey": "item.ledgerRaven",
+   "descKey": "item.ledgerRaven.desc",
+   "icon": "book",
+   "weight": 1.2,
+   "volume": 1.5,
+   "value": 0,
+   "cat": "document",
+   "tags": [
+    "quest",
+    "unique"
+   ]
+  },
+  {
+   "id": "relic_elenem",
+   "nameKey": "item.relicElenem",
+   "descKey": "item.relicElenem.desc",
+   "icon": "relic",
+   "weight": 1.5,
+   "volume": 1.2,
+   "value": 300,
+   "cat": "special",
+   "tags": [
+    "quest",
+    "unique",
+    "rare"
+   ]
+  },
+  {
+   "id": "passage_token",
+   "nameKey": "item.passageToken",
+   "descKey": "item.passageToken.desc",
+   "icon": "permit",
+   "weight": 0.05,
+   "volume": 0.05,
+   "value": 0,
+   "cat": "document",
+   "tags": [
+    "quest",
+    "unique"
+   ]
   }
  ]
 }

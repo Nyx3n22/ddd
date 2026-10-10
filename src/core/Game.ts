@@ -381,6 +381,7 @@ export class Game {
     bus.on('player:died', () => { if (!settings.data.disableCameraShake) this.renderer.camera.kick(5); });
     bus.on('player:step', (e: any) => this.renderer.weather.footstep(e.x, e.y, e.ground, false));
     bus.on('game:ending', (e: any) => this.ui.showEnding(e));
+    bus.on('game:endingRequest', (e: any) => QuestSystem.triggerEnding(e.id));
     bus.on('lang:set', (e: any) => { setLang(e.lang); settings.data.lang = e.lang; settings.save(); this.ui.refreshAll(); });
     bus.on('rep:add', (e: any) => {});
     bus.on('time:skip', (e: any) => this.skipTime(e.hours * 60, e.reason));
@@ -388,7 +389,7 @@ export class Game {
     bus.on('save:written', () => {});
     bus.on('quest:completed', () => audio.questDone());
     bus.on('skill:levelUp', () => audio.levelUp());
-    bus.on('inventory:changed', () => this.ui.updateBelt());
+    bus.on('inventory:changed', () => { this.ui.updateBelt(); QuestSystem.recheck(); });
     bus.on('inventory:full', (e: any) => this.ui.toast(e.msg, 'bad'));
   }
 

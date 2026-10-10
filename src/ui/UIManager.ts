@@ -392,7 +392,7 @@ export class UIManager {
       const john = johnNotes();
       html += s.notes.johnNotes.map(id => {
         const n = john.find((x: any) => x.id === id);
-        const day = n?.dayKey ? t(n.dayKey) : t('journal.day', { day: 1 });
+        const day = n?.dayKey ? t(n.dayKey) : t('journal.day', { day: Number(s.flags['note_day_' + id]) || 1 });
         const txt = n?.textKey ? t(n.textKey) : id;
         return `<div class="card"><h4>${esc(day)}</h4><div>${esc(txt)}</div></div>`;
       }).join('') || `<div class="card"><div class="mut">${esc(t('notes.empty.john'))}</div></div>`;
@@ -1178,17 +1178,45 @@ export class UIManager {
     const g = $('gen-title'); if (g) g.textContent = t('ending.title');
     const body = $('gen-body'); if (!body) return;
     const s = this.game.state;
-    body.innerHTML = `<div class="card parchment"><h4>${esc(e.name)}</h4><div style="line-height:1.6">${esc(t('ending.' + e.id + '.text'))}</div></div>
+    const total = QuestSystem.endingDefs().length;
+    let seen = 1;
+    try { seen = (JSON.parse(localStorage.getItem('elenem.endings') || '[]') as string[]).length || 1; } catch { /* brak pamięci */ }
+    const fates = this.epilogueFates().map(([who, txt]) => `<div class="fate"><b>${esc(who)}</b><span>${esc(txt)}</span></div>`).join('');
+    body.innerHTML = `<div class="card parchment"><h4>${esc(e.name)}</h4><div class="epilogue">${esc(t('ending.' + e.id + '.text'))}</div></div>
+      <div class="card" style="margin-top:.6em"><h4>${esc(t('epi.title'))}</h4>${fates}</div>
       <div class="card" style="margin-top:.6em"><h4>${esc(t('ending.summary'))}</h4>
-      <div class="row"><span class="n">${esc(t('stat.daysPlayed'))}</span><span>${s.stats.daysPlayed}</span></div>
+      <div class="row"><span class="n">${esc(t('stat.daysPlayed'))}</span><span>${s.time.day}</span></div>
       <div class="row"><span class="n">${esc(t('stat.earned'))}</span><span>${Math.round(s.stats.earned)}</span></div>
+      <div class="row"><span class="n">${esc(t('epi.debtLeft'))}</span><span>${Math.round(s.debtRemaining)}</span></div>
       <div class="row"><span class="n">${esc(t('stat.killed'))}</span><span>${s.stats.killed}</span></div>
       <div class="row"><span class="n">${esc(t('stat.questsDone'))}</span><span>${s.stats.questsDone}</span></div>
       <div class="row"><span class="n">${esc(t('stat.crimesCommitted'))}</span><span>${s.stats.crimesCommitted}</span></div>
-      <div class="row"><span class="n">${esc(t('ending.reputation'))}</span><span>${esc(e.summary)}</span></div></div>
+      <div class="row"><span class="n">${esc(t('ending.reputation'))}</span><span>${esc(e.summary)}</span></div>
+      <div class="row"><span class="n">${esc(t('epi.endingsFound'))}</span><span>${seen} / ${total}</span></div></div>
       <div class="grid g2" style="margin-top:.6em"><button class="clickable" id="end-title">${esc(t('ending.toTitle'))}</button><button class="clickable" id="end-close">${esc(t('ending.continue'))}</button></div>`;
     $('end-title')!.onclick = () => { this.closeAll(); this.buildTitle(); this.showTitle(); this.game.started = false; };
     $('end-close')!.onclick = () => { this.closeOverlay(); };
+  }
+
+  /** Losy wyspy w epilogu: frakcje według reputacji i kilka postaci według decyzji Johna. */
+  epilogueFates(): Array<[string, string]> {
+    const s = this.game.state;
+    const out: Array<[string, string]> = [];
+    for (const f of Object.keys(s.reputation) as Array<keyof typeof s.reputation>) {
+      const v = s.reputation[f];
+      const tier = v >= 30 ? 'good' : v <= -30 ? 'bad' : 'mid';
+      out.push([t('faction.' + f), t(`epi.${f}.${tier}`)]);
+    }
+    const npc = (id: string, key: string) => out.push([npcName(id), t(key)]);
+    if (s.flags.relic_returned) npc('teodor', 'epi.teodor.relic');
+    else if (s.flags.relic_sold) npc('teodor', 'epi.teodor.sold');
+    if (s.flags.informed_on_idzi || s.flags.betrayed_idzi) npc('idzi', 'epi.idzi.betrayed');
+    else if (s.flags.idzi_trusts) npc('idzi', 'epi.idzi.friend');
+    if (QuestSystem.get('q_marta_satchel')?.state === 'done') npc('marta', 'epi.marta.helped');
+    if (ReputationSystem.relation('hanna') >= 30) npc('hanna', 'epi.hanna.friend');
+    if (s.flags.ledger_to_raven) npc('baldwin', 'epi.baldwin.ledger');
+    else if (s.flags.overthrow) npc('baldwin', 'epi.baldwin.fallen');
+    return out;
   }
 
   refreshAll() {

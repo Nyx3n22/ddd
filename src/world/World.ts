@@ -466,6 +466,39 @@ export class World {
         if (npcId && s.alive(npcId) && !s.flags.table_welcome) { bus.emit('hud:toast', { text: t('gamble.notWelcome'), tone: 'bad' }); DialogueSystem.open(npcId === 'gambler_night' ? 'gracz_pankracy' : 'graczka_cecylia'); return; }
         bus.emit('ui:openGamble', { game: kind === 'gambleTable' ? 'dice' : 'dice', npcId: d.npc === 'gambler_day' ? 'graczka_cecylia' : 'gracz_pankracy' });
         return;
+      case 'ferryBoat': {
+        // ucieczka z wyspy: znak Idziego, noc i (najlepiej) spokojne morze
+        if (!InventorySystem.has('passage_token')) { bus.emit('hud:toast', { text: t('interact.boatNeedToken'), tone: 'bad' }); return; }
+        if (!s.time.isNight()) { bus.emit('hud:toast', { text: t('interact.boatDay'), tone: 'bad' }); return; }
+        const storm = s.weather.kind === 'storm';
+        bus.emit('ui:confirm', {
+          text: t(storm ? 'interact.boatStorm' : 'interact.boatConfirm'),
+          onYes: () => {
+            InventorySystem.remove('passage_token', 1);
+            NotesSystem.addJohnNote('note_ferry');
+            if (storm) { s.flags.drowned = true; QuestSystem.triggerEnding('end_drowned'); }
+            else { s.flags.escaped_island = true; QuestSystem.notify('flag', { flag: 'escaped_island' }); QuestSystem.triggerEnding('end_escape'); }
+          }
+        });
+        return;
+      }
+      case 'questSearch': {
+        // skrytka fabularna: jeden przedmiot, czasem tylko gdy John wie, czego szuka
+        if (d.needFlag && !s.flags[d.needFlag]) { bus.emit('hud:toast', { text: t(d.emptyKey || 'interact.nothingSpecial') }); return; }
+        if (s.flags['taken_' + obj.id]) { bus.emit('hud:toast', { text: t('interact.empty') }); return; }
+        const watcher = d.guard ? this.npcs.find(n => n.npcId === d.guard && !n.hidden && n.scene === s.scene) : undefined;
+        if (watcher) {
+          bus.emit('hud:toast', { text: t('interact.searchSeen', { who: watcher.name }), tone: 'bad' });
+          bus.emit('crime:witnessEvent', { type: 'theft', npcId: watcher.npcId });
+        }
+        s.time.advanceMinutes(10);
+        this.player.setAction('search');
+        s.flags['taken_' + obj.id] = true;
+        if (InventorySystem.add(d.item, 1, { stolen: !!d.stolen })) {
+          bus.emit('hud:toast', { text: t(d.foundKey || 'interact.found', { what: itemName(d.item) }), tone: 'good' });
+        }
+        return;
+      }
       case 'medic':
         if (npcId && s.alive(npcId)) { DialogueSystem.open(npcId); return; }
         bus.emit('ui:openService', { id: 'treat' });
@@ -707,6 +740,14 @@ export class World {
       }
     });
     bus.on('combat:spar', (e: any) => this.startSpar(e.npcId));
+    // wróg fabularny pojawia się, gdy zadanie wchodzi w jego etap
+    bus.on('quest:spawn', (e: any) => {
+      const free = this.freeSpot(e.tx, e.ty, 4);
+      const en = new EnemyActor(e.typeId, e.kind, free ? free.x : e.tx * TILE, free ? free.y : e.ty * TILE, { seed: e.tx * 31 + e.ty });
+      en.scene = 'world';
+      en.hidden = getGame().state.scene !== 'world';
+      this.enemies.push(en); this.actors.push(en);
+    });
     bus.on('rumor:seedEvent', (e: any) => RumorSystem.seed(e.textKey, { witness: e.witness, severity: e.severity }));
     bus.on('notes:add', (e: any) => NotesSystem.addEntry(e.kind || 'note', e.key));
     bus.on('player:died', () => this.onPlayerDeath());

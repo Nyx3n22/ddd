@@ -1064,6 +1064,18 @@
      "kind": "shop",
      "labelKey": "station.confiscated",
      "npc": "celnik_bernard"
+    },
+    {
+     "tx": 10,
+     "ty": 5,
+     "kind": "questSearch",
+     "labelKey": "station.ledgerChest",
+     "item": "ledger_raven",
+     "needFlag": "ledger_hint",
+     "guard": "celnik_bernard",
+     "stolen": true,
+     "emptyKey": "interact.ledgerNotYet",
+     "foundKey": "interact.foundLedger"
     }
    ],
    "npcs": [

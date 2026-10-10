@@ -1690,6 +1690,113 @@ interact.purse|Podnosisz sakiewkę: {gold} koron.|You pick up a purse: {gold} cr
 """)
 
 # ===========================================================================
+# 8c. FABUŁA: KSIĘGA KRUKA, OBALENIE, UCIECZKA, PRZYSIĘGA, RELIKWIARZ
+# ===========================================================================
+add(r"""
+quest.ledger.title|Księga Kruka|The Raven's Ledger
+quest.ledger.journal|Baldwin trzyma ludzi na wyspie nie złotem, tylko pamięcią: kto podpalał Vranov, kto patrzył, kto zapłacił za milczenie. Odpis jego księgi może uwolnić mnie — albo kogoś innego.|Baldwin holds the island's people not with gold but with memory: who burned Vranov, who watched, who paid for silence. A copy of his ledger could free me — or someone else.
+quest.ledger.s1|Zapytaj Idziego, gdzie Kruk trzyma odpisy księgi|Ask Idzi where the Raven keeps copies of the ledger
+quest.ledger.s2|Wykradnij odpis księgi ze skrzyni w kantorze celnym (najlepiej nocą)|Steal the ledger copy from the chest in the customs office (best at night)
+quest.ledger.s3|Zdecyduj, komu oddać księgę: Rawiczowi, ojcu Teodorowi czy Baldwinowi|Decide who gets the ledger: Rawicz, Father Teodor or Baldwin
+quest.overthrow.title|Rachunek dla Kruka|A Reckoning for the Raven
+quest.overthrow.journal|Rawicz ma księgę i dwunastu ludzi. Żeby wyrzucić Dzikich Rycerzy z miasta, potrzebuje cechu, Kościoła i przedmieścia.|Rawicz has the ledger and twelve men. To throw the Wild Knights out of town he needs the guild, the Church and the suburb.
+quest.overthrow.s1|Przekonaj kupca Zbyluta, żeby cech stanął za strażą|Convince Zbylut the merchant to put the guild behind the watch
+quest.overthrow.s2|Poproś ojca Teodora, żeby dzwony zabiły na znak|Ask Father Teodor to ring the bells as the signal
+quest.overthrow.s3|Namów starego Vagna, żeby zebrał ludzi z przedmieścia|Persuade old Vagn to gather the people of the suburb
+quest.overthrow.s4|Nocą stań przy sierżancie Rawiczu — wtedy uderzycie|At night, stand with Sergeant Rawicz — then you strike
+quest.ferry.title|Ostatni prom|The Last Ferry
+quest.ferry.journal|„Szara Mewa” stoi na redzie i nie zadaje pytań, jeśli kapitan dostanie znak od Idziego. Rybacy przewiozą mnie nocą z końca środkowej kei.|The Grey Gull lies in the roads and asks no questions if the captain gets Idzi's token. The fishermen will row me out at night from the end of the middle pier.
+quest.ferry.s1|Kup od Idziego znak przewozowy (600 koron)|Buy the passage token from Idzi (600 crowns)
+quest.ferry.s2|Nocą wsiądź do łodzi na końcu środkowej kei — i nie w sztorm|At night board the boat at the end of the middle pier — and not in a storm
+quest.oath.title|Płaszcz Kruka|The Raven's Cloak
+quest.oath.journal|Baldwin przyjmie mnie do bractwa zamiast długu. Przysięgi nie składa się słowami.|Baldwin will take me into the brotherhood instead of the debt. An oath is not sworn with words.
+quest.oath.s1|Odbierz od zielarki Wiery czterdzieści koron dla Gwidona|Collect forty crowns from Wiera the herbwoman for Gwidon
+quest.oath.s2|Zabij herszta bandy na wschodnim trakcie|Kill the chief of the band on the eastern road
+quest.oath.s3|Wróć do Baldwina i złóż przysięgę|Return to Baldwin and swear the oath
+quest.relic.title|Relikwiarz świętego Elenema|Saint Elenem's Reliquary
+quest.relic.journal|Relikwiarz zniknął z ruin opactwa trzy lata temu. Teodor nie błogosławi poszukiwań, ale nie doniesie, jeśli wróci na ołtarz.|The reliquary vanished from the abbey ruins three years ago. Teodor does not bless the search, but will not report it if it returns to the altar.
+quest.relic.s1|Przeszukaj ruiny opactwa za zachodnim murem|Search the abbey ruins beyond the western wall
+quest.relic.s2|Oddaj relikwiarz ojcu Teodorowi albo sprzedaj go Idziemu|Return the reliquary to Father Teodor or sell it to Idzi
+item.ledgerRaven|Księga Kruka (odpis)|The Raven's Ledger (copy)
+item.ledgerRaven.desc|Odpis księgi długów Dzikich Rycerzy. Nazwiska, kwoty i daty — także z Vranova. Każda strona to czyjś strach.|A copy of the Wild Knights' debt ledger. Names, sums and dates — Vranov among them. Every page is someone's fear.
+item.relicElenem|Relikwiarz świętego Elenema|Saint Elenem's Reliquary
+item.relicElenem.desc|Pozłacana skrzynka z kośćmi świętego. Lżejsza, niż powinna być rzecz, o którą ludzie się zabijają.|A gilded box with the saint's bones. Lighter than a thing people kill for ought to be.
+item.passageToken|Znak przewozowy|Passage token
+item.passageToken.desc|Wycięty z kości znak Idziego. Kapitan „Szarej Mewy” nie zadaje pytań temu, kto go ma.|Idzi's token carved from bone. The captain of the Grey Gull asks no questions of whoever carries it.
+station.ledgerChest|Skrzynia z odpisami ksiąg|Chest of ledger copies
+station.abbeyRubble|Zwalony ołtarz opactwa|Collapsed abbey altar
+station.ferryBoat|Łódź rybacka przy kei|Fishing boat at the pier
+interact.nothingSpecial|Gruz, ptasie gniazda i zimny wiatr. Gdybyś wiedział, czego szukać…|Rubble, birds' nests and a cold wind. If only you knew what to look for…
+interact.ledgerNotYet|Skrzynia z papierami celnymi. Bez powodu nie ma co w niej grzebać.|A chest of customs papers. No reason to dig through it.
+interact.foundLedger|Pod rachunkami za sól leży gruba księga z krukiem na okładce: {what}.|Under the salt receipts lies a thick book with a raven on the cover: {what}.
+interact.foundRelic|Pod zwalonym ołtarzem, w gnieździe z gałęzi, coś błyska złotem: {what}.|Under the collapsed altar, in a nest of twigs, something glints gold: {what}.
+interact.boatNeedToken|Rybacy nie wiozą nikogo na redę bez znaku od Idziego.|The fishermen take nobody out to the roads without a token from Idzi.
+interact.boatDay|W dzień celnik widzi każdą łódź. Przyjdź nocą.|By day the customs man sees every boat. Come back at night.
+interact.boatConfirm|Wsiąść do łodzi i odpłynąć do „Szarej Mewy”? Nie będzie powrotu.|Board the boat and row out to the Grey Gull? There is no coming back.
+interact.boatStorm|Morze ryczy, a rybak kręci głową. Płynąć mimo sztormu? Nie będzie powrotu.|The sea roars and the fisherman shakes his head. Sail despite the storm? There is no coming back.
+notes.johnAdded|John coś zapisał w notatniku (K → Zapiski Johna).|John wrote something in his notebook (K → John's notes).
+debt.forgiven|Umorzono {gold} koron długu. Zostało {remaining}.|{gold} crowns of debt forgiven. {remaining} remaining.
+req.nightOnly|Tylko nocą|Only at night
+req.idziTrust|Idzi musi ci ufać|Idzi must trust you
+ending.drowned|Morze nie wybacza|The Sea Does Not Forgive
+ending.sanctuary|Azyl|Sanctuary
+ending.informer|Na żołdzie straży|In the Watch's Pay
+ending.smuggler|Król portu|King of the Harbour
+ending.guild|Mieszczanin|Burgher
+ending.hanna|Przy szynkwasie|At the Bar
+ending.end_drowned.text|Rybacy mówili, żeby nie płynąć w sztorm. Fala przyszła od strony latarni, czarna i wysoka jak mur, i łódź po prostu przestała istnieć. Dług Johna zapisano w księdze jako „spłacony przez morze”. Baldwin nie lubi takich wpisów — morza nie da się wezwać na rynek.|The fishermen said not to sail in a storm. A wave came from the lighthouse side, black and tall as a wall, and the boat simply stopped existing. John's debt was entered in the ledger as "settled by the sea". Baldwin dislikes such entries — the sea cannot be summoned to the market square.
+ending.end_sanctuary.text|Tydzień po terminie ludzie z krukiem na płaszczu stanęli pod drzwiami kaplicy i nie weszli. Relikwiarz świętego Elenema stał na ołtarzu, a ojciec Teodor siedział na progu z księgą na kolanach. Prawo azylu jest stare jak wyspa. John zamiata kaplicę, dzwoni na nieszpory i nie wychodzi za mur. Dług wciąż istnieje — ale tylko na papierze, którego nikt nie odważy się wnieść do świętego miejsca.|A week after the deadline, men with ravens on their cloaks stood at the chapel door and did not enter. Saint Elenem's reliquary stood on the altar and Father Teodor sat on the threshold with a book on his knees. The law of sanctuary is as old as the island. John sweeps the chapel, rings for vespers and never goes beyond the wall. The debt still exists — but only on paper nobody dares carry into a holy place.
+ending.end_informer.text|Kiedy Rycerze przyszli po Johna, sierżant Rawicz stał już w drzwiach z dokumentem z pieczęcią rady: „W służbie miasta, nietykalny do odwołania”. Dług nie zniknął, tylko przeszedł na kasę miejską — do odpracowania. John nosi włócznię, pilnuje portu i wie, że Idzi wciąż gdzieś tam jest i pamięta, kto na niego doniósł.|When the Knights came for John, Sergeant Rawicz was already in the doorway with a paper bearing the council's seal: "In the town's service, untouchable until revoked." The debt did not vanish; it passed to the town treasury, to be worked off. John carries a spear, guards the harbour, and knows Idzi is still out there, remembering who informed on him.
+ending.end_smuggler.text|Dług spłacony, a pieniądze pachniały solą bez akcyzy. Idzi przekazał Johnowi klucz do magazynu i połowę kontaktów, bo sam postanowił w końcu odpłynąć. Teraz to John wie, która skrzynia nie ma papierów i który strażnik ma długi. Kruk dostał swoje dziesięć tysięcy. Port dostał nowego pana, którego nie ma w żadnej księdze.|The debt is paid, and the money smelled of untaxed salt. Idzi handed John the warehouse key and half his contacts, for he finally decided to sail away himself. Now John knows which crate has no papers and which guard has debts. The Raven got his ten thousand. The harbour got a new master who is in no ledger at all.
+ending.end_guild.text|Zbylut sam przyniósł kwit do kantoru i postawił na nim pieczęć cechu. „Człowiek, który spłaca dziesięć tysięcy uczciwie, jest wart więcej niż dziesięć tysięcy” — powiedział i wpisał Johna do rejestru jako czeladnika handlu. Po roku John ma własny kram na rynku i płaci podatki jak wszyscy. Nudne życie. Najlepsze, jakie miał.|Zbylut brought the receipt to the office himself and set the guild's seal on it. "A man who pays ten thousand honestly is worth more than ten thousand," he said, and entered John in the register as a journeyman of trade. A year later John has his own stall on the square and pays taxes like everyone else. A dull life. The best he ever had.
+ending.end_hanna.text|Dług zamknięty. Statek na kontynent odpływał trzy dni później, a John nie wsiadł. Hanna postawiła przed nim kufel i powiedziała: „Stołek przy szynkwasie się zwolnił. Umiesz nosić beczki?”. Umiał. Wieczorami opowiada nowym z kontynentu, żeby najpierw płacili, potem pytali — i czasem nawet go słuchają.|The debt is closed. The ship to the mainland left three days later and John was not on it. Hanna set a mug in front of him and said, "There's a free stool at the bar. Can you carry barrels?" He could. In the evenings he tells newcomers from the mainland to pay first and ask later — and sometimes they even listen.
+note.vranov_fire|Vranov. Myślałem, że zostawiłem to na kontynencie razem z mieczem, który wtedy nosiłem. Teodor pamięta chłopca. Ja pamiętam dym i to, że stałem trzy kroki dalej. Kruk nie trzyma mnie długiem. Trzyma mnie tym, co wie.|Vranov. I thought I had left it on the mainland with the sword I carried then. Teodor remembers the boy. I remember the smoke, and that I stood three steps away. The Raven does not hold me with the debt. He holds me with what he knows.
+note.choice_guard|Oddałem księgę Rawiczowi. Pierwszy raz od lat zrobiłem coś, za co nikt mi nie zapłacił. Dziwne uczucie — lżejsze, niż myślałem.|I gave the ledger to Rawicz. The first time in years I did something nobody paid me for. A strange feeling — lighter than I expected.
+note.choice_church|Teodor przeczyta imiona z ambony. Moje też — jako świadka. Nie wiem, czy to rozgrzeszenie, czy wyrok. Wiem, że Kruk stracił trzy tysiące i coś więcej.|Teodor will read the names from the pulpit. Mine too — as a witness. I do not know whether that is absolution or a sentence. I know the Raven lost three thousand, and something more.
+note.choice_raven|Sprzedałem Krukowi jego własną księgę. Pięć tysięcy mniej długu i jedna rzecz więcej, której nie powiem Teodorowi.|I sold the Raven his own ledger. Five thousand less debt, and one more thing I will not tell Teodor.
+note.relic|Relikwiarz ważył mniej, niż się spodziewałem. Teodor płakał, a ja udawałem, że nie widzę. Kaplica ma teraz świętego, a ja mam miejsce, do którego Kruk nie wejdzie.|The reliquary weighed less than I expected. Teodor wept and I pretended not to see. The chapel has its saint again, and I have a place the Raven will not enter.
+note.relic_sold|Trzysta koron za świętego. Idzi nawet nie zajrzał do środka. Ja zajrzałem — kości jak kości. Tylko że teraz śnią mi się po nocach.|Three hundred crowns for a saint. Idzi did not even look inside. I did — bones like any bones. Only now they visit me at night.
+note.oath|Uklęknąłem przed Krukiem. Dług zniknął, a razem z nim ktoś, kim byłem do wczoraj.|I knelt before the Raven. The debt vanished, and with it someone I was until yesterday.
+note.ferry|Łódź kołysze się pod nogami. Latarnia celnika gaśnie za plecami. Jeśli ktoś to czyta, to znaczy, że zostawiłem notatnik na wyspie — razem ze wszystkim innym.|The boat rocks under my feet. The customs lantern fades behind me. If someone is reading this, I left the notebook on the island — along with everything else.
+note.overthrow|Dzwon bił przez całą noc. Rano na bramie nie było już kruka, tylko ślad po gwoździach. Nie wiem, czy miasto jest teraz wolne. Wiem, że ja jestem.|The bell rang all night. In the morning there was no raven on the gate, only nail holes. I do not know if the town is free now. I know I am.
+""")
+
+# ===========================================================================
+# 8d. EPILOG: LOSY WYSPY
+# ===========================================================================
+add(r"""
+epi.title|Losy wyspy|The fate of the island
+epi.debtLeft|Pozostały dług|Debt remaining
+epi.endingsFound|Odkryte zakończenia|Endings discovered
+epi.wildKnights.good|Kruk wspomina Johna przy winie jako „jedynego dłużnika, który rozumiał rachunki”.|The Raven speaks of John over wine as "the only debtor who understood accounts".
+epi.wildKnights.mid|Rycerze pobierają dziesiątą część jak dawniej. Nikt już nie pyta, czy mają do tego prawo.|The Knights take their tenth as before. Nobody asks any more whether they have the right.
+epi.wildKnights.bad|Na bramie obozu Rycerzy ktoś wyrył imię Johna. Nie jako ostrzeżenie — jako obietnicę.|Someone carved John's name on the gate of the Knights' camp. Not as a warning — as a promise.
+epi.cityGuard.good|Rawicz dostał od rady dwudziestu nowych ludzi i po raz pierwszy od lat śpi spokojnie.|Rawicz got twenty new men from the council and for the first time in years sleeps soundly.
+epi.cityGuard.mid|Straż pilnuje rynku, nie zamku. Tak było i tak zostało.|The watch guards the market, not the castle. So it was and so it remains.
+epi.cityGuard.bad|List gończy za Johnem wisi na tablicy jeszcze rok po tym, jak deszcz rozmył twarz.|John's wanted poster hangs on the board a year after the rain washed out the face.
+epi.merchantGuild.good|Cech podniósł ceny soli o jedną koronę i wszyscy wiedzą, czyja to zasługa.|The guild raised the price of salt by one crown, and everyone knows whom to thank.
+epi.merchantGuild.mid|Kupcy liczą jak zawsze — dokładnie i bez sentymentów.|The merchants count as always — precisely and without sentiment.
+epi.merchantGuild.bad|Zbylut nie sprzedaje już nikomu, kto wymówi imię Johna.|Zbylut no longer sells to anyone who speaks John's name.
+epi.church.good|W kaplicy co niedzielę pali się jedna świeca więcej. Teodor nie mówi, za kogo.|Every Sunday one more candle burns in the chapel. Teodor does not say for whom.
+epi.church.mid|Dzwon bije o godzinach, jak zawsze. Pan słucha w obu pozycjach.|The bell rings the hours as always. The Lord listens in both positions.
+epi.church.bad|Z ambony padło imię Johna — w modlitwie za zabłąkanych.|John's name was spoken from the pulpit — in the prayer for the lost.
+epi.smugglers.good|W porcie mówią, że skrzynia bez papierów płynie szybciej, jeśli pozdrowi się Johna.|In the harbour they say a crate without papers sails faster if you greet John.
+epi.smugglers.mid|Idzi wciąż stoi w cieniu magazynu i nie wychodzi do światła.|Idzi still stands in the warehouse shadow and does not step into the light.
+epi.smugglers.bad|Przemytnicy omijają kei, na których stał John. Pamięć w porcie jest dłuższa niż cumy.|The smugglers avoid the piers where John stood. Memory in the harbour is longer than the moorings.
+epi.villagers.good|Dzieci z przedmieścia bawią się w „Johna i Kruka”. John zawsze wygrywa.|The suburb children play "John and the Raven". John always wins.
+epi.villagers.mid|Ludzie z Dolnego Miasta pamiętają Johna tak, jak pamięta się pogodę: czasem.|The Lower Town folk remember John the way one remembers weather: sometimes.
+epi.villagers.bad|Przy studni wciąż mówi się o najemniku, który przyniósł wyspie tylko kłopoty.|At the well they still talk of the sellsword who brought the island nothing but trouble.
+epi.teodor.relic|Relikwiarz stoi na ołtarzu, a w Dzień Świętego Elenema Teodor kładzie przy nim jedną różę bez słowa.|The reliquary stands on the altar, and on Saint Elenem's Day Teodor lays a single rose beside it without a word.
+epi.teodor.sold|Teodor odprawia mszę przed pustym ołtarzem i nigdy nie pyta, kto sprzedał świętego.|Teodor says mass before an empty altar and never asks who sold the saint.
+epi.idzi.betrayed|Idzi zniknął z portu. Na jego miejscu w cieniu stoi ktoś nowy, kto zna imię Johna.|Idzi vanished from the harbour. In his shadow stands someone new who knows John's name.
+epi.idzi.friend|Idzi przysyła czasem beczkę soli bez akcyzy. Bez liściku — po co komu liściki.|Idzi sometimes sends a barrel of untaxed salt. No note — who needs notes.
+epi.marta.helped|Marta odkupiła srebrną zapinkę matki i podobno już nie kradnie. Podobno.|Marta bought back her mother's silver brooch and supposedly no longer steals. Supposedly.
+epi.hanna.friend|Hanna trzyma przy szynkwasie kufel, z którego nikt inny nie pije.|Hanna keeps a mug at the bar that nobody else drinks from.
+epi.baldwin.ledger|Baldwin spalił odpis księgi na oczach Johna. Potem założył nową.|Baldwin burned the ledger copy before John's eyes. Then he started a new one.
+epi.baldwin.fallen|Baldwin odpłynął na kontynent z dziesięcioma ludźmi i pustą skrzynią. Księga została na wyspie.|Baldwin sailed for the mainland with ten men and an empty chest. The ledger stayed on the island.
+""")
+
+# ===========================================================================
 # 9. ZAPIS I RAPORT POKRYCIA
 # ===========================================================================
 def write(path, data):

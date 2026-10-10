@@ -37,6 +37,9 @@ export interface DialogueCond {
   wanted?: boolean;
   alive?: string; dead?: string;
   hasPerk?: string;
+  noWeather?: string; noQuest?: string; noItem2?: string;
+  /** zadanie aktywne i doszło co najmniej do etapu o tym indeksie */
+  questStage?: { id: string; min: number };
 }
 
 export interface DialogueEffect {
@@ -55,9 +58,10 @@ export interface DialogueEffect {
   debtExtend?: number; loan?: { principal: number; due: number };
   combat?: string; hygiene?: number; gambler?: string;
   teach?: string; end?: string;
+  johnNote?: string; debtForgive?: number;
 }
 
-export interface DialogueOption { text: string; cond?: DialogueCond; reqKey?: string; goto: string; effects?: DialogueEffect[] }
+export interface DialogueOption { text: string; cond?: DialogueCond; reqKey?: string; goto: string; effects?: DialogueEffect[]; hidden?: boolean }
 export interface DialogueNode { portrait?: string; emotion?: string; text: string; options: DialogueOption[]; once?: boolean }
 
 const TREES: Record<string, Record<string, DialogueNode>> = { pl: (PL as any).nodes, en: (EN as any).nodes };
@@ -130,10 +134,14 @@ export class DialogueSystem {
   /** Widoczne opcje: niespełnione warunki pokazujemy z powodem (nie ukrywamy). */
   static visibleOptions(): Array<{ text: string; ok: boolean; reason?: string; index: number }> {
     const ses = this.session; if (!ses) return [];
-    return ses.node.options.map((o, i) => {
+    const out: Array<{ text: string; ok: boolean; reason?: string; index: number }> = [];
+    ses.node.options.forEach((o, i) => {
       const c = this.checkCond(o.cond);
-      return { text: o.text, ok: c.ok, reason: c.ok ? undefined : (o.reqKey ? t(o.reqKey) : c.reason), index: i };
+      // opcje fabularne z wątków, których John jeszcze nie zna, nie zaśmiecają rozmowy
+      if (!c.ok && o.hidden) return;
+      out.push({ text: o.text, ok: c.ok, reason: c.ok ? undefined : (o.reqKey ? t(o.reqKey) : c.reason), index: i });
     });
+    return out;
   }
 
   static checkCond(c?: DialogueCond): { ok: boolean; reason?: string } {
@@ -173,6 +181,12 @@ export class DialogueSystem {
     if (c.alive && !s.alive(c.alive)) return { ok: false, reason: t('cond.dead') };
     if (c.dead && s.alive(c.dead)) return { ok: false, reason: t('cond.alive') };
     if (c.hasPerk && !SkillsSystem.hasPerk(c.hasPerk)) return { ok: false, reason: t('cond.perk') };
+    if (c.noWeather && s.weather.kind === c.noWeather) return { ok: false, reason: t('cond.weather') };
+    if (c.noQuest && QuestSystem.get(c.noQuest)) return { ok: false, reason: t('cond.questState') };
+    if (c.questStage) {
+      const q = QuestSystem.get(c.questStage.id);
+      if (!q || q.state !== 'active' || q.stageIdx < c.questStage.min) return { ok: false, reason: t('cond.questState') };
+    }
     return { ok: true };
   }
 
@@ -191,7 +205,9 @@ export class DialogueSystem {
     if (e.take) InventorySystem.remove(e.take, e.qty || 1);
     if (e.rep) for (const f in e.rep) ReputationSystem.add(f as any, e.rep[f], 'rep.reason.dialogue');
     if (e.relation) for (const id in e.relation) ReputationSystem.addRelation(id, e.relation[id], 'dialogue');
-    if (e.flag) s.flags[e.flag] = e.flagValue !== undefined ? e.flagValue : true;
+    if (e.flag) { s.flags[e.flag] = e.flagValue !== undefined ? e.flagValue : true; QuestSystem.notify('flag', { flag: e.flag }); }
+    if (e.johnNote) NotesSystem.addJohnNote(e.johnNote);
+    if (e.debtForgive) DebtSystem.forgive(e.debtForgive);
     if (e.xp) for (const sk in e.xp) SkillsSystem.use(sk, e.xp[sk]);
     if (e.note) bus.emit('hud:toast', { text: t('notes.hint') });
     if (e.entry) NotesSystem.addEntry(e.entry.kind as any, e.entry.id);

@@ -37,6 +37,7 @@ interface DistrictJson {
   lamps: Array<[number, number]>;
   spawners: Record<string, { count: number; points?: Array<[number, number]>; areas?: Array<[number, number, number, number]> }>;
   fastTravel: Array<{ id: string; nameKey: string; tx: number; ty: number }>;
+  stations?: Array<{ tx: number; ty: number; kind: string; labelKey: string; npc?: string; [k: string]: any }>;
   ambience: { birds: number; smoke: Array<[number, number]> };
 }
 
@@ -219,6 +220,16 @@ export function loadDistrict(): LoadedWorld {
   // --- dymy z kominów ---
   for (const [tx, ty] of DISTRICT.ambience.smoke) scene.smokeSources.push({ x: tx * TILE + 16, y: ty * TILE });
 
+  // --- stanowiska w plenerze (skrytki, miejsca zadań) ---
+  for (const st of DISTRICT.stations ?? []) {
+    scene.add({
+      kind: 'station', type: st.kind, id: `world_st_${st.kind}_${st.tx}_${st.ty}`,
+      x: st.tx * TILE + 16, y: st.ty * TILE + TILE - 4, box: null,
+      sortY: st.ty * TILE + TILE, tall: false, art: null,
+      interactId: `station:${st.kind}:${st.tx}_${st.ty}`, nameKey: st.labelKey, data: { ...st }
+    });
+  }
+
   // --- zagospodarowanie: trawa, ścieżki, roślinność ---
   const reservedSpots: Array<[number, number]> = [
     [Math.floor(DISTRICT.spawn.x / TILE), Math.floor(DISTRICT.spawn.y / TILE)],
@@ -259,6 +270,8 @@ export function loadInterior(def: InteriorDef): Scene {
   tm.blockRect(def.w - 1, 0, 1, def.h, true);
   tm.blockRect(0, def.h - 1, def.w, 1, true);
 
+  // na kaflu ze stanowiskiem prop jest tylko scenografią — E obsługuje stanowisko
+  const stationTiles = new Set((def.stations ?? []).map(st => `${st.tx},${st.ty}`));
   for (const p of def.props) {
     const [type, tx, ty, variant] = p as [string, number, number, number?];
     const d = PROPS[type]; if (!d) { console.warn('[interior] nieznany props:', type); continue; }
@@ -272,7 +285,7 @@ export function loadInterior(def: InteriorDef): Scene {
       box: d.solid ? { x: ax - bw / 2, y: ay - bh, w: bw, h: bh } : null,
       sortY: ay, tall: d.tall, art, dx: off.dx, dy: off.dy, variant: v,
       solid: d.solid, grabbable: d.grabbable, nameKey: `prop.${type}`,
-      interactId: INTERACTIVE_PROPS.has(type) ? `prop:${def.id}:${type}:${tx}_${ty}` : undefined
+      interactId: INTERACTIVE_PROPS.has(type) && !stationTiles.has(`${tx},${ty}`) ? `prop:${def.id}:${type}:${tx}_${ty}` : undefined
     });
   }
   for (const l of def.lights) {

@@ -2177,5 +2177,23 @@
     28
    ]
   ]
- }
+ },
+ "stations": [
+  {
+   "tx": 11,
+   "ty": 23,
+   "kind": "questSearch",
+   "labelKey": "station.abbeyRubble",
+   "item": "relic_elenem",
+   "needFlag": "relic_promise",
+   "emptyKey": "interact.nothingSpecial",
+   "foundKey": "interact.foundRelic"
+  },
+  {
+   "tx": 61,
+   "ty": 108,
+   "kind": "ferryBoat",
+   "labelKey": "station.ferryBoat"
+  }
+ ]
 }
